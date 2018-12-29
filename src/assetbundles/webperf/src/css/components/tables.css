@@ -1,0 +1,88 @@
+/**
+ * components/tables.css
+ *
+ * Project Tables.
+ *
+ */
+
+table.vuetable {
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.retour-menubtn-asc::after {
+  content: 'downangle';
+}
+
+.retour-menubtn-desc::after {
+  content: 'upangle';
+}
+
+/**
+ * Dashboard chart
+ */
+
+table.retour-dashboard th.vuetable-th-redirectSrcUrl {
+  width: 34%!important;
+}
+
+th.vuetable-th-referrerUrl {
+  width: 20%!important;
+}
+
+th.vuetable-th-remoteIp {
+  width: 14%!important;
+}
+
+th.vuetable-th-hitCount {
+  width: 8%!important;
+  text-align: right!important;
+}
+
+th.vuetable-th-hitLastTime {
+  width: 18%!important;
+}
+
+th.vuetable-th-handledByRetour {
+  width: 12%!important;
+}
+
+th.vuetable-th-addLink {
+  width: 3%!important;
+}
+
+/**
+ * Redirects chart
+ */
+
+table.retour-redirects th.vuetable-th-redirectSrcUrl {
+  width: 30%!important;
+}
+
+th.vuetable-th-redirectDestUrl {
+  width: 24%!important;
+}
+
+th.vuetable-th-redirectMatchType {
+  width: 13%!important;
+}
+
+th.vuetable-th-redirectHttpCode {
+  width: 10%!important;
+}
+
+th.vuetable-th-deleteLink {
+  width: 5%!important;
+}
+
+/**
+ * Column alignment
+ */
+td.text-center {
+  text-align: center!important;
+}
+
+td.text-right {
+  text-align: right!important;
+}
