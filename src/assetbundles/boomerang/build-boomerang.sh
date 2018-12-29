@@ -21,7 +21,7 @@ fi
 echo "Copying ${BOOMERANG_PLUGINS_JSON_DIR}/${PLUGINS_FILE} to ${BOOMERANG_BASE_DIR}/${PLUGINS_FILE}"
 cp "${BOOMERANG_PLUGINS_JSON_DIR}/${PLUGINS_FILE}" "${BOOMERANG_BASE_DIR}/${PLUGINS_FILE}"
 
-for file in "${COPY_PLUGIN_FILES[@]}"
+for file in "${COPY_PLUGIN_JS_FILES[@]}"
 do
   echo "Copying ${BOOMERANG_PLUGINS_JS_DIR}/${file} to ${BOOMERANG_BASE_DIR}/plugins/${file}"
   cp "${BOOMERANG_PLUGINS_JS_DIR}/${file}" "${BOOMERANG_BASE_DIR}/plugins/${file}"

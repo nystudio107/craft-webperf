@@ -1,0 +1,51 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Webperf plugin for Craft CMS 3.x
+ *
+ * Monitor the performance of your webpages through real-world user timing data
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2018 nystudio107
+ */
+#}
+
+{% requirePermission "webperf:settings" %}
+
+{% extends "_layouts/cp" %}
+
+{% import "_includes/forms" as forms %}
+{% from "webperf/_includes/macros.twig" import configWarning %}
+
+{% block content %}
+
+    <input type="hidden" name="action" value="webperf/settings/save-plugin-settings">
+    <input type="hidden" name="pluginHandle" value="retour">
+
+    {{ redirectInput("webperf/settings") }}
+    {% namespace "settings" %}
+        {{ forms.textField({
+            label: "Plugin name"|t("webperf"),
+            instructions: "The public-facing name of the plugin"|t("webperf"),
+            id: "pluginName",
+            name: "pluginName",
+            value: settings.pluginName,
+            warning: configWarning("pluginName", "webperf"),
+            errors: settings.getErrors("pluginName"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Include User Timing Beacon"|t("retour"),
+            instructions: "Controls whether or not the User Timing Beacon should be rendered on the pages."|t("webperf"),
+            id: "includeBeacon",
+            name: "includeBeacon",
+            on: settings.includeBeacon,
+            warning: configWarning("includeBeacon", "webperf"),
+            errors: settings.getErrors("includeBeacon"),
+        }) }}
+
+    {% endnamespace %}
+
+    {# include our JavaScript modules #}
+    {{ parent() }}
+{% endblock %}

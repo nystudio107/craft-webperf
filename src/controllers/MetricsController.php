@@ -23,6 +23,11 @@ use craft\web\Controller;
 class MetricsController extends Controller
 {
 
+    // Public Properties
+    // =========================================================================
+
+    public $enableCsrfValidation = false;
+
     // Protected Properties
     // =========================================================================
 
@@ -31,7 +36,8 @@ class MetricsController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['beacon'];
+
 
     // Public Methods
     // =========================================================================
@@ -39,20 +45,9 @@ class MetricsController extends Controller
     /**
      * @return mixed
      */
-    public function actionIndex()
+    public function actionBeacon()
     {
-        $result = 'Welcome to the MetricsController actionIndex() method';
-
-        return $result;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function actionDoSomething()
-    {
-        $result = 'Welcome to the MetricsController actionDoSomething() method';
-
-        return $result;
+        $data = Craft::$app->getRequest()->getBodyParams();
+        Craft::debug(print_r($data, true), __METHOD__);
     }
 }

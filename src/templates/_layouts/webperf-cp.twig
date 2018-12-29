@@ -1,0 +1,9 @@
+{% extends "_layouts/cp" %}
+
+{% block head %}
+    {{ parent() }}
+    {{ craft.webperf.includeCssModule("styles.css") }}
+    {{ craft.webperf.includeCssModule("vendor.css") }}
+    {{ craft.webperf.includeJsModule("vendor.js", false) }}
+    {{ craft.webperf.includeJsModule("webperf.js", false) }}
+{% endblock %}

@@ -8,32 +8,15 @@
  * @copyright Copyright (c) 2018 nystudio107
  */
 
-namespace nystudio107\webperf\assetbundles\boomerang;
-
-use Craft;
-use craft\web\AssetBundle;
+namespace nystudio107\webperf\variables;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class BoomerangAsset extends AssetBundle
+class WebperfVariable extends ManifestVariable
 {
     // Public Methods
     // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        $this->sourcePath = "@nystudio107/webperf/assetbundles/boomerang/dist";
-
-        $this->js = [
-            'js/boomerang-1.0.0.min.js',
-        ];
-
-        parent::init();
-    }
 }

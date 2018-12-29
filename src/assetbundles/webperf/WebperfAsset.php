@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2018 nystudio107
  */
 
-namespace nystudio107\webperf\assetbundles\Webperf;
+namespace nystudio107\webperf\assetbundles\webperf;
 
 use Craft;
 use craft\web\AssetBundle;

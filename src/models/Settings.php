@@ -26,9 +26,14 @@ class Settings extends Model
     // =========================================================================
 
     /**
-     * @var string
+     * @var string The public-facing name of the plugin
      */
-    public $someAttribute = 'Some Default';
+    public $pluginName = 'Webperf';
+
+    /**
+     * @var bool
+     */
+    public $includeBeacon = true;
 
     // Public Methods
     // =========================================================================
@@ -39,8 +44,10 @@ class Settings extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            ['pluginName', 'string'],
+            ['pluginName', 'default', 'value' => 'Webperf'],
+            ['includeBeacon', 'boolean'],
+            ['includeBeacon', 'default', 'value' => true],
         ];
     }
 }
