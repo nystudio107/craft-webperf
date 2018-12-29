@@ -1,6 +1,5 @@
 {
     "plugins": [
-        "plugins/continuity.js",
         "plugins/iframe-delay.js",
         "plugins/auto-xhr.js",
         "plugins/spa.js",
