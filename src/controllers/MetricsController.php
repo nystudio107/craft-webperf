@@ -8,46 +8,63 @@
  * @copyright Copyright (c) 2018 nystudio107
  */
 
-namespace nystudio107\webperf\controllers;
+namespace {
 
-use nystudio107\webperf\Webperf;
+    require_once '../lib/geoiploc.php';
+}
 
-use Craft;
-use craft\web\Controller;
+namespace nystudio107\webperf\controllers {
 
-/**
- * @author    nystudio107
- * @package   Webperf
- * @since     1.0.0
- */
-class MetricsController extends Controller
-{
-
-    // Public Properties
-    // =========================================================================
-
-    public $enableCsrfValidation = false;
-
-    // Protected Properties
-    // =========================================================================
+    use Craft;
+    use craft\web\Controller;
+    use yii\base\InvalidConfigException;
 
     /**
-     * @var    bool|array Allows anonymous access to this controller's actions.
-     *         The actions must be in 'kebab-case'
-     * @access protected
+     * @author    nystudio107
+     * @package   Webperf
+     * @since     1.0.0
      */
-    protected $allowAnonymous = ['beacon'];
-
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-     * @return mixed
-     */
-    public function actionBeacon()
+    class MetricsController extends Controller
     {
-        $data = Craft::$app->getRequest()->getBodyParams();
-        Craft::debug(print_r($data, true), __METHOD__);
+        // Public Properties
+        // =========================================================================
+
+        public $enableCsrfValidation = false;
+
+        // Protected Properties
+        // =========================================================================
+
+        /**
+         * @var    bool|array Allows anonymous access to this controller's actions.
+         *         The actions must be in 'kebab-case'
+         * @access protected
+         */
+        protected $allowAnonymous = ['beacon'];
+
+
+        // Public Methods
+        // =========================================================================
+
+        /**
+         * @return mixed
+         */
+        public function actionBeacon()
+        {
+            $request = Craft::$app->getRequest();
+            $request->userAgent;
+            getCountryFromIP($request->userIP);
+            try {
+                $params = Craft::$app->getRequest()->getBodyParams();
+            } catch (InvalidConfigException $e) {
+                $params = [];
+            }
+            if (empty($params)) {
+                return;
+            }
+            $config = [
+
+            ];
+            Craft::debug(print_r($config, true), __METHOD__);
+        }
     }
 }

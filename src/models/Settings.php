@@ -10,9 +10,6 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\Webperf;
-
-use Craft;
 use craft\base\Model;
 
 /**
