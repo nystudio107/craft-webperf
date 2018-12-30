@@ -25,6 +25,11 @@ class DataSample extends DbModel
     // =========================================================================
 
     /**
+     * @var int
+     */
+    public $siteId;
+
+    /**
      * @var string u - the URL of the User Timing sample
      */
     public $url;
@@ -93,6 +98,7 @@ class DataSample extends DbModel
     public function rules()
     {
         return [
+            ['siteId', 'integer'],
             ['url', 'required'],
             ['url', DbStringValidator::class, 'max' => 255],
             ['countryCode', DbStringValidator::class, 'max' => 2],
