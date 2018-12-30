@@ -278,21 +278,25 @@ class Webperf extends Plugin
      */
     protected function handleSiteRequest()
     {
-        // Handler: View::EVENT_END_PAGE
-        Event::on(
-            View::class,
-            View::EVENT_END_PAGE,
-            function () {
-                Craft::debug(
-                    'View::EVENT_END_PAGE',
-                    __METHOD__
-                );
-                // The page is done rendering, include our beacon
-                if (Webperf::$settings->includeBeacon) {
-                    Webperf::$plugin->beacon->includeBeacon();
+        // Don't include the beacon for response codes >= 400
+        $response = Craft::$app->getResponse();
+        if ($response->statusCode >= 400) {
+            // Handler: View::EVENT_END_PAGE
+            Event::on(
+                View::class,
+                View::EVENT_END_PAGE,
+                function () {
+                    Craft::debug(
+                        'View::EVENT_END_PAGE',
+                        __METHOD__
+                    );
+                    // The page is done rendering, include our beacon
+                    if (Webperf::$settings->includeBeacon) {
+                        Webperf::$plugin->beacons->includeBeacon();
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     /**
