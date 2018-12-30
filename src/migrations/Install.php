@@ -72,18 +72,30 @@ class Install extends Migration
     {
         $tablesCreated = false;
 
-        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%webperf_metrics}}');
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%webperf_data_samples}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
-                '{{%webperf_metrics}}',
+                '{{%webperf_data_samples}}',
                 [
                     'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
-                    'siteId' => $this->integer()->notNull(),
-                    'some_field' => $this->string(255)->notNull()->defaultValue(''),
+
+                    'siteId' => $this->integer(),
+                    'url' => $this->string(255)->notNull()->defaultValue(''),
+                    'dns' => $this->integer(),
+                    'connect' => $this->integer(),
+                    'firstByte' => $this->integer(),
+                    'firstPaint' => $this->integer(),
+                    'firstContentfulPaint' => $this->integer(),
+                    'domInteractive' => $this->integer(),
+                    'pageLoad' => $this->integer(),
+                    'countryCode' => $this->string(2),
+                    'browser' => $this->string(50),
+                    'os' => $this->string(50),
+                    'mobile' => $this->boolean(),
                 ]
             );
         }
@@ -98,13 +110,13 @@ class Install extends Migration
     {
         $this->createIndex(
             $this->db->getIndexName(
-                '{{%webperf_metrics}}',
-                'some_field',
-                true
+                '{{%webperf_data_samples}}',
+                'url',
+                false
             ),
-            '{{%webperf_metrics}}',
-            'some_field',
-            true
+            '{{%webperf_data_samples}}',
+            'url',
+            false
         );
         // Additional commands depending on the db driver
         switch ($this->driver) {
@@ -121,8 +133,8 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_metrics}}', 'siteId'),
-            '{{%webperf_metrics}}',
+            $this->db->getForeignKeyName('{{%webperf_data_samples}}', 'siteId'),
+            '{{%webperf_data_samples}}',
             'siteId',
             '{{%sites}}',
             'id',
@@ -143,6 +155,6 @@ class Install extends Migration
      */
     protected function removeTables()
     {
-        $this->dropTableIfExists('{{%webperf_metrics}}');
+        $this->dropTableIfExists('{{%webperf_data_samples}}');
     }
 }
