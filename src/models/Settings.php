@@ -28,9 +28,19 @@ class Settings extends Model
     public $pluginName = 'Webperf';
 
     /**
-     * @var bool
+     * @var bool Whether or not to include the beacon on the page
      */
     public $includeBeacon = true;
+
+    /**
+     * @var int The number of data samples to store
+     */
+    public $dataSamplesStoredLimit = 10000;
+
+    /**
+     * @var bool Whether the DataSamples should be trimmed after each new DataSample is added
+     */
+    public $automaticallyTrimDataSamples = true;
 
     // Public Methods
     // =========================================================================
@@ -45,6 +55,10 @@ class Settings extends Model
             ['pluginName', 'default', 'value' => 'Webperf'],
             ['includeBeacon', 'boolean'],
             ['includeBeacon', 'default', 'value' => true],
+            ['dataSamplesStoredLimit', 'integer'],
+            ['dataSamplesStoredLimit', 'default', 'value' => 10000],
+            ['automaticallyTrimDataSamples', 'boolean'],
+            ['automaticallyTrimDataSamples', 'default', 'value' => true],
         ];
     }
 }

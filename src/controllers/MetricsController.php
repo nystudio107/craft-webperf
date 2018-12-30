@@ -15,6 +15,7 @@ namespace {
 
 namespace nystudio107\webperf\controllers {
 
+    use nystudio107\webperf\Webperf;
     use nystudio107\webperf\models\DataSample;
 
     use Craft;
@@ -96,6 +97,10 @@ namespace nystudio107\webperf\controllers {
             $ip = $request->userIP;
             if ($ip) {
                 $sample->countryCode = getCountryFromIP($ip);
+                // getCountryFromIP returns 'ZZ' for unknown countries, map to '??'
+                if ($sample->countryCode === 'ZZ') {
+                    $sample->countryCode = '??';
+                }
             }
             $userAgent = $request->userAgent;
             if ($userAgent) {
@@ -104,8 +109,9 @@ namespace nystudio107\webperf\controllers {
                 $sample->os = $parser->os->name;
                 $sample->mobile = $parser->isMobile();
             }
-
-            Craft::debug(print_r($config, true), __METHOD__);
+            // Save the data sample
+            Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
+            Webperf::$plugin->dataSamples->addDataSample($sample);
         }
     }
 }

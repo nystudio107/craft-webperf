@@ -44,6 +44,28 @@
             errors: settings.getErrors("includeBeacon"),
         }) }}
 
+        {{ forms.textField({
+            label: "Webperf Data Samples to Store"|t("retour"),
+            instructions: "How many unique Webperf Data Samples should be stored before they are trimmed."|t("webperf"),
+            id: "dataSamplesStoredLimit",
+            name: "dataSamplesStoredLimit",
+            size: 10,
+            maxlength: 10,
+            value: settings.dataSamplesStoredLimit,
+            warning: configWarning("dataSamplesStoredLimit", "webperf"),
+            errors: settings.getErrors("dataSamplesStoredLimit"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Automatically Trim Data Samples"|t("retour"),
+            instructions: "Whether the Data Samples should be trimmed after each new Data Sample is added"|t("webperf"),
+            id: "automaticallyTrimDataSamples",
+            name: "automaticallyTrimDataSamples",
+            on: settings.automaticallyTrimDataSamples,
+            warning: configWarning("automaticallyTrimDataSamples", "webperf"),
+            errors: settings.getErrors("automaticallyTrimDataSamples"),
+        }) }}
+
     {% endnamespace %}
 
     {# include our JavaScript modules #}
