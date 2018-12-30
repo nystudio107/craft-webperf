@@ -57,7 +57,7 @@ class DataSample extends DbModel
     /**
      * @var int pt_fcp in ms
      */
-    public $firstContenfulPaint;
+    public $firstContentfulPaint;
 
     /**
      * @var int (nt_domint - nt_nav_st) in ms
@@ -119,7 +119,7 @@ class DataSample extends DbModel
                     'connect',
                     'firstByte',
                     'firstPaint',
-                    'firstContenfulPaint',
+                    'firstContentfulPaint',
                     'domInteractive',
                     'pageLoad',
                 ],

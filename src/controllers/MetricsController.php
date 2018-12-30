@@ -84,7 +84,7 @@ namespace nystudio107\webperf\controllers {
                 $sample->firstPaint = $params['pt_fp'];
             }
             if (!empty($params['pt_fcp'])) {
-                $sample->firstContenfulPaint = $params['pt_fcp'];
+                $sample->firstContentfulPaint = $params['pt_fcp'];
             }
             if (!empty($params['nt_domint']) && !empty($params['nt_nav_st'])) {
                 $sample->domInteractive = $params['nt_domint'] - $params['nt_nav_st'];
