@@ -10,14 +10,19 @@
 
 namespace {
 
-    require_once '../lib/geoiploc.php';
+    require_once __DIR__ . '/../lib/geoiploc.php';
 }
 
 namespace nystudio107\webperf\controllers {
 
+    use nystudio107\webperf\models\DataSample;
+
     use Craft;
     use craft\web\Controller;
+
     use yii\base\InvalidConfigException;
+
+    use WhichBrowser\Parser;
 
     /**
      * @author    nystudio107
@@ -50,20 +55,56 @@ namespace nystudio107\webperf\controllers {
          */
         public function actionBeacon()
         {
-            $request = Craft::$app->getRequest();
-            $request->userAgent;
-            getCountryFromIP($request->userIP);
+            // Get the incoming params from the beacon
             try {
                 $params = Craft::$app->getRequest()->getBodyParams();
             } catch (InvalidConfigException $e) {
                 $params = [];
             }
-            if (empty($params)) {
+            // Ensure the beacon has at least the URL parameter
+            if (empty($params) || empty($params['u'])) {
                 return;
             }
-            $config = [
+            // Allocate a new DataSample, and fill it in
+            $sample = new DataSample();
+            $sample->url = $params['u'] ?? null;
+            // Fill in all of the timing information that's available
+            $sample->pageLoad = $params['t_done'] ?? null;
+            if (!empty($params['nt_dns_end']) && !empty($params['nt_dns_st'])) {
+                $sample->dns = $params['nt_dns_end'] - $params['nt_dns_st'];
+            }
+            if (!empty($params['nt_con_end']) && !empty($params['nt_con_st'])) {
+                $sample->connect = $params['nt_con_end'] - $params['nt_con_st'];
+            }
+            if (!empty($params['t_resp'])) {
+                $sample->firstByte = $params['t_resp'];
+            }
+            if (!empty($params['pt_fp'])) {
+                $sample->firstPaint = $params['pt_fp'];
+            }
+            if (!empty($params['pt_fcp'])) {
+                $sample->firstContenfulPaint = $params['pt_fcp'];
+            }
+            if (!empty($params['nt_domint']) && !empty($params['nt_nav_st'])) {
+                $sample->domInteractive = $params['nt_domint'] - $params['nt_nav_st'];
+            }
+            if (!empty($params['nt_domcomp']) && !empty($params['nt_nav_st'])) {
+                $sample->pageLoad = $params['nt_domcomp'] - $params['nt_nav_st'];
+            }
+            // Fill in information from the current request
+            $request = Craft::$app->getRequest();
+            $ip = $request->userIP;
+            if ($ip) {
+                $sample->countryCode = getCountryFromIP($ip);
+            }
+            $userAgent = $request->userAgent;
+            if ($userAgent) {
+                $parser = new Parser($userAgent);
+                $sample->browser = $parser->browser->name;
+                $sample->os = $parser->os->name;
+                $sample->mobile = $parser->isMobile();
+            }
 
-            ];
             Craft::debug(print_r($config, true), __METHOD__);
         }
     }

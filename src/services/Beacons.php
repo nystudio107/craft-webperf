@@ -24,7 +24,7 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  */
-class Beacon extends Component
+class Beacons extends Component
 {
     // Public Methods
     // =========================================================================

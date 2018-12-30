@@ -10,20 +10,22 @@
 
 namespace nystudio107\webperf\models;
 
-use craft\base\Model;
+use nystudio107\retour\validators\DbStringValidator;
+
+use yii\behaviors\AttributeTypecastBehavior;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class PerformanceSample extends Model
+class DataSample extends DbModel
 {
     // Public Properties
     // =========================================================================
 
     /**
-     * @var string The URL of the User Timing sample
+     * @var string u - the URL of the User Timing sample
      */
     public $url;
 
@@ -62,6 +64,25 @@ class PerformanceSample extends Model
      */
     public $pageLoad;
 
+    /**
+     * @var string the country code from the IP address
+     */
+    public $countryCode;
+
+    /**
+     * @var string the browser name
+     */
+    public $browser;
+
+    /**
+     * @var string the operating system
+     */
+    public $os;
+
+    /**
+     * @var bool mobile or non-mobile
+     */
+    public $mobile;
 
     // Public Methods
     // =========================================================================
@@ -72,7 +93,20 @@ class PerformanceSample extends Model
     public function rules()
     {
         return [
-            ['url', 'string'],
+            ['url', 'required'],
+            ['url', DbStringValidator::class, 'max' => 255],
+            ['countryCode', DbStringValidator::class, 'max' => 2],
+            ['browser', DbStringValidator::class, 'max' => 50],
+            ['os', DbStringValidator::class, 'max' => 50],
+            [
+                [
+                    'url',
+                    'countryCode',
+                    'browser',
+                    'os',
+                ],
+                'string'
+            ],
             [
                 [
                     'dns',
@@ -84,6 +118,20 @@ class PerformanceSample extends Model
                     'pageLoad',
                 ],
                 'integer'
+            ],
+            ['mobile', 'boolean'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'typecast' => [
+                'class' => AttributeTypecastBehavior::class,
+                // 'attributeTypes' will be composed automatically according to `rules()`
             ],
         ];
     }

@@ -20,7 +20,7 @@ use craft\base\Component;
  * @package   Webperf
  * @since     1.0.0
  */
-class Metrics extends Component
+class DataSamples extends Component
 {
     // Public Methods
     // =========================================================================

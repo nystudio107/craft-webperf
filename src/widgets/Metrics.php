@@ -42,7 +42,7 @@ class Metrics extends Widget
      */
     public static function displayName(): string
     {
-        return Craft::t('webperf', 'Metrics');
+        return Craft::t('webperf', 'DataSamples');
     }
 
     /**
@@ -50,7 +50,7 @@ class Metrics extends Widget
      */
     public static function iconPath()
     {
-        return Craft::getAlias("@nystudio107/webperf/assetbundles/metricswidget/dist/img/Metrics-icon.svg");
+        return Craft::getAlias("@nystudio107/webperf/assetbundles/metricswidget/dist/img/DataSamples-icon.svg");
     }
 
     /**

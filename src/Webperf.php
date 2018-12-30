@@ -11,8 +11,8 @@
 namespace nystudio107\webperf;
 
 use nystudio107\webperf\models\Settings;
-use nystudio107\webperf\services\Metrics as MetricsService;
-use nystudio107\webperf\services\Beacon as BeaconService;
+use nystudio107\webperf\services\DataSamples as DataSamplesService;
+use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\widgets\Metrics as MetricsWidget;
 use nystudio107\webperf\variables\WebperfVariable;
 
@@ -39,8 +39,8 @@ use yii\base\Event;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property  MetricsService $metrics
- * @property  BeaconService $beacon
+ * @property  DataSamplesService $dataSamples
+ * @property  BeaconsService      $beacons
  */
 class Webperf extends Plugin
 {
@@ -340,7 +340,7 @@ class Webperf extends Plugin
     protected function customFrontendRoutes(): array
     {
         return [
-            // Beacon
+            // Beacons
             '/webperf/metrics/beacon' => 'webperf/metrics/beacon',
         ];
     }
