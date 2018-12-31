@@ -356,7 +356,10 @@ class Webperf extends Plugin
     protected function customAdminCpRoutes(): array
     {
         return [
-            'webperf' => 'webperf/metrics/dashboard',
+            'webperf' => 'webperf/sections/dashboard',
+            'webperf/dashboard' => 'webperf/sections/dashboard',
+            'webperf/dashboard/<siteHandle:{handle}>' => 'webperf/sections/dashboard',
+
             'webperf/settings' => 'webperf/settings/plugin-settings',
         ];
     }
