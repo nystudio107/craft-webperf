@@ -344,8 +344,15 @@ class Webperf extends Plugin
     protected function customFrontendRoutes(): array
     {
         return [
-            // Beacons
+            // Beacon
             '/webperf/metrics/beacon' => 'webperf/metrics/beacon',
+            // Tables
+            '/webperf/tables/dashboard' => 'webperf/tables/dashboard',
+            '/webperf/tables/redirects' => 'webperf/tables/redirects',
+            // Charts
+            '/webperf/charts/dashboard/<range:{handle}>' => 'webperf/charts/dashboard',
+            '/webperf/charts/dashboard/<range:{handle}>/<siteId:\d+>' => 'webperf/charts/dashboard',
+            '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];
     }
     /**
