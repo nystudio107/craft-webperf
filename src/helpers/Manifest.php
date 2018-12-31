@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2018 nystudio107
  */
 
-namespace nystudio107\seomatic\helpers;
+namespace nystudio107\webperf\helpers;
 
 use Craft;
 use craft\helpers\Json as JsonHelper;
@@ -29,8 +29,8 @@ class Manifest
     // Constants
     // =========================================================================
 
-    const CACHE_KEY = 'twigpack-seomatic';
-    const CACHE_TAG = 'twigpack-seomatic';
+    const CACHE_KEY = 'twigpack-webperf';
+    const CACHE_TAG = 'twigpack-webperf';
 
     const DEVMODE_CACHE_DURATION = 1;
 
@@ -229,7 +229,7 @@ EOT;
             // Make sure it exists in the manifest
             if (empty($manifest[$moduleName])) {
                 self::reportError(Craft::t(
-                    'seomatic',
+                    'webperf',
                     'Module does not exist in the manifest: {moduleName}',
                     ['moduleName' => $moduleName]
                 ), $soft);
@@ -269,7 +269,7 @@ EOT;
             if ($manifest === null) {
                 // We couldn't find a manifest; throw an error
                 self::reportError(Craft::t(
-                    'seomatic',
+                    'webperf',
                     'Manifest file not found at: {manifestPath}',
                     ['manifestPath' => $manifestPath]
                 ), true);

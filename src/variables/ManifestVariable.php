@@ -1,6 +1,6 @@
 <?php
 
-namespace nystudio107\retour\variables;
+namespace nystudio107\webperf\variables;
 
 use nystudio107\webperf\assetbundles\webperf\WebperfAsset;
 use nystudio107\webperf\helpers\Manifest as ManifestHelper;
