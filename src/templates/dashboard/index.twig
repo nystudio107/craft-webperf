@@ -1,34 +1,31 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 {#
 /**
- * Retour plugin for Craft CMS 3.x
+ * Webperf plugin for Craft CMS 3.x
  *
- * Retour Dashboard index.twig
+ * Monitor the performance of your webpages through real-world user timing data
  *
- * @author    nystudio107
+ * @link      https://nystudio107.com
  * @copyright Copyright (c) 2018 nystudio107
- * @link      https://nystudio107.com/
- * @package   Retour
- * @since     3.0.0
  */
 #}
 
-{% requirePermission "retour:dashboard" %}
+{% requirePermission "webperf:dashboard" %}
 
-{% extends "retour/_layouts/retour-cp.twig" %}
+{% extends "webperf/_layouts/webperf-cp.twig" %}
 
 {% import "_includes/forms" as forms %}
 
 {% block contextMenu %}
-    {% include "retour/_includes/sites-menu.twig" %}
+    {% include "webperf/_includes/sites-menu.twig" %}
 {% endblock %}
 
 {% block actionButton %}
     <div class="buttons">
         <div class="retour-button-container">
-            <a href="{{ actionUrl('retour/file/export-statistics') }}" class="btn icon">{{ "Export CSV File"|t }}</a>
+            <a href="{{ actionUrl('webperf/file/export-statistics') }}" class="btn icon">{{ "Export CSV File"|t }}</a>
         </div>
-        <a href="{{ actionUrl('retour/statistics/clear-statistics') }}" class="btn delete icon">{{ "Clear Stats"|t }}</a>
+        <a href="{{ actionUrl('webperf/statistics/clear-statistics') }}" class="btn delete icon">{{ "Clear Stats"|t }}</a>
     </div>
 {% endblock %}
 
@@ -39,9 +36,9 @@
                 <confetti>
                 </confetti>
                 <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
-                    <img src="{{ baseAssetsUrl ~ '/img/Retour-icon.svg' }}"
+                    <img src="{{ baseAssetsUrl ~ '/img/Webperf-icon.svg' }}"
                          width="30%" height="auto"/>
-                    <h2>Thanks for using Retour!</h2>
+                    <h2>Thanks for using Webperf!</h2>
                     <p>
                         Retour allows you to intelligently redirect legacy URLs, so that you don't lose SEO value when rebuilding & restructuring a website.
                     </p>
@@ -93,5 +90,5 @@
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}
-    {{ craft.retour.includeJsModule("dashboard.js", false) }}
+    {{ craft.webperf.includeJsModule("dashboard.js", false) }}
 {% endblock %}

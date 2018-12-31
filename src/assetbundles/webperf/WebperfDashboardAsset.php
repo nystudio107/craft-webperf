@@ -18,7 +18,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Webperf
  * @since     1.0.0
  */
-class WebperfAsset extends AssetBundle
+class WebperfDashboardAsset extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -32,6 +32,7 @@ class WebperfAsset extends AssetBundle
 
         $this->depends = [
             CpAsset::class,
+            WebperfAsset::class,
         ];
 
         $this->js = [
