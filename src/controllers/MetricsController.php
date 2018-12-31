@@ -15,10 +15,12 @@ namespace {
 
 namespace nystudio107\webperf\controllers {
 
+    use nystudio107\webperf\helpers\MultiSite;
     use nystudio107\webperf\Webperf;
     use nystudio107\webperf\models\DataSample;
 
     use Craft;
+    use craft\errors\SiteNotFoundException;
     use craft\web\Controller;
 
     use yii\base\InvalidConfigException;
@@ -68,7 +70,14 @@ namespace nystudio107\webperf\controllers {
             }
             // Allocate a new DataSample, and fill it in
             $sample = new DataSample();
-            $sample->url = $params['u'] ?? null;
+            $sample->url = $params['u'];
+            // Get the site id
+            try {
+                $site = MultiSite::getSiteFromUrl($sample->url);
+                $sample->siteId = $site->id;
+            } catch (SiteNotFoundException $e) {
+                $sample->siteId = null;
+            }
             // Fill in all of the timing information that's available
             $sample->pageLoad = $params['t_done'] ?? null;
             if (!empty($params['nt_dns_end']) && !empty($params['nt_dns_st'])) {

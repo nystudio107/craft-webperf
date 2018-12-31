@@ -11,8 +11,9 @@
 namespace nystudio107\webperf\helpers;
 
 use Craft;
-
+use craft\helpers\ArrayHelper;
 use craft\models\Site;
+
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -144,6 +145,82 @@ class MultiSite
         return $siteId;
     }
 
+    /**
+     * Returns the site that most closely matches the requested URL.
+     * Adapted from craft\web\Request.php
+     *
+     * @param string $url
+     *
+     * @return Site
+     * @throws \craft\errors\SiteNotFoundException
+     */
+    public static function getSiteFromUrl(string $url): Site
+    {
+        $sites = Craft::$app->getSites()->getAllSites();
+        $request = Craft::$app->getRequest();
+
+        $hostName = parse_url($url, PHP_URL_HOST);
+        $fullUri = trim(parse_url($url, PHP_URL_PATH), '/');
+        $secure = parse_url($url, PHP_URL_SCHEME) === 'https';
+        $scheme = $secure ? 'https' : 'http';
+        $port = $secure ? $request->getSecurePort() : $request->getPort();
+
+        $scores = [];
+        foreach ($sites as $i => $site) {
+            if (!$site->baseUrl) {
+                continue;
+            }
+
+            if (($parsed = parse_url($site->getBaseUrl())) === false) {
+                Craft::warning('Unable to parse the site base URL: ' . $site->baseUrl);
+                continue;
+            }
+
+            // Does the site URL specify a host name?
+            if (!empty($parsed['host']) && $hostName && $parsed['host'] !== $hostName) {
+                continue;
+            }
+
+            // Does the site URL specify a base path?
+            $parsedPath = !empty($parsed['path']) ? self::normalizePath($parsed['path']) : '';
+            if ($parsedPath && strpos($fullUri . '/', $parsedPath . '/') !== 0) {
+                continue;
+            }
+
+            // It's a possible match!
+            $scores[$i] = 8 + strlen($parsedPath);
+
+            $parsedScheme = !empty($parsed['scheme']) ? strtolower($parsed['scheme']) : $scheme;
+            $parsedPort = $parsed['port'] ?? ($parsedScheme === 'https' ? 443 : 80);
+
+            // Do the ports match?
+            if ($parsedPort == $port) {
+                $scores[$i] += 4;
+            }
+
+            // Do the schemes match?
+            if ($parsedScheme === $scheme) {
+                $scores[$i] += 2;
+            }
+
+            // One Pence point if it's the primary site in case we need a tiebreaker
+            if ($site->primary) {
+                $scores[$i]++;
+            }
+        }
+
+        if (empty($scores)) {
+            // Default to the primary site
+            return Craft::$app->getSites()->getPrimarySite();
+        }
+
+        // Sort by scores descending
+        arsort($scores, SORT_NUMERIC);
+        $first = ArrayHelper::firstKey($scores);
+
+        return $sites[$first];
+    }
+
     // Protected Static Methods
     // =========================================================================
 
@@ -157,5 +234,16 @@ class MultiSite
         if (!Craft::$app->getUser()->checkPermission($permissionName)) {
             throw new ForbiddenHttpException('User is not permitted to perform this action');
         }
+    }
+
+    /**
+     * Normalizes a URI path by trimming leading/trailing slashes and removing double slashes.
+     *
+     * @param string $path
+     * @return string
+     */
+    protected static function normalizePath(string $path): string
+    {
+        return preg_replace('/\/\/+/', '/', trim($path, '/'));
     }
 }
