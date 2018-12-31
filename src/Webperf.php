@@ -13,8 +13,8 @@ namespace nystudio107\webperf;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
-use nystudio107\webperf\widgets\Metrics as MetricsWidget;
 use nystudio107\webperf\variables\WebperfVariable;
+use nystudio107\webperf\widgets\Metrics as MetricsWidget;
 
 use Craft;
 use craft\base\Plugin;
@@ -280,7 +280,7 @@ class Webperf extends Plugin
     {
         // Don't include the beacon for response codes >= 400
         $response = Craft::$app->getResponse();
-        if ($response->statusCode >= 400) {
+        if ($response->statusCode < 400) {
             // Handler: View::EVENT_END_PAGE
             Event::on(
                 View::class,
