@@ -19,13 +19,14 @@ namespace nystudio107\webperf\controllers {
     use nystudio107\webperf\Webperf;
     use nystudio107\webperf\models\DataSample;
 
+    use Jaybizzle\CrawlerDetect\CrawlerDetect;
+    use WhichBrowser\Parser;
+
     use Craft;
     use craft\errors\SiteNotFoundException;
     use craft\web\Controller;
 
     use yii\base\InvalidConfigException;
-
-    use WhichBrowser\Parser;
 
     /**
      * @author    nystudio107
@@ -67,6 +68,14 @@ namespace nystudio107\webperf\controllers {
             // Ensure the beacon has at least the URL parameter
             if (empty($params) || empty($params['u'])) {
                 return;
+            }
+            // Filter out bot/spam requests via UserAgent
+            if (Webperf::$settings->filterBotUserAgents) {
+                $crawlerDetect = new CrawlerDetect;
+                // Check the user agent of the current 'visitor'
+                if ($crawlerDetect->isCrawler()) {
+                    return;
+                }
             }
             // Allocate a new DataSample, and fill it in
             $sample = new DataSample();

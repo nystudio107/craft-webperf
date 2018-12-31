@@ -42,6 +42,11 @@ class Settings extends Model
      */
     public $automaticallyTrimDataSamples = true;
 
+    /**
+     * @var bool
+     */
+    public $filterBotUserAgents = true;
+
     // Public Methods
     // =========================================================================
 
@@ -59,6 +64,8 @@ class Settings extends Model
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],
             ['automaticallyTrimDataSamples', 'default', 'value' => true],
+            ['filterBotUserAgents', 'boolean'],
+            ['filterBotUserAgents', 'default', 'value' => true],
         ];
     }
 }
