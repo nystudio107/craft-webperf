@@ -70,6 +70,11 @@ namespace nystudio107\webperf\controllers {
             if (empty($params) || empty($params['u'])) {
                 Craft::$app->end();
             }
+            // This parameter will exist (but have no value) if the beacon was
+            // fired as part of the onbeforeunload event.
+            if (isset($params['rt_quit'])) {
+                Craft::$app->end();
+            }
             // Filter out bot/spam requests via UserAgent
             if (Webperf::$settings->filterBotUserAgents) {
                 $crawlerDetect = new CrawlerDetect;
@@ -131,6 +136,7 @@ namespace nystudio107\webperf\controllers {
             if ($request->isAjax) {
                 $sample->siteId = null;
             }
+            Craft::debug('Woof Params: '.print_r($params, true), __METHOD__);
             // Save the data sample
             Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
