@@ -1,12 +1,18 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/quality-score.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/?branch=v1) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/coverage.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/?branch=v1) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/build.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/build-status/v1) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/code-intelligence.svg?b=v1)](https://scrutinizer-ci.com/code-intelligence)
+
 # Webperf plugin for Craft CMS 3.x
 
 Monitor the performance of your webpages through real-world user timing data
 
 ![Screenshot](resources/img/plugin-logo.png)
 
+## This plugin is in development
+
+This plugin isn't finished; don't use it yet. No, really.
+
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 3.0.0 or later.
 
 ## Installation
 
@@ -18,9 +24,11 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require nystudio107/webperf
+        composer require nystudio107/craft-webperf
 
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Webperf.
+3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Webperf
+
+You can also install Retour via the **Plugin Store** in the Craft Control Panel.
 
 ## Webperf Overview
 
