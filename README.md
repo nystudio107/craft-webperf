@@ -34,7 +34,7 @@ You can also install Retour via the **Plugin Store** in the Craft Control Panel.
 
 Webperf uses Real User Monitoring (RUM) captured from actual visitors to your website to profile its performance. In this way, it passively gathers and monitors how your website performs on real-world devices used by real-world users.
 
-Webperf uses the battle-tested [Boomerang](https://akamai.github.io/boomerang/) JavaScript from Akamai, loaded asynchronously in a non-blocking iframe. Boomerang uses performance information from the user's browsing via the [Navigation Timing API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API) 
+Webperf uses the battle-tested [Boomerang](https://akamai.github.io/boomerang/) JavaScript from Akamai, loaded asynchronously in a non-blocking iframe. Boomerang uses performance information from the user's browser via the [Navigation Timing API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_timing_API).
 
 ## Configuring Webperf
 
