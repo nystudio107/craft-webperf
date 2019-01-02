@@ -290,8 +290,9 @@ class Webperf extends Plugin
                         'View::EVENT_END_PAGE',
                         __METHOD__
                     );
+                    $view = Craft::$app->getView();
                     // The page is done rendering, include our beacon
-                    if (Webperf::$settings->includeBeacon) {
+                    if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
                         Webperf::$plugin->beacons->includeBeacon();
                     }
                 }
