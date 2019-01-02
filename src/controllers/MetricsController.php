@@ -55,7 +55,8 @@ namespace nystudio107\webperf\controllers {
         // =========================================================================
 
         /**
-         * @return mixed
+         * @return void
+         * @throws \yii\base\ExitException
          */
         public function actionBeacon()
         {
@@ -67,14 +68,14 @@ namespace nystudio107\webperf\controllers {
             }
             // Ensure the beacon has at least the URL parameter
             if (empty($params) || empty($params['u'])) {
-                return;
+                Craft::$app->end();
             }
             // Filter out bot/spam requests via UserAgent
             if (Webperf::$settings->filterBotUserAgents) {
                 $crawlerDetect = new CrawlerDetect;
                 // Check the user agent of the current 'visitor'
                 if ($crawlerDetect->isCrawler()) {
-                    return;
+                    Craft::$app->end();
                 }
             }
             // Allocate a new DataSample, and fill it in
@@ -127,9 +128,13 @@ namespace nystudio107\webperf\controllers {
                 $sample->os = $parser->os->name;
                 $sample->mobile = $parser->isMobile();
             }
+            if ($request->isAjax) {
+                $sample->siteId = null;
+            }
             // Save the data sample
             Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
+            Craft::$app->end();
         }
     }
 }
