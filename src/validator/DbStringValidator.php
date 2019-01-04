@@ -10,7 +10,7 @@
 
 namespace nystudio107\webperf\validators;
 
-use nystudio107\retour\helpers\Text as TextHelper;
+use nystudio107\webperf\helpers\Text as TextHelper;
 
 use craft\helpers\StringHelper;
 
