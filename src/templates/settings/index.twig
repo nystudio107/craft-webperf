@@ -20,7 +20,7 @@
 {% block content %}
 
     <input type="hidden" name="action" value="webperf/settings/save-plugin-settings">
-    <input type="hidden" name="pluginHandle" value="retour">
+    <input type="hidden" name="pluginHandle" value="webperf">
 
     {{ redirectInput("webperf/settings") }}
     {% namespace "settings" %}
@@ -35,7 +35,7 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Include User Timing Beacons"|t("retour"),
+            label: "Include User Timing Beacons"|t("webperf"),
             instructions: "Controls whether or not the User Timing Beacons should be rendered on the pages."|t("webperf"),
             id: "includeBeacon",
             name: "includeBeacon",
@@ -45,7 +45,7 @@
         }) }}
 
         {{ forms.textField({
-            label: "Webperf Data Samples to Store"|t("retour"),
+            label: "Webperf Data Samples to Store"|t("webperf"),
             instructions: "How many unique Webperf Data Samples should be stored before they are trimmed."|t("webperf"),
             id: "dataSamplesStoredLimit",
             name: "dataSamplesStoredLimit",
@@ -57,7 +57,7 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Automatically Trim Data Samples"|t("retour"),
+            label: "Automatically Trim Data Samples"|t("webperf"),
             instructions: "Whether the Data Samples should be trimmed after each new Data Sample is added"|t("webperf"),
             id: "automaticallyTrimDataSamples",
             name: "automaticallyTrimDataSamples",

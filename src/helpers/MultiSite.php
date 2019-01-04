@@ -38,7 +38,7 @@ class MultiSite
         // Set defaults based on the section settings
         $variables['sitesMenu'] = [
             0 => Craft::t(
-                'retour',
+                'webperf',
                 'All Sites'
             ),
         ];
@@ -106,7 +106,7 @@ class MultiSite
         if ($variables['showSites']) {
             if ($variables['currentSiteId'] === 0) {
                 $variables['sitesMenuLabel'] = Craft::t(
-                    'retour',
+                    'webperf',
                     'All Sites'
                 );
             } else {
