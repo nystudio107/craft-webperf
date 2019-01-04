@@ -10,7 +10,7 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\retour\validators\DbStringValidator;
+use nystudio107\webperf\validators\DbStringValidator;
 
 use yii\behaviors\AttributeTypecastBehavior;
 
