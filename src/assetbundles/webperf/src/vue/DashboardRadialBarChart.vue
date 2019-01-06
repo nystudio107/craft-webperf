@@ -8,13 +8,6 @@
 
     const chartDataBaseUrl = '/webperf/charts/dashboard-radial-bar/';
 
-    // Get the largest number from the passed in arrays
-    const largestNumber = (mainArray) => {
-        return mainArray.map(function(subArray) {
-            return Math.max.apply(null, subArray);
-        });
-    };
-
     // Configure the api endpoint
     const configureApi = (url) => {
         return {
@@ -63,21 +56,21 @@
                     // Clone the chartOptions object, and replace the needed values
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
-                        options.yaxis.max = Math.round(largestNumber([data[0]['data']])[0] + 1.5);
-                        options.labels = data[0]['labels'];
                         this.chartOptions = options;
-                        this.series = data;
+                        let val = data[0] / 1000;
+                        val = (val * 100) / 10;
+                        this.series = [val];
                     }
                 });
             }
         },
         created () {
-            //this.getSeriesData();
+            this.getSeriesData();
         },
         mounted() {
             // Live refresh the data
             setInterval(() => {
-                //this.getSeriesData();
+                this.getSeriesData();
             }, 3000);
         },
         data: function() {
@@ -108,38 +101,27 @@
                                 }
                             },
                             dataLabels: {
+                                showOn: 'always',
                                 name: {
                                     fontSize: '16px',
-                                    color: undefined,
+                                    color: '#333',
                                     offsetY: 80
                                 },
                                 value: {
-                                    offsetY: 60,
+                                    offsetY: 40,
                                     fontSize: '22px',
                                     color: undefined,
                                     formatter: function (val) {
-                                        return val + "%";
+                                        val = (val * 10) / 100;
+                                        return Number(val).toFixed(2) + "s";
                                     }
                                 }
                             }
                         }
                     },
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            shade: 'dark',
-                            type: 'horizontal',
-                            shadeIntensity: 0.5,
-                            gradientToColors: ['#00FF00'],
-                            inverseColors: true,
-                            opacityFrom: 0.5,
-                            opacityTo: 1.0,
-                            stops: [0, 100]
-                        }
-                    },
+                    labels: [this.title],
                 },
-                series: [75],
-                labels: ['woof'],
+                series: [0],
                 stroke: {
                     lineCap: 'round'
                 },

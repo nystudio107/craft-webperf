@@ -77,19 +77,14 @@ class ChartsController extends Controller
         if ($db->getIsMysql()) {
             // Query the db
             $query = (new Query())
-                ->from('{{%retour_stats}}')
+                ->from('{{%webperf_data_samples}}')
                 ->select([
-                    "DATE_FORMAT(hitLastTime, '%Y-%m-%d') AS date_formatted",
-                    'COUNT(redirectSrcUrl) AS cnt',
-                    'COUNT(handledByRetour = 1 or null) as handled_cnt',
+                    'AVG('.$column.') AS avg',
                 ])
-                ->where("hitLastTime >= ( CURDATE() - INTERVAL '{$days}' DAY )");
+                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )");
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
             }
-            $query
-                ->orderBy('date_formatted ASC')
-                ->groupBy('date_formatted');
             $stats = $query->all();
         }
         if ($db->getIsPgsql()) {
@@ -111,16 +106,7 @@ class ChartsController extends Controller
             $stats = $query->all();
         }
         if ($stats) {
-            $data[] = [
-                'name' => '404 hits',
-                'data' => array_merge(['0'], ArrayHelper::getColumn($stats, 'cnt')),
-                'labels' => array_merge(['-'], ArrayHelper::getColumn($stats, 'date_formatted')),
-            ];
-            $data[] = [
-                'name' => 'Handled 404 hits',
-                'data' => array_merge(['0'], ArrayHelper::getColumn($stats, 'handled_cnt')),
-                'labels' => array_merge(['-'], ArrayHelper::getColumn($stats, 'date_formatted')),
-            ];
+            $data = ArrayHelper::getColumn($stats, 'avg');
         }
 
         return $this->asJson($data);

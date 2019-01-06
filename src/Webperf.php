@@ -351,8 +351,8 @@ class Webperf extends Plugin
             '/webperf/tables/dashboard' => 'webperf/tables/dashboard',
             '/webperf/tables/redirects' => 'webperf/tables/redirects',
             // Charts
-            '/webperf/charts/dashboard/<range:{handle}>/<column:{handle}>' => 'webperf/charts/dashboard',
-            '/webperf/charts/dashboard/<range:{handle}>/<column:{handle}>/<range:{handle}>/<siteId:\d+>' => 'webperf/charts/dashboard',
+            '/webperf/charts/dashboard-radial-bar/<range:{handle}>/<column:{handle}>' => 'webperf/charts/dashboard-radial-bar',
+            '/webperf/charts/dashboard-radial-bar/<range:{handle}>/<column:{handle}>/<siteId:\d+>' => 'webperf/charts/dashboard-radial-bar',
             '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];
     }
