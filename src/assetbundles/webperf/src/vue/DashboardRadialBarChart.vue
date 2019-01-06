@@ -8,6 +8,30 @@
 
     const chartDataBaseUrl = '/webperf/charts/dashboard-radial-bar/';
 
+    const greenColor = {
+        r: 0,
+        g: 200,
+        b: 0
+    };
+    const yellowColor = {
+        r: 255,
+        g: 255,
+        b: 0
+    };
+    const redColor = {
+        r: 200,
+        g: 0,
+        b: 0
+    };
+
+    // convert 0..255 R,G,B values to a hexidecimal color string
+    const RGBToHex = (r,g,b) => {
+        var bin = r << 16 | g << 8 | b;
+        return (function(h){
+            return new Array(7-h.length).join("0")+h
+        })(bin.toString(16).toUpperCase())
+    };
+
     // Configure the api endpoint
     const configureApi = (url) => {
         return {
@@ -48,7 +72,7 @@
             // Load in our chart data asynchronously
             getSeriesData: async function() {
                 const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.range + '/' + this.column;
+                let uri = this.displayRange + '/' + this.column;
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
@@ -57,24 +81,42 @@
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
                         let val = data[0] / 1000;
-                        options.colors = ['#FF0000'];
-                        if (val <= (this.maxValue * .33)) {
-                            options.colors = ['#008000'];
-                        }
-                        if (val <= (this.maxValue * .66)) {
-                            options.colors = ['#FFFF00'];
+                        if (val > this.maxValue) {
+                            this.maxValue = Math.round(val);
                         }
                         val = (val * 100) / this.maxValue;
+                        let chartColor = this.colorFromPercentage(val);
+                        options.colors = [chartColor];
+                        options.plotOptions.radialBar.dataLabels.value.color = chartColor;
                         this.chartOptions = options;
                         this.series = [val];
                     }
                 });
+            },
+            onChangeRange (range) {
+                this.displayRange = range;
+                this.getSeriesData();
+            },
+            colorFromPercentage(val) {
+                let startColor = greenColor;
+                let endColor = yellowColor;
+                if (val >= 50) {
+                    startColor = yellowColor;
+                    endColor = redColor;
+                    val = val - 50;
+                }
+                const multiplier = (val / 50);
+                const r = Math.round(startColor.r + multiplier * (endColor.r - startColor.r));
+                const g = Math.round(startColor.g + multiplier * (endColor.g - startColor.g));
+                const b = Math.round(startColor.b + multiplier * (endColor.b - startColor.b));
+                return '#' + RGBToHex(r,g,b);
             }
         },
         created () {
             this.getSeriesData();
         },
         mounted() {
+            this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
             // Live refresh the data
             setInterval(() => {
                 this.getSeriesData();
@@ -127,11 +169,12 @@
                         }
                     },
                     labels: [this.title],
+                    stroke: {
+                        lineCap: 'round'
+                    },
                 },
                 series: [0],
-                stroke: {
-                    lineCap: 'round'
-                },
+                displayRange: this.range,
             }
         },
     }

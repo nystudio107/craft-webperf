@@ -134,10 +134,6 @@ namespace nystudio107\webperf\controllers {
                 $sample->os = $parser->os->name;
                 $sample->mobile = $parser->isMobile();
             }
-            if ($request->isAjax) {
-                $sample->siteId = null;
-            }
-            Craft::debug('Woof Params: '.print_r($parser->device, true), __METHOD__);
             // Save the data sample
             Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
