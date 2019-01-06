@@ -129,6 +129,7 @@ namespace nystudio107\webperf\controllers {
             $userAgent = $request->userAgent;
             if ($userAgent) {
                 $parser = new Parser($userAgent);
+                $sample->device = $parser->device->model;
                 $sample->browser = $parser->browser->name;
                 $sample->os = $parser->os->name;
                 $sample->mobile = $parser->isMobile();
@@ -136,7 +137,7 @@ namespace nystudio107\webperf\controllers {
             if ($request->isAjax) {
                 $sample->siteId = null;
             }
-            Craft::debug('Woof Params: '.print_r($params, true), __METHOD__);
+            Craft::debug('Woof Params: '.print_r($parser->device, true), __METHOD__);
             // Save the data sample
             Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);

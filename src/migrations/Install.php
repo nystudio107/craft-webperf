@@ -93,6 +93,7 @@ class Install extends Migration
                     'domInteractive' => $this->integer(),
                     'pageLoad' => $this->integer(),
                     'countryCode' => $this->string(2),
+                    'device' => $this->string(50),
                     'browser' => $this->string(50),
                     'os' => $this->string(50),
                     'mobile' => $this->boolean(),

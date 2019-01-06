@@ -75,6 +75,11 @@ class DataSample extends DbModel
     public $countryCode;
 
     /**
+     * @var string the device name
+     */
+    public $device;
+
+    /**
      * @var string the browser name
      */
     public $browser;
@@ -102,12 +107,14 @@ class DataSample extends DbModel
             ['url', 'required'],
             ['url', DbStringValidator::class, 'max' => 255],
             ['countryCode', DbStringValidator::class, 'max' => 2],
+            ['device', DbStringValidator::class, 'max' => 50],
             ['browser', DbStringValidator::class, 'max' => 50],
             ['os', DbStringValidator::class, 'max' => 50],
             [
                 [
                     'url',
                     'countryCode',
+                    'device',
                     'browser',
                     'os',
                 ],
