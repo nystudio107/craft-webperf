@@ -53,9 +53,9 @@
                 <div class="">
                     <dashboard-radial-bar-chart
                             title="First Byte"
-                            sub-title=""
                             range="month"
                             column="firstByte"
+                            :max-value="5"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
@@ -65,9 +65,9 @@
                 <div class="">
                     <dashboard-radial-bar-chart
                             title="First Paint"
-                            sub-title=""
                             range="month"
                             column="firstPaint"
+                            :max-value="5"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
@@ -77,9 +77,9 @@
                 <div class="">
                     <dashboard-radial-bar-chart
                             title="First Contentful Paint"
-                            sub-title=""
                             range="month"
                             column="firstContentfulPaint"
+                            :max-value="5"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
@@ -89,9 +89,9 @@
                 <div class="">
                     <dashboard-radial-bar-chart
                             title="DOM Interactive"
-                            sub-title=""
                             range="month"
                             column="domInteractive"
+                            :max-value="5"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
@@ -101,9 +101,9 @@
                 <div class="">
                     <dashboard-radial-bar-chart
                             title="Page Loaded"
-                            sub-title=""
                             range="month"
                             column="pageLoad"
+                            :max-value="10"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>

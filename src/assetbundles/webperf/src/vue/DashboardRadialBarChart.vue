@@ -36,9 +36,9 @@
         },
         props: {
             title: String,
-            subTitle: String,
             range: String,
             column: String,
+            maxValue: Number,
             siteId: {
                 type: Number,
                 default: 0,
@@ -56,9 +56,16 @@
                     // Clone the chartOptions object, and replace the needed values
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
-                        this.chartOptions = options;
                         let val = data[0] / 1000;
-                        val = (val * 100) / 10;
+                        options.colors = ['#FF0000'];
+                        if (val <= (this.maxValue * .33)) {
+                            options.colors = ['#008000'];
+                        }
+                        if (val <= (this.maxValue * .66)) {
+                            options.colors = ['#FFFF00'];
+                        }
+                        val = (val * 100) / this.maxValue;
+                        this.chartOptions = options;
                         this.series = [val];
                     }
                 });
@@ -82,7 +89,7 @@
                             show: false,
                         },
                     },
-                    colors: ['#00FF00'],
+                    colors: ['#000000'],
                     plotOptions: {
                         radialBar: {
                             startAngle: -135,
@@ -111,8 +118,8 @@
                                     offsetY: 40,
                                     fontSize: '22px',
                                     color: undefined,
-                                    formatter: function (val) {
-                                        val = (val * 10) / 100;
+                                    formatter: (val) => {
+                                        val = (val * this.maxValue) / 100;
                                         return Number(val).toFixed(2) + "s";
                                     }
                                 }
