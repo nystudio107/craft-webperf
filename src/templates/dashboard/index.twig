@@ -52,9 +52,10 @@
             <div class="flex-grow">
                 <div class="shadow">
                     <dashboard-radial-bar-chart
-                            title="404s by Month"
-                            sub-title="Discrete 404 URI hits in the last month"
+                            title="First Byte"
+                            sub-title=""
                             range="month"
+                            column="firstByte"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
@@ -63,9 +64,10 @@
             <div class="flex-grow">
                 <div class="shadow">
                     <dashboard-radial-bar-chart
-                            title="404s by Week"
-                            sub-title="Discrete 404 URI hits in the last week"
-                            range="week"
+                            title="First Paint"
+                            sub-title=""
+                            range="month"
+                            column="firstPaint"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
@@ -74,9 +76,34 @@
             <div class="flex-grow">
                 <div class="shadow">
                     <dashboard-radial-bar-chart
-                            title="404s by Day"
-                            sub-title="Discrete 404 URI hits in the last day"
-                            range="day"
+                            title="First Contentful Paint"
+                            sub-title=""
+                            range="month"
+                            column="firstContentfulPaint"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-radial-bar-chart>
+                </div>
+            </div>
+            <div class="flex-grow">
+                <div class="shadow">
+                    <dashboard-radial-bar-chart
+                            title="DOM Interactive"
+                            sub-title=""
+                            range="month"
+                            column="domInteractive"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-radial-bar-chart>
+                </div>
+            </div>
+            <div class="flex-grow">
+                <div class="shadow">
+                    <dashboard-radial-bar-chart
+                            title="Page Loaded"
+                            sub-title=""
+                            range="month"
+                            column="pageLoad"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>

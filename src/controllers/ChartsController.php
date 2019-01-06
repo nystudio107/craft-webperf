@@ -46,13 +46,17 @@ class ChartsController extends Controller
      * The Dashboard chart
      *
      * @param string $range
+     * @param string $column
      * @param int    $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
      */
-    public function actionDashboardRadialBar(string $range = 'day', int $siteId = 0): Response
-    {
+    public function actionDashboardRadialBar(
+        string $range = 'day',
+        string $column = 'pageLoad',
+        int $siteId = 0
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         $days = 1;

@@ -1,5 +1,5 @@
 <template>
-    <apexcharts width="100%" height="400px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
+    <apexcharts width="100%" height="200px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
 </template>
 
 <script>
@@ -45,6 +45,7 @@
             title: String,
             subTitle: String,
             range: String,
+            column: String,
             siteId: {
                 type: Number,
                 default: 0,
@@ -54,7 +55,7 @@
             // Load in our chart data asynchronously
             getSeriesData: async function() {
                 const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.range;
+                let uri = this.range + '/' + this.column;
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
@@ -88,23 +89,32 @@
                             show: false,
                         },
                     },
-                    colors: ['#008FFB', '#DCE6EC'],
-                    stroke: {
-                        curve: 'straight',
-                        width: 3,
-                    },
+                    colors: ['#00FF00'],
                     plotOptions: {
                         radialBar: {
                             startAngle: -135,
                             endAngle: 135,
+                            track: {
+                                background: "#e7e7e7",
+                                strokeWidth: '97%',
+                                margin: 5, // margin is in pixels
+                                shadow: {
+                                    enabled: true,
+                                    top: 2,
+                                    left: 0,
+                                    color: '#999',
+                                    opacity: 1,
+                                    blur: 2
+                                }
+                            },
                             dataLabels: {
                                 name: {
                                     fontSize: '16px',
                                     color: undefined,
-                                    offsetY: 120
+                                    offsetY: 80
                                 },
                                 value: {
-                                    offsetY: 76,
+                                    offsetY: 60,
                                     fontSize: '22px',
                                     color: undefined,
                                     formatter: function (val) {
@@ -120,43 +130,19 @@
                             shade: 'dark',
                             type: 'horizontal',
                             shadeIntensity: 0.5,
-                            gradientToColors: ['#ABE5A1'],
+                            gradientToColors: ['#00FF00'],
                             inverseColors: true,
-                            opacityFrom: 1,
-                            opacityTo: 1,
+                            opacityFrom: 0.5,
+                            opacityTo: 1.0,
                             stops: [0, 100]
                         }
                     },
-                    xaxis: {
-                        crosshairs: {
-                            width: 1
-                        },
-                    },
-                    labels: [],
-                    yaxis: {
-                        min: 0,
-                        max: 0,
-                    },
-                    title: {
-                        text: this.title,
-                        offsetX: 0,
-                        style: {
-                            fontSize: '24px',
-                            cssClass: 'apexcharts-yaxis-title'
-                        }
-                    },
-                    subtitle: {
-                        text: this.subTitle,
-                        offsetX: 0,
-                        style: {
-                            fontSize: '14px',
-                            cssClass: 'apexcharts-yaxis-title'
-                        }
-                    }
                 },
-                series: [
-                    75
-                ],
+                series: [75],
+                labels: ['woof'],
+                stroke: {
+                    lineCap: 'round'
+                },
             }
         },
     }
