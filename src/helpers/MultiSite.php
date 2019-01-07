@@ -257,9 +257,37 @@ class MultiSite
     protected static function getBaseUrl(Site $site): string
     {
         if ($site->baseUrl) {
-            return rtrim(Craft::parseEnv($site->baseUrl), '/') . '/';
+            return rtrim(self::parseEnv($site->baseUrl), '/') . '/';
         }
 
         return null;
+    }
+
+    /**
+     * Checks if a string references an environment variable (`$VARIABLE_NAME`)
+     * and/or an alias (`@aliasName`), and returns the referenced value.
+     *
+     * ---
+     *
+     * ```php
+     * $value1 = Craft::parseEnv('$SMPT_PASSWORD');
+     * $value2 = Craft::parseEnv('@webroot');
+     * ```
+     *
+     * @param string|null $str
+     * @return string|null The parsed value, or the original value if it didn’t
+     * reference an environment variable and/or alias.
+     */
+    protected static function parseEnv(string $str = null)
+    {
+        if ($str === null) {
+            return null;
+        }
+
+        if (preg_match('/^\$(\w+)$/', $str, $matches)) {
+            $str = getenv($matches[1]) ?: $str;
+        }
+
+        return Craft::getAlias($str);
     }
 }
