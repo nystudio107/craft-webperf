@@ -171,7 +171,7 @@ class MultiSite
                 continue;
             }
 
-            if (($parsed = parse_url($site->getBaseUrl())) === false) {
+            if (($parsed = parse_url(self::getBaseUrl($site))) === false) {
                 Craft::warning('Unable to parse the site base URL: ' . $site->baseUrl);
                 continue;
             }
@@ -245,5 +245,21 @@ class MultiSite
     protected static function normalizePath(string $path): string
     {
         return preg_replace('/\/\/+/', '/', trim($path, '/'));
+    }
+
+    /**
+     * Returns the site’s base URL.
+     *
+     * @param Site $site
+     *
+     * @return string|null
+     */
+    protected static function getBaseUrl(Site $site): string
+    {
+        if ($site->baseUrl) {
+            return rtrim(Craft::parseEnv($site->baseUrl), '/') . '/';
+        }
+
+        return null;
     }
 }
