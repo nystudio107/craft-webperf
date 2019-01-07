@@ -92,17 +92,12 @@ class ChartsController extends Controller
             $query = (new Query())
                 ->from('{{%retour_stats}}')
                 ->select([
-                    "to_char(\"hitLastTime\", 'yyyy-mm-dd') AS date_formatted",
-                    "COUNT(\"redirectSrcUrl\") AS cnt",
-                    "COUNT(CASE WHEN \"handledByRetour\" = true THEN 1 END) as handled_cnt",
+                    'AVG("'.$column.'") AS avg',
                 ])
-                ->where("\"hitLastTime\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
+                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
             }
-            $query
-                ->orderBy('date_formatted ASC')
-                ->groupBy('date_formatted');
             $stats = $query->all();
         }
         if ($stats) {
