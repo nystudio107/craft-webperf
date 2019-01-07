@@ -2,8 +2,8 @@
  * @project        Webperf
  * @name           styles.css
  * @author         Andrew Welch
- * @build          Mon, Jan 7, 2019 2:02 AM ET
- * @release        6906f3d583e75324988a4d96660646ce2c6e4c6a [develop]
+ * @build          Mon, Jan 7, 2019 2:04 AM ET
+ * @release        1664a9808b5067b510597bb7ee896e4e5f42460f [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */div.retour-button-container{display:inline-block;margin-right:10px}table.vuetable{width:100%;table-layout:fixed;overflow:hidden}.block{display:block}.table{display:table}.hidden{display:none}.flex{display:flex}.flex-no-wrap{flex-wrap:nowrap}.flex-grow{flex-grow:1}.overflow-hidden{overflow:hidden}.fixed{position:fixed}.visible{visibility:visible}.w-full{width:100%}
