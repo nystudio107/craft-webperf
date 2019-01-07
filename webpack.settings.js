@@ -51,10 +51,10 @@ module.exports = {
         paths: [
             "./src/templates/**/*.{twig,html}",
             "./node_modules/vuetable-2/src/components/**/*.{vue,html}",
-            "./src/assetbundles/webpef/src/vue/**/*.{vue,html}"
+            "./src/assetbundles/webperf/src/vue/**/*.{vue,html}"
         ],
         whitelist: [
-            "./src/assetbundles/webpef/src/css/components/**/*.{css,pcss}"
+            "./src/assetbundles/webperf/src/css/components/**/*.{css,pcss}"
         ],
         whitelistPatterns: [],
         extensions: [

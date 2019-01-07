@@ -164,7 +164,7 @@
                                     fontSize: '40px',
                                     color: '#333',
                                     style: {
-                                        cssClass: 'apexcharts-radial-bar-value',
+                                        cssClass: 'apexcharts-datalabel-value',
                                     },
                                     formatter: (val) => {
                                         val = (val * this.maxValue) / 100;
@@ -181,7 +181,7 @@
                         offsetY: 20,
                         style: {
                             fontSize: '18px',
-                            cssClass: 'apexcharts-radial-bar-title'
+                            cssClass: 'apexcharts-title-text'
                         }
                     },
                     stroke: {

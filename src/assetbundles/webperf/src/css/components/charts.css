@@ -1,0 +1,13 @@
+/**
+ * components/tables.css
+ *
+ * Project Charts.
+ *
+ */
+.apexcharts-title-text {
+  font-weight: bold;
+}
+
+.apexcharts-datalabel-value {
+  font-weight: bold;
+}
