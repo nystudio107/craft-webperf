@@ -50,19 +50,19 @@
         </div>
         <div class="flex overflow-hidden w-full flex-no-wrap">
             <div class="flex-grow">
-                <div class="">
+                <div class="shadow">
                     <dashboard-radial-bar-chart
                             title="First Byte"
                             range="month"
                             column="firstByte"
-                            :max-value="5"
+                            :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
                 </div>
             </div>
             <div class="flex-grow">
-                <div class="">
+                <div class="shadow">
                     <dashboard-radial-bar-chart
                             title="First Contentful Paint"
                             range="month"
@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="flex-grow">
-                <div class="">
+                <div class="shadow">
                     <dashboard-radial-bar-chart
                             title="DOM Interactive"
                             range="month"
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="flex-grow">
-                <div class="">
+                <div class="shadow">
                     <dashboard-radial-bar-chart
                             title="Page Loaded"
                             range="month"

@@ -1,5 +1,5 @@
 <template>
-    <apexcharts width="100%" height="200px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
+    <apexcharts width="100%" height="300px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
 </template>
 
 <script>
@@ -87,7 +87,7 @@
                         val = (val * 100) / this.maxValue;
                         let chartColor = this.colorFromPercentage(val);
                         options.colors = [chartColor];
-                        options.plotOptions.radialBar.dataLabels.value.color = chartColor;
+                        //options.plotOptions.radialBar.dataLabels.value.color = chartColor;
                         this.chartOptions = options;
                         this.series = [val];
                     }
@@ -119,7 +119,7 @@
             this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
             // Live refresh the data
             setInterval(() => {
-                this.getSeriesData();
+                //this.getSeriesData();
             }, 3000);
         },
         data: function() {
@@ -136,6 +136,9 @@
                         radialBar: {
                             startAngle: -135,
                             endAngle: 135,
+                            hollow: {
+                                size: '65%',
+                            },
                             track: {
                                 background: "#e7e7e7",
                                 strokeWidth: '97%',
@@ -150,16 +153,16 @@
                                 }
                             },
                             dataLabels: {
-                                showOn: 'always',
                                 name: {
+                                    show: false,
                                     fontSize: '16px',
                                     color: '#333',
-                                    offsetY: 80
+                                    offsetY: 100
                                 },
                                 value: {
-                                    offsetY: 40,
-                                    fontSize: '22px',
-                                    color: undefined,
+                                    offsetY: 10,
+                                    fontSize: '40px',
+                                    color: '#333',
                                     formatter: (val) => {
                                         val = (val * this.maxValue) / 100;
                                         return Number(val).toFixed(2) + "s";
@@ -169,7 +172,17 @@
                         }
                     },
                     labels: [this.title],
+                    title: {
+                        text: this.title,
+                        offsetX: 10,
+                        offsetY: 20,
+                        style: {
+                            fontSize: '18px',
+                            cssClass: 'apexcharts-radial-bar-title'
+                        }
+                    },
                     stroke: {
+                        width: 1,
                         lineCap: 'round'
                     },
                 },
