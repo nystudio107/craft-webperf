@@ -163,6 +163,9 @@
                                     offsetY: 10,
                                     fontSize: '40px',
                                     color: '#333',
+                                    style: {
+                                        cssClass: 'apexcharts-radial-bar-value',
+                                    },
                                     formatter: (val) => {
                                         val = (val * this.maxValue) / 100;
                                         return Number(val).toFixed(2) + "s";
