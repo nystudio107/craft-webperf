@@ -1,0 +1,13 @@
+{
+  "dashboard.js": "js/dashboard.js",
+  "dashboard.js.map": "js/dashboard.js.map",
+  "styles.css": "css/styles.css",
+  "styles.js": "js/styles.js",
+  "styles.js.map": "js/styles.js.map",
+  "vendor.js": "js/vendor.js",
+  "vendor.js.map": "js/vendor.js.map",
+  "webperf.js": "js/webperf.js",
+  "webperf.js.map": "js/webperf.js.map",
+  "css/styles.css.map": "css/styles.css.map",
+  "img/Webperf-icon.svg": "img/Webperf-icon.svg"
+}

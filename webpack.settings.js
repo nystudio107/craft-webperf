@@ -33,7 +33,7 @@ module.exports = {
     entries: {
         "dashboard": "dashboard.js",
         "webperf": "webperf.js",
-        "widget": "widget.js"
+//        "widget": "widget.js"
     },
     copyWebpackConfig: [
     ],

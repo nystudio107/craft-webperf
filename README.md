@@ -28,7 +28,7 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Webperf
 
-You can also install Retour via the **Plugin Store** in the Craft Control Panel.
+You can also install Webperf via the **Plugin Store** in the Craft Control Panel.
 
 ## Webperf Overview
 
