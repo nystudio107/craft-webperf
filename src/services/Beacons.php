@@ -40,12 +40,6 @@ class Beacons extends Component
     public function includeHtmlBeacon()
     {
         $view = Craft::$app->getView();
-        // Asset bundle
-        try {
-            $view->registerAssetBundle(BoomerangAsset::class);
-        } catch (InvalidConfigException $e) {
-            Craft::error($e->getMessage(), __METHOD__);
-        }
         $boomerangUrl = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
             true
@@ -71,6 +65,7 @@ class Beacons extends Component
         $view->registerJsFile(
             self::AMP_IFRAME_SCRIPT_URL,
             [
+                'position' => $view::POS_HEAD,
                 'async' => 'async',
                 'custom-element' => 'amp-iframe',
             ],
@@ -84,12 +79,6 @@ class Beacons extends Component
     public function includeAmpHtmlBeacon()
     {
         $view = Craft::$app->getView();
-        // Asset bundle
-        try {
-            $view->registerAssetBundle(BoomerangAsset::class);
-        } catch (InvalidConfigException $e) {
-            Craft::error($e->getMessage(), __METHOD__);
-        }
         $boomerangUrl = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
             true
