@@ -31,7 +31,7 @@ class WebperfVariable extends ManifestVariable
     {
         Webperf::$settings->includeBeacon = $includeBeacon;
     }
-    
+
     /**
      * Change the type of render; either `html` or `amp-html` are valid for $renderType
      *
