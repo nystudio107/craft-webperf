@@ -6,7 +6,7 @@
     import Axios from 'axios';
     import ApexCharts from 'vue-apexcharts';
 
-    const chartDataBaseUrl = '/webperf/charts/dashboard-radial-bar/';
+    const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
 
     const greenColor = {
         r: 0,

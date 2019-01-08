@@ -52,7 +52,7 @@ class ChartsController extends Controller
      * @return Response
      * @throws ForbiddenHttpException
      */
-    public function actionDashboardRadialBar(
+    public function actionDashboardStatsAverage(
         string $range = 'day',
         string $column = 'pageLoad',
         int $siteId = 0
