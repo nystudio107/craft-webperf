@@ -10,6 +10,8 @@
 
 namespace nystudio107\webperf\variables;
 
+use nystudio107\webperf\Webperf;
+
 /**
  * @author    nystudio107
  * @package   Webperf
@@ -19,4 +21,24 @@ class WebperfVariable extends ManifestVariable
 {
     // Public Methods
     // =========================================================================
+
+    /**
+     * Whether to include the beacon or not
+     *
+     * @param bool $includeBeacon
+     */
+    public function includeBeacon(bool $includeBeacon)
+    {
+        Webperf::$settings->includeBeacon = $includeBeacon;
+    }
+    
+    /**
+     * Change the type of render; either `html` or `amp-html` are valid for $renderType
+     *
+     * @param string $renderType
+     */
+    public function renderType(string $renderType)
+    {
+        Webperf::$renderType = $renderType;
+    }
 }
