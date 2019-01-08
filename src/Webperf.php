@@ -57,6 +57,11 @@ class Webperf extends Plugin
      */
     public static $settings;
 
+    /**
+     * @var string
+     */
+    public static $renderType = 'html';
+
     // Public Properties
     // =========================================================================
 
@@ -293,7 +298,36 @@ class Webperf extends Plugin
                     $view = Craft::$app->getView();
                     // The page is done rendering, include our beacon
                     if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
-                        Webperf::$plugin->beacons->includeBeacon();
+                        switch (self::$renderType) {
+                            case 'html':
+                                Webperf::$plugin->beacons->includeHtmlBeacon();
+                                break;
+                            case 'amp-html':
+                                Webperf::$plugin->beacons->includeAmpHtmlScript();
+                                break;
+                        }
+                    }
+                }
+            );
+            // Handler: View::EVENT_END_BODY
+            Event::on(
+                View::class,
+                View::EVENT_END_BODY,
+                function () {
+                    Craft::debug(
+                        'View::EVENT_END_BODY',
+                        __METHOD__
+                    );
+                    $view = Craft::$app->getView();
+                    // The page is done rendering, include our beacon
+                    if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
+                        switch (self::$renderType) {
+                            case 'html':
+                                break;
+                            case 'amp-html':
+                                Webperf::$plugin->beacons->includeAmpHtmlBeacon();
+                                break;
+                        }
                     }
                 }
             );

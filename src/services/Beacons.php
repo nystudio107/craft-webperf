@@ -26,13 +26,18 @@ use yii\base\InvalidConfigException;
  */
 class Beacons extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const AMP_IFRAME_SCRIPT_URL = "https://cdn.ampproject.org/v0/amp-iframe-0.1.js";
+
     // Public Methods
     // =========================================================================
 
     /*
-     * @return mixed
+     * @return void
      */
-    public function includeBeacon()
+    public function includeHtmlBeacon()
     {
         $view = Craft::$app->getView();
         // Asset bundle
@@ -55,5 +60,46 @@ class Beacons extends Component
             $script,
             $view::POS_HEAD
         );
+    }
+
+    /*
+     * @return void
+     */
+    public function includeAmpHtmlScript()
+    {
+        $view = Craft::$app->getView();
+        $view->registerJsFile(
+            self::AMP_IFRAME_SCRIPT_URL,
+            [
+                'async' => 'async',
+                'custom-element' => 'amp-iframe',
+            ],
+            'webperf-amp-iframe-script'
+        );
+    }
+
+    /*
+     * @return void
+     */
+    public function includeAmpHtmlBeacon()
+    {
+        $view = Craft::$app->getView();
+        // Asset bundle
+        try {
+            $view->registerAssetBundle(BoomerangAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $boomerangUrl = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
+            true
+        );
+        $html = PluginTemplate::renderPluginTemplate(
+            '_frontend/scripts/load-boomerang-amp-iframe.twig',
+            [
+                'boomerangScriptUrl' => $boomerangUrl,
+            ]
+        );
+        echo $html;
     }
 }
