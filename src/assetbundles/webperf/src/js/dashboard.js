@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueEvents from 'vue-events';
 import Confetti from '../vue/Confetti.vue';
 import DashboardRadialBarChart from '../vue/DashboardRadialBarChart.vue';
+import DashboardSimpleBarChart from '../vue/DashboardSimpleBarChart.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
@@ -10,6 +11,7 @@ const vm = new Vue({
     components: {
         'confetti': Confetti,
         'dashboard-radial-bar-chart': DashboardRadialBarChart,
+        'dashboard-simple-bar-chart': DashboardSimpleBarChart,
     },
     data: {
     },

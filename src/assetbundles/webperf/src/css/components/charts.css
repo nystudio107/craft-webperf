@@ -11,3 +11,19 @@
 .apexcharts-datalabel-value {
   font-weight: bold;
 }
+
+.simple-bar-chart-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.simple-bar-chart {
+  height: 10px;
+}
+
+.simple-bar-chart-label {
+  float: left;
+}
+.simple-bar-chart-value {
+  float: right;
+}

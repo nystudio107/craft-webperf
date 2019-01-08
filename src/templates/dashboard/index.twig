@@ -64,30 +64,6 @@
             <div class="flex-grow">
                 <div class="shadow">
                     <dashboard-radial-bar-chart
-                            title="First Contentful Paint"
-                            range="month"
-                            column="firstContentfulPaint"
-                            :max-value="5"
-                            :site-id="{{ currentSiteId }}"
-                    >
-                    </dashboard-radial-bar-chart>
-                </div>
-            </div>
-            <div class="flex-grow">
-                <div class="shadow">
-                    <dashboard-radial-bar-chart
-                            title="DOM Interactive"
-                            range="month"
-                            column="domInteractive"
-                            :max-value="5"
-                            :site-id="{{ currentSiteId }}"
-                    >
-                    </dashboard-radial-bar-chart>
-                </div>
-            </div>
-            <div class="flex-grow">
-                <div class="shadow">
-                    <dashboard-radial-bar-chart
                             title="Page Loaded"
                             range="month"
                             column="pageLoad"
@@ -95,6 +71,34 @@
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-radial-bar-chart>
+                </div>
+            </div>
+            <div class="flex-grow">
+                <div class="shadow">
+                    <dashboard-simple-bar-chart
+                            title="First Paint"
+                            range="month"
+                            column="firstPaint"
+                            :max-value="5"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-simple-bar-chart>
+                    <dashboard-simple-bar-chart
+                            title="First Contentful Paint"
+                            range="month"
+                            column="firstContentfulPaint"
+                            :max-value="5"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-simple-bar-chart>
+                    <dashboard-simple-bar-chart
+                            title="DOM Interactive"
+                            range="month"
+                            column="domInteractive"
+                            :max-value="5"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-simple-bar-chart>
                 </div>
             </div>
         </div>
