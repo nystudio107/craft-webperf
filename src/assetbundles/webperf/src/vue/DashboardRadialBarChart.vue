@@ -81,10 +81,10 @@
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
                         let val = data[0] / 1000;
-                        if (val > this.maxValue) {
-                            this.maxValue = Math.round(val);
+                        if (val > this.displayMaxValue) {
+                            this.displayMaxValue = val;
                         }
-                        val = (val * 100) / this.maxValue;
+                        val = (val * 100) / this.displayMaxValue;
                         let chartColor = this.colorFromPercentage(val);
                         options.colors = [chartColor];
                         //options.plotOptions.radialBar.dataLabels.value.color = chartColor;
@@ -167,7 +167,7 @@
                                         cssClass: 'apexcharts-datalabel-value',
                                     },
                                     formatter: (val) => {
-                                        val = (val * this.maxValue) / 100;
+                                        val = (val * this.displayMaxValue) / 100;
                                         return Number(val).toFixed(2) + "s";
                                     }
                                 }
@@ -191,6 +191,7 @@
                 },
                 series: [0],
                 displayRange: this.range,
+                displayMaxValue: this.maxValue,
             }
         },
     }
