@@ -10,14 +10,11 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\Webperf;
 use nystudio107\webperf\helpers\PluginTemplate;
-use nystudio107\webperf\assetbundles\boomerang\BoomerangAsset;
 
 use Craft;
 use craft\base\Component;
-
-use yii\base\InvalidConfigException;
+use craft\helpers\UrlHelper;
 
 /**
  * @author    nystudio107
@@ -78,17 +75,32 @@ class Beacons extends Component
      */
     public function includeAmpHtmlBeacon()
     {
-        $view = Craft::$app->getView();
+        $html = PluginTemplate::renderPluginTemplate(
+            '_frontend/scripts/load-boomerang-amp-iframe.twig',
+            [
+                'boomerangIframeUrl' => UrlHelper::siteUrl('/webperf/render/amp-iframe'),
+            ]
+        );
+        echo $html;
+    }
+
+    /*
+     * @return void
+     */
+    public function ampHtmlIframe()
+    {
         $boomerangUrl = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
             true
         );
         $html = PluginTemplate::renderPluginTemplate(
-            '_frontend/scripts/load-boomerang-amp-iframe.twig',
+            '_frontend/scripts/boomerang-amp-iframe-html.twig',
             [
                 'boomerangScriptUrl' => $boomerangUrl,
             ]
         );
-        echo $html;
+
+        return $html;
     }
+
 }

@@ -381,6 +381,8 @@ class Webperf extends Plugin
         return [
             // Beacon
             '/webperf/metrics/beacon' => 'webperf/metrics/beacon',
+            // Render
+            '/webperf/render/amp-iframe' => 'webperf/render/amp-iframe',
             // Tables
             '/webperf/tables/dashboard' => 'webperf/tables/dashboard',
             '/webperf/tables/redirects' => 'webperf/tables/redirects',

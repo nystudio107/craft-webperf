@@ -1,1 +1,14 @@
-<html><head></head><body onload="document._l();"><script id="boomr-if-as" src="{{ boomerangScriptUrl }}"></script></body></html>
+<html>
+<head></head>
+<body>
+<script>
+    (function(d, s) {
+        var js = d.createElement(s),
+            sc = d.getElementsByTagName(s)[0];
+
+        js.src="{{ boomerangScriptUrl }}";
+        sc.parentNode.insertBefore(js, sc);
+    }(document, "script"));
+</script>
+</body>
+</html>
