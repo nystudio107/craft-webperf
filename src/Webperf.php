@@ -31,7 +31,6 @@ use craft\web\UrlManager;
 use craft\web\View;
 
 use yii\base\Event;
-use yii\log\Logger;
 
 /**
  * Class Webperf
@@ -297,10 +296,6 @@ class Webperf extends Plugin
                         __METHOD__
                     );
                     $view = Craft::$app->getView();
-                    $target = Craft::$app->getLog()->targets['debug'];
-                    $messages = $target->filterMessages($target->messages, Logger::LEVEL_PROFILE);
-                    $timings = Craft::getLogger()->calculateTimings($messages);
-                    Craft::error('whore ' . print_r($timings, true), __METHOD__);
                     // The page is done rendering, include our beacon
                     if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
                         switch (self::$renderType) {
