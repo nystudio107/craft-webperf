@@ -116,6 +116,10 @@ namespace nystudio107\webperf\controllers {
             if (!empty($params['nt_domcomp']) && !empty($params['nt_nav_st'])) {
                 $sample->pageLoad = $params['nt_domcomp'] - $params['nt_nav_st'];
             }
+            // Set the document title
+            if (!empty($params['doc_title'])) {
+                $sample->title = $params['doc_title'];
+            }
             // Fill in information from the current request
             $request = Craft::$app->getRequest();
             $ip = $request->userIP;

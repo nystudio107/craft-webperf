@@ -30,6 +30,11 @@ class DataSample extends DbModel
     public $siteId;
 
     /**
+     * @var string the title of the document (if any)
+     */
+    public $title;
+
+    /**
      * @var string u - the URL of the User Timing sample
      */
     public $url;
@@ -105,6 +110,7 @@ class DataSample extends DbModel
         return [
             ['siteId', 'integer'],
             ['url', 'required'],
+            ['title', DbStringValidator::class, 'max' => 120],
             ['url', DbStringValidator::class, 'max' => 255],
             ['countryCode', DbStringValidator::class, 'max' => 2],
             ['device', DbStringValidator::class, 'max' => 50],
@@ -112,6 +118,7 @@ class DataSample extends DbModel
             ['os', DbStringValidator::class, 'max' => 50],
             [
                 [
+                    'title',
                     'url',
                     'countryCode',
                     'device',
