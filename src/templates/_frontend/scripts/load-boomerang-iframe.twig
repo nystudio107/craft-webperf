@@ -35,6 +35,9 @@
     }
 
     doc.open()._l = function() {
+        {% if boomerangTitle | length %}
+        doc.title = '{{ boomerangTitle }}';
+        {% endif %}
         var js = this.createElement("script");
         if (dom) {
             this.domain = dom;
