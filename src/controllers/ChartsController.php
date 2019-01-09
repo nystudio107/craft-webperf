@@ -90,7 +90,7 @@ class ChartsController extends Controller
         if ($db->getIsPgsql()) {
             // Query the db
             $query = (new Query())
-                ->from('{{%retour_stats}}')
+                ->from('{{%webperf_data_samples}}')
                 ->select([
                     'AVG("'.$column.'") AS avg',
                 ])
