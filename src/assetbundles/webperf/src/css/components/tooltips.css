@@ -7,21 +7,22 @@
 
 .webperf-tooltip {
   position: relative;
+  cursor: default;
 }
 
 .webperf-tooltip .webperf-tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 300px;
   background-color: gray;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px;
   position: absolute;
   z-index: 1;
-  top: 90%;
+  top: 85%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -150px;
 }
 
 .webperf-tooltip .webperf-tooltiptext::after {
