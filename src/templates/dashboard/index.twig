@@ -64,7 +64,7 @@
                                     title="Page Loaded"
                                     range="month"
                                     column="pageLoad"
-                                    :max-value="20"
+                                    :max-value="10"
                                     :site-id="{{ currentSiteId }}"
                                 >
                             </dashboard-radial-bar-chart>
@@ -129,7 +129,7 @@
                                 title="DNS Lookup"
                                 range="month"
                                 column="dns"
-                                :max-value="5"
+                                :max-value=".5"
                                 :site-id="{{ currentSiteId }}"
                             >
                             </dashboard-simple-bar-chart>
@@ -140,7 +140,7 @@
                                 title="Connect"
                                 range="month"
                                 column="connect"
-                                :max-value="5"
+                                :max-value=".5"
                                 :site-id="{{ currentSiteId }}"
                             >
                             </dashboard-simple-bar-chart>
