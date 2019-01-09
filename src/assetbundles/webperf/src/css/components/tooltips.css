@@ -39,3 +39,10 @@
 .webperf-tooltip:hover .webperf-tooltiptext {
   visibility: visible;
 }
+
+.webperf-tooltiptext.webperf-tooltip-visible {
+  visibility: visible!important;
+  width: 60px;
+  margin-left: -30px;
+  top: 150%;
+}
