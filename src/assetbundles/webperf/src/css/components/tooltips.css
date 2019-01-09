@@ -1,0 +1,40 @@
+/**
+ * components/tables.css
+ *
+ * Project Tooltips.
+ *
+ */
+
+.webperf-tooltip {
+  position: relative;
+}
+
+.webperf-tooltip .webperf-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: gray;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 90%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.webperf-tooltip .webperf-tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent grey transparent;
+}
+
+.webperf-tooltip:hover .webperf-tooltiptext {
+  visibility: visible;
+}

@@ -127,7 +127,8 @@
                 chartOptions: {
                     chart: {
                         id: 'vuechart-dashboard-radial-bar',
-                        toolbar: {
+                        fontFamily: 'inherit',
+                    toolbar: {
                             show: false,
                         },
                     },
@@ -140,7 +141,7 @@
                                 size: '65%',
                             },
                             track: {
-                                background: "#e7e7e7",
+                                background: "#f1f5f8",
                                 strokeWidth: '97%',
                                 margin: 5, // margin is in pixels
                                 shadow: {
@@ -177,10 +178,10 @@
                     labels: [this.title],
                     title: {
                         text: this.title,
-                        offsetX: 10,
-                        offsetY: 20,
+                        offsetY: 36,
+                        align: 'center',
                         style: {
-                            fontSize: '18px',
+                            fontSize: '16px',
                             cssClass: 'apexcharts-title-text'
                         }
                     },

@@ -5,7 +5,7 @@
             <div class="simple-bar-chart-value text-base font-bold">{{ statFormatter(series[0]) }}</div>
         </div>
         <div class="py-2">
-            <div class="simple-bar-chart-track rounded-full bg-grey-light">
+            <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
                 <div class="h-3 rounded-full" :style="{ width: series[0] + '%', backgroundColor: barColor }"></div>
             </div>
         </div>

@@ -30,9 +30,14 @@
 {% endblock %}
 
 {% block content %}
+    <style>
+        #content {
+            background: none !important;
+        }
+    </style>
     <div id="cp-nav-content">
+        {% if showWelcome %}
         <div class="field readable">
-            {% if showWelcome %}
                 <confetti>
                 </confetti>
                 <div class="readable" style="text-align:center; margin:0 auto; padding: 5% 10%;">
@@ -46,52 +51,66 @@
                     </p>
                     <p>We hope you love it! For more information, please <a href="{{ docsUrl }}" target="_blank" rel="noopener">see the documentation</a>.</p>
                 </div>
-            {% endif %}
         </div>
-            <div class="text-center text-4xl">Frontend</div>
-            <div class="flex overflow-hidden w-full flex-no-wrap items-start">
-                <div class="flex-grow">
-                    <div class="">
-                        <dashboard-radial-bar-chart
-                                title="Page Loaded"
-                                range="month"
-                                column="pageLoad"
-                                :max-value="20"
-                                :site-id="{{ currentSiteId }}"
-                        >
-                        </dashboard-radial-bar-chart>
+        {% endif %}
+            {# -- Frontend -- #}
+            <div class="pane first">
+                <h1 class="text-center">Frontend</h1>
+                <div class="flex overflow-hidden w-full flex-no-wrap items-start">
+                    <div class="flex-grow">
+                        <div class="webperf-tooltip">
+                            <span class="webperf-tooltiptext">Tooltip text</span>
+                            <dashboard-radial-bar-chart
+                                    title="Page Loaded"
+                                    range="month"
+                                    column="pageLoad"
+                                    :max-value="20"
+                                    :site-id="{{ currentSiteId }}"
+                                >
+                            </dashboard-radial-bar-chart>
+                        </div>
                     </div>
-                </div>
-                <div class="flex-grow self-center">
-                    <div class="">
-                        <dashboard-simple-bar-chart
-                                title="First Contentful Paint"
-                                range="month"
-                                column="firstContentfulPaint"
-                                :max-value="5"
-                                :site-id="{{ currentSiteId }}"
-                        >
-                        </dashboard-simple-bar-chart>
-                        <dashboard-simple-bar-chart
-                                title="DOM Interactive"
-                                range="month"
-                                column="domInteractive"
-                                :max-value="5"
-                                :site-id="{{ currentSiteId }}"
-                        >
-                        </dashboard-simple-bar-chart>
+                    <div class="flex-grow self-center">
+                        <div class="">
+                            <div class="webperf-tooltip">
+                                <span class="webperf-tooltiptext">Tooltip text</span>
+                                <dashboard-simple-bar-chart
+                                        title="First Contentful Paint"
+                                        range="month"
+                                        column="firstContentfulPaint"
+                                        :max-value="5"
+                                        :site-id="{{ currentSiteId }}"
+                                >
+                                </dashboard-simple-bar-chart>
+                            </div>
+                            <div class="webperf-tooltip">
+                                <span class="webperf-tooltiptext">Tooltip text</span>
+                                <dashboard-simple-bar-chart
+                                    title="DOM Interactive"
+                                    range="month"
+                                    column="domInteractive"
+                                    :max-value="5"
+                                    :site-id="{{ currentSiteId }}"
+                                >
+                                </dashboard-simple-bar-chart>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="flex-grow">
-                    <div class="text-center text-xl font-bold">
-                        Slowest pages
+                    <div class="flex-grow">
+                        <div class="text-left text-base font-bold">
+                            Slowest pages
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="text-center text-4xl">Backend</div>
+
+        {# -- Backend -- #}
+        <div class="pane">
+            <h1 class="text-center">Backend</h1>
             <div class="flex overflow-hidden w-full flex-no-wrap items-start">
                 <div class="flex-grow">
-                    <div class="">
+                    <div class="webperf-tooltip">
+                        <span class="webperf-tooltiptext">Tooltip text</span>
                         <dashboard-radial-bar-chart
                                 title="First Byte"
                                 range="month"
@@ -104,31 +123,38 @@
                 </div>
                 <div class="flex-grow self-center">
                     <div class="">
-                        <dashboard-simple-bar-chart
+                        <div class="webperf-tooltip">
+                            <span class="webperf-tooltiptext">Tooltip text</span>
+                            <dashboard-simple-bar-chart
                                 title="DNS Lookup"
                                 range="month"
                                 column="dns"
                                 :max-value="5"
                                 :site-id="{{ currentSiteId }}"
-                        >
-                        </dashboard-simple-bar-chart>
-                        <dashboard-simple-bar-chart
+                            >
+                            </dashboard-simple-bar-chart>
+                        </div>
+                        <div class="webperf-tooltip">
+                            <span class="webperf-tooltiptext">Tooltip text</span>
+                            <dashboard-simple-bar-chart
                                 title="Connect"
                                 range="month"
                                 column="connect"
                                 :max-value="5"
                                 :site-id="{{ currentSiteId }}"
-                        >
-                        </dashboard-simple-bar-chart>
+                            >
+                            </dashboard-simple-bar-chart>
+                        </div>
                     </div>
                 </div>
                 <div class="flex-grow">
-                    <div class="text-center text-xl font-bold">
+                    <div class="text-left text-base font-bold">
                         Slowest pages
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     {# include our JavaScript modules #}
     {{ parent() }}
     {{ craft.webperf.includeJsModule("dashboard.js", false) }}
