@@ -14,32 +14,9 @@
 
 <script>
     import Axios from 'axios';
+    import TriBlendColor from '../js/tri-color-blend';
 
     const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
-
-    const greenColor = {
-        r: 0,
-        g: 200,
-        b: 0
-    };
-    const yellowColor = {
-        r: 255,
-        g: 255,
-        b: 0
-    };
-    const redColor = {
-        r: 200,
-        g: 0,
-        b: 0
-    };
-
-    // convert 0..255 R,G,B values to a hexidecimal color string
-    const RGBToHex = (r,g,b) => {
-        var bin = r << 16 | g << 8 | b;
-        return (function(h){
-            return new Array(7-h.length).join("0")+h
-        })(bin.toString(16).toUpperCase())
-    };
 
     // Configure the api endpoint
     const configureApi = (url) => {
@@ -93,7 +70,7 @@
                             this.displayMaxValue = val;
                         }
                         val = (val * 100) / this.displayMaxValue;
-                        this.barColor = this.colorFromPercentage(val);
+                        this.barColor = this.triBlend.colorFromPercentage(val);
                         this.series = [val];
                     }
                 });
@@ -101,20 +78,6 @@
             onChangeRange (range) {
                 this.displayRange = range;
                 this.getSeriesData();
-            },
-            colorFromPercentage(val) {
-                let startColor = greenColor;
-                let endColor = yellowColor;
-                if (val >= 50) {
-                    startColor = yellowColor;
-                    endColor = redColor;
-                    val = val - 50;
-                }
-                const multiplier = (val / 50);
-                const r = Math.round(startColor.r + multiplier * (endColor.r - startColor.r));
-                const g = Math.round(startColor.g + multiplier * (endColor.g - startColor.g));
-                const b = Math.round(startColor.b + multiplier * (endColor.b - startColor.b));
-                return '#' + RGBToHex(r,g,b);
             },
             statFormatter(val) {
                 val = (val * this.displayMaxValue) / 100;
@@ -133,6 +96,7 @@
         },
         data: function() {
             return {
+                triBlend: new TriBlendColor,
                 barColor: '#000',
                 series: [0],
                 displayRange: this.range,
