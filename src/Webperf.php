@@ -295,6 +295,12 @@ class Webperf extends Plugin
                         'View::EVENT_END_PAGE',
                         __METHOD__
                     );
+
+                    $profiles = Craft::getLogger()->getProfiling();
+                    Craft::debug('Debug profiles: '.print_r($profiles, true), __METHOD__);
+                    $dbProfiles = Craft::getLogger()->getDbProfiling();
+                    Craft::debug('DB profiles: '.print_r($dbProfiles, true), __METHOD__);
+
                     $view = Craft::$app->getView();
                     // The page is done rendering, include our beacon
                     if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
