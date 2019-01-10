@@ -97,9 +97,13 @@
                         </div>
                     </div>
                     <div class="flex-grow">
-                        <div class="text-left text-base font-bold">
-                            Slowest pages
-                        </div>
+                        <dashboard-file-list
+                                range="month"
+                                column="pageLoad"
+                                :max-value="10"
+                                :site-id="{{ currentSiteId }}"
+                        >
+                        </dashboard-file-list>
                     </div>
                 </div>
             </div>
@@ -148,9 +152,13 @@
                     </div>
                 </div>
                 <div class="flex-grow">
-                    <div class="text-left text-base font-bold">
-                        Slowest pages
-                    </div>
+                    <dashboard-file-list
+                            range="month"
+                            column="firstByte"
+                            :max-value="10"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-file-list>
                 </div>
             </div>
         </div>
