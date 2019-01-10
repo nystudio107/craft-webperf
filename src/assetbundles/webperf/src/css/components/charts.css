@@ -26,11 +26,29 @@
 .simple-bar-chart-label {
   float: left;
 }
+
 .simple-bar-chart-value {
   float: right;
+}
+
+.file-list-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.file-list-wrapper:hover {
+  background-color: #EEE;
 }
 
 .good-bad-ugly {
   background: linear-gradient(to right, rgb(0, 200, 0), rgb(255, 255, 0), rgb(200, 0, 0));
   height: 20px;
+}
+
+.truncate-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="simple-bar-chart-wrapper p-5">
+    <div class="simple-bar-chart-wrapper px-5 py-3">
         <div class="clearafter py-2">
             <div class="simple-bar-chart-label text-base font-bold">{{ title }}</div>
             <div class="simple-bar-chart-value text-base font-bold">{{ statFormatter(series[0]) }}</div>

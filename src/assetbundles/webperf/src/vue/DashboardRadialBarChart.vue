@@ -149,7 +149,7 @@
                     labels: [this.title],
                     title: {
                         text: this.title,
-                        offsetY: 36,
+                        offsetY: 16,
                         align: 'center',
                         style: {
                             fontSize: '16px',

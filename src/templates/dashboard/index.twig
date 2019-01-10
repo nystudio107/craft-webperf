@@ -57,7 +57,7 @@
             <div class="pane first">
                 <h1 class="text-center">Frontend</h1>
                 <div class="flex overflow-hidden w-full flex-no-wrap items-start">
-                    <div class="flex-grow">
+                    <div class="flex-grow self-top w-1/5">
                         <div class="webperf-tooltip">
                             <span class="webperf-tooltiptext">
                                 The time it takes for the webpage to be fully loaded in the client's browser.
@@ -76,7 +76,7 @@
                             </dashboard-radial-bar-chart>
                         </div>
                     </div>
-                    <div class="flex-grow self-center">
+                    <div class="flex-grow self-top w-2/5">
                         <div class="">
                             <div class="webperf-tooltip">
                                 <span class="webperf-tooltiptext">
@@ -86,6 +86,14 @@
                                        class="text-grey-lighter hover:text-grey-lightest"
                                     >Learn More &rarr;</a>
                                 </span>
+                                <dashboard-simple-bar-chart
+                                        title="First Paint"
+                                        range="month"
+                                        column="firstPaint"
+                                        :max-value="5"
+                                        :site-id="{{ currentSiteId }}"
+                                >
+                                </dashboard-simple-bar-chart>
                                 <dashboard-simple-bar-chart
                                         title="First Contentful Paint"
                                         range="month"
@@ -114,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex-grow">
+                    <div class="flex-grow self-top w-2/5">
                         <dashboard-file-list
                                 range="month"
                                 column="pageLoad"
@@ -130,7 +138,7 @@
         <div class="pane">
             <h1 class="text-center">Backend</h1>
             <div class="flex overflow-hidden w-full flex-no-wrap items-start">
-                <div class="flex-grow">
+                <div class="flex-grow self-top w-1/5">
                     <div class="webperf-tooltip">
                         <span class="webperf-tooltiptext">
                             How long it takes before the first byte of data is received from the server.
@@ -149,7 +157,7 @@
                         </dashboard-radial-bar-chart>
                     </div>
                 </div>
-                <div class="flex-grow self-center">
+                <div class="flex-grow self-top w-2/5">
                     <div class="">
                         <div class="webperf-tooltip">
                             <span class="webperf-tooltiptext">
@@ -187,7 +195,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-grow">
+                <div class="flex-grow self-top w-2/5">
                     <dashboard-file-list
                             range="month"
                             column="firstByte"

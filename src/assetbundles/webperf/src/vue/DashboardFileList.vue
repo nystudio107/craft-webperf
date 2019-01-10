@@ -1,17 +1,17 @@
 <template>
-    <section>
-        <div class="text-left text-base font-bold">
+    <section class="px-5 py-3">
+        <div class="text-left text-base font-bold px-2 pt-2">
             Slowest pages
         </div>
-        <div v-for="item in series" class="simple-bar-chart-wrapper p-5">
-            <div class="clearafter py-2">
-                <div class="simple-bar-chart-label text-base font-bold">{{ item.title }}</div>
-                <div class="simple-bar-chart-label text-base font-bold">{{ item.url }}</div>
-                <div class="simple-bar-chart-value text-base font-bold">{{ statFormatter(item.data) }}</div>
+        <div v-for="item in series" class="file-list-wrapper p-2">
+            <div class="text-base font-normal truncate-label" style="color: rgb(26, 13, 171); width: 99%;">{{ item.title }}</div>
+            <div class="clearafter pb-1">
+                <cite class="simple-bar-chart-label text-sm font-normal truncate-label" style="color: rgb(0, 102, 33); width: 80%;">{{ item.url }}</cite>
+                <div class="simple-bar-chart-value text-sm font-bold">{{ statFormatter(item.data) }}</div>
             </div>
-            <div class="py-2">
-                <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
-                    <div class="h-3 rounded-full" :style="{ width: item.data + '%', backgroundColor: triBlend.colorFromPercentage(item.data) }"></div>
+            <div class="py-1">
+                <div class="file-list-chart-track rounded-full bg-grey-lighter">
+                    <div class="h-2 rounded-full" :style="{ width: item.data + '%', backgroundColor: triBlend.colorFromPercentage(item.data) }"></div>
                 </div>
             </div>
         </div>
@@ -107,7 +107,17 @@
                         title: 'some title',
                         url: 'http://example.com',
                         data: 10
-                    }
+                    },
+                    {
+                        title: 'This is a super long long title that should get truncated',
+                        url: 'http://example.com/some/really/long/url/that/will/overflow',
+                        data: 10
+                    },
+                    {
+                        title: 'some title',
+                        url: 'http://example.com',
+                        data: 10
+                    },
                 ],
                 displayRange: this.range,
                 displayMaxValue: this.maxValue,
