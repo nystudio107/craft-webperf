@@ -91,8 +91,16 @@
                     chart: {
                         id: 'vuechart-dashboard-radial-bar',
                         fontFamily: 'inherit',
-                    toolbar: {
+                        toolbar: {
                             show: false,
+                        },
+                    },
+                    states: {
+                        hover: {
+                            filter: {
+                                type: 'none',
+                                value: 0,
+                            }
                         },
                     },
                     colors: ['#000000'],
