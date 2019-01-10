@@ -31,6 +31,10 @@
   float: right;
 }
 
+.simple-bar-line {
+  transition: width 1s;
+}
+
 .file-list-wrapper {
   width: 100%;
   box-sizing: border-box;

@@ -11,7 +11,7 @@
             </div>
             <div class="py-1">
                 <div class="file-list-chart-track rounded-full bg-grey-lighter">
-                    <div class="h-2 rounded-full" :style="{ width: item.data + '%', backgroundColor: triBlend.colorFromPercentage(item.data) }"></div>
+                    <div class="simple-bar-line h-2 rounded-full" :style="{ width: item.data + '%', backgroundColor: triBlend.colorFromPercentage(item.data) }"></div>
                 </div>
             </div>
         </div>
