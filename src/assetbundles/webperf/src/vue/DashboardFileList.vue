@@ -52,6 +52,10 @@
         props: {
             range: String,
             column: String,
+            limit: {
+                type: Number,
+                default: 3,
+            },
             maxValue: Number,
             siteId: {
                 type: Number,
@@ -62,12 +66,13 @@
             // Load in our chart data asynchronously
             getSeriesData: async function() {
                 const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.displayRange + '/' + this.column;
+                let uri = this.displayRange + '/' + this.column + '/' + this.limit;
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
                 await queryApi(chartsAPI, uri, (data) => {
                     // Clone the chartOptions object, and replace the needed values
+                    console.log(data);
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
                         let val = data[0] / 1000;
@@ -90,8 +95,7 @@
             }
         },
         created () {
-            console.log(this.series);
-            //this.getSeriesData();
+            this.getSeriesData();
         },
         mounted() {
             this.$events.$on('change-range', eventData => this.onChangeRange(eventData));

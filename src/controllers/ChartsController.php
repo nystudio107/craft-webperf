@@ -43,7 +43,7 @@ class ChartsController extends Controller
     // =========================================================================
 
     /**
-     * The Dashboard chart
+     * The Dashboard stats average chart
      *
      * @param string $range
      * @param string $column
@@ -103,6 +103,82 @@ class ChartsController extends Controller
         if ($stats) {
             $data = ArrayHelper::getColumn($stats, 'avg');
         }
+
+        return $this->asJson($data);
+    }
+
+    /**
+     * The Dashboard stats slowest pages list
+     *
+     * @param string $range
+     * @param string $column
+     * @param int    $limit
+     * @param int    $siteId
+     *
+     * @return Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionDashboardSlowestPages(
+        string $range = 'day',
+        string $column = 'pageLoad',
+        int $limit = 3,
+        int $siteId = 0
+    ): Response {
+        PermissionHelper::controllerPermissionCheck('webperf:dashboard');
+        $data = [];
+        $days = 1;
+        switch ($range) {
+            case 'day':
+                $days = 1;
+                break;
+            case 'week':
+                $days = 7;
+                break;
+            case 'month':
+                $days = 30;
+                break;
+        }
+        // Different dbs do it different ways
+        $stats = null;
+        $db = Craft::$app->getDb();
+        if ($db->getIsMysql()) {
+            // Query the db
+            $query = (new Query())
+                ->from('{{%webperf_data_samples}}')
+                ->select([
+                    '*',
+                    'AVG('.$column.') AS avg',
+                ])
+                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )");
+            if ((int)$siteId !== 0) {
+                $query->andWhere(['siteId' => $siteId]);
+            }
+            $query
+                ->orderBy('avg DESC')
+                ->groupBy('url')
+                ->limit($limit);
+            $stats = $query->all();
+        }
+        if ($db->getIsPgsql()) {
+            // Query the db
+            $query = (new Query())
+                ->from('{{%webperf_data_samples}}')
+                ->select([
+                    'AVG("'.$column.'") AS avg',
+                ])
+                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
+            if ((int)$siteId !== 0) {
+                $query->andWhere(['siteId' => $siteId]);
+            }
+            $stats = $query->all();
+        }
+        if ($stats) {
+            $data = ArrayHelper::getColumn($stats, 'avg');
+        }
+
+        Craft::debug('Slowest Pages: '.print_r($stats, true), __METHOD__);
+
+        $data = [];
 
         return $this->asJson($data);
     }

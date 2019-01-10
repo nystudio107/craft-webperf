@@ -135,6 +135,7 @@
                         <dashboard-file-list
                                 range="month"
                                 column="pageLoad"
+                                :limit="3"
                                 :max-value="10"
                                 :site-id="{{ currentSiteId }}"
                         >
@@ -208,6 +209,7 @@
                     <dashboard-file-list
                             range="month"
                             column="firstByte"
+                            :limit="3"
                             :max-value="10"
                             :site-id="{{ currentSiteId }}"
                     >

@@ -393,8 +393,14 @@ class Webperf extends Plugin
             '/webperf/tables/dashboard' => 'webperf/tables/dashboard',
             '/webperf/tables/redirects' => 'webperf/tables/redirects',
             // Charts
-            '/webperf/charts/dashboard-stats-average/<range:{handle}>/<column:{handle}>' => 'webperf/charts/dashboard-stats-average',
-            '/webperf/charts/dashboard-stats-average/<range:{handle}>/<column:{handle}>/<siteId:\d+>' => 'webperf/charts/dashboard-stats-average',
+            '/webperf/charts/dashboard-stats-average/<range:{handle}>/<column:{handle}>'
+            => 'webperf/charts/dashboard-stats-average',
+            '/webperf/charts/dashboard-stats-average/<range:{handle}>/<column:{handle}>/<siteId:\d+>'
+            => 'webperf/charts/dashboard-stats-average',
+            '/webperf/charts/dashboard-slowest-pages/<range:{handle}>/<column:{handle}>/<limit:\d+>'
+            => 'webperf/charts/dashboard-slowest-pages',
+            '/webperf/charts/dashboard-slowest-pages/<range:{handle}>/<column:{handle}>/<limit:\d+>/<siteId:\d+>'
+            => 'webperf/charts/dashboard-slowest-pages',
             '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];
     }
