@@ -80,8 +80,8 @@
                         <div class="">
                             <div class="webperf-tooltip">
                                 <span class="webperf-tooltiptext">
-                                    The first meaningful content that the client sees "painted" in their browser.
-                                    <a href="https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint"
+                                    When the browser first begins to nominally paint content into the browser.
+                                    <a href="https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint"
                                        target="_blank"
                                        class="text-grey-lighter hover:text-grey-lightest"
                                     >Learn More &rarr;</a>
@@ -94,6 +94,15 @@
                                         :site-id="{{ currentSiteId }}"
                                 >
                                 </dashboard-simple-bar-chart>
+                            </div>
+                            <div class="webperf-tooltip">
+                                <span class="webperf-tooltiptext">
+                                    The first meaningful content that the client sees "painted" in their browser.
+                                    <a href="https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint"
+                                       target="_blank"
+                                       class="text-grey-lighter hover:text-grey-lightest"
+                                    >Learn More &rarr;</a>
+                                </span>
                                 <dashboard-simple-bar-chart
                                         title="First Contentful Paint"
                                         range="month"
