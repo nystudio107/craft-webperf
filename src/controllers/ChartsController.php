@@ -165,11 +165,17 @@ class ChartsController extends Controller
             $query = (new Query())
                 ->from('{{%webperf_data_samples}}')
                 ->select([
+                    'url',
+                    'title',
                     'AVG("'.$column.'") AS avg',
                 ])
                 ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
+                $query
+                    ->orderBy('avg DESC')
+                    ->groupBy('url')
+                    ->limit($limit);
             }
             $stats = $query->all();
         }
