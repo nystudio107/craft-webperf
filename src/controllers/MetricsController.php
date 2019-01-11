@@ -97,9 +97,17 @@ namespace nystudio107\webperf\controllers {
             $sample->pageLoad = $params['t_done'] ?? null;
             if (!empty($params['nt_dns_end']) && !empty($params['nt_dns_st'])) {
                 $sample->dns = $params['nt_dns_end'] - $params['nt_dns_st'];
+                // If there was no delay, set it to null
+                if ($sample->dns === 0) {
+                    $sample->dns = null;
+                }
             }
             if (!empty($params['nt_con_end']) && !empty($params['nt_con_st'])) {
                 $sample->connect = $params['nt_con_end'] - $params['nt_con_st'];
+                // If there was no delay, set it to null
+                if ($sample->connect === 0) {
+                    $sample->connect = null;
+                }
             }
             if (!empty($params['t_resp'])) {
                 $sample->firstByte = $params['t_resp'];
