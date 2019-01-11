@@ -182,7 +182,9 @@ class ChartsController extends Controller
         if ($stats) {
             // Decode any emojis in the title
             foreach ($stats as &$stat) {
-                $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
+                if (!empty($stat['title'])) {
+                    $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
+                }
             }
             $data = $stats;
         }
