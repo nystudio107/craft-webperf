@@ -14,5 +14,24 @@
  * @since     1.0.0
  */
 return [
-    'Webperf plugin loaded' => 'Webperf plugin loaded',
+    'Error validating data sample: {errors}' => 'Error validating data sample: {errors}',
+    'Webperf Data Samples to Store' => 'Webperf Data Samples to Store',
+    'Automatically Trim Data Samples' => 'Automatically Trim Data Samples',
+    'Include User Timing Beacons' => 'Include User Timing Beacons',
+    '{name} plugin loaded' => '{name} plugin loaded',
+    'Dashboard' => 'Dashboard',
+    'Error rendering template string -> {error}' => 'Error rendering template string -> {error}',
+    'Module does not exist in the manifest: {moduleName}' => 'Module does not exist in the manifest: {moduleName}',
+    'Webperf' => 'Webperf',
+    'Trimmed {rows} from webperf_data_samples table' => 'Trimmed {rows} from webperf_data_samples table',
+    'How many unique Webperf Data Samples should be stored before they are trimmed.' => 'How many unique Webperf Data Samples should be stored before they are trimmed.',
+    'All Sites' => 'All Sites',
+    'Manifest file not found at: {manifestPath}' => 'Manifest file not found at: {manifestPath}',
+    'Plugin name' => 'Plugin name',
+    'Whether the Data Samples should be trimmed after each new Data Sample is added' => 'Whether the Data Samples should be trimmed after each new Data Sample is added',
+    'DataSamples' => 'DataSamples',
+    'The public-facing name of the plugin' => 'The public-facing name of the plugin',
+    'Error rendering `{template}` -> {error}' => 'Error rendering `{template}` -> {error}',
+    'Controls whether or not the User Timing Beacons should be rendered on the pages.' => 'Controls whether or not the User Timing Beacons should be rendered on the pages.',
+    'Settings' => 'Settings'
 ];
