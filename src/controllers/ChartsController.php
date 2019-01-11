@@ -146,7 +146,8 @@ class ChartsController extends Controller
             $query = (new Query())
                 ->from('{{%webperf_data_samples}}')
                 ->select([
-                    '*',
+                    'url',
+                    'title',
                     'AVG('.$column.') AS avg',
                 ])
                 ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )");
@@ -173,12 +174,12 @@ class ChartsController extends Controller
             $stats = $query->all();
         }
         if ($stats) {
-            $data = ArrayHelper::getColumn($stats, 'avg');
+            // Decode any emojis in the title
+            foreach ($stats as &$stat) {
+                $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
+            }
+            $data = $stats;
         }
-
-        Craft::debug('Slowest Pages: '.print_r($stats, true), __METHOD__);
-
-        $data = [];
 
         return $this->asJson($data);
     }

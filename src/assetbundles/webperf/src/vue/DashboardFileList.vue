@@ -11,7 +11,7 @@
             </div>
             <div class="py-1">
                 <div class="file-list-chart-track rounded-full bg-grey-lighter">
-                    <div class="simple-bar-line h-2 rounded-full" :style="{ width: item.data + '%', backgroundColor: triBlend.colorFromPercentage(item.data) }"></div>
+                    <div class="simple-bar-line h-2 rounded-full" :style="{ width: item.data + '%', backgroundColor: item.barColor }"></div>
                 </div>
             </div>
         </div>
@@ -73,16 +73,18 @@
                 await queryApi(chartsAPI, uri, (data) => {
                     // Clone the chartOptions object, and replace the needed values
                     console.log(data);
-                    const options = Object.assign({}, this.chartOptions);
-                    if (data[0] !== undefined) {
-                        let val = data[0] / 1000;
+
+                    data.forEach((element, index, array) => {
+                        console.log(element);
+                        let val = element.avg / 1000;
                         if (val > this.displayMaxValue) {
                             this.displayMaxValue = val;
                         }
                         val = (val * 100) / this.displayMaxValue;
-                        this.barColor = this.triBlend.colorFromPercentage(val);
-                        this.series = [val];
-                    }
+                        array[index].data = val;
+                        array[index].barColor = this.triBlend.colorFromPercentage(val);
+                    });
+                    this.series = data;
                 });
             },
             onChangeRange (range) {
@@ -107,21 +109,6 @@
         data: function() {
             return {
                 series: [
-                    {
-                        title: 'some title',
-                        url: 'http://example.com',
-                        data: 10
-                    },
-                    {
-                        title: 'This is a super long long title that should get truncated',
-                        url: 'http://example.com/some/really/long/url/that/will/overflow',
-                        data: 10
-                    },
-                    {
-                        title: 'some title',
-                        url: 'http://example.com',
-                        data: 10
-                    },
                 ],
                 displayRange: this.range,
                 displayMaxValue: this.maxValue,
