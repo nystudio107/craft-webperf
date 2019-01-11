@@ -7,7 +7,7 @@
             <div class="text-base font-normal truncate-label" style="color: rgb(26, 13, 171); width: 99%;">{{ item.title }}</div>
             <div class="clearafter pb-1">
                 <cite class="simple-bar-chart-label text-sm font-normal truncate-label" style="color: rgb(0, 102, 33); width: 80%;">{{ item.url }}</cite>
-                <div class="simple-bar-chart-value text-sm font-bold">{{ statFormatter(item.data) }}</div>
+                <div class="simple-bar-chart-value text-sm font-bold">{{ statFormatter(item.data, item.maxValue) }}</div>
             </div>
             <div class="py-1">
                 <div class="file-list-chart-track rounded-full bg-grey-lighter">
@@ -77,11 +77,13 @@
                     data.forEach((element, index, array) => {
                         console.log(element);
                         let val = element.avg / 1000;
-                        if (val > this.displayMaxValue) {
-                            this.displayMaxValue = val;
+                        let maxValue = this.maxValue;
+                        if (val > maxValue) {
+                            maxValue = val;
                         }
-                        val = (val * 100) / this.displayMaxValue;
+                        val = (val * 100) / maxValue;
                         array[index].data = val;
+                        array[index].maxValue = maxValue;
                         array[index].barColor = this.triBlend.colorFromPercentage(val);
                     });
                     this.series = data;
@@ -91,8 +93,8 @@
                 this.displayRange = range;
                 this.getSeriesData();
             },
-            statFormatter(val) {
-                val = (val * this.displayMaxValue) / 100;
+            statFormatter(val, maxValue) {
+                val = (val * maxValue) / 100;
                 return Number(val).toFixed(2) + "s";
             }
         },
@@ -111,7 +113,6 @@
                 series: [
                 ],
                 displayRange: this.range,
-                displayMaxValue: this.maxValue,
                 triBlend: new TriBlendColor,
             }
         },
