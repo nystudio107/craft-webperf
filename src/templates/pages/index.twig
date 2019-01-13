@@ -1,0 +1,47 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Webperf plugin for Craft CMS 3.x
+ *
+ * Monitor the performance of your webpages through real-world user timing data
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2018 nystudio107
+ */
+#}
+
+{% requirePermission "webperf:pages" %}
+
+{% extends "webperf/_layouts/webperf-cp.twig" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block contextMenu %}
+    {% include "webperf/_includes/sites-menu.twig" %}
+{% endblock %}
+
+{% block actionButton %}
+{% endblock %}
+
+{% block content %}
+    <div id="cp-nav-content">
+        <div class="flex overflow-hidden w-full flex-no-wrap">
+            <div class="flex-grow">
+                <div class="shadow">
+                    <pages-index-bar-chart
+                            title="404s by Month"
+                            sub-title="Discrete 404 URI hits in the last month"
+                            range="month"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </pages-index-bar-chart>
+                </div>
+            </div>
+        </div>
+        <pages-index-table :site-id="{{ currentSiteId }}">
+        </pages-index-table>
+    </div>
+    {# include our JavaScript modules #}
+    {{ parent() }}
+    {{ craft.webperf.includeJsModule("pages-index.js", false) }}
+{% endblock %}

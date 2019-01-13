@@ -120,6 +120,12 @@ class Webperf extends Plugin
                 'url' => 'webperf/dashboard',
             ];
         }
+        if ($currentUser->can('webperf:pages')) {
+            $subNavs['pages'] = [
+                'label' => 'Pages',
+                'url' => 'webperf/pages',
+            ];
+        }
         if ($currentUser->can('webperf:settings')) {
             $subNavs['settings'] = [
                 'label' => 'Settings',
@@ -416,6 +422,9 @@ class Webperf extends Plugin
             'webperf/dashboard' => 'webperf/sections/dashboard',
             'webperf/dashboard/<siteHandle:{handle}>' => 'webperf/sections/dashboard',
 
+            'webperf/pages' => 'webperf/sections/pages-index',
+            'webperf/pages/<siteHandle:{handle}>' => 'webperf/sections/pages-index',
+
             'webperf/settings' => 'webperf/settings/plugin-settings',
         ];
     }
@@ -430,6 +439,9 @@ class Webperf extends Plugin
         return [
             'webperf:dashboard' => [
                 'label' => Craft::t('webperf', 'Dashboard'),
+            ],
+            'webperf:pages' => [
+                'label' => Craft::t('webperf', 'Pages'),
             ],
             'webperf:settings' => [
                 'label' => Craft::t('webperf', 'Settings'),
