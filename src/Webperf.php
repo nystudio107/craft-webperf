@@ -58,6 +58,11 @@ class Webperf extends Plugin
     public static $settings;
 
     /**
+     * @var int|null
+     */
+    public static $requestUuid;
+
+    /**
      * @var string
      */
     public static $renderType = 'html';
@@ -81,8 +86,13 @@ class Webperf extends Plugin
         parent::init();
         // Initialize properties
         self::$plugin = $this;
-        self::$settings = Webperf::$plugin->getSettings();
-        $this->name = Webperf::$settings->pluginName;
+        self::$settings = $this->getSettings();
+        try {
+            self::$requestUuid = random_int(0, PHP_INT_MAX);
+        } catch (\Exception $e) {
+            self::$requestUuid = null;
+        }
+        $this->name = self::$settings->pluginName;
         // Install event listeners
         $this->installEventListeners();
         // Load that we've loaded
