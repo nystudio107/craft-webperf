@@ -108,6 +108,15 @@ class Beacons extends Component
         return $html;
     }
 
+    /**
+     * @return void
+     */
+    public function includeCraftBeacon()
+    {
+        $profiles = Craft::getLogger()->getProfiling();
+        Craft::debug('Debug profiles: '.print_r($profiles, true), __METHOD__);
+    }
+
     // Protected Methods
     // =========================================================================
 

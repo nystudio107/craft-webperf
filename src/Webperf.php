@@ -63,6 +63,11 @@ class Webperf extends Plugin
     public static $requestUuid;
 
     /**
+     * @var bool
+     */
+    public static $beaconIncluded = false;
+
+    /**
      * @var string
      */
     public static $renderType = 'html';
@@ -323,6 +328,7 @@ class Webperf extends Plugin
                         switch (self::$renderType) {
                             case 'html':
                                 Webperf::$plugin->beacons->includeHtmlBeacon();
+                                self::$beaconIncluded = true;
                                 break;
                             case 'amp-html':
                                 Webperf::$plugin->beacons->includeAmpHtmlScript();
@@ -348,8 +354,23 @@ class Webperf extends Plugin
                                 break;
                             case 'amp-html':
                                 Webperf::$plugin->beacons->includeAmpHtmlBeacon();
+                                self::$beaconIncluded = true;
                                 break;
                         }
+                    }
+                }
+            );
+            // Handler: Craft::$app::EVENT_AFTER_REQUEST
+            Event::on(
+                Craft::$app,
+                Craft::$app::EVENT_AFTER_REQUEST,
+                function () {
+                    Craft::debug(
+                        'Craft::$app::EVENT_AFTER_REQUEST',
+                        __METHOD__
+                    );
+                    if (self::$beaconIncluded) {
+                        Webperf::$plugin->beacons->includeCraftBeacon();
                     }
                 }
             );
