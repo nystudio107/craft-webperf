@@ -35,6 +35,34 @@
   transition: width 1s;
 }
 
+.flex-item-row {
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+}
+
+.three-up-grid-item {
+  flex-basis: 100%;
+  box-sizing: border-box;
+}
+
+.three-up-sm-grid-item {
+  flex-basis: 100%;
+  box-sizing: border-box;
+}
+
+@screen md {
+  .three-up-grid-item {
+    flex-basis: 40%;
+    box-sizing: border-box;
+  }
+
+  .three-up-sm-grid-item {
+    flex-basis: 20%;
+    box-sizing: border-box;
+  }
+}
+
 .file-list-wrapper {
   width: 100%;
   box-sizing: border-box;
