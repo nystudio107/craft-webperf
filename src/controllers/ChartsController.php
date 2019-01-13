@@ -45,7 +45,7 @@ class ChartsController extends Controller
     /**
      * The Dashboard stats average chart
      *
-     * @param string $range
+     * @param int    $days
      * @param string $column
      * @param int    $siteId
      *
@@ -53,24 +53,12 @@ class ChartsController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionDashboardStatsAverage(
-        string $range = 'day',
+        int $days = 30,
         string $column = 'pageLoad',
         int $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
-        $days = 1;
-        switch ($range) {
-            case 'day':
-                $days = 1;
-                break;
-            case 'week':
-                $days = 7;
-                break;
-            case 'month':
-                $days = 30;
-                break;
-        }
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
@@ -110,7 +98,7 @@ class ChartsController extends Controller
     /**
      * The Dashboard stats slowest pages list
      *
-     * @param string $range
+     * @param int    $days
      * @param string $column
      * @param int    $limit
      * @param int    $siteId
@@ -119,25 +107,13 @@ class ChartsController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionDashboardSlowestPages(
-        string $range = 'day',
+        int $days = 30,
         string $column = 'pageLoad',
         int $limit = 3,
         int $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
-        $days = 1;
-        switch ($range) {
-            case 'day':
-                $days = 1;
-                break;
-            case 'week':
-                $days = 7;
-                break;
-            case 'month':
-                $days = 30;
-                break;
-        }
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();

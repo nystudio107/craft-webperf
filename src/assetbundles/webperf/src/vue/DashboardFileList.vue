@@ -50,7 +50,10 @@
         components: {
         },
         props: {
-            range: String,
+            days: {
+                type: Number,
+                default: 30,
+            },
             column: String,
             limit: {
                 type: Number,
@@ -66,7 +69,7 @@
             // Load in our chart data asynchronously
             getSeriesData: async function() {
                 const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.displayRange + '/' + this.column + '/' + this.limit;
+                let uri = this.displayDays + '/' + this.column + '/' + this.limit;
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
@@ -90,7 +93,7 @@
                 });
             },
             onChangeRange (range) {
-                this.displayRange = range;
+                this.displayDays = days;
                 this.getSeriesData();
             },
             statFormatter(val, maxValue) {
@@ -112,7 +115,7 @@
             return {
                 series: [
                 ],
-                displayRange: this.range,
+                displayDays: this.days,
                 triBlend: new TriBlendColor,
             }
         },

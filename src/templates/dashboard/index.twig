@@ -153,7 +153,7 @@
                         </span>
                         <dashboard-radial-bar-chart
                                 title="First Byte"
-                                range="month"
+                                :days="30"
                                 column="firstByte"
                                 :max-value="2"
                                 :site-id="{{ currentSiteId }}"
@@ -173,7 +173,7 @@
                             </span>
                             <dashboard-simple-bar-chart
                                 title="DNS Lookup"
-                                range="month"
+                                :days="30"
                                 column="dns"
                                 :max-value=".5"
                                 :site-id="{{ currentSiteId }}"
@@ -190,7 +190,7 @@
                             </span>
                             <dashboard-simple-bar-chart
                                 title="Connect"
-                                range="month"
+                                :days="30"
                                 column="connect"
                                 :max-value=".5"
                                 :site-id="{{ currentSiteId }}"
@@ -201,7 +201,7 @@
                 </div>
                 <div class="flex-row three-up-grid-item self-top">
                     <dashboard-file-list
-                            range="month"
+                            :days="30"
                             column="firstByte"
                             :limit="3"
                             :max-value="2"
