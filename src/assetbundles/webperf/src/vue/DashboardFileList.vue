@@ -1,5 +1,5 @@
 <template>
-    <section class="px-5 py-3">
+    <section class="px-3 py-3">
         <div class="text-left text-base font-bold px-2 pt-2">
             Slowest pages
         </div>

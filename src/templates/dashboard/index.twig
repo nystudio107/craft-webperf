@@ -49,9 +49,9 @@
         {% endif %}
             {# -- Frontend -- #}
             <div class="pane first">
-                <h1 class="text-center">Frontend</h1>
-                <div class="overflow-hidden w-full flex-item-row items-start">
-                    <div class="flex-row sm:w-full md:w-1/5 three-up-sm-grid-item self-top">
+                <h1 class="text-center text-base text-4xl font-bold">Frontend</h1>
+                <div class="w-full flex-item-row items-start">
+                    <div class="flex-row three-up-sm-grid-item self-top">
                         <div class="webperf-tooltip">
                             <span class="webperf-tooltiptext">
                                 The time it takes for the webpage to be fully loaded in the client's browser.
@@ -70,7 +70,7 @@
                             </dashboard-radial-bar-chart>
                         </div>
                     </div>
-                    <div class="flex-row sm:w-full md:w-2/5 three-up-grid-item self-top">
+                    <div class="flex-row three-up-grid-item self-top">
                         <div class="">
                             <div class="webperf-tooltip">
                                 <span class="webperf-tooltiptext">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex-row sm:w-full md:w-2/5 three-up-grid-item self-top">
+                    <div class="flex-row three-up-grid-item self-top">
                         <dashboard-file-list
                                 range="month"
                                 column="pageLoad"
@@ -140,9 +140,9 @@
 
         {# -- Backend -- #}
         <div class="pane">
-            <h1 class="text-center">Backend</h1>
-            <div class="overflow-hidden w-full flex-item-row items-start">
-                <div class="flex-row sm:w-full md:w-1/5 three-up-sm-grid-item self-top">
+            <h1 class="text-center text-base text-4xl font-bold">Backend</h1>
+            <div class="w-full flex-item-row items-start">
+                <div class="flex-row three-up-sm-grid-item self-top">
                     <div class="webperf-tooltip">
                         <span class="webperf-tooltiptext">
                             How long it takes before the first byte of data is received from the server.
@@ -161,7 +161,7 @@
                         </dashboard-radial-bar-chart>
                     </div>
                 </div>
-                <div class="flex-row sm:w-full md:w-2/5 three-up-grid-item self-top">
+                <div class="flex-row three-up-grid-item self-top">
                     <div class="">
                         <div class="webperf-tooltip">
                             <span class="webperf-tooltiptext">
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-row sm:w-full md:w-2/5 three-up-grid-item self-top">
+                <div class="flex-row three-up-grid-item self-top">
                     <dashboard-file-list
                             range="month"
                             column="firstByte"
