@@ -68,6 +68,10 @@ class ProfileTarget extends Target
      */
     public function collect($messages, $final)
     {
+        // Bail if either values are null
+        if (($messages === null) || ($this->messages === null)) {
+            return;
+        }
         // Merge in any messages intended for us
         $this->messages = array_merge(
             $this->messages,
