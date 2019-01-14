@@ -78,7 +78,6 @@
                     console.log(data);
 
                     data.forEach((element, index, array) => {
-                        console.log(element);
                         let val = element.avg / 1000;
                         let maxValue = this.maxValue;
                         if (val > maxValue) {
