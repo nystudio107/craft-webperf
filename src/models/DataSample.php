@@ -27,6 +27,11 @@ class DataSample extends DbModel
     /**
      * @var int
      */
+    public $requestId;
+
+    /**
+     * @var int
+     */
     public $siteId;
 
     /**
@@ -99,6 +104,31 @@ class DataSample extends DbModel
      */
     public $mobile;
 
+    /**
+     * @var int
+     */
+    public $craft;
+
+    /**
+     * @var int
+     */
+    public $craftDb;
+
+    /**
+     * @var int
+     */
+    public $craftTwig;
+
+    /**
+     * @var int
+     */
+    public $craftOther;
+
+    /**
+     * @var int
+     */
+    public $craftMemory;
+
     // Public Methods
     // =========================================================================
 
@@ -108,6 +138,7 @@ class DataSample extends DbModel
     public function rules()
     {
         return [
+            ['requestId', 'integer'],
             ['siteId', 'integer'],
             ['url', 'required'],
             ['title', DbStringValidator::class, 'max' => 120],
@@ -136,6 +167,11 @@ class DataSample extends DbModel
                     'firstContentfulPaint',
                     'domInteractive',
                     'pageLoad',
+                    'craft',
+                    'craftDb',
+                    'craftTwig',
+                    'craftOther',
+                    'craftMemory',
                 ],
                 'integer'
             ],

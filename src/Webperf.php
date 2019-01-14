@@ -10,6 +10,7 @@
 
 namespace nystudio107\webperf;
 
+use nystudio107\webperf\log\ProfileTarget;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
@@ -30,7 +31,9 @@ use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use craft\web\View;
 
+use yii\base\Application;
 use yii\base\Event;
+use yii\base\InvalidConfigException;
 
 /**
  * Class Webperf
@@ -39,8 +42,9 @@ use yii\base\Event;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property  DataSamplesService $dataSamples
+ * @property  DataSamplesService  $dataSamples
  * @property  BeaconsService      $beacons
+ * @property  ProfileTarget       $profileTarget
  */
 class Webperf extends Plugin
 {
@@ -98,6 +102,8 @@ class Webperf extends Plugin
             self::$requestUuid = null;
         }
         $this->name = self::$settings->pluginName;
+        // Add in our components
+        $this->addComponents();
         // Install event listeners
         $this->installEventListeners();
         // Load that we've loaded
@@ -156,6 +162,27 @@ class Webperf extends Plugin
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Add in our components
+     */
+    protected function addComponents()
+    {
+        // Add in the ProfileTarget component
+        try {
+            $this->set('profileTarget', [
+                'class' => ProfileTarget::class,
+                'levels' => ['profile'],
+                'categories' => [],
+                'logVars' => [],
+                'except' => [],
+            ]);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        // Attach our log target
+        Craft::$app->getLog()->targets['webperf'] = $this->profileTarget;
+    }
 
     /**
      * Install our event listeners.
@@ -316,12 +343,6 @@ class Webperf extends Plugin
                         'View::EVENT_END_PAGE',
                         __METHOD__
                     );
-
-                    $profiles = Craft::getLogger()->getProfiling();
-                    Craft::debug('Debug profiles: '.print_r($profiles, true), __METHOD__);
-                    $dbProfiles = Craft::getLogger()->getDbProfiling();
-                    Craft::debug('DB profiles: '.print_r($dbProfiles, true), __METHOD__);
-
                     $view = Craft::$app->getView();
                     // The page is done rendering, include our beacon
                     if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
@@ -360,18 +381,15 @@ class Webperf extends Plugin
                     }
                 }
             );
-            // Handler: Craft::$app::EVENT_AFTER_REQUEST
+            // Handler: Application::EVENT_AFTER_REQUEST
             Event::on(
-                Craft::$app,
-                Craft::$app::EVENT_AFTER_REQUEST,
+                Application::class,
+                Application::EVENT_AFTER_REQUEST,
                 function () {
                     Craft::debug(
-                        'Craft::$app::EVENT_AFTER_REQUEST',
+                        'Application::EVENT_AFTER_REQUEST',
                         __METHOD__
                     );
-                    if (self::$beaconIncluded) {
-                        Webperf::$plugin->beacons->includeCraftBeacon();
-                    }
                 }
             );
         }

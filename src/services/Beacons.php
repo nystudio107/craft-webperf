@@ -10,6 +10,8 @@
 
 namespace nystudio107\webperf\services;
 
+use nystudio107\webperf\models\DataSample;
+use nystudio107\webperf\Webperf;
 use nystudio107\webperf\helpers\PluginTemplate;
 
 use nystudio107\seomatic\Seomatic;
@@ -113,8 +115,21 @@ class Beacons extends Component
      */
     public function includeCraftBeacon()
     {
-        $profiles = Craft::getLogger()->getProfiling();
-        Craft::debug('Debug profiles: '.print_r($profiles, true), __METHOD__);
+        if (Webperf::$beaconIncluded) {
+            $stats = Webperf::$plugin->profileTarget->stats;
+            // Allocate a new DataSample, and fill it in
+            $sample = new DataSample([
+                'url' => 'craft',
+                'craft' => (int)($stats['database']['duration'] + $stats['twig']['duration'] + $stats['other']['duration']),
+                'craftDb' => (int)$stats['database']['duration'],
+                'craftTwig' => (int)$stats['twig']['duration'],
+                'craftOther' => (int)$stats['other']['duration'],
+                'craftMemory' => (int)($stats['database']['memory'] + $stats['twig']['memory'] + $stats['other']['memory']),
+            ]);
+            // Save the data sample
+            Craft::debug('Saving Craft DataSample: '.print_r($sample, true), __METHOD__);
+            Webperf::$plugin->dataSamples->addDataSample($sample);
+        }
     }
 
     // Protected Methods
