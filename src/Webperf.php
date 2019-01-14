@@ -31,7 +31,6 @@ use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use craft\web\View;
 
-use yii\base\Application;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 
@@ -379,17 +378,6 @@ class Webperf extends Plugin
                                 break;
                         }
                     }
-                }
-            );
-            // Handler: Application::EVENT_AFTER_REQUEST
-            Event::on(
-                Application::class,
-                Application::EVENT_AFTER_REQUEST,
-                function () {
-                    Craft::debug(
-                        'Application::EVENT_AFTER_REQUEST',
-                        __METHOD__
-                    );
                 }
             );
         }
