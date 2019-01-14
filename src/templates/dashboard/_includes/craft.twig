@@ -99,4 +99,11 @@
             </dashboard-file-list>
         </div>
     </div>
+    {% if  craft.app.config.general.devMode %}
+        <div class="px-8">
+            <div class="field">
+                <p class="warning">Craft performance will be slower than normal with <code>devMode</code> enabled due to extensive logging and disabling of some caches. <a href="https://craftcms.com/guides/what-dev-mode-does" target="_blank">Learn More</a>.</p>
+            </div>
+        </div>
+    {% endif %}
 </div>
