@@ -83,7 +83,7 @@ class Install extends Migration
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
 
-                    'requestId' => $this->integer(),
+                    'requestId' => $this->bigInteger(),
                     'siteId' => $this->integer(),
                     'title' => $this->string(120),
                     'url' => $this->string(255)->notNull()->defaultValue(''),
@@ -99,11 +99,14 @@ class Install extends Migration
                     'browser' => $this->string(50),
                     'os' => $this->string(50),
                     'mobile' => $this->boolean(),
-                    'craft' => $this->integer(),
-                    'craftDb' => $this->integer(),
-                    'craftTwig' => $this->integer(),
-                    'craftOther' => $this->integer(),
-                    'craftMemory' => $this->integer(),
+                    'craftTotalMs' => $this->integer(),
+                    'craftDbMs' => $this->integer(),
+                    'craftDbCnt' => $this->integer(),
+                    'craftTwigMs' => $this->integer(),
+                    'craftTwigCnt' => $this->integer(),
+                    'craftOtherMs' => $this->integer(),
+                    'craftOtherCnt' => $this->integer(),
+                    'craftTotalMemory' => $this->integer(),
                 ]
             );
         }

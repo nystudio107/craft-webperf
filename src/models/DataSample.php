@@ -21,6 +21,43 @@ use yii\behaviors\AttributeTypecastBehavior;
  */
 class DataSample extends DbModel
 {
+    // Constants
+    // =========================================================================
+
+    const SCENARIO_BOOMERANG_BEACON = 'boomerang-beacon';
+    const SCENARIO_CRAFT_BEACON = 'craft-beacon';
+    const BOOMERANG_BEACON_FIELDS = [
+        'requestId',
+        'siteId',
+        'title',
+        'url',
+        'dns',
+        'connect',
+        'firstByte',
+        'firstPaint',
+        'firstContentfulPaint',
+        'domInteractive',
+        'pageLoad',
+        'countryCode',
+        'device',
+        'browser',
+        'os',
+        'mobile',
+    ];
+
+    const CRAFT_BEACON_FIELDS = [
+        'requestId',
+        'url',
+        'craftTotalMs',
+        'craftDbMs',
+        'craftDbCnt',
+        'craftTwigMs',
+        'craftTwigCnt',
+        'craftOtherMs',
+        'craftOtherCnt',
+        'craftTotalMemory',
+    ];
+
     // Public Properties
     // =========================================================================
 
@@ -107,27 +144,42 @@ class DataSample extends DbModel
     /**
      * @var int
      */
-    public $craft;
+    public $craftTotalMs;
 
     /**
      * @var int
      */
-    public $craftDb;
+    public $craftDbMs;
 
     /**
      * @var int
      */
-    public $craftTwig;
+    public $craftDbCnt;
 
     /**
      * @var int
      */
-    public $craftOther;
+    public $craftTwigMs;
 
     /**
      * @var int
      */
-    public $craftMemory;
+    public $craftTwigCnt;
+
+    /**
+     * @var int
+     */
+    public $craftOtherMs;
+
+    /**
+     * @var int
+     */
+    public $craftOtherCnt;
+
+    /**
+     * @var int
+     */
+    public $craftTotalMemory;
 
     // Public Methods
     // =========================================================================
@@ -167,15 +219,47 @@ class DataSample extends DbModel
                     'firstContentfulPaint',
                     'domInteractive',
                     'pageLoad',
-                    'craft',
-                    'craftDb',
-                    'craftTwig',
-                    'craftOther',
-                    'craftMemory',
+                    'craftTotalMs',
+                    'craftDbMs',
+                    'craftDbCnt',
+                    'craftTwigMs',
+                    'craftTwigCnt',
+                    'craftOtherMs',
+                    'craftOtherCnt',
+                    'craftTotalMemory',
                 ],
                 'integer'
             ],
             ['mobile', 'boolean'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        $fields = parent::fields();
+        switch ($this->scenario) {
+            case self::SCENARIO_BOOMERANG_BEACON:
+                $fields = self::BOOMERANG_BEACON_FIELDS;
+                break;
+            case self::SCENARIO_CRAFT_BEACON:
+                $fields = self::CRAFT_BEACON_FIELDS;
+                break;
+        }
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_BOOMERANG_BEACON => self::BOOMERANG_BEACON_FIELDS,
+            self::SCENARIO_CRAFT_BEACON => self::CRAFT_BEACON_FIELDS,
         ];
     }
 

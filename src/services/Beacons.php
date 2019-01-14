@@ -52,6 +52,7 @@ class Beacons extends Component
             [
                 'boomerangScriptUrl' => $boomerangUrl,
                 'boomerangTitle' => $boomerangTitle,
+                'boomerangRequestId' => Webperf::$requestUuid,
             ]
         );
         $view->registerJs(
@@ -100,10 +101,13 @@ class Beacons extends Component
             '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
             true
         );
+        $boomerangTitle = $this->getDocumentTitle();
         $html = PluginTemplate::renderPluginTemplate(
             '_frontend/scripts/boomerang-amp-iframe-html.twig',
             [
                 'boomerangScriptUrl' => $boomerangUrl,
+                'boomerangTitle' => $boomerangTitle,
+                'boomerangRequestId' => Webperf::$requestUuid,
             ]
         );
 
@@ -119,14 +123,23 @@ class Beacons extends Component
             $stats = Webperf::$plugin->profileTarget->stats;
             // Allocate a new DataSample, and fill it in
             $sample = new DataSample([
+                'requestId' => Webperf::$requestUuid,
                 'url' => 'craft',
-                'craft' => (int)($stats['database']['duration'] + $stats['twig']['duration'] + $stats['other']['duration']),
-                'craftDb' => (int)$stats['database']['duration'],
-                'craftTwig' => (int)$stats['twig']['duration'],
-                'craftOther' => (int)$stats['other']['duration'],
-                'craftMemory' => (int)($stats['database']['memory'] + $stats['twig']['memory'] + $stats['other']['memory']),
+                'craftTotalMs' => (int)($stats['database']['duration']
+                    + $stats['twig']['duration']
+                    + $stats['other']['duration']),
+                'craftDbMs' => (int)$stats['database']['duration'],
+                'craftDbCnt' => (int)$stats['database']['count'],
+                'craftTwigMs' => (int)$stats['twig']['duration'],
+                'craftTwigCnt' => (int)$stats['twig']['count'],
+                'craftOtherMs' => (int)$stats['other']['duration'],
+                'craftOtherCnt' => (int)$stats['other']['count'],
+                'craftTotalMemory' => (int)($stats['database']['memory']
+                    + $stats['twig']['memory']
+                    + $stats['other']['memory']),
             ]);
             // Save the data sample
+            $sample->setScenario(DataSample::SCENARIO_CRAFT_BEACON);
             Craft::debug('Saving Craft DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
         }

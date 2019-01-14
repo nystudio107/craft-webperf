@@ -12,8 +12,6 @@ namespace nystudio107\webperf\log;
 
 use nystudio107\webperf\Webperf;
 
-use Craft;
-
 use yii\log\Target;
 use yii\log\Logger;
 

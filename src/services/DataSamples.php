@@ -10,6 +10,7 @@
 
 namespace nystudio107\webperf\services;
 
+use craft\db\Query;
 use nystudio107\webperf\Webperf;
 use nystudio107\webperf\models\DataSample;
 
@@ -41,17 +42,44 @@ class DataSamples extends Component
 
             return;
         }
+        $isNew = true;
+        // See if a redirect exists with this source URL already
+        $testSample = (new Query())
+            ->from(['{{%webperf_data_samples}}'])
+            ->where(['requestId' => $dataSample->requestId])
+            ->one();
+        // If it exists, update it rather than having duplicates
+        if (!empty($testSample)) {
+            $isNew = false;
+        }
         // Get the validated model attributes and save them to the db
-        $dataSampleConfig = $dataSample->getAttributes();
+        $dataSampleConfig = $dataSample->getAttributes($dataSample->fields());
         $db = Craft::$app->getDb();
-        // Create a new record
-        try {
-            $db->createCommand()->insert(
-                '{{%webperf_data_samples}}',
-                $dataSampleConfig
-            )->execute();
-        } catch (\Exception $e) {
-            Craft::error($e->getMessage(), __METHOD__);
+        if ($isNew) {
+            Craft::debug('Creating new data sample', __METHOD__);
+            // Create a new record
+            try {
+                $db->createCommand()->insert(
+                    '{{%webperf_data_samples}}',
+                    $dataSampleConfig
+                )->execute();
+            } catch (\Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        } else {
+            Craft::debug('Updating existing data sample', __METHOD__);
+            // Update the existing record
+            try {
+                $db->createCommand()->update(
+                    '{{%webperf_data_samples}}',
+                    $dataSampleConfig,
+                    [
+                        'requestId' => $dataSample->requestId,
+                    ]
+                )->execute();
+            } catch (\Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
         }
         // After adding the DataSample, trim the webperf_data_samples db table
         if (Webperf::$settings->automaticallyTrimDataSamples) {

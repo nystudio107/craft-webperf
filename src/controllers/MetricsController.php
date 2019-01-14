@@ -128,6 +128,10 @@ namespace nystudio107\webperf\controllers {
             if (!empty($params['doc_title'])) {
                 $sample->title = $params['doc_title'];
             }
+            // Set the request id
+            if (!empty($params['request_id'])) {
+                $sample->requestId = $params['request_id'];
+            }
             // Fill in information from the current request
             $request = Craft::$app->getRequest();
             $ip = $request->userIP;
@@ -147,6 +151,7 @@ namespace nystudio107\webperf\controllers {
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample
+            $sample->setScenario(DataSample::SCENARIO_BOOMERANG_BEACON);
             Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
             Craft::$app->end();
