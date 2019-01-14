@@ -1,0 +1,102 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+* Webperf plugin for Craft CMS 3.x
+*
+* Monitor the performance of your webpages through real-world user timing data
+*
+* @link      https://nystudio107.com
+* @copyright Copyright (c) 2018 nystudio107
+*/
+#}
+
+{# -- Backend -- #}
+<div class="pane">
+    <h1 class="text-center text-base text-4xl font-bold">Craft Profile</h1>
+    <div class="w-full flex-item-row items-start">
+        <div class="flex-row three-up-sm-grid-item self-top">
+            <div class="webperf-tooltip">
+                <span class="webperf-tooltiptext">
+                    The total amount of time it takes Craft to process the webpages.
+                    <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
+                       target="_blank"
+                       class="text-grey-lighter hover:text-grey-lightest"
+                    >Learn More &rarr;</a>
+                </span>
+                <dashboard-radial-bar-chart
+                        title="Craft Execution"
+                        :days="30"
+                        column="craftTotalms"
+                        :max-value="1"
+                        :site-id="{{ currentSiteId }}"
+                >
+                </dashboard-radial-bar-chart>
+            </div>
+        </div>
+        <div class="flex-row three-up-grid-item self-top">
+            <div class="">
+                <div class="webperf-tooltip">
+                    <span class="webperf-tooltiptext">
+                        How long it takes to execute the database queries for the webpages.
+                        <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
+                           target="_blank"
+                           class="text-grey-lighter hover:text-grey-lightest"
+                        >Learn More &rarr;</a>
+                    </span>
+                    <dashboard-simple-bar-chart
+                            title="Database Queries"
+                            :days="30"
+                            column="craftDbMs"
+                            :max-value="1"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-simple-bar-chart>
+                </div>
+                <div class="webperf-tooltip">
+                    <span class="webperf-tooltiptext">
+                        How long it takes Twig to render the templates for the webpages.
+                        <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
+                           target="_blank"
+                           class="text-grey-lighter hover:text-grey-lightest"
+                        >Learn More &rarr;</a>
+                    </span>
+                    <dashboard-simple-bar-chart
+                            title="Twig Rendering"
+                            :days="30"
+                            column="craftTwigMs"
+                            :max-value="1"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-simple-bar-chart>
+                </div>
+                <div class="webperf-tooltip">
+                    <span class="webperf-tooltiptext">
+                        Other profiled code (such as from plugins) in order to process the webpages.
+                        <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
+                           target="_blank"
+                           class="text-grey-lighter hover:text-grey-lightest"
+                        >Learn More &rarr;</a>
+                    </span>
+                    <dashboard-simple-bar-chart
+                            title="Other"
+                            :days="30"
+                            column="craftOtherMs"
+                            :max-value="1"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </dashboard-simple-bar-chart>
+                </div>
+            </div>
+        </div>
+        <div class="flex-row three-up-grid-item self-top">
+            <dashboard-file-list
+                    :days="30"
+                    column="craftTotalMs"
+                    :limit="3"
+                    :max-value="1"
+                    :site-id="{{ currentSiteId }}"
+            >
+            </dashboard-file-list>
+        </div>
+    </div>
+</div>

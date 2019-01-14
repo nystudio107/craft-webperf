@@ -44,7 +44,6 @@ class DataSample extends DbModel
         'os',
         'mobile',
     ];
-
     const CRAFT_BEACON_FIELDS = [
         'requestId',
         'url',
@@ -57,6 +56,7 @@ class DataSample extends DbModel
         'craftOtherCnt',
         'craftTotalMemory',
     ];
+    const PLACEHOLDER_URL = 'webperf-craft-placeholder';
 
     // Public Properties
     // =========================================================================

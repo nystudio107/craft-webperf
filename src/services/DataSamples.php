@@ -81,9 +81,35 @@ class DataSamples extends Component
                 Craft::error($e->getMessage(), __METHOD__);
             }
         }
+        // Trim orphaned samples
+        $this->trimOrphanedSamples($dataSample->requestId);
         // After adding the DataSample, trim the webperf_data_samples db table
         if (Webperf::$settings->automaticallyTrimDataSamples) {
             $this->trimDataSamples();
+        }
+    }
+
+    /**
+     * Trim samples that have the placeholder in the URL, aka they never
+     * received the Boomerang beacon
+     *
+     * @param int $requestId
+     */
+    public function trimOrphanedSamples(int $requestId)
+    {
+        $db = Craft::$app->getDb();
+        Craft::debug('Trimming orphaned samples', __METHOD__);
+        // Update the existing record
+        try {
+            $db->createCommand()->delete(
+                '{{%webperf_data_samples}}',
+                [
+                    'and', ['url' => DataSample::PLACEHOLDER_URL],
+                    ['not', ['requestId' => $requestId]],
+                ]
+            )->execute();
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
         }
     }
 
