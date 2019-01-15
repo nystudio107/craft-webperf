@@ -27,6 +27,30 @@ class DataSamples extends Component
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param int    $siteId
+     * @param string $column
+     *
+     * @return int|string
+     */
+    public function totalSamples(int $siteId, string $column)
+    {
+        // See if a redirect exists with this source URL already
+        $query = (new Query())
+            ->from(['{{%webperf_data_samples}}'])
+            ->where(['not', [$column => null]])
+            ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+        return $query->count();
+    }
+
+    /**
+     * Add a data sample to the webperf_data_samples table
+     *
+     * @param DataSample $dataSample
+     */
     public function addDataSample(DataSample $dataSample)
     {
         // Validate the model before saving it to the db
@@ -101,13 +125,14 @@ class DataSamples extends Component
         Craft::debug('Trimming orphaned samples', __METHOD__);
         // Update the existing record
         try {
-            $db->createCommand()->delete(
+            $result = $db->createCommand()->delete(
                 '{{%webperf_data_samples}}',
                 [
                     'and', ['url' => DataSample::PLACEHOLDER_URL],
                     ['not', ['requestId' => $requestId]],
                 ]
             )->execute();
+            Craft::debug($result, __METHOD__);
         } catch (\Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }

@@ -41,4 +41,16 @@ class WebperfVariable extends ManifestVariable
     {
         Webperf::$renderType = $renderType;
     }
+
+    /**
+     * @param int    $siteId
+     * @param string $column
+     *
+     * @return int|string
+     */
+    public function totalSamples(int $siteId, string $column)
+    {
+        return Webperf::$plugin->dataSamples->totalSamples($siteId, $column);
+    }
+
 }
