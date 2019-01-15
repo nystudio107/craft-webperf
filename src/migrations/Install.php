@@ -87,6 +87,7 @@ class Install extends Migration
                     'siteId' => $this->integer(),
                     'title' => $this->string(120),
                     'url' => $this->string(255)->notNull()->defaultValue(''),
+                    'queryString' => $this->string(255)->defaultValue(''),
                     'dns' => $this->integer(),
                     'connect' => $this->integer(),
                     'firstByte' => $this->integer(),

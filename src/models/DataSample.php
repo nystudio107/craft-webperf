@@ -31,6 +31,7 @@ class DataSample extends DbModel
         'siteId',
         'title',
         'url',
+        'queryString',
         'dns',
         'connect',
         'firstByte',
@@ -47,6 +48,7 @@ class DataSample extends DbModel
     const CRAFT_BEACON_FIELDS = [
         'requestId',
         'url',
+        'queryString',
         'craftTotalMs',
         'craftDbMs',
         'craftDbCnt',
@@ -80,6 +82,11 @@ class DataSample extends DbModel
      * @var string u - the URL of the User Timing sample
      */
     public $url;
+
+    /**
+     * @var string the query string
+     */
+    public $queryString;
 
     /**
      * @var int (nt_dns_end - nt_dns_st) in ms
@@ -195,6 +202,7 @@ class DataSample extends DbModel
             ['url', 'required'],
             ['title', DbStringValidator::class, 'max' => 120],
             ['url', DbStringValidator::class, 'max' => 255],
+            ['queryString', DbStringValidator::class, 'max' => 255],
             ['countryCode', DbStringValidator::class, 'max' => 2],
             ['device', DbStringValidator::class, 'max' => 50],
             ['browser', DbStringValidator::class, 'max' => 50],
@@ -203,6 +211,7 @@ class DataSample extends DbModel
                 [
                     'title',
                     'url',
+                    'queryString',
                     'countryCode',
                     'device',
                     'browser',

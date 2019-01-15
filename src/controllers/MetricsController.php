@@ -86,7 +86,9 @@ namespace nystudio107\webperf\controllers {
             }
             // Allocate a new DataSample, and fill it in
             $sample = new DataSample();
-            $sample->url = UrlHelper::stripQueryString($params['u']);
+            $url = $params['u'];
+            $sample->url = UrlHelper::stripQueryString($url);
+            $sample->queryString = parse_url($url, PHP_URL_QUERY);
             // Get the site id
             try {
                 $site = MultiSite::getSiteFromUrl($sample->url);
