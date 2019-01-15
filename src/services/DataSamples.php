@@ -119,7 +119,7 @@ class DataSamples extends Component
      *
      * @param int $requestId
      */
-    public function trimOrphanedSamples(int $requestId)
+    public function trimOrphanedSamples($requestId)
     {
         $db = Craft::$app->getDb();
         Craft::debug('Trimming orphaned samples', __METHOD__);
