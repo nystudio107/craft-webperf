@@ -1,0 +1,14 @@
+{% set dataSamples = craft.webperf.totalSamples(currentSiteId, footerStatsColumn) %}
+<div class="px-8">
+    <div class="field">
+        <div class="heading">
+            <p class="instructions">The above data is an <em>average</em> of <strong>{{ dataSamples }}</strong> collected data samples.</p>
+        </div>
+        {% if  dataSamples < 1000 %}
+            <p class="warning">Webperf has collected less than <strong>1,000</strong> data samples. The sample size is not statistically significant, so above averaged results may not be meaningful.</p>
+        {% endif %}
+        {% if  craft.app.config.general.devMode and displayDevModeWarning %}
+            <p class="warning">Craft performance will be slower than normal with <code>devMode</code> enabled due to extensive logging and disabling of some caches. <a href="https://craftcms.com/guides/what-dev-mode-does" target="_blank">Learn More</a>.</p>
+        {% endif %}
+    </div>
+</div>

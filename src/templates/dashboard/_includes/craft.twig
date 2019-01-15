@@ -27,7 +27,7 @@
                         title="Craft Execution"
                         :days="30"
                         column="craftTotalMs"
-                        :max-value="1"
+                        :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
                 </dashboard-radial-bar-chart>
@@ -47,7 +47,7 @@
                             title="Database Queries"
                             :days="30"
                             column="craftDbMs"
-                            :max-value="1"
+                            :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-simple-bar-chart>
@@ -64,7 +64,7 @@
                             title="Twig Rendering"
                             :days="30"
                             column="craftTwigMs"
-                            :max-value="1"
+                            :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-simple-bar-chart>
@@ -81,7 +81,7 @@
                             title="Other"
                             :days="30"
                             column="craftOtherMs"
-                            :max-value="1"
+                            :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
                     </dashboard-simple-bar-chart>
@@ -93,17 +93,15 @@
                     :days="30"
                     column="craftTotalMs"
                     :limit="3"
-                    :max-value="1"
+                    :max-value="2"
                     :site-id="{{ currentSiteId }}"
             >
             </dashboard-file-list>
         </div>
     </div>
-    {% if  craft.app.config.general.devMode %}
-        <div class="px-8">
-            <div class="field">
-                <p class="warning">Craft performance will be slower than normal with <code>devMode</code> enabled due to extensive logging and disabling of some caches. <a href="https://craftcms.com/guides/what-dev-mode-does" target="_blank">Learn More</a>.</p>
-            </div>
-        </div>
-    {% endif %}
+    {% include "webperf/dashboard/_includes/stats-pane-footer.twig" with {
+        'currentSiteId': currentSiteId,
+        'footerStatsColumn': 'craftTotalMs',
+        'displayDevModeWarning': true,
+    } %}
 </div>
