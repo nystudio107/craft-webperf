@@ -1,0 +1,7 @@
+{% if headless is not defined or not headless %}
+    var webperf_config = function() {
+        this.url = '{{ boomerangScriptUrl }}';
+        this.title = '{{ boomerangTitle }}';
+        this.requestId = '{{ boomerangRequestId }}';
+    };
+{% endif %}

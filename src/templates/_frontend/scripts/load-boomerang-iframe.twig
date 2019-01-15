@@ -1,3 +1,4 @@
+{% include "webperf/_frontend/scripts/webperf-config.twig" %}
 (function(){
     // Boomerang Loader Snippet version 10
     if (window.BOOMR && (window.BOOMR.version || window.BOOMR.snippetExecuted)) {
@@ -40,49 +41,14 @@
             this.domain = dom;
         }
         js.id = "boomr-if-as";
-        js.src = '{{ boomerangScriptUrl }}';
+        js.src = webperf_config.url;
         BOOMR_lstart = new Date().getTime();
         this.body.appendChild(js);
     };
     doc.write('<bo' + 'dy onload="document._l();">');
     doc.close();
 
-// Webperf-specific code below
-
-// Modern browsers
-    if (document.addEventListener) {
-        document.addEventListener("onBoomerangLoaded", function(e) {
-            // e.detail.BOOMR is a reference to the BOOMR global object
-            {% if boomerangTitle | length %}
-            e.detail.BOOMR.addVar({
-                'doc_title': '{{ boomerangTitle }}'
-            });
-            {% endif %}
-            {% if boomerangRequestId | length %}
-            e.detail.BOOMR.addVar({
-                'request_id': '{{ boomerangRequestId }}'
-            });
-            {% endif %}
-        });
-    }
-// IE 6, 7, 8 we use onPropertyChange and look for propertyName === "onBoomerangLoaded"
-    else if (document.attachEvent) {
-        document.attachEvent("onpropertychange", function(e) {
-            if (!e) e=event;
-            if (e.propertyName === "onBoomerangLoaded") {
-                // e.detail.BOOMR is a reference to the BOOMR global object
-                {% if boomerangTitle | length %}
-                e.detail.BOOMR.addVar({
-                    'doc_title': '{{ boomerangTitle }}'
-                });
-                {% endif %}
-                {% if boomerangRequestId | length %}
-                e.detail.BOOMR.addVar({
-                    'request_id': '{{ boomerangRequestId }}'
-                });
-                {% endif %}
-            }
-        });
-    }
+    // Webperf-specific code
+    {% include "webperf/_frontend/scripts/webperf-boomerang-custom.twig" %}
 
 })();

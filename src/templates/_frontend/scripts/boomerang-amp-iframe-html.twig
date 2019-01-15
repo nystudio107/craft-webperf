@@ -2,51 +2,17 @@
 <head></head>
 <body>
 <script>
+    {% include "webperf/_frontend/scripts/webperf-config.twig" %}
     (function(d, s) {
         var js = d.createElement(s),
             sc = d.getElementsByTagName(s)[0];
 
-        js.src="{{ boomerangScriptUrl }}";
+        js.src=webperf_config.url;
         sc.parentNode.insertBefore(js, sc);
     }(document, "script"));
 
-    // Webperf-specific code below
-
-    // Modern browsers
-    if (document.addEventListener) {
-        document.addEventListener("onBoomerangLoaded", function(e) {
-            // e.detail.BOOMR is a reference to the BOOMR global object
-            {% if boomerangTitle | length %}
-            e.detail.BOOMR.addVar({
-                'doc_title': '{{ boomerangTitle }}'
-            });
-            {% endif %}
-            {% if boomerangRequestId | length %}
-            e.detail.BOOMR.addVar({
-                'request_id': '{{ boomerangRequestId }}'
-            });
-            {% endif %}
-        });
-    }
-// IE 6, 7, 8 we use onPropertyChange and look for propertyName === "onBoomerangLoaded"
-    else if (document.attachEvent) {
-        document.attachEvent("onpropertychange", function(e) {
-            if (!e) e=event;
-            if (e.propertyName === "onBoomerangLoaded") {
-                // e.detail.BOOMR is a reference to the BOOMR global object
-                {% if boomerangTitle | length %}
-                e.detail.BOOMR.addVar({
-                    'doc_title': '{{ boomerangTitle }}'
-                });
-                {% endif %}
-                {% if boomerangRequestId | length %}
-                e.detail.BOOMR.addVar({
-                    'request_id': '{{ boomerangRequestId }}'
-                });
-                {% endif %}
-            }
-        });
-    }
+    // Webperf-specific code
+    {% include "webperf/_frontend/scripts/webperf-boomerang-custom.twig" %}
 </script>
 </body>
 </html>

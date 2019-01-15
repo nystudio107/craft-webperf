@@ -1,0 +1,27 @@
+// Modern browsers
+    if (document.addEventListener) {
+        document.addEventListener("onBoomerangLoaded", function(e) {
+            // e.detail.BOOMR is a reference to the BOOMR global object
+            e.detail.BOOMR.addVar({
+                'doc_title': webperf_config.title,
+            });
+            e.detail.BOOMR.addVar({
+                'request_id': webperf_config.requestId,
+            });
+        });
+    }
+// IE 6, 7, 8 we use onPropertyChange and look for propertyName === "onBoomerangLoaded"
+    else if (document.attachEvent) {
+        document.attachEvent("onpropertychange", function(e) {
+            if (!e) e=event;
+            if (e.propertyName === "onBoomerangLoaded") {
+                // e.detail.BOOMR is a reference to the BOOMR global object
+                e.detail.BOOMR.addVar({
+                    'doc_title': webperf_config.title,
+                });
+                e.detail.BOOMR.addVar({
+                    'request_id': webperf_config.requestId,
+                });
+            }
+        });
+    }
