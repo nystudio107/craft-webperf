@@ -167,20 +167,23 @@ class Webperf extends Plugin
      */
     protected function addComponents()
     {
-        // Add in the ProfileTarget component
-        try {
-            $this->set('profileTarget', [
-                'class' => ProfileTarget::class,
-                'levels' => ['profile'],
-                'categories' => [],
-                'logVars' => [],
-                'except' => [],
-            ]);
-        } catch (InvalidConfigException $e) {
-            Craft::error($e->getMessage(), __METHOD__);
+        $request = Craft::$app->getRequest();
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+            // Add in the ProfileTarget component
+            try {
+                $this->set('profileTarget', [
+                    'class' => ProfileTarget::class,
+                    'levels' => ['profile'],
+                    'categories' => [],
+                    'logVars' => [],
+                    'except' => [],
+                ]);
+            } catch (InvalidConfigException $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // Attach our log target
+            Craft::$app->getLog()->targets['webperf'] = $this->profileTarget;
         }
-        // Attach our log target
-        Craft::$app->getLog()->targets['webperf'] = $this->profileTarget;
     }
 
     /**
