@@ -5,10 +5,15 @@
         </div>
         <div v-for="item in series" class="file-list-wrapper p-2">
             <div class="clearafter pb-1">
-                <div class="simple-bar-chart-label text-base font-normal truncate-label" style="color: rgb(26, 13, 171); width: 90%;">{{ item.title }}</div>
+                <div class="simple-bar-chart-label text-base font-normal truncate-label"
+                     style="color: rgb(26, 13, 171); width: 90%;"
+                     :title="item.title"
+                >
+                    {{ item.title }}
+                </div>
                 <div class="simple-bar-chart-value text-sm font-normal">
                     <div class="field webperf-tooltip">
-                            <p class="warning display-block" v-if="item.cnt < 1000">&nbsp;</p>
+                        <p class="warning display-block" v-if="item.cnt < 1000">&nbsp;</p>
                         <span class="webperf-tooltiptext webperf-sample-tooltip">
                             Only {{ item.cnt }} data sample<span v-if="item.cnt != 1">s</span>.
                         </span>
@@ -16,7 +21,12 @@
                 </div>
             </div>
             <div class="clearafter pb-1">
-                <cite class="simple-bar-chart-label text-sm font-normal truncate-label" style="color: rgb(0, 102, 33); width: 80%;">{{ item.url }}</cite>
+                <cite class="simple-bar-chart-label text-sm font-normal truncate-label"
+                      style="color: rgb(0, 102, 33); width: 80%;"
+                      :title="item.url"
+                >
+                    {{ item.url }}
+                </cite>
                 <div class="simple-bar-chart-value text-sm font-bold">{{ statFormatter(item.data, item.maxValue) }}</div>
             </div>
             <div class="py-1">
