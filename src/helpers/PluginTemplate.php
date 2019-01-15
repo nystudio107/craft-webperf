@@ -10,11 +10,12 @@
 
 namespace nystudio107\webperf\helpers;
 
-use nystudio107\webperf\Webperf;
+use nystudio107\minify\Minify;
 
 use Craft;
 use craft\helpers\Template;
 use craft\web\View;
+
 use yii\base\Exception;
 
 /**
@@ -24,6 +25,11 @@ use yii\base\Exception;
  */
 class PluginTemplate
 {
+    // Constants
+    // =========================================================================
+
+    const MINIFY_PLUGIN_HANDLE = 'minify';
+
     // Static Methods
     // =========================================================================
 
@@ -46,13 +52,17 @@ class PluginTemplate
     /**
      * Render a plugin template
      *
-     * @param $templatePath
-     * @param $params
+     * @param string      $templatePath
+     * @param array       $params
+     * @param string|null $minifier
      *
      * @return string
      */
-    public static function renderPluginTemplate(string $templatePath, array $params = []): string
-    {
+    public static function renderPluginTemplate(
+        string $templatePath,
+        array $params = [],
+        string $minifier = null
+    ): string {
         // Stash the old template mode, and set it Control Panel template mode
         $oldMode = Craft::$app->view->getTemplateMode();
         try {
@@ -64,7 +74,14 @@ class PluginTemplate
         // Render the template with our vars passed in
         try {
             $htmlText = Craft::$app->view->renderTemplate('webperf/' . $templatePath, $params);
-            $templateRendered = true;
+            if ($minifier) {
+                // If SEOmatic is installed, get the title from it
+                $minify = Craft::$app->getPlugins()->getPlugin(self::MINIFY_PLUGIN_HANDLE);
+                if ($minify) {
+                    $htmlText = Minify::$plugin->minify->$minifier($htmlText);
+                }
+
+            }
         } catch (\Exception $e) {
             $htmlText = Craft::t(
                 'webperf',
@@ -72,29 +89,6 @@ class PluginTemplate
                 ['template' => $templatePath, 'error' => $e->getMessage()]
             );
             Craft::error($htmlText, __METHOD__);
-            $templateRendered = false;
-        }
-
-        // If we couldn't find a plugin template, look for a frontend template
-        if (!$templateRendered) {
-            try {
-                Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
-            } catch (Exception $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-            }
-            // Render the template with our vars passed in
-            try {
-                $htmlText = Craft::$app->view->renderTemplate($templatePath, $params);
-                $templateRendered = true;
-            } catch (\Exception $e) {
-                $htmlText = Craft::t(
-                    'webperf',
-                    'Error rendering `{template}` -> {error}',
-                    ['template' => $templatePath, 'error' => $e->getMessage()]
-                );
-                Craft::error($htmlText, __METHOD__);
-                $templateRendered = false;
-            }
         }
 
         // Restore the old template mode
