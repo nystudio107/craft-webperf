@@ -64,15 +64,11 @@ class Settings extends Model
             ['pluginName', 'string'],
             ['pluginName', 'default', 'value' => 'Webperf'],
             ['includeBeacon', 'boolean'],
-            ['includeBeacon', 'default', 'value' => true],
             ['includeCraftProfiling', 'boolean'],
-            ['includeCraftProfiling', 'default', 'value' => true],
             ['dataSamplesStoredLimit', 'integer'],
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],
-            ['automaticallyTrimDataSamples', 'default', 'value' => true],
             ['filterBotUserAgents', 'boolean'],
-            ['filterBotUserAgents', 'default', 'value' => true],
         ];
     }
 }
