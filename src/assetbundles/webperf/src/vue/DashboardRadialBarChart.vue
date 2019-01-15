@@ -67,7 +67,7 @@
                         val = (val * 100) / this.displayMaxValue;
                         let chartColor = this.triBlend.colorFromPercentage(val);
                         options.colors = [chartColor];
-                        //options.plotOptions.radialBar.dataLabels.value.color = chartColor;
+                        options.plotOptions.radialBar.dataLabels.value.color = chartColor;
                         this.chartOptions = options;
                         this.series = [val];
                     }
