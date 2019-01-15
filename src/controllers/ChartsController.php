@@ -123,7 +123,7 @@ class ChartsController extends Controller
                 ->from('{{%webperf_data_samples}}')
                 ->select([
                     'url',
-                    'title',
+                    'MIN(title) AS title',
                     'AVG('.$column.') AS avg',
                 ])
                 ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )");
@@ -142,7 +142,7 @@ class ChartsController extends Controller
                 ->from('{{%webperf_data_samples}}')
                 ->select([
                     'url',
-                    'title',
+                    'MIN(title) AS title',
                     'AVG("'.$column.'") AS avg',
                 ])
                 ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
