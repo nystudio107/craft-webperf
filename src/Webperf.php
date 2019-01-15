@@ -175,8 +175,14 @@ class Webperf extends Plugin
     {
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+            try {
+                $uri = $request->getPathInfo();
+            } catch (InvalidConfigException $e) {
+                $uri = '';
+            }
             $this->setRequestUrl();
-            if (self::$settings->includeCraftProfiling) {
+            // Ignore our own controllers
+            if (self::$settings->includeCraftProfiling && strpos($uri, 'webperf/') !== 0) {
                 // Add in the ProfileTarget component
                 try {
                     $this->set('profileTarget', [
