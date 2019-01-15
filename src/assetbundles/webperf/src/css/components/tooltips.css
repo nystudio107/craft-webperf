@@ -46,3 +46,9 @@
   margin-left: -30px;
   top: 150%;
 }
+
+.webperf-tooltiptext.webperf-sample-tooltip {
+  width: 120px;
+  margin-left: -60px;
+  top: 150%;
+}
