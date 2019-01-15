@@ -26,7 +26,7 @@ class RenderController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected $allowAnonymous = [];
+    protected $allowAnonymous = ['amp-iframe'];
 
     // Public Methods
     // =========================================================================

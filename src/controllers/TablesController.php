@@ -35,8 +35,7 @@ class TablesController extends Controller
     /**
      * @var    bool|array
      */
-    protected $allowAnonymous = [
-    ];
+    protected $allowAnonymous = [];
 
     // Public Methods
     // =========================================================================
