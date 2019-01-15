@@ -24,6 +24,7 @@ namespace nystudio107\webperf\controllers {
 
     use Craft;
     use craft\errors\SiteNotFoundException;
+    use craft\helpers\UrlHelper;
     use craft\web\Controller;
 
     use yii\base\InvalidConfigException;
@@ -85,7 +86,7 @@ namespace nystudio107\webperf\controllers {
             }
             // Allocate a new DataSample, and fill it in
             $sample = new DataSample();
-            $sample->url = $params['u'];
+            $sample->url = UrlHelper::stripQueryString($params['u']);
             // Get the site id
             try {
                 $site = MultiSite::getSiteFromUrl($sample->url);
