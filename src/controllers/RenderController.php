@@ -26,19 +26,27 @@ class RenderController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected $allowAnonymous = ['amp-iframe'];
+    protected $allowAnonymous = ['amp-iframe', 'beacon-script'];
 
     // Public Methods
     // =========================================================================
 
     /**
-     * Plugin settings
-     *
      * @return Response The rendered result
      */
     public function actionAmpIframe(): Response
     {
         // Render the template
         return $this->asRaw(Webperf::$plugin->beacons->ampHtmlIframe());
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return Response
+     */
+    public function actionBeaconScript(string $title = ''): Response
+    {
+        return $this->asRaw(Webperf::$plugin->beacons->htmlBeaconScript($title));
     }
 }
