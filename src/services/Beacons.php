@@ -158,6 +158,9 @@ class Beacons extends Component
         // Default to whatever the view title is
         $view = Craft::$app->getView();
         $docTitle = $view->title;
+        if (empty($docTitle)) {
+            $docTitle = '';
+        }
         // If SEOmatic is installed, get the title from it
         $seomatic = Craft::$app->getPlugins()->getPlugin(self::SEOMATIC_PLUGIN_HANDLE);
         if ($seomatic && Seomatic::$settings->renderEnabled) {
