@@ -38,6 +38,9 @@ class ProfileTarget extends Target
     // Public Properties
     // =========================================================================
 
+    /**
+     * @var array Recorded cumulative profiling stats for the request
+     */
     public $stats = [];
 
     // Public Methods

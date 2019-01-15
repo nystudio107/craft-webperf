@@ -33,6 +33,11 @@ class Settings extends Model
     public $includeBeacon = true;
 
     /**
+     * @var bool Whether or not to include the Craft profiling of pages
+     */
+    public $includeCraftProfiling = true;
+
+    /**
      * @var int The number of data samples to store
      */
     public $dataSamplesStoredLimit = 10000;
@@ -60,6 +65,8 @@ class Settings extends Model
             ['pluginName', 'default', 'value' => 'Webperf'],
             ['includeBeacon', 'boolean'],
             ['includeBeacon', 'default', 'value' => true],
+            ['includeCraftProfiling', 'boolean'],
+            ['includeCraftProfiling', 'default', 'value' => true],
             ['dataSamplesStoredLimit', 'integer'],
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],

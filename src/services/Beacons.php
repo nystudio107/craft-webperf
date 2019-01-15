@@ -124,7 +124,7 @@ class Beacons extends Component
             // Allocate a new DataSample, and fill it in
             $sample = new DataSample([
                 'requestId' => Webperf::$requestUuid,
-                'url' =>DataSample::PLACEHOLDER_URL,
+                'url' => Webperf::$requestUrl ?? DataSample::PLACEHOLDER_URL,
                 'craftTotalMs' => (int)($stats['database']['duration']
                     + $stats['twig']['duration']
                     + $stats['other']['duration']),

@@ -47,14 +47,18 @@
                 </div>
         </div>
         {% endif %}
-        {# -- Frontend -- #}
-        {% include "webperf/dashboard/_includes/frontend.twig" %}
+        {% if settings.includeBeacon %}
+            {# -- Frontend -- #}
+            {% include "webperf/dashboard/_includes/frontend.twig" %}
 
-        {# -- Backend -- #}
-        {% include "webperf/dashboard/_includes/backend.twig" %}
+            {# -- Backend -- #}
+            {% include "webperf/dashboard/_includes/backend.twig" %}
+        {% endif %}
 
-        {# -- Craft -- #}
-        {% include "webperf/dashboard/_includes/craft.twig" %}
+        {% if settings.includeCraftProfiling %}
+            {# -- Craft -- #}
+            {% include "webperf/dashboard/_includes/craft.twig" %}
+        {% endif %}
 
         <div class="text-center p-8">
                 <div class="webperf-tooltip inline-block w-full max-w-xl good-bad-ugly">

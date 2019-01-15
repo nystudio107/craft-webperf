@@ -35,13 +35,23 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Include User Timing Beacons"|t("webperf"),
-            instructions: "Controls whether or not the User Timing Beacons should be rendered on the pages."|t("webperf"),
+            label: "Include User Timing Beacon"|t("webperf"),
+            instructions: "Whether or not the User Timing Beacon should be rendered on frontend pages."|t("webperf"),
             id: "includeBeacon",
             name: "includeBeacon",
             on: settings.includeBeacon,
             warning: configWarning("includeBeacon", "webperf"),
             errors: settings.getErrors("includeBeacon"),
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "Include Craft Profiling"|t("webperf"),
+            instructions: "Whether or not the Craft profiling data should be recorded for site requests."|t("webperf"),
+            id: "includeCraftProfiling",
+            name: "includeCraftProfiling",
+            on: settings.includeCraftProfiling,
+            warning: configWarning("includeCraftProfiling", "webperf"),
+            errors: settings.getErrors("includeCraftProfiling"),
         }) }}
 
         {{ forms.textField({

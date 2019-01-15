@@ -55,6 +55,7 @@ class SectionsController extends Controller
         $variables = [];
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         // Trim the statistics
+        Webperf::$plugin->dataSamples->trimOrphanedSamples(1024);
         Webperf::$plugin->dataSamples->trimDataSamples();
         // Get the site to edit
         $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
@@ -93,6 +94,7 @@ class SectionsController extends Controller
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'dashboard';
         $variables['showWelcome'] = $showWelcome;
+        $variables['settings'] = Webperf::$settings;
 
         // Render the template
         return $this->renderTemplate('webperf/dashboard/index', $variables);

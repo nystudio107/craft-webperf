@@ -11,6 +11,7 @@
 namespace nystudio107\webperf;
 
 use nystudio107\webperf\log\ProfileTarget;
+use nystudio107\webperf\models\DataSample;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
@@ -64,6 +65,11 @@ class Webperf extends Plugin
      * @var int|null
      */
     public static $requestUuid;
+
+    /**
+     * @var int|null
+     */
+    public static $requestUrl;
 
     /**
      * @var bool
@@ -169,20 +175,37 @@ class Webperf extends Plugin
     {
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-            // Add in the ProfileTarget component
-            try {
-                $this->set('profileTarget', [
-                    'class' => ProfileTarget::class,
-                    'levels' => ['profile'],
-                    'categories' => [],
-                    'logVars' => [],
-                    'except' => [],
-                ]);
-            } catch (InvalidConfigException $e) {
-                Craft::error($e->getMessage(), __METHOD__);
+            $this->setRequestUrl();
+            if (self::$settings->includeCraftProfiling) {
+                // Add in the ProfileTarget component
+                try {
+                    $this->set('profileTarget', [
+                        'class' => ProfileTarget::class,
+                        'levels' => ['profile'],
+                        'categories' => [],
+                        'logVars' => [],
+                        'except' => [],
+                    ]);
+                } catch (InvalidConfigException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
+                // Attach our log target
+                Craft::$app->getLog()->targets['webperf'] = $this->profileTarget;
             }
-            // Attach our log target
-            Craft::$app->getLog()->targets['webperf'] = $this->profileTarget;
+        }
+    }
+
+    /**
+     * Set the request URL
+     */
+    protected function setRequestUrl()
+    {
+        self::$requestUrl = DataSample::PLACEHOLDER_URL;
+        if (!self::$settings->includeBeacon) {
+            $request = Craft::$app->getRequest();
+            self::$requestUrl = UrlHelper::stripQueryString(
+                urldecode($request->getAbsoluteUrl())
+            );
         }
     }
 
