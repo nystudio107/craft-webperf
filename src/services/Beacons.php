@@ -36,13 +36,13 @@ class Beacons extends Component
     // Public Methods
     // =========================================================================
 
-    /*
+    /**
      * @return void
      */
     public function includeHtmlBeacon()
     {
         $view = Craft::$app->getView();
-        $script = $this->htmlBeaconScript();
+        $script = $this->htmlBeaconScript(false);
         // Register the JavaScript
         $view->registerJs(
             $script,
@@ -51,11 +51,12 @@ class Beacons extends Component
     }
 
     /**
+     * @param bool        $headless
      * @param string|null $title
      *
      * @return string
      */
-    public function htmlBeaconScript(string $title = null): string
+    public function htmlBeaconScript(bool $headless = false, string $title = null): string
     {
         $boomerangUrl = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
@@ -65,6 +66,7 @@ class Beacons extends Component
         $script = PluginTemplate::renderPluginTemplate(
             '_frontend/scripts/load-boomerang-iframe.twig',
             [
+                'headless' => $headless,
                 'boomerangScriptUrl' => $boomerangUrl,
                 'boomerangTitle' => $boomerangTitle,
                 'boomerangRequestId' => Webperf::$requestUuid,

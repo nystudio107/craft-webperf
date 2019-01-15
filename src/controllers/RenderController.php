@@ -47,6 +47,6 @@ class RenderController extends Controller
      */
     public function actionBeaconScript(string $title = ''): Response
     {
-        return $this->asRaw(Webperf::$plugin->beacons->htmlBeaconScript($title));
+        return $this->asRaw(Webperf::$plugin->beacons->htmlBeaconScript(true, $title));
     }
 }
