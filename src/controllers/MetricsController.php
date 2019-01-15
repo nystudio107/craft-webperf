@@ -129,6 +129,7 @@ namespace nystudio107\webperf\controllers {
                 $sample->title = $params['doc_title'];
             }
             // Set the request id
+            $sample->requestId = Webperf::$requestUuid;
             if (!empty($params['request_id'])) {
                 $sample->requestId = $params['request_id'];
             }
