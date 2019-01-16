@@ -101,7 +101,9 @@ class TablesController extends Controller
         $stats = $query->all();
         if ($stats) {
             // Decode any emojis in the title
+            $index = 1;
             foreach ($stats as &$stat) {
+                $stat['id'] = $index++;
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
