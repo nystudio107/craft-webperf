@@ -16,6 +16,7 @@
                   :sort-order="sortOrder"
                   :append-params="moreParams"
                   @vuetable:pagination-data="onPaginationData"
+                  @vuetable:row-clicked="onRowClicked"
         >
             <template slot="load-time-bar" slot-scope="props">
                 <div>
@@ -123,6 +124,9 @@
             },
             onChangePage (page) {
                 this.$refs.vuetable.changePage(page);
+            },
+            onRowClicked(dataItem, event) {
+                console.log(dataItem);
             },
             statFormatter(val) {
                 return Number(val / 1000).toFixed(2) + "s";
