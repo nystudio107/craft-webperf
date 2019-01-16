@@ -94,7 +94,7 @@ class TablesController extends Controller
                 'AVG(craftDbCnt) AS craftDbCnt',
                 'AVG(craftDbMs) AS craftDbMs',
                 'AVG(craftTwigCnt) AS craftTwigCnt',
-                'AVG(craftTwigMs) AS craftTwigCnt',
+                'AVG(craftTwigMs) AS craftTwigMs',
                 'AVG(craftTotalMemory) AS craftTotalMemory',
             ])
             ->from(['{{%webperf_data_samples}}'])
