@@ -42,6 +42,7 @@ class SectionsController extends Controller
 
     // Public Methods
     // =========================================================================
+
     /**
      * @param string|null $siteHandle
      * @param bool        $showWelcome
@@ -98,5 +99,62 @@ class SectionsController extends Controller
 
         // Render the template
         return $this->renderTemplate('webperf/dashboard/index', $variables);
+    }
+
+    /**
+     * @param string|null $siteHandle
+     * @param bool        $showWelcome
+     *
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
+     */
+    public function actionPagesIndex(string $siteHandle = null): Response
+    {
+        $variables = [];
+        PermissionHelper::controllerPermissionCheck('webperf:pages');
+        // Trim the statistics
+        Webperf::$plugin->dataSamples->trimOrphanedSamples(1024);
+        Webperf::$plugin->dataSamples->trimDataSamples();
+        // Get the site to edit
+        $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
+        $pluginName = Webperf::$settings->pluginName;
+        $templateTitle = Craft::t('webperf', 'Pages');
+        $view = Craft::$app->getView();
+        // Asset bundle
+        try {
+            $view->registerAssetBundle(WebperfDashboardAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/webperf/assetbundles/webperf/dist',
+            true
+        );
+        // Enabled sites
+        MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $variables['controllerHandle'] = 'dashboard';
+
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = $pluginName;
+        $variables['title'] = $templateTitle;
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url' => UrlHelper::cpUrl('webperf'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url' => UrlHelper::cpUrl('webperf/pages'),
+            ],
+        ];
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
+        $variables['selectedSubnavItem'] = 'pages';
+        $variables['settings'] = Webperf::$settings;
+
+        // Render the template
+        return $this->renderTemplate('webperf/pages/index', $variables);
     }
 }

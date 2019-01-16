@@ -1,56 +1,49 @@
-// Field definitions for DashboardTable.vue
+// Field definitions for PagesIndexTable.vue
 export default [
     {
-        name: '__component:file-not-found-url',
-        sortField: 'redirectSrcUrl',
-        title: '404 File Not Found URL',
-        titleClass: 'center',
+        name: '__component:page-listing-display',
+        sortField: 'url',
+        title: 'Page',
+        titleClass: 'center pageListingDisplay',
         dataClass: 'center',
     },
     {
-        name: 'referrerUrl',
-        sortField: 'referrerUrl',
-        title: 'Last Referrer URL',
-        titleClass: 'center',
+        name: '__component:load-time-bar',
+        sortField: 'pageLoad',
+        title: 'Load Time',
+        titleClass: 'center loadTimeBar',
         dataClass: 'center',
-        callback: 'urlFormatter'
     },
     {
-        name: 'remoteIp',
-        sortField: 'remoteIp',
-        title: 'Remote IP',
-        titleClass: 'center',
-        dataClass: 'center',
-        callback: 'ipFormatter'
-    },
-    {
-        name: 'hitCount',
-        sortField: 'hitCount',
-        title: 'Hits',
+        name: 'craftDbCnt',
+        sortField: 'craftDbCnt',
+        title: 'DB Queries',
         titleClass: 'text-right',
         dataClass: 'text-right',
+        callback: 'countFormatter'
     },
     {
-        name: 'hitLastTime',
-        sortField: 'hitLastTime',
-        title: 'Last Hit',
-        titleClass: 'center',
-        dataClass: 'center',
+        name: 'craftTwigCnt',
+        sortField: 'craftTwigCnt',
+        title: 'Templates',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter'
     },
     {
-        name: 'handledByRetour',
-        sortField: 'handledByRetour',
-        title: 'Handled',
-        titleClass: 'text-center',
-        dataClass: 'text-center',
-        callback: 'boolFormatter'
+        name: 'craftOtherCnt',
+        sortField: 'craftOtherCnt',
+        title: 'Other',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter'
     },
     {
-        name: 'addLink',
-        sortField: 'addLink',
-        title: '',
-        titleClass: 'text-center',
-        dataClass: 'text-center',
-        callback: 'addUrlFormatter'
-    }
+        name: 'craftTotalMemory',
+        sortField: 'craftTotalMemory',
+        title: 'Memory',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'memoryFormatter'
+    },
 ];

@@ -52,16 +52,16 @@ class TablesController extends Controller
      * @return Response
      * @throws ForbiddenHttpException
      */
-    public function actionDashboard(
-        string $sort = 'hitCount|desc',
+    public function actionPagesIndex(
+        string $sort = 'pageLoad|desc',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
         $siteId = 0
     ): Response {
-        PermissionHelper::controllerPermissionCheck('webperf:dashboard');
+        PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
-        $sortField = 'hitCount';
+        $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Figure out the sorting type
         if ($sort !== '') {
@@ -74,36 +74,46 @@ class TablesController extends Controller
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
-            ->from(['{{%retour_stats}}'])
-            ->offset($offset)
-            ->limit($per_page)
-            ->orderBy("{$sortField} {$sortType}");
+            ->select([
+                'url',
+                'MIN(title) AS title',
+                'COUNT(url) AS cnt',
+                'AVG(pageLoad) AS pageLoad',
+                'AVG(craftDbCnt) AS craftDbCnt',
+                'AVG(craftTwigCnt) AS craftTwigCnt',
+                'AVG(craftOtherCnt) AS craftOtherCnt',
+                'AVG(craftTotalMemory) AS craftTotalMemory',
+            ])
+            ->from(['{{%webperf_data_samples}}'])
+            ->offset($offset);
         if ((int)$siteId !== 0) {
             $query->where(['siteId' => $siteId]);
         }
         if ($filter !== '') {
-            $query->where(['like', 'redirectSrcUrl', $filter]);
-            $query->orWhere(['like', 'referrerUrl', $filter]);
+            $query->where(['like', 'url', $filter]);
+            $query->orWhere(['like', 'title', $filter]);
         }
+        $query
+            ->orderBy("{$sortField} {$sortType}")
+            ->groupBy('url')
+            ->limit($per_page);
+
         $stats = $query->all();
         if ($stats) {
-            // Add in the `addLink` field
+            // Decode any emojis in the title
             foreach ($stats as &$stat) {
-                $stat['addLink'] = '';
-                if (!$stat['handledByRetour']) {
-                    $encodedUrl = urlencode('/'.ltrim($stat['redirectSrcUrl'], '/'));
-                    $stat['addLink'] = UrlHelper::cpUrl('retour/add-redirect', [
-                        'defaultUrl' => $encodedUrl
-                    ]);
+                if (!empty($stat['title'])) {
+                    $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
             }
             // Format the data for the API
             $data['data'] = $stats;
             $query = (new Query())
-                ->from(['{{%retour_stats}}']);
+                ->from(['{{%webperf_data_samples}}'])
+                ->groupBy('url');
             if ($filter !== '') {
-                $query->where(['like', 'redirectSrcUrl', $filter]);
-                $query->orWhere(['like', 'referrerUrl', $filter]);
+                $query->where(['like', 'url', $filter]);
+                $query->orWhere(['like', 'title', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [

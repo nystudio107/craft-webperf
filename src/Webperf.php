@@ -483,8 +483,7 @@ class Webperf extends Plugin
             // Render
             '/webperf/render/amp-iframe' => 'webperf/render/amp-iframe',
             // Tables
-            '/webperf/tables/dashboard' => 'webperf/tables/dashboard',
-            '/webperf/tables/redirects' => 'webperf/tables/redirects',
+            '/webperf/tables/pages-index' => 'webperf/tables/pages-index',
             // Charts
             '/webperf/charts/dashboard-stats-average/<days:\d+>/<column:{handle}>'
             => 'webperf/charts/dashboard-stats-average',

@@ -9,7 +9,7 @@
             ></vuetable-pagination>
         </div>
         <vuetable ref="vuetable"
-                  api-url="/retour/tables/dashboard"
+                  api-url="/webperf/tables/pages-index"
                   :per-page="20"
                   :fields="fields"
                   :css="css"
@@ -29,14 +29,16 @@
 
 <script>
     import Vue from 'vue';
-    import FieldDefs from './DashboardFieldDefs.js';
-    import FileNotFoundUrl from './FileNotFoundUrl.vue';
+    import FieldDefs from './PagesIndexFieldDefs.js';
+    import PageListingDisplay from './PageListingDisplay.vue';
+    import LoadTimeBar from './LoadTimeBar.vue';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
     import VueTablePagination from './VuetablePagination.vue';
     import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
     import VueTableFilterBar from './VuetableFilterBar.vue';
 
-    Vue.component('file-not-found-url', FileNotFoundUrl);
+    Vue.component('page-listing-display', PageListingDisplay);
+    Vue.component('load-time-bar', LoadTimeBar);
     // Our component exports
     export default {
         components: {
@@ -57,14 +59,14 @@
                     'siteId': this.siteId,
                 },
                 css: {
-                    tableClass: 'data fullwidth retour-dashboard',
-                    ascendingIcon: 'menubtn retour-menubtn-asc',
-                    descendingIcon: 'menubtn retour-menubtn-desc'
+                    tableClass: 'data fullwidth webperf-dashboard',
+                    ascendingIcon: 'menubtn webperf-menubtn-asc',
+                    descendingIcon: 'menubtn webperf-menubtn-desc'
                 },
                 sortOrder: [
                     {
-                        field: 'hitCount',
-                        sortField: 'hitCount',
+                        field: 'pageLoad',
+                        sortField: 'pageLoad',
                         direction: 'desc'
                     }
                 ],
@@ -74,10 +76,6 @@
         mounted() {
             this.$events.$on('filter-set', eventData => this.onFilterSet(eventData));
             this.$events.$on('filter-reset', e => this.onFilterReset());
-            // Live refresh the data
-            setInterval(() => {
-                this.$refs.vuetable.refresh();
-            }, 3000);
         },
         methods: {
             onFilterSet (filterText) {
@@ -103,39 +101,11 @@
             onChangePage (page) {
                 this.$refs.vuetable.changePage(page);
             },
-            urlFormatter(value) {
-                if (value === '') {
-                    return '';
-                }
-                return `
-                <a class="go" href="${value}" title="${value}" target="_blank" rel="noopener">${value}</a>
-                `;
+            countFormatter(val) {
+                return Number(val).toFixed(0);
             },
-            ipFormatter(value) {
-                if (value === '') {
-                    return '';
-                }
-                return `
-                <a class="go" href="https://www.ipaddressguide.com/ip-geolocation?ip=${value}" title="Lookup ${value}" target="_blank" rel="noopener">${value}</a>
-                `;
-            },
-            boolFormatter(value) {
-                if (value == 1) {
-                    return `
-                <span style="color: green;">&#x2714;</span>
-                `;
-                }
-                return `
-                <span style="color: red;">&#x2716;</span>
-                `;
-            },
-            addUrlFormatter(value) {
-                if (value === '') {
-                    return '';
-                }
-                return `
-                <a class="add icon" href="${value}" title="Add"></a>
-                `;
+            memoryFormatter(value) {
+                return Number(value / (1024 * 1024)).toFixed(2) + ' Mb';
             }
         }
     }

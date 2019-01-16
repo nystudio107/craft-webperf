@@ -11,11 +11,11 @@ table.vuetable {
   overflow: hidden;
 }
 
-.retour-menubtn-asc::after {
+.webperf-menubtn-asc::after {
   content: 'downangle';
 }
 
-.retour-menubtn-desc::after {
+.webperf-menubtn-desc::after {
   content: 'upangle';
 }
 
@@ -23,33 +23,32 @@ table.vuetable {
  * Dashboard chart
  */
 
-table.retour-dashboard th.vuetable-th-redirectSrcUrl {
-  width: 34%!important;
+table.webperf-dashboard th.pageListingDisplay {
+  width: 30%!important;
 }
 
-th.vuetable-th-referrerUrl {
-  width: 20%!important;
+th.loadTimeBar {
+  width: 30%!important;
 }
 
-th.vuetable-th-remoteIp {
-  width: 14%!important;
-}
-
-th.vuetable-th-hitCount {
-  width: 8%!important;
+th.vuetable-th-craftDbCnt {
+  width: 10%!important;
   text-align: right!important;
 }
 
-th.vuetable-th-hitLastTime {
-  width: 18%!important;
+th.vuetable-th-craftTwigCnt {
+  width: 10%!important;
+  text-align: right!important;
 }
 
-th.vuetable-th-handledByRetour {
-  width: 12%!important;
+th.vuetable-th-craftOtherCnt {
+  width: 10%!important;
+  text-align: right!important;
 }
 
-th.vuetable-th-addLink {
-  width: 3%!important;
+th.vuetable-th-craftTotalMemory {
+  width: 10%!important;
+  text-align: right!important;
 }
 
 /**

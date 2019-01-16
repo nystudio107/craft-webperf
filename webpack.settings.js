@@ -32,7 +32,7 @@ module.exports = {
     },
     entries: {
         "dashboard": "dashboard.js",
-//        "pages-index": "pages-index.js",
+        "pages-index": "pages-index.js",
         "webperf": "webperf.js",
 //        "widget": "widget.js"
     },
