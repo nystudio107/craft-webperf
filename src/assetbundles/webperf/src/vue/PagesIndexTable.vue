@@ -25,58 +25,83 @@
                              :style="{width: ((props.rowData.totalPageLoad / props.rowData.maxTotalPageLoad) * 100) + '%'}"
                              title="Page Load"
                         >
-                            <div class="bg-orange h-5"
+                            <div v-if="props.rowData.pageLoad" class="bg-blue h-5"
                                  :style="{width: ((props.rowData.domInteractive / props.rowData.totalPageLoad) * 100) + '%'}"
                                  title="DOM Interactive"
                             >
-                                <div class="bg-red h-5"
+                                <div class="bg-blue-light h-5"
                                      :style="{width: ((props.rowData.firstContentfulPaint / props.rowData.domInteractive) * 100) + '%'}"
                                      title="First Contentful Paint"
                                 >
-                                    <div class="bg-yellow h-5"
+                                    <div class="bg-blue-lighter h-5"
                                          :style="{width: ((props.rowData.firstPaint / props.rowData.firstContentfulPaint) * 100) + '%'}"
                                          title="First Paint"
                                     >
-                                        <div class="bg-green h-5"
+                                        <div class="bg-orange-dark h-5"
                                              :style="{width: ((props.rowData.firstByte / props.rowData.firstPaint) * 100) + '%'}"
                                              title="First Byte"
                                         >
-                                            <div class="bg-red-dark h-5"
+                                            <div class="bg-orange h-5"
                                                  :style="{width: ((props.rowData.craftTotalMs / props.rowData.firstByte) * 100) + '%'}"
                                                  title="Craft Rendering"
                                             >
-                                                <div v-if="props.rowData.craftDbMs > props.rowData.craftTwigMs" class="bg-purple h-5"
+                                                <div v-if="props.rowData.craftDbMs > props.rowData.craftTwigMs" class="bg-orange-light h-5"
                                                      :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTotalMs) * 100) + '%'}"
                                                      title="DB Queries"
                                                 >
-                                                    <div class="bg-yellow-dark h-5"
+                                                    <div class="bg-orange-lighter h-5"
                                                          :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftDbMs) * 100) + '%'}"
                                                          title="Template Rendering"
                                                     >
                                                     </div>
                                                 </div>
-                                                <div v-else class="bg-yellow-dark h-5"
+                                                <div v-else class="bg-orange-light h-5"
                                                      :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftTotalMs) * 100) + '%'}"
                                                      title="Template Rendering"
                                                 >
-                                                    <div class="bg-purple h-5"
+                                                    <div class="bg-orange-lighter h-5"
                                                          :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTwigMs) * 100) + '%'}"
                                                          title="DB Queries"
                                                     >
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div v-else class="bg-orange h-5"
+                                 :style="{width: ((props.rowData.craftTotalMs / props.rowData.firstByte) * 100) + '%'}"
+                                 title="Craft Rendering"
+                            >
+                                <div v-if="props.rowData.craftDbMs > props.rowData.craftTwigMs" class="bg-orange-light h-5"
+                                     :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTotalMs) * 100) + '%'}"
+                                     title="DB Queries"
+                                >
+                                    <div class="bg-orange-lighter h-5"
+                                         :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftDbMs) * 100) + '%'}"
+                                         title="Template Rendering"
+                                    >
+                                    </div>
+                                </div>
+                                <div v-else class="bg-orange-light h-5"
+                                     :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftTotalMs) * 100) + '%'}"
+                                     title="Template Rendering"
+                                >
+                                    <div class="bg-orange-lighter h-5"
+                                         :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTwigMs) * 100) + '%'}"
+                                         title="DB Queries"
+                                    >
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <span class="align-middle">{{ statFormatter(props.rowData.totalPageLoad) }}</span>
                 </div>
             </template>
-            <template slot="page-listing-display" slot-scope="props">
+            <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
                 <div>
                     <div class="relative single-line-truncate-wrapper">
                         <div class="text-base font-normal truncate-label"
@@ -95,6 +120,11 @@
                         >
                             {{ props.rowData.url }}
                         </cite>
+                    </div>
+                    <div class="py-2">
+                        <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
+                            <div class="simple-bar-line h-2 rounded-full" :style="{ width: ((props.rowData.totalPageLoad / maxValue) * 100) + '%', backgroundColor: triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100)) }"></div>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -116,6 +146,7 @@
     import VueTablePagination from './VuetablePagination.vue';
     import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
     import VueTableFilterBar from './VuetableFilterBar.vue';
+    import TriBlendColor from '../js/tri-color-blend';
 
     // Our component exports
     export default {
@@ -126,6 +157,22 @@
             'vuetable-filter-bar': VueTableFilterBar,
         },
         props: {
+            fastColor: {
+                type: String,
+                default: '#00C800',
+            },
+            averageColor: {
+                type: String,
+                default: '#FFFF00',
+            },
+            slowColor: {
+                type: String,
+                default: '#C80000',
+            },
+            maxValue: {
+                type: Number,
+                default: 10000,
+            },
             siteId: {
                 type: Number,
                 default: 0,
@@ -149,6 +196,7 @@
                     }
                 ],
                 fields: FieldDefs,
+                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
         mounted() {
