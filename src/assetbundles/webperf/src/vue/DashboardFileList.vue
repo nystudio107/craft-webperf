@@ -75,6 +75,18 @@
                 default: 30,
             },
             column: String,
+            fastColor: {
+                type: String,
+                default: '#00C800',
+            },
+            averageColor: {
+                type: String,
+                default: '#FFFF00',
+            },
+            slowColor: {
+                type: String,
+                default: '#C80000',
+            },
             limit: {
                 type: Number,
                 default: 3,
@@ -135,7 +147,7 @@
                 series: [
                 ],
                 displayDays: this.days,
-                triBlend: new TriBlendColor,
+                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
     }

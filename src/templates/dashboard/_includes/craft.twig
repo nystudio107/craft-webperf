@@ -27,6 +27,9 @@
                         title="Craft Execution"
                         :days="30"
                         column="craftTotalMs"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
@@ -47,6 +50,9 @@
                             title="Database Queries"
                             :days="30"
                             column="craftDbMs"
+                            fast-color="{{ settings.dashboardFastColor }}"
+                            average-color="{{ settings.dashboardAverageColor }}"
+                            slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
@@ -64,6 +70,9 @@
                             title="Twig Rendering"
                             :days="30"
                             column="craftTwigMs"
+                            fast-color="{{ settings.dashboardFastColor }}"
+                            average-color="{{ settings.dashboardAverageColor }}"
+                            slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
@@ -81,6 +90,9 @@
                             title="Other"
                             :days="30"
                             column="craftOtherMs"
+                            fast-color="{{ settings.dashboardFastColor }}"
+                            average-color="{{ settings.dashboardAverageColor }}"
+                            slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="2"
                             :site-id="{{ currentSiteId }}"
                     >
@@ -92,6 +104,9 @@
             <dashboard-file-list
                     :days="30"
                     column="craftTotalMs"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
                     :limit="3"
                     :max-value="2"
                     :site-id="{{ currentSiteId }}"

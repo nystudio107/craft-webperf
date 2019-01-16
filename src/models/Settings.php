@@ -11,6 +11,7 @@
 namespace nystudio107\webperf\models;
 
 use craft\base\Model;
+use craft\validators\ColorValidator;
 
 /**
  * @author    nystudio107
@@ -48,9 +49,24 @@ class Settings extends Model
     public $automaticallyTrimDataSamples = true;
 
     /**
-     * @var bool
+     * @var bool Whether to filter bot user agents from generating profile hits or not
      */
     public $filterBotUserAgents = true;
+
+    /**
+     * @var string The dashboard 'fast' color for charts
+     */
+    public $dashboardFastColor = '#00C800';
+
+    /**
+     * @var string The dashboard 'average' color for charts
+     */
+    public $dashboardAverageColor = '#FFFF00';
+
+    /**
+     * @var string The dashboard 'slow' color for charts
+     */
+    public $dashboardSlowColor = '#C80000';
 
     // Public Methods
     // =========================================================================
@@ -69,6 +85,10 @@ class Settings extends Model
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],
             ['filterBotUserAgents', 'boolean'],
+            ['dashboardFastColor', 'default', 'value' => '#00C800'],
+            ['dashboardAverageColor', 'default', 'value' => '#FFFF00'],
+            ['dashboardSlowColor', 'default', 'value' => '#C80000'],
+            [['dashboardFastColor', 'dashboardAverageColor', 'dashboardSlowColor'], ColorValidator::class],
         ];
     }
 }

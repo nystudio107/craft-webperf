@@ -27,6 +27,9 @@
                         title="Page Loaded"
                         :days="30"
                         column="pageLoad"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="10"
                         :site-id="{{ currentSiteId }}"
                     >
@@ -47,6 +50,9 @@
                             title="First Paint"
                             :days="30"
                             column="firstPaint"
+                            fast-color="{{ settings.dashboardFastColor }}"
+                            average-color="{{ settings.dashboardAverageColor }}"
+                            slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="5"
                             :site-id="{{ currentSiteId }}"
                     >
@@ -64,6 +70,9 @@
                             title="First Contentful Paint"
                             :days="30"
                             column="firstContentfulPaint"
+                            fast-color="{{ settings.dashboardFastColor }}"
+                            average-color="{{ settings.dashboardAverageColor }}"
+                            slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="5"
                             :site-id="{{ currentSiteId }}"
                     >
@@ -81,6 +90,9 @@
                         title="DOM Interactive"
                         :days="30"
                         column="domInteractive"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="5"
                         :site-id="{{ currentSiteId }}"
                     >
@@ -93,6 +105,9 @@
                     :days="30"
                     column="pageLoad"
                     :limit="3"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
                     :max-value="10"
                     :site-id="{{ currentSiteId }}"
             >

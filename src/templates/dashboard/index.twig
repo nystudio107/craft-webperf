@@ -60,13 +60,7 @@
             {% include "webperf/dashboard/_includes/craft.twig" %}
         {% endif %}
 
-        <div class="text-center p-8">
-                <div class="webperf-tooltip inline-block w-full max-w-xl good-bad-ugly">
-                    <span class="webperf-tooltiptext webperf-tooltip-visible" style="left: 30px;">Fast</span>
-                    <span class="webperf-tooltiptext webperf-tooltip-visible" style="left: 50%;">Average</span>
-                    <span class="webperf-tooltiptext webperf-tooltip-visible" style="left: auto; right: 0;">Slow</span>
-                </div>
-        </div>
+        {% include "webperf/dashboard/_includes/speed-color-key.twig" %}
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}

@@ -42,6 +42,18 @@
                 default: 30,
             },
             column: String,
+            fastColor: {
+                type: String,
+                default: '#00C800',
+            },
+            averageColor: {
+                type: String,
+                default: '#FFFF00',
+            },
+            slowColor: {
+                type: String,
+                default: '#C80000',
+            },
             maxValue: Number,
             siteId: {
                 type: Number,
@@ -167,7 +179,7 @@
                 series: [0],
                 displayDays: this.days,
                 displayMaxValue: this.maxValue,
-                triBlend: new TriBlendColor,
+                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
     }

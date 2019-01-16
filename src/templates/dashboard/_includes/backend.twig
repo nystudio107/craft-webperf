@@ -27,6 +27,9 @@
                         title="First Byte"
                         :days="30"
                         column="firstByte"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
@@ -47,6 +50,9 @@
                         title="DNS Lookup"
                         :days="30"
                         column="dns"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value=".5"
                         :site-id="{{ currentSiteId }}"
                     >
@@ -64,6 +70,9 @@
                         title="Connect"
                         :days="30"
                         column="connect"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value=".5"
                         :site-id="{{ currentSiteId }}"
                     >
@@ -75,6 +84,9 @@
             <dashboard-file-list
                     :days="30"
                     column="firstByte"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
                     :limit="3"
                     :max-value="2"
                     :site-id="{{ currentSiteId }}"

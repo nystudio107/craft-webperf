@@ -1,10 +1,11 @@
 export default class TriColorBlend {
 
-    constructor(clr1 = {r: 0, g: 200, b: 0}, clr2 = {r: 255, g: 255, b: 0}, clr3 = {r: 200, g: 0, b: 0})
+    constructor(clr1 = '#00C800', clr2 = '#FFFF00', clr3 = '#C80000')
     {
-        this.clr1 = clr1;
-        this.clr2 = clr2;
-        this.clr3 = clr3;
+        console.log(clr1, clr2, clr3);
+        this.clr1 = this.HexToRGB(clr1);
+        this.clr2 = this.HexToRGB(clr2);
+        this.clr3 = this.HexToRGB(clr3);
     }
 
     RGBToHex(r, g, b)
@@ -13,6 +14,16 @@ export default class TriColorBlend {
         return (function (h) {
             return new Array(7 - h.length).join("0") + h
         })(bin.toString(16).toUpperCase())
+    }
+
+    HexToRGB(hex)
+    {
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
     }
 
     colorFromPercentage(val)
