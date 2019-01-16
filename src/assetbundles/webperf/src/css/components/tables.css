@@ -78,7 +78,6 @@ table.webperf-pages-index th:last-child {
   padding-right: 10px;
 }
 
-
 /**
  * Column alignment
  */
@@ -88,4 +87,21 @@ td.text-center {
 
 td.text-right {
   text-align: right!important;
+}
+
+/**
+ * Misc
+ */
+
+.single-line-truncate-wrapper {
+  height: 20px;
+}
+
+.single-line-truncate {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }

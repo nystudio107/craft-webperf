@@ -9,10 +9,38 @@ export default [
     },
     {
         name: '__slot:load-time-bar',
-        sortField: 'pageLoad',
+        sortField: 'totalPageLoad',
         title: 'Request Timeline',
         titleClass: 'center loadTimeBar',
         dataClass: 'center',
+    },
+    {
+        name: 'maxTotalPageLoad',
+        visible: false,
+    },
+    {
+        name: 'domInteractive',
+        visible: false,
+    },
+    {
+        name: 'firstContentfulPaint',
+        visible: false,
+    },
+    {
+        name: 'firstPaint',
+        visible: false,
+    },
+    {
+        name: 'firstByte',
+        visible: false,
+    },
+    {
+        name: 'connect',
+        visible: false,
+    },
+    {
+        name: 'dns',
+        visible: false,
     },
     {
         name: 'craftDbCnt',

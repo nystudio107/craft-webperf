@@ -71,6 +71,9 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        if ($sortField === 'totalPageLoad') {
+            $sortField = 'pageLoad';
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -79,31 +82,65 @@ class TablesController extends Controller
                 'MIN(title) AS title',
                 'COUNT(url) AS cnt',
                 'AVG(pageLoad) AS pageLoad',
+
+                'AVG(domInteractive) AS domInteractive',
+                'AVG(firstContentfulPaint) AS firstContentfulPaint',
+                'AVG(firstPaint) AS firstPaint',
+                'AVG(firstByte) AS firstByte',
+                'AVG(connect) AS connect',
+                'AVG(dns) AS dns',
+
+                'AVG(craftTotalMs) AS craftTotalMs',
                 'AVG(craftDbCnt) AS craftDbCnt',
+                'AVG(craftDbMs) AS craftDbMs',
                 'AVG(craftTwigCnt) AS craftTwigCnt',
-                'AVG(craftOtherCnt) AS craftOtherCnt',
+                'AVG(craftTwigMs) AS craftTwigCnt',
                 'AVG(craftTotalMemory) AS craftTotalMemory',
             ])
             ->from(['{{%webperf_data_samples}}'])
-            ->offset($offset);
+            ->offset($offset)
+            ;
         if ((int)$siteId !== 0) {
             $query->where(['siteId' => $siteId]);
         }
         if ($filter !== '') {
-            $query->where(['like', 'url', $filter]);
-            $query->orWhere(['like', 'title', $filter]);
+            $query
+                ->where(['like', 'url', $filter])
+                ->orWhere(['like', 'title', $filter])
+            ;
         }
         $query
             ->orderBy("{$sortField} {$sortType}")
             ->groupBy('url')
-            ->limit($per_page);
+            ->limit($per_page)
+        ;
 
         $stats = $query->all();
         if ($stats) {
-            // Decode any emojis in the title
+            // Compute the largest page load time
+            $maxTotalPageLoad = 0;
+            foreach ($stats as &$stat) {
+                if (empty($stat['pageLoad'])) {
+                    $pageLoad = $stat['craftTotalMs'];
+                } else {
+                    $pageLoad = $stat['pageLoad'];
+                }
+                if ($pageLoad > $maxTotalPageLoad) {
+                    $maxTotalPageLoad = $pageLoad;
+                }
+            }
+            // Massage the stats
             $index = 1;
             foreach ($stats as &$stat) {
                 $stat['id'] = $index++;
+                $stat['maxTotalPageLoad'] = $maxTotalPageLoad;
+                // If there is no frontend beacon timing, use the Craft timing
+                if (empty($stat['pageLoad'])) {
+                    $stat['totalPageLoad'] = $stat['craftTotalMs'];
+                } else {
+                    $stat['totalPageLoad'] = $stat['pageLoad'];
+                }
+                // Decode any emojis in the title
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }

@@ -20,28 +20,82 @@
         >
             <template slot="load-time-bar" slot-scope="props">
                 <div>
-                    <div class="inline-block" style="width: 80%">
-                        <div class="w-full bg-blue">
-                            {{ props.rowData.pageLoad }} xx
+                    <div class="inline-block align-middle" style="width: 80%">
+                        <div class="bg-blue-dark h-5"
+                             :style="{width: ((props.rowData.totalPageLoad / props.rowData.maxTotalPageLoad) * 100) + '%'}"
+                             title="Page Load"
+                        >
+                            <div class="bg-orange h-5"
+                                 :style="{width: ((props.rowData.domInteractive / props.rowData.totalPageLoad) * 100) + '%'}"
+                                 title="DOM Interactive"
+                            >
+                                <div class="bg-red h-5"
+                                     :style="{width: ((props.rowData.firstContentfulPaint / props.rowData.domInteractive) * 100) + '%'}"
+                                     title="First Contentful Paint"
+                                >
+                                    <div class="bg-yellow h-5"
+                                         :style="{width: ((props.rowData.firstPaint / props.rowData.firstContentfulPaint) * 100) + '%'}"
+                                         title="First Paint"
+                                    >
+                                        <div class="bg-green h-5"
+                                             :style="{width: ((props.rowData.firstByte / props.rowData.firstPaint) * 100) + '%'}"
+                                             title="First Byte"
+                                        >
+                                            <div class="bg-red-dark h-5"
+                                                 :style="{width: ((props.rowData.craftTotalMs / props.rowData.firstByte) * 100) + '%'}"
+                                                 title="Craft Rendering"
+                                            >
+                                                <div v-if="props.rowData.craftDbMs > props.rowData.craftTwigMs" class="bg-purple h-5"
+                                                     :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTotalMs) * 100) + '%'}"
+                                                     title="DB Queries"
+                                                >
+                                                    <div class="bg-yellow-dark h-5"
+                                                         :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftDbMs) * 100) + '%'}"
+                                                         title="Template Rendering"
+                                                    >
+                                                    </div>
+                                                </div>
+                                                <div v-else class="bg-yellow-dark h-5"
+                                                     :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftTotalMs) * 100) + '%'}"
+                                                     title="Template Rendering"
+                                                >
+                                                    <div class="bg-purple h-5"
+                                                         :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTwigMs) * 100) + '%'}"
+                                                         title="DB Queries"
+                                                    >
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {{ statFormatter(props.rowData.pageLoad) }}
+                    <span class="align-middle">{{ statFormatter(props.rowData.totalPageLoad) }}</span>
                 </div>
             </template>
             <template slot="page-listing-display" slot-scope="props">
                 <div>
-                    <div class="text-base font-normal truncate-label"
-                         style="color: rgb(26, 13, 171); width: 100%;"
-                         :title="props.rowData.title"
-                    >
-                        {{ props.rowData.title }}
+                    <div class="relative single-line-truncate-wrapper">
+                        <div class="text-base font-normal truncate-label"
+                             style="color: rgb(26, 13, 171); width: 100%; height: 20px;"
+                             :title="props.rowData.title"
+                        >
+                            <span v-if="props.rowData.title">{{ props.rowData.title }}</span>
+                            <span v-else class="text-grey-light"><em>untitled</em></span>
+
+                        </div>
                     </div>
-                    <cite class="text-sm font-normal truncate-label"
-                          style="color: rgb(0, 102, 33); width: 100%;"
-                          :title="props.rowData.url"
-                    >
-                        {{ props.rowData.url }}
-                    </cite>
+                    <div class="relative single-line-truncate-wrapper">
+                        <cite class="text-sm font-normal truncate-label single-line-truncate"
+                              style="color: rgb(0, 102, 33); width: 100%; "
+                              :title="props.rowData.url"
+                        >
+                            {{ props.rowData.url }}
+                        </cite>
+                    </div>
                 </div>
             </template>
         </vuetable>
@@ -90,7 +144,7 @@
                 sortOrder: [
                     {
                         field: '__slot:load-time-bar',
-                        sortField: 'pageLoad',
+                        sortField: 'totalPageLoad',
                         direction: 'desc'
                     }
                 ],

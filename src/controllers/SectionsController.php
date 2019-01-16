@@ -133,7 +133,7 @@ class SectionsController extends Controller
         );
         // Enabled sites
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'dashboard';
+        $variables['controllerHandle'] = 'pages-index';
 
         // Basic variables
         $variables['fullPageForm'] = false;
