@@ -28,6 +28,7 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\helpers\UrlHelper;
 use craft\services\Dashboard;
 use craft\services\UserPermissions;
+use craft\web\Application;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use craft\web\View;
@@ -175,12 +176,12 @@ class Webperf extends Plugin
     {
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+            $this->setRequestUrl();
             try {
                 $uri = $request->getPathInfo();
             } catch (InvalidConfigException $e) {
                 $uri = '';
             }
-            $this->setRequestUrl();
             // Ignore our own controllers
             if (self::$settings->includeCraftProfiling && strpos($uri, 'webperf/') !== 0) {
                 // Add in the ProfileTarget component
@@ -203,11 +204,13 @@ class Webperf extends Plugin
 
     /**
      * Set the request URL
+     *
+     * @param bool $force
      */
-    protected function setRequestUrl()
+    protected function setRequestUrl(bool $force = false)
     {
         self::$requestUrl = DataSample::PLACEHOLDER_URL;
-        if (!self::$settings->includeBeacon) {
+        if (!self::$settings->includeBeacon || $force) {
             $request = Craft::$app->getRequest();
             self::$requestUrl = UrlHelper::stripQueryString(
                 urldecode($request->getAbsoluteUrl())
@@ -409,6 +412,21 @@ class Webperf extends Plugin
                                 self::$beaconIncluded = true;
                                 break;
                         }
+                    }
+                }
+            );
+            // Handler: Application::EVENT_AFTER_REQUEST
+            Event::on(
+                Application::class,
+                Application::EVENT_AFTER_REQUEST,
+                function () {
+                    Craft::debug(
+                        'Application::EVENT_AFTER_REQUEST',
+                        __METHOD__
+                    );
+                    // If the beacon wasn't included, allow for the Craft timings
+                    if (!self::$beaconIncluded) {
+                        $this->setRequestUrl(true);
                     }
                 }
             );
