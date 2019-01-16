@@ -1,13 +1,17 @@
 {
+  "vendor.css": "css/vendor.css",
+  "vendor.js": "js/vendor.js",
+  "vendor.js.map": "js/vendor.js.map",
   "dashboard.js": "js/dashboard.js",
   "dashboard.js.map": "js/dashboard.js.map",
+  "pages-index.js": "js/pages-index.js",
+  "pages-index.js.map": "js/pages-index.js.map",
   "styles.css": "css/styles.css",
   "styles.js": "js/styles.js",
   "styles.js.map": "js/styles.js.map",
-  "vendor.js": "js/vendor.js",
-  "vendor.js.map": "js/vendor.js.map",
   "webperf.js": "js/webperf.js",
   "webperf.js.map": "js/webperf.js.map",
   "css/styles.css.map": "css/styles.css.map",
+  "css/vendor.css.map": "css/vendor.css.map",
   "img/Webperf-icon.svg": "img/Webperf-icon.svg"
 }
