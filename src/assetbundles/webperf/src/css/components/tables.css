@@ -9,6 +9,7 @@ table.vuetable {
   width: 100%;
   table-layout: fixed;
   overflow: hidden;
+  padding: 0;
 }
 
 .webperf-menubtn-asc::after {
@@ -56,29 +57,27 @@ th.vuetable-th-cnt {
   text-align: right!important;
 }
 
-/**
- * Redirects chart
- */
-
-table.retour-redirects th.vuetable-th-redirectSrcUrl {
-  width: 30%!important;
+table.webperf-pages-index tbody.vuetable-body tr:hover {
+  background-color: #DCEEFE;
+  cursor: pointer;
 }
 
-th.vuetable-th-redirectDestUrl {
-  width: 24%!important;
+table.webperf-pages-index td:first-child {
+  padding-left: 10px;
 }
 
-th.vuetable-th-redirectMatchType {
-  width: 13%!important;
+table.webperf-pages-index td:last-child {
+  padding-right: 10px;
 }
 
-th.vuetable-th-redirectHttpCode {
-  width: 10%!important;
+table.webperf-pages-index th:first-child {
+  padding-left: 10px;
 }
 
-th.vuetable-th-deleteLink {
-  width: 5%!important;
+table.webperf-pages-index th:last-child {
+  padding-right: 10px;
 }
+
 
 /**
  * Column alignment
