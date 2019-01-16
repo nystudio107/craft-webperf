@@ -16,7 +16,34 @@
                   :sort-order="sortOrder"
                   :append-params="moreParams"
                   @vuetable:pagination-data="onPaginationData"
-        ></vuetable>
+        >
+            <template slot="load-time-bar" slot-scope="props">
+                <div>
+                    <div class="inline-block" style="width: 80%">
+                        <div class="w-full bg-blue">
+                            {{ props.rowData.pageLoad }} xx
+                        </div>
+                    </div>
+                    {{ statFormatter(props.rowData.pageLoad) }}
+                </div>
+            </template>
+            <template slot="page-listing-display" slot-scope="props">
+                <div>
+                    <div class="text-base font-normal truncate-label"
+                         style="color: rgb(26, 13, 171); width: 100%;"
+                         :title="props.rowData.title"
+                    >
+                        {{ props.rowData.title }}
+                    </div>
+                    <cite class="text-sm font-normal truncate-label"
+                          style="color: rgb(0, 102, 33); width: 100%;"
+                          :title="props.rowData.url"
+                    >
+                        {{ props.rowData.url }}
+                    </cite>
+                </div>
+            </template>
+        </vuetable>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
             ></vuetable-pagination-info>
@@ -30,15 +57,11 @@
 <script>
     import Vue from 'vue';
     import FieldDefs from './PagesIndexFieldDefs.js';
-    import PageListingDisplay from './PageListingDisplay.vue';
-    import LoadTimeBar from './LoadTimeBar.vue';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
     import VueTablePagination from './VuetablePagination.vue';
     import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
     import VueTableFilterBar from './VuetableFilterBar.vue';
 
-    Vue.component('page-listing-display', PageListingDisplay);
-    Vue.component('load-time-bar', LoadTimeBar);
     // Our component exports
     export default {
         components: {
@@ -59,13 +82,13 @@
                     'siteId': this.siteId,
                 },
                 css: {
-                    tableClass: 'data fullwidth webperf-dashboard',
+                    tableClass: 'data fullwidth webperf-pages-index',
                     ascendingIcon: 'menubtn webperf-menubtn-asc',
                     descendingIcon: 'menubtn webperf-menubtn-desc'
                 },
                 sortOrder: [
                     {
-                        field: 'pageLoad',
+                        field: '__slot:load-time-bar',
                         sortField: 'pageLoad',
                         direction: 'desc'
                     }
@@ -100,6 +123,9 @@
             },
             onChangePage (page) {
                 this.$refs.vuetable.changePage(page);
+            },
+            statFormatter(val) {
+                return Number(val / 1000).toFixed(2) + "s";
             },
             countFormatter(val) {
                 return Number(val).toFixed(0);

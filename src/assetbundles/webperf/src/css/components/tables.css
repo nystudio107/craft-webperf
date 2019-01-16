@@ -23,12 +23,12 @@ table.vuetable {
  * Dashboard chart
  */
 
-table.webperf-dashboard th.pageListingDisplay {
+table.webperf-pages-index th.pageListingDisplay {
   width: 30%!important;
 }
 
 th.loadTimeBar {
-  width: 30%!important;
+  width: 20%!important;
 }
 
 th.vuetable-th-craftDbCnt {
@@ -47,6 +47,11 @@ th.vuetable-th-craftOtherCnt {
 }
 
 th.vuetable-th-craftTotalMemory {
+  width: 10%!important;
+  text-align: right!important;
+}
+
+th.vuetable-th-cnt {
   width: 10%!important;
   text-align: right!important;
 }

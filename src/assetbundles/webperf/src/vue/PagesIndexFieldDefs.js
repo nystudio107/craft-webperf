@@ -1,14 +1,14 @@
 // Field definitions for PagesIndexTable.vue
 export default [
     {
-        name: '__component:page-listing-display',
+        name: '__slot:page-listing-display',
         sortField: 'url',
         title: 'Page',
         titleClass: 'center pageListingDisplay',
         dataClass: 'center',
     },
     {
-        name: '__component:load-time-bar',
+        name: '__slot:load-time-bar',
         sortField: 'pageLoad',
         title: 'Load Time',
         titleClass: 'center loadTimeBar',
@@ -45,5 +45,13 @@ export default [
         titleClass: 'text-right',
         dataClass: 'text-right',
         callback: 'memoryFormatter'
+    },
+    {
+        name: 'cnt',
+        sortField: 'cnt',
+        title: 'Samples',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter'
     },
 ];
