@@ -68,7 +68,8 @@ class ChartsController extends Controller
                 ->select([
                     'AVG('.$column.') AS avg',
                 ])
-                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )");
+                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+                ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
             }
@@ -81,7 +82,8 @@ class ChartsController extends Controller
                 ->select([
                     'AVG("'.$column.'") AS avg',
                 ])
-                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
+                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )")
+                ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
             }
@@ -126,7 +128,8 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG('.$column.') AS avg',
                 ])
-                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )");
+                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+                ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
             }
@@ -146,7 +149,8 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG("'.$column.'") AS avg',
                 ])
-                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )");
+                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )")
+                ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
             }
