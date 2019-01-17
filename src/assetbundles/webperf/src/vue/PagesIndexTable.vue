@@ -19,87 +19,8 @@
                   @vuetable:row-clicked="onRowClicked"
         >
             <template slot="load-time-bar" slot-scope="props">
-                <div>
-                    <div class="inline-block align-middle" style="width: 80%">
-                        <div class="bg-blue-dark h-5"
-                             :style="{width: ((props.rowData.totalPageLoad / props.rowData.maxTotalPageLoad) * 100) + '%'}"
-                             title="Page Load"
-                        >
-                            <div v-if="props.rowData.pageLoad" class="bg-blue h-5"
-                                 :style="{width: ((props.rowData.domInteractive / props.rowData.totalPageLoad) * 100) + '%'}"
-                                 title="DOM Interactive"
-                            >
-                                <div class="bg-blue-light h-5"
-                                     :style="{width: ((props.rowData.firstContentfulPaint / props.rowData.domInteractive) * 100) + '%'}"
-                                     title="First Contentful Paint"
-                                >
-                                    <div class="bg-blue-lighter h-5"
-                                         :style="{width: ((props.rowData.firstPaint / props.rowData.firstContentfulPaint) * 100) + '%'}"
-                                         title="First Paint"
-                                    >
-                                        <div class="bg-orange-dark h-5"
-                                             :style="{width: ((props.rowData.firstByte / props.rowData.firstPaint) * 100) + '%'}"
-                                             title="First Byte"
-                                        >
-                                            <div class="bg-orange h-5"
-                                                 :style="{width: ((props.rowData.craftTotalMs / props.rowData.firstByte) * 100) + '%'}"
-                                                 title="Craft Rendering"
-                                            >
-                                                <div v-if="props.rowData.craftDbMs > props.rowData.craftTwigMs" class="bg-orange-light h-5"
-                                                     :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTotalMs) * 100) + '%'}"
-                                                     title="DB Queries"
-                                                >
-                                                    <div class="bg-orange-lighter h-5"
-                                                         :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftDbMs) * 100) + '%'}"
-                                                         title="Template Rendering"
-                                                    >
-                                                    </div>
-                                                </div>
-                                                <div v-else class="bg-orange-light h-5"
-                                                     :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftTotalMs) * 100) + '%'}"
-                                                     title="Template Rendering"
-                                                >
-                                                    <div class="bg-orange-lighter h-5"
-                                                         :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTwigMs) * 100) + '%'}"
-                                                         title="DB Queries"
-                                                    >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-else class="bg-orange h-5"
-                                 :style="{width: ((props.rowData.craftTotalMs / props.rowData.firstByte) * 100) + '%'}"
-                                 title="Craft Rendering"
-                            >
-                                <div v-if="props.rowData.craftDbMs > props.rowData.craftTwigMs" class="bg-orange-light h-5"
-                                     :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTotalMs) * 100) + '%'}"
-                                     title="DB Queries"
-                                >
-                                    <div class="bg-orange-lighter h-5"
-                                         :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftDbMs) * 100) + '%'}"
-                                         title="Template Rendering"
-                                    >
-                                    </div>
-                                </div>
-                                <div v-else class="bg-orange-light h-5"
-                                     :style="{width: ((props.rowData.craftTwigMs / props.rowData.craftTotalMs) * 100) + '%'}"
-                                     title="Template Rendering"
-                                >
-                                    <div class="bg-orange-lighter h-5"
-                                         :style="{width: ((props.rowData.craftDbMs / props.rowData.craftTwigMs) * 100) + '%'}"
-                                         title="DB Queries"
-                                    >
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <span class="align-middle">{{ statFormatter(props.rowData.totalPageLoad) }}</span>
-                </div>
+                <request-bar-chart :rowData="props.rowData">
+                </request-bar-chart>
             </template>
             <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
                 <div>
@@ -147,6 +68,7 @@
     import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
     import VueTableFilterBar from './VuetableFilterBar.vue';
     import TriBlendColor from '../js/tri-color-blend';
+    import RequestBarChart from './RequestBarChart.vue';
 
     // Our component exports
     export default {
@@ -155,6 +77,7 @@
             'vuetable-pagination': VueTablePagination,
             'vuetable-pagination-info': VueTablePaginationInfo,
             'vuetable-filter-bar': VueTableFilterBar,
+            'request-bar-chart': RequestBarChart,
         },
         props: {
             fastColor: {
@@ -238,7 +161,11 @@
             },
             memoryFormatter(value) {
                 return Number(value / (1024 * 1024)).toFixed(2) + ' Mb';
+            },
+            bar(rowData) {
+
             }
+
         }
     }
 </script>
