@@ -1,5 +1,4 @@
 <template>
-    <div class="inline-block align-middle" style="width: 80%">
         <request-bar-recursive :column="root.column"
                                :color="root.color"
                                :label="root.label"
@@ -8,7 +7,6 @@
                                :nodes="root.nodes"
         >
         </request-bar-recursive>
-    </div>
 </template>
 <script>
     import RequestBarRecursive from './RequestBarRecursive.vue';
@@ -86,7 +84,7 @@
                     color: element.color,
                     label: element.label,
                     value: parseFloat(this.rowData[element.column]) || null,
-                    parentValue: parseFloat(this.rowData[element.column]) || null,
+                    parentValue: parseFloat(this.rowData['maxTotalPageLoad']) || null,
                     nodes: undefined,
                 };
                 if (node.value !== null) {

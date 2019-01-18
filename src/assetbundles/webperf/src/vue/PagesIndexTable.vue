@@ -19,8 +19,10 @@
                   @vuetable:row-clicked="onRowClicked"
         >
             <template slot="load-time-bar" slot-scope="props">
-                <request-bar-chart :rowData="props.rowData">
-                </request-bar-chart>
+                <div class="inline-block align-middle" style="width: 80%">
+                    <request-bar-chart :rowData="props.rowData">
+                    </request-bar-chart>
+                </div>
                 {{ statFormatter(props.rowData.totalPageLoad) }}
             </template>
             <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
