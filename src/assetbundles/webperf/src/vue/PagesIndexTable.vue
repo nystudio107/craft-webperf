@@ -26,31 +26,12 @@
                 {{ statFormatter(props.rowData.totalPageLoad) }}
             </template>
             <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
-                <div>
-                    <div class="relative single-line-truncate-wrapper">
-                        <div class="text-base font-normal truncate-label"
-                             style="color: rgb(26, 13, 171); width: 100%; height: 20px;"
-                             :title="props.rowData.title"
-                        >
-                            <span v-if="props.rowData.title">{{ props.rowData.title }}</span>
-                            <span v-else class="text-grey-light"><em>untitled</em></span>
-
-                        </div>
-                    </div>
-                    <div class="relative single-line-truncate-wrapper">
-                        <cite class="text-sm font-normal truncate-label single-line-truncate"
-                              style="color: rgb(0, 102, 33); width: 100%; "
-                              :title="props.rowData.url"
-                        >
-                            {{ props.rowData.url }}
-                        </cite>
-                    </div>
-                    <div class="py-2">
-                        <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
-                            <div class="simple-bar-line h-2 rounded-full" :style="{ width: ((props.rowData.totalPageLoad / maxValue) * 100) + '%', backgroundColor: triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100)) }"></div>
-                        </div>
-                    </div>
-                </div>
+                <page-result-cell :title="props.rowData.title"
+                                  :url="props.rowData.url"
+                                  :width="((props.rowData.totalPageLoad / maxValue) * 100)"
+                                  :color="triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100))"
+                >
+                </page-result-cell>
             </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">
@@ -72,6 +53,7 @@
     import VueTableFilterBar from './VuetableFilterBar.vue';
     import TriBlendColor from '../js/tri-color-blend';
     import RequestBarChart from './RequestBarChart.vue';
+    import PageResultCell from './PageResultCell.vue';
 
     // Our component exports
     export default {
@@ -81,6 +63,7 @@
             'vuetable-pagination-info': VueTablePaginationInfo,
             'vuetable-filter-bar': VueTableFilterBar,
             'request-bar-chart': RequestBarChart,
+            'page-result-cell': PageResultCell,
         },
         props: {
             fastColor: {
@@ -165,10 +148,6 @@
             memoryFormatter(value) {
                 return Number(value / (1024 * 1024)).toFixed(2) + ' Mb';
             },
-            bar(rowData) {
-
-            }
-
         }
     }
 </script>
