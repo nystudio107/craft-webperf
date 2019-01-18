@@ -1,21 +1,18 @@
 <template>
-    <div class="request-bar-chart">
-        <div>{{ column }}</div>
-        <div v-if="nodes.nodes && nodes.nodes.length">
-        <request-bar-chart
-                v-for="node in nodes"
-                :nodes="node.nodes"
-                :column="node.column"
-                :color="node.color"
-                :label="node.label"
-                :value="node.value"
-                :row-data="rowData"
+    <div class="inline-block align-middle" style="width: 80%">
+        <request-bar-recursive :column="root.column"
+                               :color="root.color"
+                               :label="root.label"
+                               :value="root.value"
+                               :parentValue="root.parentValue"
+                               :nodes="root.nodes"
         >
-        </request-bar-chart>
-        </div>
+        </request-bar-recursive>
     </div>
 </template>
 <script>
+    import RequestBarRecursive from './RequestBarRecursive.vue';
+
     const requestBarGraphFields = [
         {
             column: 'totalPageLoad',
@@ -24,100 +21,93 @@
         },
         {
             column: 'domInteractive',
-            color: 'bg-blue-dark',
+            color: 'bg-blue',
             label: 'DOM Interactive',
         },
         {
             column: 'firstContentfulPaint',
-            color: 'bg-blue-dark',
+            color: 'bg-blue-light',
             label: 'First Contentful Paint',
         },
         {
             column: 'firstPaint',
-            color: 'bg-blue-dark',
+            color: 'bg-blue-lighter',
             label: 'First Paint',
         },
         {
             column: 'firstByte',
-            color: 'bg-blue-dark',
+            color: 'bg-orange-dark',
             label: 'First Byte',
         },
         {
             column: 'connect',
-            color: 'bg-blue-dark',
+            color: 'bg-orange',
             label: 'Connect',
         },
         {
             column: 'dns',
-            color: 'bg-blue-dark',
+            color: 'bg-orange-light',
             label: 'DNS Lookup',
         },
         {
             column: 'craftTotalMs',
-            color: 'bg-blue-dark',
+            color: 'bg-red-dark',
             label: 'Craft Rendering',
         },
         {
             column: 'craftTwigMs',
-            color: 'bg-blue-dark',
+            color: 'bg-red',
             label: 'Twig Rendering',
         },
         {
             column: 'craftDbMs',
-            color: 'bg-blue-dark',
+            color: 'bg-red-light',
             label: 'DB Queries',
         },
     ];
 
     export default {
         name: 'request-bar-chart',
+        components: {
+            'request-bar-recursive': RequestBarRecursive,
+        },
         props: {
             rowData: Object,
-            column: String,
-            color: String,
-            label: String,
-            value: String,
         },
         data: function() {
-            let element = requestBarGraphFields[0];
             return {
-                nodes: {
-                    column: element.column,
-                    color: element.color,
-                    label: element.label,
-                    value: 100,
-                },
+                root: undefined,
             }
         },
         created() {
-            return;
-
             requestBarGraphFields.forEach((element) => {
                 let node = {
                     column: element.column,
                     color: element.color,
                     label: element.label,
-                    value: this.rowData[element.column],
+                    value: parseFloat(this.rowData[element.column]) || null,
+                    parentValue: parseFloat(this.rowData[element.column]) || null,
                     nodes: undefined,
                 };
-                if (this.nodes) {
-                    let searchNode = this.nodes;
-                    console.log(searchNode);
-                    while (searchNode) {
-                        if (!searchNode.nodes || (node.value > searchNode.value)) {
-                            node.nodes = searchNode.nodes;
-                            searchNode.nodes = [node];
-
-                            node.nodes = undefined;
+                if (node.value !== null) {
+                    if (this.root) {
+                        let searchNode = this.root;
+                        while (searchNode) {
+                            if (!searchNode.nodes || (node.value > searchNode.value)) {
+                                node.nodes = searchNode.nodes;
+                                node.parentValue = searchNode.parentValue;
+                                searchNode.nodes = [node];
+                                searchNode = node.nodes || undefined;
+                            } else {
+                                searchNode = searchNode.nodes[0] || undefined;
+                            }
                         }
-                        searchNode = searchNode.nodes || undefined;
-                        searchNode = undefined;
+                    } else {
+                        this.root = node;
                     }
-                } else {
-                    this.nodes = node;
                 }
             });
-            console.log('exiting requestBarGraphFields.forEach()');
+            console.log(this.root);
         },
         methods: {
         }
