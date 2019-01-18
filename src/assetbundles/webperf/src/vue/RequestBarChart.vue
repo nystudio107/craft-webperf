@@ -1,12 +1,12 @@
 <template>
-        <request-bar-recursive :column="root.column"
-                               :color="root.color"
-                               :label="root.label"
-                               :value="root.value"
-                               :parentValue="root.parentValue"
-                               :nodes="root.nodes"
-        >
-        </request-bar-recursive>
+    <request-bar-recursive :column="root.column"
+                           :color="root.color"
+                           :label="root.label"
+                           :value="root.value"
+                           :parentValue="root.parentValue"
+                           :nodes="root.nodes"
+    >
+    </request-bar-recursive>
 </template>
 <script>
     import RequestBarRecursive from './RequestBarRecursive.vue';
@@ -77,37 +77,47 @@
                 root: undefined,
             }
         },
+        mounted() {
+            this.$events.$on('refresh-table-components', eventData => this.onTableRefresh(eventData));
+        },
         created() {
-            requestBarGraphFields.forEach((element) => {
-                let node = {
-                    column: element.column,
-                    color: element.color,
-                    label: element.label,
-                    value: parseFloat(this.rowData[element.column]) || null,
-                    parentValue: parseFloat(this.rowData['maxTotalPageLoad']) || null,
-                    nodes: undefined,
-                };
-                if (node.value !== null) {
-                    if (this.root) {
-                        let searchNode = this.root;
-                        while (searchNode) {
-                            if (!searchNode.nodes || (node.value > searchNode.value)) {
-                                node.nodes = searchNode.nodes;
-                                node.parentValue = searchNode.parentValue;
-                                searchNode.nodes = [node];
-                                searchNode = node.nodes || undefined;
-                            } else {
-                                searchNode = searchNode.nodes[0] || undefined;
-                            }
-                        }
-                    } else {
-                        this.root = node;
-                    }
-                }
-            });
-            console.log(this.root);
+            this.calculateNodes();
         },
         methods: {
-        }
+            onTableRefresh: function (eventData) {
+                this.calculateNodes();
+            },
+            calculateNodes: function() {
+                this.root = undefined;
+                requestBarGraphFields.forEach((element) => {
+                    let node = {
+                        column: element.column,
+                        color: element.color,
+                        label: element.label,
+                        value: parseFloat(this.rowData[element.column]) || null,
+                        parentValue: parseFloat(this.rowData['maxTotalPageLoad']) || null,
+                        nodes: undefined,
+                    };
+                    if (node.value !== null) {
+                        if (this.root) {
+                            let searchNode = this.root;
+                            while (searchNode) {
+                                if (!searchNode.nodes || (node.value > searchNode.value)) {
+                                    node.nodes = searchNode.nodes;
+                                    node.parentValue = searchNode.parentValue;
+                                    searchNode.nodes = [node];
+                                    searchNode = node.nodes || undefined;
+                                } else {
+                                    searchNode = searchNode.nodes[0] || undefined;
+                                }
+                            }
+                        } else {
+                            this.root = node;
+                        }
+                    }
+                });
+                console.log(this.root);
+            }
+        },
     }
 </script>

@@ -17,6 +17,7 @@
                   :append-params="moreParams"
                   @vuetable:pagination-data="onPaginationData"
                   @vuetable:row-clicked="onRowClicked"
+                  @vuetable:loaded="onLoaded"
         >
             <template slot="load-time-bar" slot-scope="props">
                 <div class="inline-block align-middle" style="width: 80%">
@@ -125,6 +126,10 @@
                     'siteId': this.siteId,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
+            },
+            onLoaded () {
+                console.log('fired');
+                this.$events.fire('refresh-table-components', this.$refs.vuetable);
             },
             onPaginationData (paginationData) {
                 this.$refs.paginationTop.setPaginationData(paginationData);
