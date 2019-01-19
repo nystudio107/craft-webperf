@@ -3,7 +3,7 @@ export default [
     {
         name: 'dateUpdated',
         sortField: 'dateUpdated',
-        title: 'Date',
+        title: 'Sample Date',
         titleClass: 'text-left',
         dataClass: 'text-left',
         callback: 'dateFormatter',
