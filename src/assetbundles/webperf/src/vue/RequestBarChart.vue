@@ -98,11 +98,11 @@
                         parentValue: parseFloat(this.rowData['maxTotalPageLoad']) || null,
                         nodes: undefined,
                     };
-                    if (node.value !== null) {
+                    if (node.value) {
                         if (this.root) {
                             let searchNode = this.root;
                             while (searchNode) {
-                                if (!searchNode.nodes || (node.value > searchNode.value)) {
+                                if (!searchNode.nodes || (!searchNode.value) || (node.value > searchNode.value)) {
                                     node.nodes = searchNode.nodes;
                                     node.parentValue = searchNode.parentValue;
                                     searchNode.nodes = [node];
@@ -116,7 +116,6 @@
                         }
                     }
                 });
-                console.log(this.root);
             }
         },
     }
