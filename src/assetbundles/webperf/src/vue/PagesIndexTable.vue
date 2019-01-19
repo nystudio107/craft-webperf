@@ -128,7 +128,6 @@
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             onLoaded () {
-                console.log('fired');
                 this.$events.fire('refresh-table-components', this.$refs.vuetable);
             },
             onPaginationData (paginationData) {

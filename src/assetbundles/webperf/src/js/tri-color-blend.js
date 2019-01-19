@@ -2,7 +2,6 @@ export default class TriColorBlend {
 
     constructor(clr1 = '#00C800', clr2 = '#FFFF00', clr3 = '#C80000')
     {
-        console.log(clr1, clr2, clr3);
         this.clr1 = this.HexToRGB(clr1);
         this.clr2 = this.HexToRGB(clr2);
         this.clr3 = this.HexToRGB(clr3);
