@@ -9,7 +9,7 @@
             ></vuetable-pagination>
         </div>
         <vuetable ref="vuetable"
-                  api-url="/webperf/tables/pages-index"
+                  api-url="/webperf/tables/page-detail"
                   :per-page="20"
                   :fields="fields"
                   :css="css"
@@ -83,6 +83,7 @@
                 type: Number,
                 default: 10000,
             },
+            pageUrl: String,
             siteId: {
                 type: Number,
                 default: 0,
@@ -91,10 +92,11 @@
         data: function() {
             return {
                 moreParams: {
+                    'pageUrl': this.pageUrl,
                     'siteId': this.siteId,
                 },
                 css: {
-                    tableClass: 'data fullwidth webperf-pages-index',
+                    tableClass: 'data fullwidth webperf-page-detail',
                     ascendingIcon: 'menubtn webperf-menubtn-asc',
                     descendingIcon: 'menubtn webperf-menubtn-desc'
                 },
@@ -117,12 +119,14 @@
             onFilterSet (filterText) {
                 this.moreParams = {
                     'siteId': this.siteId,
+                    'pageUrl': this.pageUrl,
                     'filter': filterText,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             onFilterReset () {
                 this.moreParams = {
+                    'pageUrl': this.pageUrl,
                     'siteId': this.siteId,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
@@ -142,8 +146,6 @@
             },
             onRowClicked(dataItem, event) {
                 console.log(dataItem);
-                let url = '/admin/webperf/page-detail?pageUrl=' + encodeURIComponent(dataItem.url);
-                window.location.href = url;
             },
             statFormatter(val) {
                 return Number(val / 1000).toFixed(2) + "s";

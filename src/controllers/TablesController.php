@@ -82,14 +82,12 @@ class TablesController extends Controller
                 'MIN(title) AS title',
                 'COUNT(url) AS cnt',
                 'AVG(pageLoad) AS pageLoad',
-
                 'AVG(domInteractive) AS domInteractive',
                 'AVG(firstContentfulPaint) AS firstContentfulPaint',
                 'AVG(firstPaint) AS firstPaint',
                 'AVG(firstByte) AS firstByte',
                 'AVG(connect) AS connect',
                 'AVG(dns) AS dns',
-
                 'AVG(craftTotalMs) AS craftTotalMs',
                 'AVG(craftDbCnt) AS craftDbCnt',
                 'AVG(craftDbMs) AS craftDbMs',
@@ -171,28 +169,31 @@ class TablesController extends Controller
     }
 
     /**
-     * Handle requests for the dashboard redirects table
+     * Handle requests for the dashboard statistics table
      *
      * @param string $sort
      * @param int    $page
      * @param int    $per_page
      * @param string $filter
-     * @param null   $siteId
+     * @param string $pageUrl
+     * @param int    $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
      */
-    public function actionRedirects(
-        string $sort = 'hitCount|desc',
+    public function actionPageDetail(
+        string $sort = 'pageLoad|desc',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
+        $pageUrl = '',
         $siteId = 0
     ): Response {
-        PermissionHelper::controllerPermissionCheck('webperf:redirects');
+        PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
-        $sortField = 'hitCount';
+        $sortField = 'pageLoad';
         $sortType = 'DESC';
+        $pageUrl = urldecode($pageUrl);
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -201,34 +202,85 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        if ($sortField === 'totalPageLoad') {
+            $sortField = 'pageLoad';
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
-            ->from(['{{%retour_static_redirects}}'])
+            ->select([
+                'url',
+                'title',
+                'pageLoad',
+                'domInteractive',
+                'firstContentfulPaint',
+                'firstPaint',
+                'firstByte',
+                'connect',
+                'dns',
+                'craftTotalMs',
+                'craftDbCnt',
+                'craftDbMs',
+                'craftTwigCnt',
+                'craftTwigMs',
+                'craftTotalMemory',
+            ])
+            ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
-            ->limit($per_page)
-            ->orderBy("{$sortField} {$sortType}");
+            ->where(['url' => $pageUrl])
+        ;
         if ((int)$siteId !== 0) {
             $query->where(['siteId' => $siteId]);
         }
         if ($filter !== '') {
-            $query->where(['like', 'redirectSrcUrl', $filter]);
-            $query->orWhere(['like', 'redirectDestUrl', $filter]);
+            $query
+                ->where(['like', 'url', $filter])
+                ->orWhere(['like', 'title', $filter])
+            ;
         }
-        $redirects = $query->all();
-        // Add in the `deleteLink` field
-        foreach ($redirects as &$redirect) {
-            $redirect['deleteLink'] = UrlHelper::cpUrl('retour/delete-redirect/'.$redirect['id']);
-            $redirect['editLink'] = UrlHelper::cpUrl('retour/edit-redirect/'.$redirect['id']);
-        }
-        // Format the data for the API
-        if ($redirects) {
-            $data['data'] = $redirects;
+        $query
+            ->orderBy("{$sortField} {$sortType}")
+            ->limit($per_page)
+        ;
+
+        $stats = $query->all();
+        if ($stats) {
+            // Compute the largest page load time
+            $maxTotalPageLoad = 0;
+            foreach ($stats as &$stat) {
+                if (empty($stat['pageLoad'])) {
+                    $pageLoad = $stat['craftTotalMs'];
+                } else {
+                    $pageLoad = $stat['pageLoad'];
+                }
+                if ($pageLoad > $maxTotalPageLoad) {
+                    $maxTotalPageLoad = $pageLoad;
+                }
+            }
+            // Massage the stats
+            $index = 1;
+            foreach ($stats as &$stat) {
+                $stat['id'] = $index++;
+                $stat['maxTotalPageLoad'] = $maxTotalPageLoad;
+                // If there is no frontend beacon timing, use the Craft timing
+                if (empty($stat['pageLoad'])) {
+                    $stat['totalPageLoad'] = $stat['craftTotalMs'];
+                } else {
+                    $stat['totalPageLoad'] = $stat['pageLoad'];
+                }
+                // Decode any emojis in the title
+                if (!empty($stat['title'])) {
+                    $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
+                }
+            }
+            // Format the data for the API
+            $data['data'] = $stats;
             $query = (new Query())
-                ->from(['{{%retour_static_redirects}}']);
+                ->from(['{{%webperf_data_samples}}'])
+                ;
             if ($filter !== '') {
-                $query->where(['like', 'redirectSrcUrl', $filter]);
-                $query->orWhere(['like', 'redirectDestUrl', $filter]);
+                $query->where(['like', 'url', $filter]);
+                $query->orWhere(['like', 'title', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [

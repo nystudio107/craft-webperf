@@ -484,6 +484,7 @@ class Webperf extends Plugin
             '/webperf/render/amp-iframe' => 'webperf/render/amp-iframe',
             // Tables
             '/webperf/tables/pages-index' => 'webperf/tables/pages-index',
+            '/webperf/tables/page-detail' => 'webperf/tables/page-detail',
             // Charts
             '/webperf/charts/dashboard-stats-average/<days:\d+>/<column:{handle}>'
             => 'webperf/charts/dashboard-stats-average',
@@ -510,6 +511,9 @@ class Webperf extends Plugin
 
             'webperf/pages' => 'webperf/sections/pages-index',
             'webperf/pages/<siteHandle:{handle}>' => 'webperf/sections/pages-index',
+
+            'webperf/page-detail' => 'webperf/sections/page-detail',
+            'webperf/page-detail/<siteHandle:{handle}>' => 'webperf/sections/page-detail',
 
             'webperf/settings' => 'webperf/settings/plugin-settings',
         ];
