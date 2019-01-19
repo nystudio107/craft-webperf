@@ -4,37 +4,14 @@
             Slowest pages
         </div>
         <div v-for="item in series" class="file-list-wrapper p-2">
-            <div class="clearafter pb-1">
-                <div class="simple-bar-chart-label text-base font-normal truncate-label"
-                     style="color: rgb(26, 13, 171); width: 90%;"
-                     :title="item.title"
-                >
-                    <span v-if="item.title">{{ item.title }}</span>
-                    <span v-else class="text-grey-light"><em>Craft backend route</em></span>
-                </div>
-                <div class="simple-bar-chart-value text-sm font-normal">
-                    <div class="field webperf-tooltip">
-                        <p class="warning display-block" v-if="item.cnt < 1000">&nbsp;</p>
-                        <span class="webperf-tooltiptext webperf-sample-tooltip">
-                            Only {{ item.cnt }} data sample<span v-if="item.cnt != 1">s</span>.
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="clearafter pb-1">
-                <cite class="simple-bar-chart-label text-sm font-normal truncate-label"
-                      style="color: rgb(0, 102, 33); width: 80%;"
-                      :title="item.url"
-                >
-                    {{ item.url }}
-                </cite>
-                <div class="simple-bar-chart-value text-sm font-bold">{{ statFormatter(item.data, item.maxValue) }}</div>
-            </div>
-            <div class="py-1">
-                <div class="file-list-chart-track rounded-full bg-grey-lighter">
-                    <div class="simple-bar-line h-2 rounded-full" :style="{ width: item.data + '%', backgroundColor: item.barColor }"></div>
-                </div>
-            </div>
+            <dashboard-file-list-cell :title="item.title"
+                                      :url="item.url"
+                                      :data="statFormatter(item.data, item.maxValue)"
+                                      :cnt="item.cnt"
+                                      :width="item.data"
+                                      :color="item.barColor"
+            >
+            </dashboard-file-list-cell>
         </div>
     </section>
 </template>
@@ -42,6 +19,7 @@
 <script>
     import Axios from 'axios';
     import TriBlendColor from '../js/tri-color-blend';
+    import DashboardFileListCell from '../vue/DashboardFileListCell.vue';
 
     const chartDataBaseUrl = '/webperf/charts/dashboard-slowest-pages/';
 
@@ -68,7 +46,9 @@
 
     // Our component exports
     export default {
+        name: 'dashboard-file-list',
         components: {
+            'dashboard-file-list-cell': DashboardFileListCell,
         },
         props: {
             days: {
@@ -108,8 +88,6 @@
                 }
                 await queryApi(chartsAPI, uri, (data) => {
                     // Clone the chartOptions object, and replace the needed values
-                    console.log(data);
-
                     data.forEach((element, index, array) => {
                         let val = element.avg / 1000;
                         let maxValue = this.maxValue;
