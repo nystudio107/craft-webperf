@@ -208,23 +208,6 @@ class TablesController extends Controller
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
-            ->select([
-                'url',
-                'title',
-                'pageLoad',
-                'domInteractive',
-                'firstContentfulPaint',
-                'firstPaint',
-                'firstByte',
-                'connect',
-                'dns',
-                'craftTotalMs',
-                'craftDbCnt',
-                'craftDbMs',
-                'craftTwigCnt',
-                'craftTwigMs',
-                'craftTotalMemory',
-            ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
@@ -234,8 +217,10 @@ class TablesController extends Controller
         }
         if ($filter !== '') {
             $query
-                ->where(['like', 'url', $filter])
-                ->orWhere(['like', 'title', $filter])
+                ->andWhere(['like', 'device', $filter])
+                ->orWhere(['like', 'os', $filter])
+                ->orWhere(['like', 'browser', $filter])
+                ->orWhere(['like', 'countryCode', $filter])
             ;
         }
         $query

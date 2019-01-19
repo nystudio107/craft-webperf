@@ -6,6 +6,7 @@ export default [
         title: 'Page',
         titleClass: 'center pageListingDisplay',
         dataClass: 'center',
+        width: '30%',
     },
     {
         name: '__slot:load-time-bar',
@@ -13,6 +14,52 @@ export default [
         title: 'Request Timeline',
         titleClass: 'center loadTimeBar',
         dataClass: 'center',
+        width: '20%',
+    },
+    {
+        name: 'craftDbCnt',
+        sortField: 'craftDbCnt',
+        title: 'DB Queries',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '10%',
+    },
+    {
+        name: 'craftTwigCnt',
+        sortField: 'craftTwigCnt',
+        title: 'Templates',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '10%',
+    },
+    {
+        name: 'craftOtherCnt',
+        sortField: 'craftOtherCnt',
+        title: 'Other',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '10%',
+    },
+    {
+        name: 'craftTotalMemory',
+        sortField: 'craftTotalMemory',
+        title: 'Memory',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'memoryFormatter',
+        width: '10%',
+    },
+    {
+        name: 'cnt',
+        sortField: 'cnt',
+        title: 'Samples',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '10%',
     },
     {
         name: 'maxTotalPageLoad',
@@ -41,45 +88,5 @@ export default [
     {
         name: 'dns',
         visible: false,
-    },
-    {
-        name: 'craftDbCnt',
-        sortField: 'craftDbCnt',
-        title: 'DB Queries',
-        titleClass: 'text-right',
-        dataClass: 'text-right',
-        callback: 'countFormatter'
-    },
-    {
-        name: 'craftTwigCnt',
-        sortField: 'craftTwigCnt',
-        title: 'Templates',
-        titleClass: 'text-right',
-        dataClass: 'text-right',
-        callback: 'countFormatter'
-    },
-    {
-        name: 'craftOtherCnt',
-        sortField: 'craftOtherCnt',
-        title: 'Other',
-        titleClass: 'text-right',
-        dataClass: 'text-right',
-        callback: 'countFormatter'
-    },
-    {
-        name: 'craftTotalMemory',
-        sortField: 'craftTotalMemory',
-        title: 'Memory',
-        titleClass: 'text-right',
-        dataClass: 'text-right',
-        callback: 'memoryFormatter'
-    },
-    {
-        name: 'cnt',
-        sortField: 'cnt',
-        title: 'Samples',
-        titleClass: 'text-right',
-        dataClass: 'text-right',
-        callback: 'countFormatter'
     },
 ];

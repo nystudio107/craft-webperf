@@ -19,13 +19,6 @@
                   @vuetable:row-clicked="onRowClicked"
                   @vuetable:loaded="onLoaded"
         >
-            <template slot="load-time-bar" slot-scope="props">
-                <div class="inline-block align-middle" style="width: 80%">
-                    <request-bar-chart :rowData="props.rowData">
-                    </request-bar-chart>
-                </div>
-                {{ statFormatter(props.rowData.totalPageLoad) }}
-            </template>
             <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
                 <page-result-cell :title="props.rowData.title"
                                   :url="props.rowData.url"
@@ -33,6 +26,13 @@
                                   :color="triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100))"
                 >
                 </page-result-cell>
+            </template>
+            <template slot="load-time-bar" slot-scope="props">
+                <div class="inline-block align-middle" style="width: 80%">
+                    <request-bar-chart :rowData="props.rowData">
+                    </request-bar-chart>
+                </div>
+                {{ statFormatter(props.rowData.totalPageLoad) }}
             </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">

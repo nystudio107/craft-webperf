@@ -25,35 +25,44 @@ table.vuetable {
  */
 
 table.webperf-pages-index th.pageListingDisplay {
-  width: 30%!important;
 }
 
 th.loadTimeBar {
-  width: 20%!important;
 }
 
 th.vuetable-th-craftDbCnt {
-  width: 10%!important;
   text-align: right!important;
 }
 
 th.vuetable-th-craftTwigCnt {
-  width: 10%!important;
   text-align: right!important;
 }
 
 th.vuetable-th-craftOtherCnt {
-  width: 10%!important;
   text-align: right!important;
 }
 
 th.vuetable-th-craftTotalMemory {
-  width: 10%!important;
   text-align: right!important;
 }
 
 th.vuetable-th-cnt {
-  width: 10%!important;
+  text-align: right!important;
+}
+
+th.vuetable-th-device {
+  text-align: right!important;
+}
+
+th.vuetable-th-os {
+  text-align: right!important;
+}
+
+th.vuetable-th-browser {
+  text-align: right!important;
+}
+
+th.vuetable-th-countryCode {
   text-align: right!important;
 }
 

@@ -26,14 +26,6 @@
                 </div>
                 {{ statFormatter(props.rowData.totalPageLoad) }}
             </template>
-            <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
-                <page-result-cell :title="props.rowData.title"
-                                  :url="props.rowData.url"
-                                  :width="((props.rowData.totalPageLoad / maxValue) * 100)"
-                                  :color="triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100))"
-                >
-                </page-result-cell>
-            </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
@@ -47,7 +39,7 @@
 
 <script>
     import Vue from 'vue';
-    import FieldDefs from './PagesIndexFieldDefs.js';
+    import FieldDefs from './PageDetailFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
     import VueTablePagination from './VuetablePagination.vue';
     import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
@@ -153,8 +145,11 @@
             countFormatter(val) {
                 return Number(val).toFixed(0);
             },
-            memoryFormatter(value) {
-                return Number(value / (1024 * 1024)).toFixed(2) + ' Mb';
+            memoryFormatter(val) {
+                return Number(val / (1024 * 1024)).toFixed(2) + ' Mb';
+            },
+            dateFormatter(val) {
+                return val;
             },
         }
     }
