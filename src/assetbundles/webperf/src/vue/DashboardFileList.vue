@@ -9,7 +9,8 @@
                      style="color: rgb(26, 13, 171); width: 90%;"
                      :title="item.title"
                 >
-                    {{ item.title }}
+                    <span v-if="item.title">{{ item.title }}</span>
+                    <span v-else class="text-grey-light"><em>Craft backend route</em></span>
                 </div>
                 <div class="simple-bar-chart-value text-sm font-normal">
                     <div class="field webperf-tooltip">

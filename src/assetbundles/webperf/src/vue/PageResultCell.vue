@@ -6,7 +6,7 @@
                  :title="title"
             >
                 <span v-if="title">{{ title }}</span>
-                <span v-else class="text-grey-light"><em>untitled</em></span>
+                <span v-else class="text-grey-light"><em>Craft backend route</em></span>
 
             </div>
         </div>
