@@ -76,12 +76,12 @@ class SectionsController extends Controller
         // Enabled sites
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'dashboard';
-
         // Basic variables
         $variables['fullPageForm'] = false;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
+        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -89,7 +89,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/dashboard'),
+                'url' => UrlHelper::cpUrl('webperf/dashboard'.$siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -132,13 +132,14 @@ class SectionsController extends Controller
         );
         // Enabled sites
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'pages-index';
+        $variables['controllerHandle'] = 'pages';
 
         // Basic variables
         $variables['fullPageForm'] = false;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
+        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -146,7 +147,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/pages'),
+                'url' => UrlHelper::cpUrl('webperf/pages'.$siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -189,13 +190,14 @@ class SectionsController extends Controller
         );
         // Enabled sites
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'pages-detail';
+        $variables['controllerHandle'] = 'page-detail';
 
         // Basic variables
         $variables['fullPageForm'] = false;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
+        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -203,7 +205,13 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/pages'),
+                'url' => UrlHelper::cpUrl('webperf/pages'.$siteHandleUri),
+            ],
+            [
+                'label' => Craft::t('webperf', 'Page Detail'),
+                'url' => UrlHelper::cpUrl('webperf/page-detail'.$siteHandleUri, [
+                    'pageUrl' => $pageUrl
+                ]),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";

@@ -1,7 +1,7 @@
 {% import "_includes/forms" as forms %}
 
 {% set baseUrl = "webperf/#{controllerHandle}/" %}
-{% set params = [] %}
+{% set params = params ?? [] %}
 
 {% if showSites %}
     <div id="sites-btn" class="btn menubtn" data-icon="world">{{ sitesMenuLabel }}</div>

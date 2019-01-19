@@ -17,7 +17,7 @@
 {% import "_includes/forms" as forms %}
 
 {% block contextMenu %}
-    {% include "webperf/_includes/sites-menu.twig" %}
+    {% include "webperf/_includes/sites-menu.twig" with {'params': {}} %}
 {% endblock %}
 
 {% block actionButton %}
