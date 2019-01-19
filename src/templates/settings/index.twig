@@ -45,6 +45,16 @@
         }) }}
 
         {{ forms.lightswitchField({
+            label: "Static Cached Site"|t("webperf"),
+            instructions: "If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token."|t("webperf"),
+            id: "staticCachedSite",
+            name: "staticCachedSite",
+            on: settings.staticCachedSite,
+            warning: configWarning("staticCachedSite", "webperf"),
+            errors: settings.getErrors("staticCachedSite"),
+        }) }}
+
+        {{ forms.lightswitchField({
             label: "Include Craft Profiling"|t("webperf"),
             instructions: "Whether or not the Craft profiling data should be recorded for site requests."|t("webperf"),
             id: "includeCraftProfiling",

@@ -67,14 +67,16 @@ class DataSamples extends Component
             return;
         }
         $isNew = true;
-        // See if a redirect exists with this source URL already
-        $testSample = (new Query())
-            ->from(['{{%webperf_data_samples}}'])
-            ->where(['requestId' => $dataSample->requestId])
-            ->one();
-        // If it exists, update it rather than having duplicates
-        if (!empty($testSample)) {
-            $isNew = false;
+        if (!empty($dataSample->requestId)) {
+            // See if a redirect exists with this source URL already
+            $testSample = (new Query())
+                ->from(['{{%webperf_data_samples}}'])
+                ->where(['requestId' => $dataSample->requestId])
+                ->one();
+            // If it exists, update it rather than having duplicates
+            if (!empty($testSample)) {
+                $isNew = false;
+            }
         }
         // Get the validated model attributes and save them to the db
         $dataSampleConfig = $dataSample->getAttributes($dataSample->fields());

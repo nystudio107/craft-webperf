@@ -63,13 +63,14 @@ class Beacons extends Component
             true
         );
         $boomerangTitle = $title ?? $this->getDocumentTitle();
+        $boomerangRequestId = Webperf::$settings->staticCachedSite ? null : Webperf::$requestUuid;
         $script = PluginTemplate::renderPluginTemplate(
             '_frontend/scripts/load-boomerang-iframe.twig',
             [
                 'headless' => $headless,
                 'boomerangScriptUrl' => $boomerangUrl,
                 'boomerangTitle' => $boomerangTitle,
-                'boomerangRequestId' => Webperf::$requestUuid,
+                'boomerangRequestId' => $boomerangRequestId,
             ],
             'jsMin'
         );
@@ -119,12 +120,13 @@ class Beacons extends Component
             true
         );
         $boomerangTitle = $this->getDocumentTitle();
+        $boomerangRequestId = Webperf::$settings->staticCachedSite ? null : Webperf::$requestUuid;
         $html = PluginTemplate::renderPluginTemplate(
             '_frontend/scripts/boomerang-amp-iframe-html.twig',
             [
                 'boomerangScriptUrl' => $boomerangUrl,
                 'boomerangTitle' => $boomerangTitle,
-                'boomerangRequestId' => Webperf::$requestUuid,
+                'boomerangRequestId' => $boomerangRequestId,
             ],
             'minify'
         );

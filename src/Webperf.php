@@ -210,7 +210,7 @@ class Webperf extends Plugin
     protected function setRequestUrl(bool $force = false)
     {
         self::$requestUrl = DataSample::PLACEHOLDER_URL;
-        if (!self::$settings->includeBeacon || $force) {
+        if (!self::$settings->includeBeacon || $force || self::$settings->staticCachedSite) {
             $request = Craft::$app->getRequest();
             self::$requestUrl = UrlHelper::stripQueryString(
                 urldecode($request->getAbsoluteUrl())

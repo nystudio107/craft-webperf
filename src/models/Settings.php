@@ -39,6 +39,11 @@ class Settings extends Model
     public $includeCraftProfiling = true;
 
     /**
+     * @var bool If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token
+     */
+    public $staticCachedSite = false;
+
+    /**
      * @var int The number of data samples to store
      */
     public $dataSamplesStoredLimit = 10000;
@@ -50,6 +55,7 @@ class Settings extends Model
 
     /**
      * @var bool Whether to filter bot user agents from generating profile hits or not
+     *           NOT visible in the GUI currently
      */
     public $filterBotUserAgents = true;
 
@@ -81,6 +87,7 @@ class Settings extends Model
             ['pluginName', 'default', 'value' => 'Webperf'],
             ['includeBeacon', 'boolean'],
             ['includeCraftProfiling', 'boolean'],
+            ['staticCachedSite', 'boolean'],
             ['dataSamplesStoredLimit', 'integer'],
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],
