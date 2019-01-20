@@ -11,8 +11,8 @@
 #}
 
 {# -- Frontend -- #}
-<div class="pane first mx-2">
-    <h1 class="text-center text-base text-4xl font-bold">Frontend Profile</h1>
+<div class="pane mx-2">
+    <h1 class="text-center text-base text-3xl font-bold">Frontend Profile</h1>
     <div class="w-full flex-item-row items-start text-center">
         <div class="webperf-tooltip w-full">
             <span class="webperf-tooltiptext">
@@ -96,5 +96,15 @@
                 </dashboard-simple-bar-chart>
             </div>
         </div>
+    </div>
+    <div class="buttons pt-4 pb-2">
+        {% set testUrl = url('https://developers.google.com/speed/pagespeed/insights', {
+            'url': pageUrl,
+        }) %}
+        {% set testName = 'Test on Google PageSpeed Insights'|t %}
+        <a href="{{ testUrl }}"
+           class="btn icon m-auto">
+            {{ testName }}
+        </a>
     </div>
 </div>

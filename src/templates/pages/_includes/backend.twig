@@ -12,7 +12,7 @@
 
 {# -- Backend -- #}
 <div class="pane mx-2">
-    <h1 class="text-center text-base text-4xl font-bold">Backend Profile</h1>
+    <h1 class="text-center text-base text-3xl font-bold">Backend Profile</h1>
     <div class="w-full flex-item-row items-start">
         <div class="webperf-tooltip w-full">
             <span class="webperf-tooltiptext">
@@ -96,5 +96,21 @@
                 </dashboard-simple-bar-chart>
             </div>
         </div>
+    </div>
+    <div class="buttons pt-4 pb-2">
+        {% if settings.webpageTestApiKey | length %}
+            {% set testUrl = url('https://www.webpagetest.org/runtest.php', {
+                'url': pageUrl,
+                'k': settings.webpageTestApiKey
+            }) %}
+            {% set testName = 'Test on WebpageTest.org'|t %}
+        {% else %}
+            {% set testUrl = url('https://www.webpagetest.org/getkey.php') %}
+            {% set testName = 'Get WebpageTest.org API Key'|t %}
+        {% endif %}
+        <a href="{{ testUrl }}"
+           class="btn icon m-auto">
+            {{ testName }}
+        </a>
     </div>
 </div>
