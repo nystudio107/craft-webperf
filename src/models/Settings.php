@@ -59,6 +59,11 @@ class Settings extends Model
     public $rateLimitMs = 500;
 
     /**
+     * @var string API Key for WebPageTest.org
+     */
+    public $webpageTestApiKey = '';
+
+    /**
      * @var bool Whether to filter bot user agents from generating profile hits or not
      *           NOT visible in the GUI currently
      */
@@ -98,6 +103,7 @@ class Settings extends Model
             ['automaticallyTrimDataSamples', 'boolean'],
             ['rateLimitMs', 'integer'],
             ['rateLimitMs', 'default', 'value' => 500],
+            ['webpageTestApiKey', 'string'],
             ['filterBotUserAgents', 'boolean'],
             ['dashboardFastColor', 'default', 'value' => '#00C800'],
             ['dashboardAverageColor', 'default', 'value' => '#FFFF00'],
