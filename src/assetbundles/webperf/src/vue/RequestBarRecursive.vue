@@ -2,7 +2,7 @@
     <div class="h-5"
          :class="color"
          :style="{width: ((value / parentValue) * 100) + '%'}"
-         :title="label"
+         :title="label + ' ' + statFormatter(value)"
     >
         <request-bar-recursive
                 v-for="node in nodes"
@@ -18,6 +18,7 @@
 </template>
 <script>
     export default {
+        name: 'request-bar-recursive',
         props: {
             column: String,
             color: String,
@@ -26,6 +27,10 @@
             parentValue: Number,
             nodes: Array,
         },
-        name: 'request-bar-recursive'
+        methods: {
+            statFormatter(val) {
+                return Number(val / 1000).toFixed(2) + "s";
+            },
+        },
     }
 </script>
