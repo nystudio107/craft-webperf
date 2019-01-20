@@ -262,10 +262,15 @@ class TablesController extends Controller
             $data['data'] = $stats;
             $query = (new Query())
                 ->from(['{{%webperf_data_samples}}'])
-                ;
+                ->where(['url' => $pageUrl])
+            ;
             if ($filter !== '') {
-                $query->where(['like', 'url', $filter]);
-                $query->orWhere(['like', 'title', $filter]);
+                $query
+                    ->andWhere(['like', 'device', $filter])
+                    ->orWhere(['like', 'os', $filter])
+                    ->orWhere(['like', 'browser', $filter])
+                    ->orWhere(['like', 'countryCode', $filter])
+                ;
             }
             $count = $query->count();
             $data['links']['pagination'] = [
