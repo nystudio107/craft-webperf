@@ -533,6 +533,12 @@ class Webperf extends Plugin
             'webperf:pages' => [
                 'label' => Craft::t('webperf', 'Pages'),
             ],
+            'webperf:page-detail' => [
+                'label' => Craft::t('webperf', 'Page Detail'),
+            ],
+            'webperf:delete-data-samples' => [
+                'label' => Craft::t('webperf', 'Delete Data Samples'),
+            ],
             'webperf:settings' => [
                 'label' => Craft::t('webperf', 'Settings'),
             ],
