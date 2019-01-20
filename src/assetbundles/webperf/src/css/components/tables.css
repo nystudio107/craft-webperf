@@ -51,19 +51,19 @@ th.vuetable-th-slot-data-samples {
 }
 
 th.vuetable-th-device {
-  text-align: right!important;
+  text-align: left!important;
 }
 
 th.vuetable-th-os {
-  text-align: right!important;
+  text-align: left!important;
 }
 
 th.vuetable-th-browser {
-  text-align: right!important;
+  text-align: left!important;
 }
 
 th.vuetable-th-countryCode {
-  text-align: right!important;
+  text-align: left!important;
 }
 
 table.webperf-pages-index tbody.vuetable-body tr:hover {
