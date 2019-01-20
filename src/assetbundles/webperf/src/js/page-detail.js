@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueEvents from 'vue-events';
 import PageDetailAreaChart from '../vue/PageDetailAreaChart.vue';
 import PageDetailTable from '../vue/PageDetailTable.vue';
+import DashboardRadialBarChart from '../vue/DashboardRadialBarChart.vue';
+import DashboardSimpleBarChart from '../vue/DashboardSimpleBarChart.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
@@ -10,6 +12,8 @@ const vm = new Vue({
     components: {
         'page-detail-area-chart': PageDetailAreaChart,
         'page-detail-table': PageDetailTable,
+        'dashboard-radial-bar-chart': DashboardRadialBarChart,
+        'dashboard-simple-bar-chart': DashboardSimpleBarChart,
     },
     data: {
     },

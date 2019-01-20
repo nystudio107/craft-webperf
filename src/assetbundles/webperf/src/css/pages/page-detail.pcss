@@ -1,0 +1,26 @@
+/**
+ * pages/page-detail.pcss
+ *
+ * Styles for the Page Detail page.
+ *
+ */
+
+.flex-item-row {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+}
+
+.three-up-page-detail-grid-item {
+    flex-basis: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@screen md {
+    .three-up-page-detail-grid-item {
+        flex-basis: 33%;
+        width: 33%;
+        box-sizing: border-box;
+    }
+}

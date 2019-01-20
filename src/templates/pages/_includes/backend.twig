@@ -1,0 +1,100 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+* Webperf plugin for Craft CMS 3.x
+*
+* Monitor the performance of your webpages through real-world user timing data
+*
+* @link      https://nystudio107.com
+* @copyright Copyright (c) 2018 nystudio107
+*/
+#}
+
+{# -- Backend -- #}
+<div class="pane mx-2">
+    <h1 class="text-center text-base text-4xl font-bold">Backend Profile</h1>
+    <div class="w-full flex-item-row items-start">
+        <div class="webperf-tooltip w-full">
+            <span class="webperf-tooltiptext">
+                How long it takes before the first byte of data is received from the server.
+                <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
+                   target="_blank"
+                   class="text-grey-lighter hover:text-grey-lightest"
+                >Learn More &rarr;</a>
+            </span>
+            <dashboard-radial-bar-chart
+                    title="First Byte"
+                    :days="30"
+                    column="firstByte"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
+                    :max-value="2"
+                    :site-id="{{ currentSiteId }}"
+            >
+            </dashboard-radial-bar-chart>
+        </div>
+        <div class="w-full">
+            <div class="webperf-tooltip">
+                <span class="webperf-tooltiptext">
+                    How long it takes to do a DNS lookup of the website's IP address.
+                    <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
+                       target="_blank"
+                       class="text-grey-lighter hover:text-grey-lightest"
+                    >Learn More &rarr;</a>
+                </span>
+                <dashboard-simple-bar-chart
+                    title="DNS Lookup"
+                    :days="30"
+                    column="dns"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
+                    :max-value=".5"
+                    :site-id="{{ currentSiteId }}"
+                >
+                </dashboard-simple-bar-chart>
+            </div>
+            <div class="webperf-tooltip">
+                <span class="webperf-tooltiptext">
+                    How long it takes to negotiate a connection to the server.
+                    <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
+                       target="_blank"
+                       class="text-grey-lighter hover:text-grey-lightest"
+                    >Learn More &rarr;</a>
+                </span>
+                <dashboard-simple-bar-chart
+                        title="Connect"
+                        :days="30"
+                        column="connect"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
+                        :max-value=".5"
+                        :site-id="{{ currentSiteId }}"
+                >
+                </dashboard-simple-bar-chart>
+            </div>
+            <div class="webperf-tooltip invisible">
+                <span class="webperf-tooltiptext">
+                    How long it takes to negotiate a connection to the server.
+                    <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
+                       target="_blank"
+                       class="text-grey-lighter hover:text-grey-lightest"
+                    >Learn More &rarr;</a>
+                </span>
+                <dashboard-simple-bar-chart
+                        title="Connect"
+                        :days="30"
+                        column="connect"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
+                        :max-value=".5"
+                        :site-id="{{ currentSiteId }}"
+                >
+                </dashboard-simple-bar-chart>
+            </div>
+        </div>
+    </div>
+</div>

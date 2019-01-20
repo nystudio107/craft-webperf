@@ -217,6 +217,7 @@ class SectionsController extends Controller
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'pages';
         $variables['pageUrl'] = $pageUrl;
+        $variables['pageTitle'] = Webperf::$plugin->dataSamples->pageTitle($pageUrl, $siteId);
         $variables['settings'] = Webperf::$settings;
 
         // Render the template

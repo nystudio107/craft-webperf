@@ -35,38 +35,6 @@
   transition: width 1s;
 }
 
-.flex-item-row {
-  display: flex;
-  flex-flow: row wrap;
-  box-sizing: border-box;
-}
-
-.three-up-grid-item {
-  flex-basis: 100%;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.three-up-sm-grid-item {
-  flex-basis: 100%;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-@screen md {
-  .three-up-grid-item {
-    flex-basis: 38%;
-    width: 38%;
-    box-sizing: border-box;
-  }
-
-  .three-up-sm-grid-item {
-    flex-basis: 22%;
-    width: 22%;
-    box-sizing: border-box;
-  }
-}
-
 .file-list-wrapper {
   width: 100%;
   box-sizing: border-box;

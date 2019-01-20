@@ -32,25 +32,57 @@
 {% endblock %}
 
 {% block content %}
+    <style>
+        #content {
+            background: none !important;
+        }
+        .apexcharts-canvas {
+            margin: 0 auto!important;
+        }
+    </style>
     <div id="cp-nav-content">
-        <h1 class="text-center text-base text-4xl font-bold">{{ pageUrl }}</h1>
-        <div class="flex overflow-hidden w-full flex-no-wrap">
-            <div class="flex-grow">
-                <div class="shadow">
-                    <page-detail-area-chart
-                            title="404s by Month"
-                            sub-title="Discrete 404 URI hits in the last month"
-                            range="month"
-                            :site-id="{{ currentSiteId }}"
-                    >
-                    </page-detail-area-chart>
-                </div>
+        <div class="pb-12 pt-4 mx-2">
+            {% if pageTitle | length %}
+            <h1 class="text-left text-base text-3xl font-bold truncate-label mb-0 leading-tight"
+                style="color: rgb(26, 13, 171); width: 90%;"
+            >
+                {{ pageTitle }}
+            </h1>
+            {% else %}
+                <h1 class="text-left text-base text-3xl font-bold truncate-label mb-0 leading-tight text-grey-light"
+                    style="width: 90%;"
+                >
+                    <em>{{ 'Craft backend route'|t }}</em>
+                </h1>
+            {% endif %}
+            <h2 class="text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight"
+                style="color: rgb(0, 102, 33); width: 90%; "
+            >
+                {{ pageUrl }}
+            </h2>
+        </div>
+        <div class="w-full flex-item-row items-start">
+            <div class="flex-row three-up-page-detail-grid-item self-top">
+                {# -- Frontend -- #}
+                {% include "webperf/pages/_includes/frontend.twig" %}
+            </div>
+            <div class="flex-row three-up-page-detail-grid-item self-top">
+                {# -- Backend -- #}
+                {% include "webperf/pages/_includes/backend.twig" %}
+            </div>
+            <div class="flex-row three-up-page-detail-grid-item self-top">
+                {# -- Craft -- #}
+                {% include "webperf/pages/_includes/craft.twig" %}
             </div>
         </div>
-        <page-detail-table :site-id="{{ currentSiteId }}"
-                            page-url="{{ pageUrl }}"
-        >
-        </page-detail-table>
+
+        {% include "webperf/_includes/speed-color-key.twig" %}
+        <div class="pane mx-2">
+            <page-detail-table :site-id="{{ currentSiteId }}"
+                                page-url="{{ pageUrl }}"
+            >
+            </page-detail-table>
+        </div>
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}

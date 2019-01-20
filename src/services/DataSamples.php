@@ -28,6 +28,8 @@ class DataSamples extends Component
     // =========================================================================
 
     /**
+     * Get the total number of data samples optionally limited by siteId
+     *
      * @param int    $siteId
      * @param string $column
      *
@@ -35,7 +37,7 @@ class DataSamples extends Component
      */
     public function totalSamples(int $siteId, string $column)
     {
-        // See if a redirect exists with this source URL already
+        // Get the total number of data samples
         $query = (new Query())
             ->from(['{{%webperf_data_samples}}'])
             ->where(['not', [$column => null]])
@@ -44,6 +46,33 @@ class DataSamples extends Component
             $query->andWhere(['siteId' => $siteId]);
         }
         return $query->count();
+    }
+
+    /**
+     * Get the page title from data samples by URL and optionally siteId
+     *
+     * @param string   $url
+     * @param int $siteId
+     *
+     * @return string
+     */
+    public function pageTitle(string $url, int $siteId = 0): string
+    {
+        // Get the page title from a URL
+        $query = (new Query())
+            ->select(['title'])
+            ->from(['{{%webperf_data_samples}}'])
+            ->where([
+                'and', ['url' => $url],
+                ['not', ['title' => '']],
+            ])
+        ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+        $result = $query->one();
+
+        return $result['title'] ?? '';
     }
 
     /**
@@ -68,7 +97,7 @@ class DataSamples extends Component
         }
         $isNew = true;
         if (!empty($dataSample->requestId)) {
-            // See if a redirect exists with this source URL already
+            // See if a data sample exists with the same requestId already
             $testSample = (new Query())
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['requestId' => $dataSample->requestId])
