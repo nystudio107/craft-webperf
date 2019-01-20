@@ -118,6 +118,16 @@ class TablesController extends Controller
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
+                // Determine the stat type
+                if (!empty($stat['pageLoad']) && !empty($stat['craftTotalMs'])) {
+                    $stat['type'] = 'both';
+                }
+                if (empty($stat['pageLoad'])) {
+                    $stat['type'] = 'craft';
+                }
+                if (empty($stat['craftTotalMs'])) {
+                    $stat['type'] = 'frontend';
+                }
                 if (empty($stat['pageLoad'])) {
                     $pageLoad = $stat['craftTotalMs'];
                 } else {
@@ -233,6 +243,16 @@ class TablesController extends Controller
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
+                // Determine the stat type
+                if (!empty($stat['pageLoad']) && !empty($stat['craftTotalMs'])) {
+                    $stat['type'] = 'both';
+                }
+                if (empty($stat['pageLoad'])) {
+                    $stat['type'] = 'craft';
+                }
+                if (empty($stat['craftTotalMs'])) {
+                    $stat['type'] = 'frontend';
+                }
                 if (empty($stat['pageLoad'])) {
                     $pageLoad = $stat['craftTotalMs'];
                 } else {

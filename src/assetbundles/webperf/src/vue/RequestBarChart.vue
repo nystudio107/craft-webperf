@@ -1,12 +1,37 @@
 <template>
-    <request-bar-recursive :column="root.column"
-                           :color="root.color"
-                           :label="root.label"
-                           :value="root.value"
-                           :parentValue="root.parentValue"
-                           :nodes="root.nodes"
-    >
-    </request-bar-recursive>
+    <div class="flex flex-no-wrap">
+        <div class="flex-shrink" v-if="rowData.type === 'both'" title="Combined Frontend & Craft Beacon">
+            <div class="w-2 h-2 bg-blue-dark rounded-full mb-1">
+            </div>
+            <div class="w-2 h-2 bg-orange-dark rounded-full">
+            </div>
+        </div>
+        <div class="flex-shrink" v-if="rowData.type === 'frontend'" title="Frontend Beacon only">
+            <div class="w-2 h-2 bg-blue-dark rounded-full mb-1">
+            </div>
+            <div class="w-2 h-2 bg-transparent rounded-full">
+            </div>
+        </div>
+        <div class="flex-shrink" v-if="rowData.type === 'craft'" title="Craft Beacon only">
+            <div class="w-2 h-2 bg-transparent rounded-full mb-1">
+            </div>
+            <div class="w-2 h-2 bg-orange-dark rounded-full">
+            </div>
+        </div>
+        <div class="flex-grow">
+        <request-bar-recursive :column="root.column"
+                               :color="root.color"
+                               :label="root.label"
+                               :value="root.value"
+                               :parentValue="root.parentValue"
+                               :nodes="root.nodes"
+        >
+        </request-bar-recursive>
+        </div>
+        <div class="flex-shrink">
+            {{ statFormatter(root.parentValue) }}
+        </div>
+    </div>
 </template>
 <script>
     import RequestBarRecursive from './RequestBarRecursive.vue';
@@ -86,6 +111,9 @@
         methods: {
             onTableRefresh: function (eventData) {
                 this.calculateNodes();
+            },
+            statFormatter(val) {
+                return Number(val / 1000).toFixed(2) + "s";
             },
             calculateNodes: function() {
                 this.root = undefined;
