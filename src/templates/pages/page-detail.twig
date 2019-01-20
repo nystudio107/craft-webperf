@@ -10,7 +10,7 @@
  */
 #}
 
-{% requirePermission "webperf:pages" %}
+{% requirePermission "webperf:page-detail" %}
 
 {% extends "webperf/_layouts/webperf-cp.twig" %}
 
@@ -23,9 +23,11 @@
 {% block actionButton %}
     <div class="buttons">
         <div class="webperf-button-container">
-            <a href="{{ actionUrl('webperf/file/export-data-samples') }}" class="btn icon">{{ "Export Data Samples"|t }}</a>
+            <a href="{{ actionUrl('webperf/file/export-data-samples', {'siteId': currentSiteId}) }}" class="btn icon">{{ "Export Data Samples"|t }}</a>
         </div>
-        <a href="{{ actionUrl('retour/metrics/export-data-samples') }}" class="btn delete icon">{{ "Clear Data Samples"|t }}</a>
+        {% if currentUser.can("webperf:delete-data-samples") %}
+            <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}" class="btn delete icon">{{ "Clear Data Samples"|t }}</a>
+        {% endif %}
     </div>
 {% endblock %}
 
