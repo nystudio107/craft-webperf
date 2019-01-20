@@ -20,11 +20,8 @@
                   @vuetable:loaded="onLoaded"
         >
             <template slot="load-time-bar" slot-scope="props">
-                <div class="inline-block align-middle" style="width: 80%">
-                    <request-bar-chart :rowData="props.rowData">
-                    </request-bar-chart>
-                </div>
-                {{ statFormatter(props.rowData.totalPageLoad) }}
+                <request-bar-chart :rowData="props.rowData">
+                </request-bar-chart>
             </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">
