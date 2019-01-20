@@ -15,8 +15,9 @@ namespace {
 
 namespace nystudio107\webperf\controllers {
 
-    use nystudio107\webperf\helpers\MultiSite;
     use nystudio107\webperf\Webperf;
+    use nystudio107\webperf\helpers\MultiSite;
+    use nystudio107\webperf\helpers\Permission as PermissionHelper;
     use nystudio107\webperf\models\DataSample;
 
     use Jaybizzle\CrawlerDetect\CrawlerDetect;
