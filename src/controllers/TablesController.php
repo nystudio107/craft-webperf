@@ -12,6 +12,7 @@ namespace nystudio107\webperf\controllers;
 
 use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
+use Craft;
 use craft\db\Query;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
@@ -152,9 +153,22 @@ class TablesController extends Controller
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
-                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/metrics/delete-samples-by-url', [
+                // Set up the appropriate helper links
+                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/data-samples/delete-samples-by-url', [
+                    'pageUrl' => $stat['url'],
+                    'siteId' => $siteId
+                ]);
+                $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/page-detail', [
                     'pageUrl' => $stat['url']
                 ]);
+                // Override based on permissions
+                $user = Craft::$app->getUser()->getIdentity();
+                if (!$user->can('webperf:delete-data-samples')) {
+                    $stat['deleteLink'] = '';
+                }
+                if (!$user->can('webperf:page-detail')) {
+                    $stat['detailPageUrl'] = '';
+                }
             }
             // Format the data for the API
             $data['data'] = $stats;
@@ -266,9 +280,7 @@ class TablesController extends Controller
                 }
             }
             // Massage the stats
-            $index = 1;
             foreach ($stats as &$stat) {
-                $stat['id'] = $index++;
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // If there is no frontend beacon timing, use the Craft timing
                 if (empty($stat['pageLoad'])) {
@@ -280,9 +292,14 @@ class TablesController extends Controller
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
-                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/metrics/delete-sample-by-id', [
+                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/data-samples/delete-sample-by-id', [
                     'id' => $stat['id']
                 ]);
+                // Override based on permissions
+                $user = Craft::$app->getUser()->getIdentity();
+                if (!$user->can('webperf:delete-data-samples')) {
+                    $stat['deleteLink'] = '';
+                }
             }
             // Format the data for the API
             $data['data'] = $stats;

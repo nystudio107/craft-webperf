@@ -116,6 +116,89 @@ class DataSamples extends Component
     }
 
     /**
+     * Delete a data sample by id
+     *
+     * @param int $id
+     *
+     * @return int The result
+     */
+    public function deleteSampleById(int $id): int
+    {
+        $db = Craft::$app->getDb();
+        // Delete a row from the db table
+        try {
+            $result = $db->createCommand()->delete(
+                '{{%webperf_data_samples}}',
+                [
+                    'id' => $id,
+                ]
+            )->execute();
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            $result = 0;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Delete data samples by URL and optionally siteId
+     *
+     * @param string   $url
+     * @param int|null $siteId
+     *
+     * @return int
+     */
+    public function deleteDataSamplesByUrl(string $url, int $siteId = null): int
+    {
+        $db = Craft::$app->getDb();
+        // Delete a row from the db table
+        try {
+            $conditions = ['url' => $url];
+            if ($siteId !== null) {
+                $conditions['siteId'] = $siteId;
+            }
+            $result = $db->createCommand()->delete(
+                '{{%webperf_data_samples}}',
+                $conditions
+            )->execute();
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            $result = 0;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Delete data all samples optionally siteId
+     *
+     * @param int|null $siteId
+     *
+     * @return int
+     */
+    public function deleteAllDataSamples(int $siteId = null): int
+    {
+        $db = Craft::$app->getDb();
+        // Delete a row from the db table
+        try {
+            $conditions = [];
+            if ($siteId !== null) {
+                $conditions['siteId'] = $siteId;
+            }
+            $result = $db->createCommand()->delete(
+                '{{%webperf_data_samples}}',
+                $conditions
+            )->execute();
+        } catch (\Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            $result = 0;
+        }
+
+        return $result;
+    }
+
+    /**
      * Trim samples that have the placeholder in the URL, aka they never
      * received the Boomerang beacon
      *

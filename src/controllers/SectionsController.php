@@ -169,14 +169,14 @@ class SectionsController extends Controller
     public function actionPageDetail(string $pageUrl, string $siteHandle = null): Response
     {
         $variables = [];
-        PermissionHelper::controllerPermissionCheck('webperf:pages');
+        PermissionHelper::controllerPermissionCheck('webperf:page-detail');
         // Trim the statistics
         Webperf::$plugin->dataSamples->trimOrphanedSamples(1024);
         Webperf::$plugin->dataSamples->trimDataSamples();
         // Get the site to edit
         $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
         $pluginName = Webperf::$settings->pluginName;
-        $templateTitle = Craft::t('webperf', 'Pages');
+        $templateTitle = Craft::t('webperf', 'Page Detail');
         $view = Craft::$app->getView();
         // Asset bundle
         try {
@@ -204,11 +204,11 @@ class SectionsController extends Controller
                 'url' => UrlHelper::cpUrl('webperf'),
             ],
             [
-                'label' => $templateTitle,
+                'label' => Craft::t('webperf', 'Pages'),
                 'url' => UrlHelper::cpUrl('webperf/pages'.$siteHandleUri),
             ],
             [
-                'label' => Craft::t('webperf', 'Page Detail'),
+                'label' => $templateTitle,
                 'url' => UrlHelper::cpUrl('webperf/page-detail'.$siteHandleUri, [
                     'pageUrl' => $pageUrl
                 ]),

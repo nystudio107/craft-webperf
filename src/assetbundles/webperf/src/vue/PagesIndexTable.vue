@@ -145,9 +145,9 @@
                 this.$refs.vuetable.changePage(page);
             },
             onRowClicked(dataItem, event) {
-                console.log(dataItem);
-                let url = '/admin/webperf/page-detail?pageUrl=' + encodeURIComponent(dataItem.url);
-                window.location.href = url;
+                if (dataItem.detailPageUrl.length) {
+                    window.location.href = dataItem.detailPageUrl;
+                }
             },
             computeWidth(totalPageLoad, maxValue) {
                 let result = ((totalPageLoad / maxValue) * 100);
