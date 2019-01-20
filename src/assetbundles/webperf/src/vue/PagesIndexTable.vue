@@ -22,7 +22,7 @@
             <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
                 <page-result-cell :title="props.rowData.title"
                                   :url="props.rowData.url"
-                                  :width="((props.rowData.totalPageLoad / maxValue) * 100)"
+                                  :width="computeWidth(props.rowData.totalPageLoad, maxValue)"
                                   :color="triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100))"
                 >
                 </page-result-cell>
@@ -144,6 +144,14 @@
                 console.log(dataItem);
                 let url = '/admin/webperf/page-detail?pageUrl=' + encodeURIComponent(dataItem.url);
                 window.location.href = url;
+            },
+            computeWidth(totalPageLoad, maxValue) {
+                let result = ((totalPageLoad / maxValue) * 100);
+                if (result > 100) {
+                    result = 100;
+                }
+
+                return result;
             },
             statFormatter(val) {
                 return Number(val / 1000).toFixed(2) + "s";
