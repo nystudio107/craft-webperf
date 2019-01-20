@@ -6,6 +6,7 @@
         <div v-for="item in series" class="file-list-wrapper p-2">
             <dashboard-file-list-cell :title="item.title"
                                       :url="item.url"
+                                      :detail-page-url="item.detailPageUrl"
                                       :data="statFormatter(item.data, item.maxValue)"
                                       :cnt="item.cnt"
                                       :width="item.data"

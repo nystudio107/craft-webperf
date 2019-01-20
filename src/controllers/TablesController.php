@@ -159,7 +159,8 @@ class TablesController extends Controller
                     'siteId' => $siteId
                 ]);
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/page-detail', [
-                    'pageUrl' => $stat['url']
+                    'pageUrl' => $stat['url'],
+                    'siteId' => $siteId,
                 ]);
                 // Override based on permissions
                 $user = Craft::$app->getUser()->getIdentity();

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click="redirectTo(detailPageUrl)">
         <div class="clearafter pb-1">
             <div class="simple-bar-chart-label text-base font-normal truncate-label"
                  style="color: rgb(26, 13, 171); width: 90%;"
@@ -37,10 +37,16 @@
         props: {
             title: String,
             url: String,
+            detailPageUrl: String,
             data: String,
             cnt: Number,
             width: Number,
             color: String,
         },
+        methods: {
+            redirectTo(url) {
+                window.location.href = url;
+            }
+        }
     }
 </script>
