@@ -86,6 +86,18 @@
             errors: settings.getErrors("automaticallyTrimDataSamples"),
         }) }}
 
+        {{ forms.textField({
+            label: "Rate Limit in ms"|t("webperf"),
+            instructions: "The number of milliseconds required between recording of frontend beacon data samples."|t("webperf"),
+            id: "rateLimitMs",
+            name: "rateLimitMs",
+            size: 6,
+            maxlength: 5,
+            value: settings.rateLimitMs,
+            warning: configWarning("rateLimitMs", "webperf"),
+            errors: settings.getErrors("rateLimitMs"),
+        }) }}
+
         {{ forms.colorField({
             label: "Dashboard Fast Color"|t("webperf"),
             instructions: "The color used to indicate fast timings on the Webperf Dashboard"|t("webperf"),

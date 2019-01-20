@@ -10,7 +10,7 @@
 
 namespace {
 
-    require_once __DIR__ . '/../lib/geoiploc.php';
+    require_once __DIR__.'/../lib/geoiploc.php';
 }
 
 namespace nystudio107\webperf\controllers {
@@ -36,6 +36,11 @@ namespace nystudio107\webperf\controllers {
      */
     class MetricsController extends Controller
     {
+        // Constants
+        // =========================================================================
+
+        const LAST_BEACON_CACHE_KEY = 'webperf-last-beacon';
+
         // Public Properties
         // =========================================================================
 
@@ -45,8 +50,8 @@ namespace nystudio107\webperf\controllers {
         // =========================================================================
 
         /**
-         * @var    bool|array Allows anonymous access to this controller's actions.
-         *         The actions must be in 'kebab-case'
+         * @var    bool|array Allows anonymous access to this controller's
+         *         actions. The actions must be in 'kebab-case'
          * @access protected
          */
         protected $allowAnonymous = ['beacon'];
@@ -61,6 +66,10 @@ namespace nystudio107\webperf\controllers {
          */
         public function actionBeacon()
         {
+            // Rate limit the beacon sampling
+            if ($this->rateLimited()) {
+                Craft::$app->end();
+            }
             // Get the incoming params from the beacon
             try {
                 $params = Craft::$app->getRequest()->getBodyParams();
@@ -159,6 +168,30 @@ namespace nystudio107\webperf\controllers {
             Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
             Craft::$app->end();
+        }
+
+        // Protected Methods
+        // =========================================================================
+
+        /**
+         * Don't allow a DDOS attack on the beacon endpoint by rate limiting the
+         * data sample recording
+         *
+         * @return bool
+         */
+        protected function rateLimited(): bool
+        {
+            $limited = false;
+            $now = round(microtime(true) * 1000);
+            $cache = Craft::$app->getCache();
+            $then = $cache->get(self::LAST_BEACON_CACHE_KEY);
+            if (($then !== false) && ($now - (int)$then < Webperf::$settings->rateLimitMs)) {
+                $limited = true;
+                Craft::warning('Beacon ignored due to rate limiting', __METHOD__);
+            }
+            $cache->set(self::LAST_BEACON_CACHE_KEY, $now, 0);
+
+            return $limited;
         }
     }
 }

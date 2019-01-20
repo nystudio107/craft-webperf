@@ -54,6 +54,11 @@ class Settings extends Model
     public $automaticallyTrimDataSamples = true;
 
     /**
+     * @var int The number of milliseconds required between recording of frontend beacon data samples
+     */
+    public $rateLimitMs = 500;
+
+    /**
      * @var bool Whether to filter bot user agents from generating profile hits or not
      *           NOT visible in the GUI currently
      */
@@ -91,6 +96,8 @@ class Settings extends Model
             ['dataSamplesStoredLimit', 'integer'],
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],
+            ['rateLimitMs', 'integer'],
+            ['rateLimitMs', 'default', 'value' => 500],
             ['filterBotUserAgents', 'boolean'],
             ['dashboardFastColor', 'default', 'value' => '#00C800'],
             ['dashboardAverageColor', 'default', 'value' => '#FFFF00'],
