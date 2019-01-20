@@ -166,6 +166,14 @@
             memoryFormatter(value) {
                 return Number(value / (1024 * 1024)).toFixed(2) + ' Mb';
             },
+            deleteFormatter(value) {
+                if (value === '') {
+                    return '';
+                }
+                return `
+                <a class="delete icon" href="${value}" title="Delete"></a>
+                `;
+            }
         }
     }
 </script>

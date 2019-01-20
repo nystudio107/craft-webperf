@@ -19,11 +19,11 @@ export default [
     {
         name: 'craftDbCnt',
         sortField: 'craftDbCnt',
-        title: 'DB Queries',
+        title: 'Queries',
         titleClass: 'text-right',
         dataClass: 'text-right',
         callback: 'countFormatter',
-        width: '10%',
+        width: '9%',
     },
     {
         name: 'craftTwigCnt',
@@ -32,7 +32,7 @@ export default [
         titleClass: 'text-right',
         dataClass: 'text-right',
         callback: 'countFormatter',
-        width: '10%',
+        width: '9%',
     },
     {
         name: 'craftOtherCnt',
@@ -41,7 +41,7 @@ export default [
         titleClass: 'text-right',
         dataClass: 'text-right',
         callback: 'countFormatter',
-        width: '10%',
+        width: '9%',
     },
     {
         name: 'craftTotalMemory',
@@ -50,7 +50,7 @@ export default [
         titleClass: 'text-right',
         dataClass: 'text-right',
         callback: 'memoryFormatter',
-        width: '10%',
+        width: '9%',
     },
     {
         name: '__slot:data-samples',
@@ -59,8 +59,18 @@ export default [
         titleClass: 'text-center',
         dataClass: 'text-center',
         callback: 'countFormatter',
-        width: '10%',
+        width: '9%',
     },
+    {
+        name: 'deleteLink',
+        sortField: 'deleteLink',
+        title: '',
+        titleClass: 'text-center',
+        dataClass: 'text-center',
+        callback: 'deleteFormatter',
+        width: '5%',
+    },
+
     {
         name: 'maxTotalPageLoad',
         visible: false,

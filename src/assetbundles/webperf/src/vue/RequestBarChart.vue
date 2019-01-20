@@ -29,7 +29,7 @@
         </request-bar-recursive>
         </div>
         <div class="flex-shrink">
-            {{ statFormatter(root.parentValue) }}
+            {{ statFormatter(root.value) }}
         </div>
     </div>
 </template>
@@ -85,7 +85,7 @@
         {
             column: 'craftDbMs',
             color: 'bg-red-light',
-            label: 'DB Queries',
+            label: 'Database Queries',
         },
     ];
 

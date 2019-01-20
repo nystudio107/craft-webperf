@@ -20,7 +20,7 @@ export default [
     {
         name: 'craftDbCnt',
         sortField: 'craftDbCnt',
-        title: 'DB Queries',
+        title: 'Queries',
         titleClass: 'text-right',
         dataClass: 'text-right',
         callback: 'countFormatter',
@@ -59,7 +59,7 @@ export default [
         title: 'Device',
         titleClass: 'text-left',
         dataClass: 'text-left',
-        width: '10%',
+        width: '9%',
     },
     {
         name: 'os',
@@ -67,7 +67,7 @@ export default [
         title: 'OS',
         titleClass: 'text-left',
         dataClass: 'text-left',
-        width: '10%',
+        width: '9%',
     },
     {
         name: 'browser',
@@ -75,7 +75,7 @@ export default [
         title: 'Browser',
         titleClass: 'text-left',
         dataClass: 'text-left',
-        width: '10%',
+        width: '9%',
     },
     {
         name: 'countryCode',
@@ -84,6 +84,15 @@ export default [
         titleClass: 'text-left',
         dataClass: 'text-left',
         width: '6%',
+    },
+    {
+        name: 'deleteLink',
+        sortField: 'deleteLink',
+        title: '',
+        titleClass: 'text-center',
+        dataClass: 'text-center',
+        callback: 'deleteFormatter',
+        width: '3%',
     },
     {
         name: 'maxTotalPageLoad',

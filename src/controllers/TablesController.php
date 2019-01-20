@@ -152,6 +152,9 @@ class TablesController extends Controller
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
+                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/metrics/delete-samples-by-url', [
+                    'pageUrl' => $stat['url']
+                ]);
             }
             // Format the data for the API
             $data['data'] = $stats;
@@ -277,6 +280,9 @@ class TablesController extends Controller
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
+                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/metrics/delete-sample-by-id', [
+                    'id' => $stat['id']
+                ]);
             }
             // Format the data for the API
             $data['data'] = $stats;
