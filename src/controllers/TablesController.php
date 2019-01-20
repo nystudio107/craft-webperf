@@ -131,12 +131,12 @@ class TablesController extends Controller
             $index = 1;
             foreach ($stats as &$stat) {
                 $stat['id'] = $index++;
-                $stat['maxTotalPageLoad'] = $maxTotalPageLoad;
+                $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // If there is no frontend beacon timing, use the Craft timing
                 if (empty($stat['pageLoad'])) {
-                    $stat['totalPageLoad'] = $stat['craftTotalMs'];
+                    $stat['totalPageLoad'] = (int)$stat['craftTotalMs'];
                 } else {
-                    $stat['totalPageLoad'] = $stat['pageLoad'];
+                    $stat['totalPageLoad'] = (int)$stat['pageLoad'];
                 }
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
@@ -246,12 +246,12 @@ class TablesController extends Controller
             $index = 1;
             foreach ($stats as &$stat) {
                 $stat['id'] = $index++;
-                $stat['maxTotalPageLoad'] = $maxTotalPageLoad;
+                $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // If there is no frontend beacon timing, use the Craft timing
                 if (empty($stat['pageLoad'])) {
-                    $stat['totalPageLoad'] = $stat['craftTotalMs'];
+                    $stat['totalPageLoad'] = (int)$stat['craftTotalMs'];
                 } else {
-                    $stat['totalPageLoad'] = $stat['pageLoad'];
+                    $stat['totalPageLoad'] = (int)$stat['pageLoad'];
                 }
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
