@@ -98,6 +98,16 @@
             errors: settings.getErrors("rateLimitMs"),
         }) }}
 
+        {{ forms.textField({
+            label: "WebpageTest.org API Key"|t("webperf"),
+            instructions: "To run pages through WebpageTest.org via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
+            id: "webpageTestApiKey",
+            name: "webpageTestApiKey",
+            value: settings.webpageTestApiKey,
+            warning: configWarning("webpageTestApiKey", "webperf"),
+            errors: settings.getErrors("webpageTestApiKey"),
+        }) }}
+
         {{ forms.colorField({
             label: "Dashboard Fast Color"|t("webperf"),
             instructions: "The color used to indicate fast timings on the Webperf Dashboard"|t("webperf"),
