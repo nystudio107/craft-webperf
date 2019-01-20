@@ -41,25 +41,35 @@
         }
     </style>
     <div id="cp-nav-content">
-        <div class="pb-12 pt-4 mx-2">
-            {% if pageTitle | length %}
-            <h1 class="text-left text-base text-3xl font-bold truncate-label mb-0 leading-tight"
-                style="color: rgb(26, 13, 171); width: 90%;"
-            >
-                {{ pageTitle }}
-            </h1>
-            {% else %}
-                <h1 class="text-left text-base text-3xl font-bold truncate-label mb-0 leading-tight text-grey-light"
-                    style="width: 90%;"
+        <div class="pb-4 ml-2 mr-5">
+            <div class="pane first">
+                {% if pageTitle | length %}
+                    <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight"
+                    >
+                        <a href="{{ pageUrl }}"
+                           target="_blank"
+                           style="color: rgb(26, 13, 171);"
+                        >
+                            {{ pageTitle }}
+                        </a>
+                    </h1>
+                {% else %}
+                    <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight text-grey-light"
+                    >
+                        <em>{{ 'Craft backend route'|t }}</em>
+                    </h1>
+                {% endif %}
+                <h2 class="w-full text-left text-base text-xl font-bold truncate-label mb-0 leading-tight mt-1"
                 >
-                    <em>{{ 'Craft backend route'|t }}</em>
-                </h1>
-            {% endif %}
-            <h2 class="text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight"
-                style="color: rgb(0, 102, 33); width: 90%; "
-            >
-                {{ pageUrl }}
-            </h2>
+                    <a href="{{ pageUrl }}"
+                       class="hover:no-underline"
+                       target="_blank"
+                       style="color: rgb(0, 102, 33);"
+                       >
+                        {{ pageUrl }}
+                    </a>
+                </h2>
+            </div>
         </div>
         <div class="w-full flex-item-row items-start">
             <div class="flex-row three-up-page-detail-grid-item self-top">
@@ -78,6 +88,7 @@
 
         {% include "webperf/_includes/speed-color-key.twig" %}
         <div class="pane mx-2">
+            <div class="text-base font-bold text-center">Performance Data Samples</div>
             <page-detail-table :site-id="{{ currentSiteId }}"
                                 page-url="{{ pageUrl }}"
             >

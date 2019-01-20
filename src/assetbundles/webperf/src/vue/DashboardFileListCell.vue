@@ -2,10 +2,17 @@
     <div @click="redirectTo(detailPageUrl)">
         <div class="clearafter pb-1">
             <div class="simple-bar-chart-label text-base font-normal truncate-label"
-                 style="color: rgb(26, 13, 171); width: 90%;"
+                 style="width: 90%;"
                  :title="title"
             >
-                <span v-if="title">{{ title }}</span>
+                <a v-if="title"
+                   :href="url"
+                   target="_blank"
+                   style="color: rgb(26, 13, 171);"
+                   @click.stop=""
+                >
+                    {{ title }}
+                </a>
                 <span v-else class="text-grey-light"><em>Craft backend route</em></span>
             </div>
             <div class="simple-bar-chart-value">
@@ -15,10 +22,17 @@
         </div>
         <div class="clearafter pb-1">
             <cite class="simple-bar-chart-label text-sm font-normal truncate-label"
-                  style="color: rgb(0, 102, 33); width: 80%;"
+                  style="width: 80%;"
                   :title="url"
             >
-                {{ url }}
+                <a :href="url"
+                   class="hover:no-underline"
+                   target="_blank"
+                   style="color: rgb(0, 102, 33);"
+                   @click.stop=""
+                >
+                    {{ url }}
+                </a>
             </cite>
             <div class="simple-bar-chart-value text-sm font-bold">{{ data }}</div>
         </div>

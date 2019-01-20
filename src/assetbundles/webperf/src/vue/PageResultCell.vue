@@ -2,20 +2,34 @@
     <div>
         <div class="relative single-line-truncate-wrapper">
             <div class="text-base font-normal truncate-label"
-                 style="color: rgb(26, 13, 171); width: 100%; height: 20px;"
+                 style="width: 100%; height: 20px;"
                  :title="title"
             >
-                <span v-if="title">{{ title }}</span>
+                <a v-if="title"
+                   :href="url"
+                   target="_blank"
+                   style="color: rgb(26, 13, 171);"
+                   @click.stop=""
+                >
+                    {{ title }}
+                </a>
                 <span v-else class="text-grey-light"><em>Craft backend route</em></span>
 
             </div>
         </div>
         <div class="relative single-line-truncate-wrapper">
             <cite class="text-sm font-normal truncate-label single-line-truncate"
-                  style="color: rgb(0, 102, 33); width: 100%; "
+                  style="width: 100%; "
                   :title="url"
             >
-                {{ url }}
+                <a :href="url"
+                   class="hover:no-underline"
+                   target="_blank"
+                   style="color: rgb(0, 102, 33);"
+                   @click.stop=""
+                >
+                    {{ url }}
+                </a>
             </cite>
         </div>
         <div class="py-2">
