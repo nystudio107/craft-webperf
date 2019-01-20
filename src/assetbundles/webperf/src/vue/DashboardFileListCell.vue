@@ -8,13 +8,9 @@
                 <span v-if="title">{{ title }}</span>
                 <span v-else class="text-grey-light"><em>Craft backend route</em></span>
             </div>
-            <div class="simple-bar-chart-value text-sm font-normal">
-                <div class="field webperf-tooltip">
-                    <p class="warning display-block" v-if="cnt < 1000">&nbsp;</p>
-                    <span class="webperf-tooltiptext webperf-sample-tooltip">
-                        Only {{ cnt }} data sample<span v-if="cnt != 1">s</span>.
-                    </span>
-                </div>
+            <div class="simple-bar-chart-value">
+                <sample-size-warning :sample="cnt">
+                </sample-size-warning>
             </div>
         </div>
         <div class="clearafter pb-1">
@@ -34,8 +30,10 @@
     </div>
 </template>
 <script>
+    import SampleSizeWarning from './SampleSizeWarning.vue';
     export default {
         name: 'dashboard-file-list-cell',
+        components: {SampleSizeWarning},
         props: {
             title: String,
             url: String,

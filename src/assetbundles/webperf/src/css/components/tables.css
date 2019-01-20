@@ -46,8 +46,8 @@ th.vuetable-th-craftTotalMemory {
   text-align: right!important;
 }
 
-th.vuetable-th-cnt {
-  text-align: right!important;
+th.vuetable-th-slot-data-samples {
+  text-align: center!important;
 }
 
 th.vuetable-th-device {

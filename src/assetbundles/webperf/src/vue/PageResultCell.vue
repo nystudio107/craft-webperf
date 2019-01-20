@@ -27,12 +27,12 @@
 </template>
 <script>
     export default {
+        name: 'page-result-cell',
         props: {
             title: String,
             url: String,
             width: Number,
             color: String,
         },
-        name: 'page-result-cell'
     }
 </script>

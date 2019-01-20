@@ -34,6 +34,11 @@
                 </div>
                 {{ statFormatter(props.rowData.totalPageLoad) }}
             </template>
+            <template slot="data-samples" slot-scope="props">
+                <sample-size-warning :sample="props.rowData.cnt">
+                </sample-size-warning>
+                {{ props.rowData.cnt }}
+            </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
@@ -55,6 +60,7 @@
     import TriBlendColor from '../js/tri-color-blend';
     import RequestBarChart from './RequestBarChart.vue';
     import PageResultCell from './PageResultCell.vue';
+    import SampleSizeWarning from './SampleSizeWarning.vue';
 
     // Our component exports
     export default {
@@ -65,6 +71,7 @@
             'vuetable-filter-bar': VueTableFilterBar,
             'request-bar-chart': RequestBarChart,
             'page-result-cell': PageResultCell,
+            'sample-size-warning': SampleSizeWarning,
         },
         props: {
             fastColor: {
