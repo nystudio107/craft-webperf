@@ -12,8 +12,8 @@
                 <div class="field webperf-tooltip">
                     <p class="warning display-block" v-if="cnt < 1000">&nbsp;</p>
                     <span class="webperf-tooltiptext webperf-sample-tooltip">
-                    Only {{ cnt }} data sample<span v-if="cnt != 1">s</span>.
-                </span>
+                        Only {{ cnt }} data sample<span v-if="cnt != 1">s</span>.
+                    </span>
                 </div>
             </div>
         </div>
