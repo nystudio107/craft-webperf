@@ -241,7 +241,7 @@ class TablesController extends Controller
             ->where(['url' => $pageUrl])
         ;
         if ((int)$siteId !== 0) {
-            $query->where(['siteId' => $siteId]);
+            $query->andWhere(['siteId' => $siteId]);
         }
         if ($filter !== '') {
             $query
