@@ -103,10 +103,10 @@
                 'url': pageUrl,
                 'k': settings.webpageTestApiKey
             }) %}
-            {% set testName = 'Test on WebpageTest.org'|t %}
+            {% set testName = 'Test on WebPageTest.org'|t %}
         {% else %}
             {% set testUrl = url('https://www.webpagetest.org/getkey.php') %}
-            {% set testName = 'Get WebpageTest.org API Key'|t %}
+            {% set testName = 'Get WebPageTest.org API Key'|t %}
         {% endif %}
         <a href="{{ testUrl }}"
            class="btn icon m-auto">
