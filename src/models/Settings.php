@@ -10,8 +10,11 @@
 
 namespace nystudio107\webperf\models;
 
+use Craft;
 use craft\base\Model;
 use craft\validators\ColorValidator;
+
+use putyourlightson\blitz\Blitz;
 
 /**
  * @author    nystudio107
@@ -20,6 +23,11 @@ use craft\validators\ColorValidator;
  */
 class Settings extends Model
 {
+    // Constants
+    // =========================================================================
+
+    const BLITZ_PLUGIN_HANDLE = 'blitz';
+
     // Public Properties
     // =========================================================================
 
@@ -86,6 +94,16 @@ class Settings extends Model
 
     // Public Methods
     // =========================================================================
+
+    public function init()
+    {
+        parent::init();
+        // If Blitz is installed & enabled, flip the $staticCachedSite on
+        $blitz = Craft::$app->getPlugins()->getPlugin(self::BLITZ_PLUGIN_HANDLE);
+        if ($blitz && Blitz::$plugin->getSettings()->cachingEnabled) {
+            $this->staticCachedSite = true;
+        }
+    }
 
     /**
      * @inheritdoc
