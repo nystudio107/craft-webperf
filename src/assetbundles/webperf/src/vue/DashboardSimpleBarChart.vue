@@ -28,7 +28,12 @@
         };
     };
     // Query our API endpoint via an XHR GET
-    const queryApi = (api, uri, callback) => {
+    const queryApi = (api, uri, params, callback) => {
+        let delimiter='?';
+        for (const key of Object.keys(params)) {
+            uri = uri + delimiter + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+            delimiter = '&';
+        }
         api.get(uri
         ).then((result) => {
             if (callback) {
@@ -50,6 +55,10 @@
                 default: 30,
             },
             column: String,
+            pageUrl: {
+                type: String,
+                default: '',
+            },
             fastColor: {
                 type: String,
                 default: '#00C800',
@@ -76,7 +85,10 @@
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
-                await queryApi(chartsAPI, uri, (data) => {
+                let params = {
+                    'pageUrl': this.pageUrl
+                };
+                await queryApi(chartsAPI, uri, params, (data) => {
                     // Clone the chartOptions object, and replace the needed values
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {

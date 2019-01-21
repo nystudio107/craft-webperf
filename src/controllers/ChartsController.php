@@ -47,6 +47,7 @@ class ChartsController extends Controller
      *
      * @param int    $days
      * @param string $column
+     * @param string $pageUrl
      * @param int    $siteId
      *
      * @return Response
@@ -55,10 +56,12 @@ class ChartsController extends Controller
     public function actionDashboardStatsAverage(
         int $days = 30,
         string $column = 'pageLoad',
+        $pageUrl = '',
         int $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
+        $pageUrl = urldecode($pageUrl);
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
@@ -73,6 +76,9 @@ class ChartsController extends Controller
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
+            }
+            if ($pageUrl !== '') {
+                $query->andWhere(['url' => $pageUrl]);
             }
             $stats = $query->all();
         }
