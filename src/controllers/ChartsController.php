@@ -170,6 +170,7 @@ class ChartsController extends Controller
         if ($stats) {
             // Decode any emojis in the title
             foreach ($stats as &$stat) {
+                $stat['cnt'] = (int)$stat['cnt'];
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/page-detail', [
                     'pageUrl' => $stat['url'],
                     'siteId' => $siteId,

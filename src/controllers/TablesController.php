@@ -48,7 +48,8 @@ class TablesController extends Controller
      * @param int    $page
      * @param int    $per_page
      * @param string $filter
-     * @param null   $siteId
+     * @param int    $days
+     * @param int    $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -58,6 +59,7 @@ class TablesController extends Controller
         int $page = 1,
         int $per_page = 20,
         $filter = '',
+        $days = 30,
         $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
@@ -98,13 +100,14 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
-            ;
+            ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+        ;
         if ((int)$siteId !== 0) {
-            $query->where(['siteId' => $siteId]);
+            $query->andWhere(['siteId' => $siteId]);
         }
         if ($filter !== '') {
             $query
-                ->where(['like', 'url', $filter])
+                ->andWhere(['like', 'url', $filter])
                 ->orWhere(['like', 'title', $filter])
             ;
         }
@@ -204,6 +207,7 @@ class TablesController extends Controller
      * @param int    $per_page
      * @param string $filter
      * @param string $pageUrl
+     * @param int    $days
      * @param int    $siteId
      *
      * @return Response
@@ -215,6 +219,7 @@ class TablesController extends Controller
         int $per_page = 20,
         $filter = '',
         $pageUrl = '',
+        $days = 30,
         $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
@@ -239,6 +244,7 @@ class TablesController extends Controller
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
+            ->andWhere("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
         ;
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
