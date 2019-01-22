@@ -68,6 +68,10 @@
                 type: String,
                 default: '#C80000',
             },
+            days: {
+                type: Number,
+                default: 30,
+            },
             maxValue: {
                 type: Number,
                 default: 10000,
@@ -83,6 +87,7 @@
                 moreParams: {
                     'pageUrl': this.pageUrl,
                     'siteId': this.siteId,
+                    'days': this.days,
                 },
                 css: {
                     tableClass: 'data fullwidth webperf-page-detail',
@@ -98,16 +103,19 @@
                 ],
                 fields: FieldDefs,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
+                displayDays: this.days,
             }
         },
         mounted() {
             this.$events.$on('filter-set', eventData => this.onFilterSet(eventData));
             this.$events.$on('filter-reset', e => this.onFilterReset());
+            this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
         },
         methods: {
             onFilterSet (filterText) {
                 this.moreParams = {
                     'siteId': this.siteId,
+                    'days': this.days,
                     'pageUrl': this.pageUrl,
                     'filter': filterText,
                 };
@@ -115,8 +123,9 @@
             },
             onFilterReset () {
                 this.moreParams = {
-                    'pageUrl': this.pageUrl,
                     'siteId': this.siteId,
+                    'days': this.days,
+                    'pageUrl': this.pageUrl,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
@@ -135,6 +144,10 @@
             },
             onRowClicked(dataItem, event) {
                 console.log(dataItem);
+            },
+            onChangeRange (days) {
+                this.displayDays = days;
+                this.getSeriesData();
             },
             statFormatter(val) {
                 return Number(val / 1000).toFixed(2) + "s";

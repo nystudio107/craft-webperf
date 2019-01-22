@@ -83,6 +83,10 @@
                 type: String,
                 default: '#C80000',
             },
+            days: {
+                type: Number,
+                default: 30,
+            },
             maxValue: {
                 type: Number,
                 default: 10000,
@@ -96,6 +100,7 @@
             return {
                 moreParams: {
                     'siteId': this.siteId,
+                    'days': this.days,
                 },
                 css: {
                     tableClass: 'data fullwidth webperf-pages-index',
@@ -111,16 +116,19 @@
                 ],
                 fields: FieldDefs,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
+                displayDays: this.days,
             }
         },
         mounted() {
             this.$events.$on('filter-set', eventData => this.onFilterSet(eventData));
             this.$events.$on('filter-reset', e => this.onFilterReset());
+            this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
         },
         methods: {
             onFilterSet (filterText) {
                 this.moreParams = {
                     'siteId': this.siteId,
+                    'days': this.days,
                     'filter': filterText,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
@@ -128,6 +136,7 @@
             onFilterReset () {
                 this.moreParams = {
                     'siteId': this.siteId,
+                    'days': this.days,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
@@ -148,6 +157,10 @@
                 if (dataItem.detailPageUrl.length) {
                     window.location.href = dataItem.detailPageUrl;
                 }
+            },
+            onChangeRange (days) {
+                this.displayDays = days;
+                this.getSeriesData();
             },
             computeWidth(totalPageLoad, maxValue) {
                 let result = ((totalPageLoad / maxValue) * 100);

@@ -1,0 +1,26 @@
+/**
+ * components/tables.css
+ *
+ * Project Tooltips.
+ *
+ */
+
+.date-time-picker .flex > * {
+  margin-bottom: 0;
+}
+
+.date-time-picker .flex {
+  align-items: normal;
+  flex-wrap: nowrap;
+}
+
+body.ltr .date-time-picker .flex > *:not(:last-child) {
+  margin-right: 0!important;
+}
+
+.shortcuts-container {
+}
+
+.datetimepicker .datepicker[data-v-aa61cb52] {
+  right: -200px;
+}

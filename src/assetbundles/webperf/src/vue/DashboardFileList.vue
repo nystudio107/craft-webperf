@@ -103,7 +103,7 @@
                     this.series = data;
                 });
             },
-            onChangeRange (range) {
+            onChangeRange (days) {
                 this.displayDays = days;
                 this.getSeriesData();
             },
@@ -117,10 +117,6 @@
         },
         mounted() {
             this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
-            // Live refresh the data
-            setInterval(() => {
-                //this.getSeriesData();
-            }, 3000);
         },
         data: function() {
             return {
