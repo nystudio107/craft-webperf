@@ -25,7 +25,8 @@
                 </span>
                 <dashboard-radial-bar-chart
                         title="First Byte"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="firstByte"
                         fast-color="{{ settings.dashboardFastColor }}"
                         average-color="{{ settings.dashboardAverageColor }}"
@@ -48,7 +49,8 @@
                     </span>
                     <dashboard-simple-bar-chart
                         title="DNS Lookup"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="dns"
                         fast-color="{{ settings.dashboardFastColor }}"
                         average-color="{{ settings.dashboardAverageColor }}"
@@ -68,7 +70,8 @@
                     </span>
                     <dashboard-simple-bar-chart
                         title="Connect"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="connect"
                         fast-color="{{ settings.dashboardFastColor }}"
                         average-color="{{ settings.dashboardAverageColor }}"
@@ -82,7 +85,8 @@
         </div>
         <div class="flex-row three-up-grid-item self-top">
             <dashboard-file-list
-                    :days="30"
+                    start="{{ start }}"
+                    end="{{ end }}"
                     column="firstByte"
                     fast-color="{{ settings.dashboardFastColor }}"
                     average-color="{{ settings.dashboardAverageColor }}"

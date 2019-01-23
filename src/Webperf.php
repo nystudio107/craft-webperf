@@ -486,13 +486,13 @@ class Webperf extends Plugin
             '/webperf/tables/pages-index' => 'webperf/tables/pages-index',
             '/webperf/tables/page-detail' => 'webperf/tables/page-detail',
             // Charts
-            '/webperf/charts/dashboard-stats-average/<days:\d+>/<column:{handle}>'
+            '/webperf/charts/dashboard-stats-average/<column:{handle}>'
             => 'webperf/charts/dashboard-stats-average',
-            '/webperf/charts/dashboard-stats-average/<days:\d+>/<column:{handle}>/<siteId:\d+>'
+            '/webperf/charts/dashboard-stats-average/<column:{handle}>/<siteId:\d+>'
             => 'webperf/charts/dashboard-stats-average',
-            '/webperf/charts/dashboard-slowest-pages/<days:\d+>/<column:{handle}>/<limit:\d+>'
+            '/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>'
             => 'webperf/charts/dashboard-slowest-pages',
-            '/webperf/charts/dashboard-slowest-pages/<days:\d+>/<column:{handle}>/<limit:\d+>/<siteId:\d+>'
+            '/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>/<siteId:\d+>'
             => 'webperf/charts/dashboard-slowest-pages',
             '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];

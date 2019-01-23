@@ -48,24 +48,28 @@ class TablesController extends Controller
      * @param int    $page
      * @param int    $per_page
      * @param string $filter
-     * @param int    $days
+     * @param string $start
+     * @param string $end
      * @param int    $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
      */
     public function actionPagesIndex(
+        string $start,
+        string $end,
         string $sort = 'pageLoad|desc',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
-        $days = 30,
         $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
         $sortField = 'pageLoad';
         $sortType = 'DESC';
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -100,7 +104,7 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
-            ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+            ->where(['between', 'dateUpdated', $start, $end])
         ;
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
@@ -207,25 +211,29 @@ class TablesController extends Controller
      * @param int    $per_page
      * @param string $filter
      * @param string $pageUrl
-     * @param int    $days
+     * @param string $start
+     * @param string $end
      * @param int    $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
      */
     public function actionPageDetail(
+        string $start,
+        string $end,
         string $sort = 'pageLoad|desc',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
         $pageUrl = '',
-        $days = 30,
         $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
         $sortField = 'pageLoad';
         $sortType = 'DESC';
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Figure out the sorting type
         if ($sort !== '') {
@@ -244,7 +252,7 @@ class TablesController extends Controller
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
-            ->andWhere("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+            ->andWhere(['between', 'dateUpdated', $start, $end])
         ;
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);

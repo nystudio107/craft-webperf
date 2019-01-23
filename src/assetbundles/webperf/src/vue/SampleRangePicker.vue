@@ -1,6 +1,6 @@
 <template>
     <div class="readable inline-block" style="width: 200px">
-        <vue-ctk-date-time-picker v-model="yourValue"
+        <vue-ctk-date-time-picker v-model="dateRange"
                                   :range="true"
                                   :only-date="true"
                                   :custom-shortcuts="customShortcuts"
@@ -8,6 +8,8 @@
                                   format="YYYY-MM-DD"
                                   formatted="YYYY-MM-DD"
                                   color="dimgray"
+                                  :no-button="true"
+                                  :auto-close="true"
         >
         </vue-ctk-date-time-picker>
     </div>
@@ -21,9 +23,14 @@
         components: {
             'vue-ctk-date-time-picker': VueCtkDateTimePicker,
         },
+        watch: {
+            dateRange: function (val) {
+                this.$events.fire('change-range', val);
+            },
+        },
         data () {
             return {
-                yourValue: null,
+                dateRange: null,
                 customShortcuts: [
                     { label: 'Today', value: 'day', isSelected: false },
                     { label: 'Yesterday', value: '-day', isSelected: false },

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueEvents from 'vue-events';
 import PagesIndexBarChart from '../vue/PagesIndexBarChart.vue';
 import PagesIndexTable from '../vue/PagesIndexTable.vue';
+import SampleRangePicker from '../vue/SampleRangePicker.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
@@ -10,6 +11,7 @@ const vm = new Vue({
     components: {
         'pages-index-bar-chart': PagesIndexBarChart,
         'pages-index-table': PagesIndexTable,
+        'sample-range-picker': SampleRangePicker,
     },
     data: {
     },

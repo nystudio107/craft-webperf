@@ -96,6 +96,10 @@ class SectionsController extends Controller
         $variables['selectedSubnavItem'] = 'dashboard';
         $variables['showWelcome'] = $showWelcome;
         $variables['settings'] = Webperf::$settings;
+        // Set the default date range
+        $now = new \DateTime();
+        $variables['end'] = $now->format('Y-m-d');
+        $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
         // Render the template
         return $this->renderTemplate('webperf/dashboard/index', $variables);
@@ -153,6 +157,10 @@ class SectionsController extends Controller
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'pages';
         $variables['settings'] = Webperf::$settings;
+        // Set the default date range
+        $now = new \DateTime();
+        $variables['end'] = $now->format('Y-m-d');
+        $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
         // Render the template
         return $this->renderTemplate('webperf/pages/index', $variables);
@@ -219,6 +227,10 @@ class SectionsController extends Controller
         $variables['pageUrl'] = $pageUrl;
         $variables['pageTitle'] = Webperf::$plugin->dataSamples->pageTitle($pageUrl, $siteId);
         $variables['settings'] = Webperf::$settings;
+        // Set the default date range
+        $now = new \DateTime();
+        $variables['end'] = $now->format('Y-m-d');
+        $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
         // Render the template
         return $this->renderTemplate('webperf/pages/page-detail', $variables);

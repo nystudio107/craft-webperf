@@ -55,10 +55,8 @@
                 </div>
         </div>
         {% endif %}
-        <div class="w-full text-right">
-            <sample-range-picker>
-            </sample-range-picker>
-        </div>
+        {# -- Range Picker -- #}
+        {% include "webperf/_includes/range-picker.twig" %}
         {% if settings.includeBeacon %}
             {# -- Frontend -- #}
             {% include "webperf/dashboard/_includes/frontend.twig" %}

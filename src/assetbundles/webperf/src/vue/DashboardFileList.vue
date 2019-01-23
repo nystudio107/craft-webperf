@@ -34,7 +34,12 @@
         };
     };
     // Query our API endpoint via an XHR GET
-    const queryApi = (api, uri, callback) => {
+    const queryApi = (api, uri, params, callback) => {
+        let delimiter='?';
+        for (const key of Object.keys(params)) {
+            uri = uri + delimiter + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+            delimiter = '&';
+        }
         api.get(uri
         ).then((result) => {
             if (callback) {
@@ -52,10 +57,8 @@
             'dashboard-file-list-cell': DashboardFileListCell,
         },
         props: {
-            days: {
-                type: Number,
-                default: 30,
-            },
+            start: String,
+            end: String,
             column: String,
             fastColor: {
                 type: String,
@@ -83,11 +86,15 @@
             // Load in our chart data asynchronously
             getSeriesData: async function() {
                 const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.displayDays + '/' + this.column + '/' + this.limit;
+                let uri = this.column + '/' + this.limit;
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
-                await queryApi(chartsAPI, uri, (data) => {
+                let params = {
+                    'start': this.displayStart,
+                    'end': this.displayEnd,
+                };
+                await queryApi(chartsAPI, uri, params, (data) => {
                     // Clone the chartOptions object, and replace the needed values
                     data.forEach((element, index, array) => {
                         let val = element.avg / 1000;
@@ -103,8 +110,9 @@
                     this.series = data;
                 });
             },
-            onChangeRange (days) {
-                this.displayDays = days;
+            onChangeRange (range) {
+                this.displayStart = range.start;
+                this.displayEnd = range.end;
                 this.getSeriesData();
             },
             statFormatter(val, maxValue) {
@@ -122,7 +130,8 @@
             return {
                 series: [
                 ],
-                displayDays: this.days,
+                displayStart: this.start,
+                displayEnd: this.end,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },

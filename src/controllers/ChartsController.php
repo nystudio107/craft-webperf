@@ -45,7 +45,8 @@ class ChartsController extends Controller
     /**
      * The Dashboard stats average chart
      *
-     * @param int    $days
+     * @param string $start
+     * @param string $end
      * @param string $column
      * @param string $pageUrl
      * @param int    $siteId
@@ -54,13 +55,16 @@ class ChartsController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionDashboardStatsAverage(
-        int $days = 30,
+        string $start,
+        string $end,
         string $column = 'pageLoad',
         $pageUrl = '',
         int $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Different dbs do it different ways
         $stats = null;
@@ -72,7 +76,7 @@ class ChartsController extends Controller
                 ->select([
                     'AVG('.$column.') AS avg',
                 ])
-                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+                ->where(['between', 'dateUpdated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -89,7 +93,7 @@ class ChartsController extends Controller
                 ->select([
                     'AVG("'.$column.'") AS avg',
                 ])
-                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )")
+                ->where(['between', 'dateUpdated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -106,7 +110,8 @@ class ChartsController extends Controller
     /**
      * The Dashboard stats slowest pages list
      *
-     * @param int    $days
+     * @param string $start
+     * @param string $end
      * @param string $column
      * @param int    $limit
      * @param int    $siteId
@@ -115,13 +120,16 @@ class ChartsController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionDashboardSlowestPages(
-        int $days = 30,
+        string $start,
+        string $end,
         string $column = 'pageLoad',
         int $limit = 3,
         int $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
@@ -135,7 +143,7 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG('.$column.') AS avg',
                 ])
-                ->where("dateUpdated >= ( CURDATE() - INTERVAL '{$days}' DAY )")
+                ->where(['between', 'dateUpdated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -156,7 +164,7 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG("'.$column.'") AS avg',
                 ])
-                ->where("\"dateUpdated\" >= ( CURRENT_TIMESTAMP - INTERVAL '{$days} days' )")
+                ->where(['between', 'dateUpdated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);

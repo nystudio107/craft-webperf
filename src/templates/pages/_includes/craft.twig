@@ -24,7 +24,8 @@
             </span>
             <dashboard-radial-bar-chart
                     title="Craft Execution"
-                    :days="30"
+                    start="{{ start }}"
+                    end="{{ end }}"
                     column="craftTotalMs"
                     page-url="{{ pageUrl }}"
                     fast-color="{{ settings.dashboardFastColor }}"
@@ -46,7 +47,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="Database Queries"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="craftDbMs"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"
@@ -67,7 +69,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="Twig Rendering"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="craftTwigMs"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"
@@ -88,7 +91,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="Other"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="craftOtherMs"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"

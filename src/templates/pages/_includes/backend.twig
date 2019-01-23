@@ -24,7 +24,8 @@
             </span>
             <dashboard-radial-bar-chart
                     title="First Byte"
-                    :days="30"
+                    start="{{ start }}"
+                    end="{{ end }}"
                     column="firstByte"
                     page-url="{{ pageUrl }}"
                     fast-color="{{ settings.dashboardFastColor }}"
@@ -46,7 +47,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                     title="DNS Lookup"
-                    :days="30"
+                    start="{{ start }}"
+                    end="{{ end }}"
                     column="dns"
                     page-url="{{ pageUrl }}"
                     fast-color="{{ settings.dashboardFastColor }}"
@@ -67,7 +69,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="Connect"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="connect"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"
@@ -88,7 +91,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="Connect"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="connect"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"

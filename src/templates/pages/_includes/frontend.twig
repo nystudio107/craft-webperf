@@ -24,7 +24,8 @@
             </span>
             <dashboard-radial-bar-chart
                     title="Page Loaded"
-                    :days="30"
+                    start="{{ start }}"
+                    end="{{ end }}"
                     column="pageLoad"
                     page-url="{{ pageUrl }}"
                     fast-color="{{ settings.dashboardFastColor }}"
@@ -46,7 +47,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="First Paint"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="firstPaint"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"
@@ -67,7 +69,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                         title="First Contentful Paint"
-                        :days="30"
+                        start="{{ start }}"
+                        end="{{ end }}"
                         column="firstContentfulPaint"
                         page-url="{{ pageUrl }}"
                         fast-color="{{ settings.dashboardFastColor }}"
@@ -88,7 +91,8 @@
                 </span>
                 <dashboard-simple-bar-chart
                     title="DOM Interactive"
-                    :days="30"
+                    start="{{ start }}"
+                    end="{{ end }}"
                     column="domInteractive"
                     page-url="{{ pageUrl }}"
                     fast-color="{{ settings.dashboardFastColor }}"

@@ -41,6 +41,8 @@
         }
     </style>
     <div id="cp-nav-content">
+        {# -- Range Picker -- #}
+        {% include "webperf/_includes/range-picker.twig" %}
         <div class="pb-4 ml-2 mr-5">
             <div class="pane first">
                 {% if pageTitle | length %}
@@ -90,7 +92,9 @@
         <div class="pane mx-2">
             <div class="text-base font-bold text-center">Performance Data Samples</div>
             <page-detail-table :site-id="{{ currentSiteId }}"
-                                page-url="{{ pageUrl }}"
+                               start="{{ start }}"
+                               end="{{ end }}"
+                               page-url="{{ pageUrl }}"
             >
             </page-detail-table>
         </div>

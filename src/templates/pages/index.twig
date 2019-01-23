@@ -33,6 +33,8 @@
 
 {% block content %}
     <div id="cp-nav-content">
+        {# -- Range Picker -- #}
+        {% include "webperf/_includes/range-picker.twig" %}
         <div class="flex overflow-hidden w-full flex-no-wrap">
             <div class="flex-grow">
                 <div class="shadow">
@@ -40,13 +42,18 @@
                             title="404s by Month"
                             sub-title="Discrete 404 URI hits in the last month"
                             range="month"
+                            start="{{ start }}"
+                            end="{{ end }}"
                             :site-id="{{ currentSiteId }}"
                     >
                     </pages-index-bar-chart>
                 </div>
             </div>
         </div>
-        <pages-index-table :site-id="{{ currentSiteId }}">
+        <pages-index-table :site-id="{{ currentSiteId }}"
+                           start="{{ start }}"
+                           end="{{ end }}"
+        >
         </pages-index-table>
     </div>
     {# include our JavaScript modules #}

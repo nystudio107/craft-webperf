@@ -71,6 +71,8 @@
             'sample-size-warning': SampleSizeWarning,
         },
         props: {
+            start: String,
+            end: String,
             fastColor: {
                 type: String,
                 default: '#00C800',
@@ -82,10 +84,6 @@
             slowColor: {
                 type: String,
                 default: '#C80000',
-            },
-            days: {
-                type: Number,
-                default: 30,
             },
             maxValue: {
                 type: Number,
@@ -100,7 +98,8 @@
             return {
                 moreParams: {
                     'siteId': this.siteId,
-                    'days': this.days,
+                    'start': this.displayStart,
+                    'end': this.displayEnd,
                 },
                 css: {
                     tableClass: 'data fullwidth webperf-pages-index',
@@ -116,7 +115,8 @@
                 ],
                 fields: FieldDefs,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
-                displayDays: this.days,
+                displayStart: this.start,
+                displayEnd: this.end,
             }
         },
         mounted() {
@@ -128,7 +128,8 @@
             onFilterSet (filterText) {
                 this.moreParams = {
                     'siteId': this.siteId,
-                    'days': this.days,
+                    'start': this.displayStart,
+                    'end': this.displayEnd,
                     'filter': filterText,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
@@ -136,7 +137,8 @@
             onFilterReset () {
                 this.moreParams = {
                     'siteId': this.siteId,
-                    'days': this.days,
+                    'start': this.displayStart,
+                    'end': this.displayEnd,
                 };
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
@@ -158,9 +160,10 @@
                     window.location.href = dataItem.detailPageUrl;
                 }
             },
-            onChangeRange (days) {
-                this.displayDays = days;
-                this.getSeriesData();
+            onChangeRange (range) {
+                this.displayStart = range.start;
+                this.displayEnd = range.end;
+                this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             computeWidth(totalPageLoad, maxValue) {
                 let result = ((totalPageLoad / maxValue) * 100);
