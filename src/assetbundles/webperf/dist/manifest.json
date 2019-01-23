@@ -1,10 +1,10 @@
 {
-  "vendor.css": "css/vendor.css",
-  "vendor.js": "js/vendor.js",
-  "vendor.js.map": "js/vendor.js.map",
   "styles.css": "css/styles.css",
   "styles.js": "js/styles.js",
   "styles.js.map": "js/styles.js.map",
+  "vendor.css": "css/vendor.css",
+  "vendor.js": "js/vendor.js",
+  "vendor.js.map": "js/vendor.js.map",
   "dashboard.js": "js/dashboard.js",
   "dashboard.js.map": "js/dashboard.js.map",
   "page-detail.js": "js/page-detail.js",
