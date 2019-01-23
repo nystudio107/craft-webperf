@@ -56,8 +56,8 @@ class TablesController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionPagesIndex(
-        string $start,
-        string $end,
+        string $start = '',
+        string $end = '',
         string $sort = 'pageLoad|desc',
         int $page = 1,
         int $per_page = 20,
@@ -149,6 +149,7 @@ class TablesController extends Controller
             $index = 1;
             foreach ($stats as &$stat) {
                 $stat['id'] = $index++;
+                $stat['cnt'] = (int)$stat['cnt'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // If there is no frontend beacon timing, use the Craft timing
                 if (empty($stat['pageLoad'])) {
@@ -219,8 +220,8 @@ class TablesController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionPageDetail(
-        string $start,
-        string $end,
+        string $start = '',
+        string $end = '',
         string $sort = 'pageLoad|desc',
         int $page = 1,
         int $per_page = 20,

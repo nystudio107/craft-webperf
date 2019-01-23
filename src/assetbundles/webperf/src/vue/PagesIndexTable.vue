@@ -98,8 +98,9 @@
             return {
                 moreParams: {
                     'siteId': this.siteId,
-                    'start': this.displayStart,
-                    'end': this.displayEnd,
+                    'start': this.start,
+                    'end': this.end,
+                    'filter': '',
                 },
                 css: {
                     tableClass: 'data fullwidth webperf-pages-index',
@@ -115,8 +116,6 @@
                 ],
                 fields: FieldDefs,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
-                displayStart: this.start,
-                displayEnd: this.end,
             }
         },
         mounted() {
@@ -126,20 +125,11 @@
         },
         methods: {
             onFilterSet (filterText) {
-                this.moreParams = {
-                    'siteId': this.siteId,
-                    'start': this.displayStart,
-                    'end': this.displayEnd,
-                    'filter': filterText,
-                };
+                this.moreParams.filter = filterText;
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             onFilterReset () {
-                this.moreParams = {
-                    'siteId': this.siteId,
-                    'start': this.displayStart,
-                    'end': this.displayEnd,
-                };
+                this.moreParams.filter = '';
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             onLoaded () {
@@ -161,8 +151,8 @@
                 }
             },
             onChangeRange (range) {
-                this.displayStart = range.start;
-                this.displayEnd = range.end;
+                this.moreParams.start = range.start;
+                this.moreParams.end = range.end;
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             computeWidth(totalPageLoad, maxValue) {

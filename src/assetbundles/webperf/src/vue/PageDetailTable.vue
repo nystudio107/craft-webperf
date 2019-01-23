@@ -84,9 +84,10 @@
             return {
                 moreParams: {
                     'siteId': this.siteId,
-                    'start': this.displayStart,
-                    'end': this.displayEnd,
                     'pageUrl': this.pageUrl,
+                    'start': this.start,
+                    'end': this.end,
+                    'filter': '',
                 },
                 css: {
                     tableClass: 'data fullwidth webperf-page-detail',
@@ -102,8 +103,6 @@
                 ],
                 fields: FieldDefs,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
-                displayStart: this.start,
-                displayEnd: this.end,
             }
         },
         mounted() {
@@ -113,22 +112,11 @@
         },
         methods: {
             onFilterSet (filterText) {
-                this.moreParams = {
-                    'siteId': this.siteId,
-                    'start': this.displayStart,
-                    'end': this.displayEnd,
-                    'pageUrl': this.pageUrl,
-                    'filter': filterText,
-                };
+                this.moreParams.filter = filterText;
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             onFilterReset () {
-                this.moreParams = {
-                    'siteId': this.siteId,
-                    'start': this.displayStart,
-                    'end': this.displayEnd,
-                    'pageUrl': this.pageUrl,
-                };
+                this.moreParams.filter = '';
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             onLoaded () {
@@ -147,8 +135,8 @@
             onRowClicked(dataItem, event) {
             },
             onChangeRange (range) {
-                this.displayStart = range.start;
-                this.displayEnd = range.end;
+                this.moreParams.start = range.start;
+                this.moreParams.end = range.end;
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
             statFormatter(val) {

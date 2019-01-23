@@ -6,6 +6,7 @@
     >
         <request-bar-recursive
                 v-for="node in nodes"
+                :key="node.column"
                 :column="node.column"
                 :color="node.color"
                 :label="node.label"
