@@ -130,7 +130,7 @@ class Settings extends Model
             ['webpageTestApiKey', 'string'],
             ['filterBotUserAgents', 'boolean'],
             ['dashboardFastColor', 'default', 'value' => '#00C800'],
-            ['dashboardAverageColor', 'default', 'value' => '#FFFF00'],
+            ['dashboardAverageColor', 'default', 'value' => '#FFA500'],
             ['dashboardSlowColor', 'default', 'value' => '#C80000'],
             [['dashboardFastColor', 'dashboardAverageColor', 'dashboardSlowColor'], ColorValidator::class],
         ];
