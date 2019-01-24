@@ -86,6 +86,16 @@
             errors: settings.getErrors("automaticallyTrimDataSamples"),
         }) }}
 
+        {{ forms.lightswitchField({
+            label: "Trim Outlier Data Samples"|t("webperf"),
+            instructions: "Whether outlier data samples that are 10x the mean should be deleted"|t("webperf"),
+            id: "trimOutlierDataSamples",
+            name: "trimOutlierDataSamples",
+            on: settings.trimOutlierDataSamples,
+            warning: configWarning("trimOutlierDataSamples", "webperf"),
+            errors: settings.getErrors("trimOutlierDataSamples"),
+        }) }}
+
         {{ forms.textField({
             label: "Rate Limit in ms"|t("webperf"),
             instructions: "The number of milliseconds required between recording of frontend beacon data samples."|t("webperf"),

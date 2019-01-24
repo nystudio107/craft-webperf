@@ -237,26 +237,28 @@ class DataSamples extends Component
      */
     public function trimOutlierSamples()
     {
-        $db = Craft::$app->getDb();
-        Craft::debug('Trimming outlier samples', __METHOD__);
-        // Get the average pageload time
-        $stats = (new Query())
-            ->from('{{%webperf_data_samples}}')
-            ->select([
-                'AVG(pageload) AS avg',
-            ])
-            ->one();
-        if (!empty($stats['avg'])) {
-            $threshold = $stats['avg'] * self::OUTLIER_PAGELOAD_MULTIPLIER;
-            // Delete any samples that are far above average
-            try {
-                $result = $db->createCommand()->delete(
-                    '{{%webperf_data_samples}}',
-                    ['>', 'pageLoad', $threshold]
-                )->execute();
-                Craft::debug($result, __METHOD__);
-            } catch (\Exception $e) {
-                Craft::error($e->getMessage(), __METHOD__);
+        if (Webperf::$settings->trimOutlierDataSamples) {
+            $db = Craft::$app->getDb();
+            Craft::debug('Trimming outlier samples', __METHOD__);
+            // Get the average pageload time
+            $stats = (new Query())
+                ->from('{{%webperf_data_samples}}')
+                ->select([
+                    'AVG(pageload) AS avg',
+                ])
+                ->one();
+            if (!empty($stats['avg'])) {
+                $threshold = $stats['avg'] * self::OUTLIER_PAGELOAD_MULTIPLIER;
+                // Delete any samples that are far above average
+                try {
+                    $result = $db->createCommand()->delete(
+                        '{{%webperf_data_samples}}',
+                        ['>', 'pageLoad', $threshold]
+                    )->execute();
+                    Craft::debug($result, __METHOD__);
+                } catch (\Exception $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
             }
         }
     }

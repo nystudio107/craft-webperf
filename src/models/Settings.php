@@ -62,6 +62,11 @@ class Settings extends Model
     public $automaticallyTrimDataSamples = true;
 
     /**
+     * @var bool Whether outlier data samples that are 10x the mean should be deleted
+     */
+    public $trimOutlierDataSamples = true;
+
+    /**
      * @var int The number of milliseconds required between recording of frontend beacon data samples
      */
     public $rateLimitMs = 500;
@@ -119,6 +124,7 @@ class Settings extends Model
             ['dataSamplesStoredLimit', 'integer'],
             ['dataSamplesStoredLimit', 'default', 'value' => 10000],
             ['automaticallyTrimDataSamples', 'boolean'],
+            ['trimOutlierDataSamples', 'boolean'],
             ['rateLimitMs', 'integer'],
             ['rateLimitMs', 'default', 'value' => 500],
             ['webpageTestApiKey', 'string'],
