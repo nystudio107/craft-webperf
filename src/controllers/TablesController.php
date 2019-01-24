@@ -183,9 +183,11 @@ class TablesController extends Controller
             $data['data'] = $stats;
             $query = (new Query())
                 ->from(['{{%webperf_data_samples}}'])
-                ->groupBy('url');
+                ->groupBy('url')
+                ->where(['between', 'dateUpdated', $start, $end])
+                ;
             if ($filter !== '') {
-                $query->where(['like', 'url', $filter]);
+                $query->andWhere(['like', 'url', $filter]);
                 $query->orWhere(['like', 'title', $filter]);
             }
             $count = $query->count();
@@ -322,6 +324,7 @@ class TablesController extends Controller
             $query = (new Query())
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
+                ->andWhere(['between', 'dateUpdated', $start, $end])
             ;
             if ($filter !== '') {
                 $query
