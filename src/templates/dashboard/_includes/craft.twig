@@ -119,9 +119,15 @@
             </dashboard-file-list>
         </div>
     </div>
-    {% include "webperf/_includes/stats-pane-footer.twig" with {
-        'currentSiteId': currentSiteId,
-        'footerStatsColumn': 'craftTotalMs',
-        'displayDevModeWarning': true,
-    } %}
+    {% set devModeWarning = craft.app.config.general.devMode ? 'true' : 'false' %}
+    <div class="px-8">
+        <sample-pane-footer
+                start="{{ start }}"
+                end="{{ end }}"
+                column="craftTotalMs"
+                :site-id="{{ currentSiteId }}"
+                :display-dev-mode-warning="{{ devModeWarning }}"
+        >
+        </sample-pane-footer>
+    </div>
 </div>

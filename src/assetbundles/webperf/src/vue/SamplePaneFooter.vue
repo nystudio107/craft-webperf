@@ -1,20 +1,15 @@
 <template>
-    <div class="simple-bar-chart-wrapper px-5 py-3">
-        <div class="clearafter py-2">
-            <div class="simple-bar-chart-label text-base font-bold">{{ title }}</div>
-            <div class="simple-bar-chart-value text-base font-bold">{{ statFormatter(series[0]) }}</div>
+    <div class="field">
+        <div class="heading">
+            <p class="instructions">The chart data is an <em>average</em> of <strong>{{ samples }}</strong> data samples.</p>
         </div>
-        <div class="py-2">
-            <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
-                <div class="simple-bar-line h-3 rounded-full" :style="{ width: series[0] + '%', backgroundColor: barColor }"></div>
-            </div>
-        </div>
+        <p v-if="samples < 1000" class="warning">Webperf has collected less than <strong>1,000</strong> data samples. The sample size is not statistically significant, so above averaged results may not be meaningful.</p>
+        <p v-if="displayDevModeWarning" class="warning">Craft performance will be slower than normal with <code>devMode</code> enabled due to extensive logging and disabling of some caches. <a href="https://craftcms.com/guides/what-dev-mode-does" target="_blank">Learn More</a>.</p>
     </div>
 </template>
 
 <script>
     import Axios from 'axios';
-    import TriBlendColor from '../js/tri-color-blend';
 
     const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
 
@@ -49,27 +44,17 @@
         components: {
         },
         props: {
-            title: String,
             start: String,
             end: String,
             column: String,
+            displayDevModeWarning: {
+                type: Boolean,
+                default: false
+            },
             pageUrl: {
                 type: String,
                 default: '',
             },
-            fastColor: {
-                type: String,
-                default: '#00C800',
-            },
-            averageColor: {
-                type: String,
-                default: '#FFFF00',
-            },
-            slowColor: {
-                type: String,
-                default: '#C80000',
-            },
-            maxValue: Number,
             siteId: {
                 type: Number,
                 default: 0,
@@ -86,19 +71,11 @@
                 let params = {
                     'start': this.displayStart,
                     'end': this.displayEnd,
-                    'pageUrl': this.pageUrl
+                    'pageUrl': this.pageUrl,
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    // Clone the chartOptions object, and replace the needed values
-                    const options = Object.assign({}, this.chartOptions);
-                    if (data.avg !== undefined) {
-                        let val = data.avg / 1000;
-                        if (val > this.displayMaxValue) {
-                            this.displayMaxValue = val;
-                        }
-                        val = (val * 100) / this.displayMaxValue;
-                        this.barColor = this.triBlend.colorFromPercentage(val);
-                        this.series = [val];
+                    if (data.cnt !== undefined) {
+                        this.samples = data.cnt;
                     }
                 });
             },
@@ -107,10 +84,6 @@
                 this.displayEnd = range.end;
                 this.getSeriesData();
             },
-            statFormatter(val) {
-                val = (val * this.displayMaxValue) / 100;
-                return Number(val).toFixed(2) + "s";
-            }
         },
         created () {
             this.getSeriesData();
@@ -120,12 +93,9 @@
         },
         data: function() {
             return {
-                barColor: '#000',
-                series: [0],
-                displayStart: this.start,
+                samples: 0,
                 displayEnd: this.end,
                 displayMaxValue: this.maxValue,
-                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
     }

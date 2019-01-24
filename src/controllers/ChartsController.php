@@ -74,6 +74,7 @@ class ChartsController extends Controller
             $query = (new Query())
                 ->from('{{%webperf_data_samples}}')
                 ->select([
+                    'COUNT(url) AS cnt',
                     'AVG('.$column.') AS avg',
                 ])
                 ->where(['between', 'dateUpdated', $start, $end])
@@ -100,8 +101,12 @@ class ChartsController extends Controller
             }
             $stats = $query->all();
         }
+        // Massage the data
         if ($stats) {
-            $data = ArrayHelper::getColumn($stats, 'avg');
+            foreach ($stats as &$stat) {
+                $stat['cnt'] = (int)$stat['cnt'];
+            }
+            $data = $stats[0];
         }
 
         return $this->asJson($data);
@@ -175,14 +180,15 @@ class ChartsController extends Controller
                 ->limit($limit);
             $stats = $query->all();
         }
+        // Massage the data
         if ($stats) {
-            // Decode any emojis in the title
             foreach ($stats as &$stat) {
                 $stat['cnt'] = (int)$stat['cnt'];
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/page-detail', [
                     'pageUrl' => $stat['url'],
                     'siteId' => $siteId,
                 ]);
+                // Decode any emojis in the title
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
