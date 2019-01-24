@@ -24,7 +24,7 @@
     "require": {
         "craftcms/cms": "^3.0.0",
         "jaybizzle/crawler-detect": "^1.2.37",
-        "league/csv": "^8.2",
+        "league/csv": "^8.2|^9.1",
         "whichbrowser/parser": "^2.0.37"
     },
     "autoload": {
