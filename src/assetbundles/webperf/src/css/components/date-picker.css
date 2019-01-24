@@ -15,7 +15,7 @@
 }
 
 body.ltr .date-time-picker .flex > *:not(:last-child) {
-  margin-right: 0!important;
+  margin-right: auto!important;
 }
 
 .shortcuts-container {
