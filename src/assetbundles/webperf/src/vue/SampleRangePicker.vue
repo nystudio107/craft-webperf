@@ -10,6 +10,7 @@
                                   color="dimgray"
                                   :no-button="true"
                                   :auto-close="true"
+                                  @input="onInput()"
         >
         </vue-ctk-date-time-picker>
     </div>
@@ -22,11 +23,6 @@
         name: 'sample-range-picker',
         components: {
             'vue-ctk-date-time-picker': VueCtkDateTimePicker,
-        },
-        watch: {
-            dateRange: function (val) {
-                this.$events.fire('change-range', val);
-            },
         },
         data () {
             return {
@@ -43,6 +39,9 @@
             }
         },
         methods: {
+            onInput() {
+                this.$events.fire('change-range', this.dateRange);
+            }
         }
     }
 </script>
