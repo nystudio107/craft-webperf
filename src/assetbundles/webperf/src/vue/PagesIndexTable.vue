@@ -3,6 +3,7 @@
         <vuetable-filter-bar></vuetable-filter-bar>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfoTop"
+                                      infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="paginationTop"
                                  @vuetable-pagination:change-page="onChangePage"
@@ -39,6 +40,7 @@
         </vuetable>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
+                                      infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="pagination"
                                  @vuetable-pagination:change-page="onChangePage"
