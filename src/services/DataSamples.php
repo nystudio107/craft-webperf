@@ -24,6 +24,11 @@ use craft\base\Component;
  */
 class DataSamples extends Component
 {
+    // Constants
+    // =========================================================================
+
+    const OUTLIER_PAGELOAD_MULTIPLIER = 10;
+
     // Public Methods
     // =========================================================================
 
@@ -228,6 +233,35 @@ class DataSamples extends Component
     }
 
     /**
+     * Trim any samples that our outliers
+     */
+    public function trimOutlierSamples()
+    {
+        $db = Craft::$app->getDb();
+        Craft::debug('Trimming outlier samples', __METHOD__);
+        // Get the average pageload time
+        $stats = (new Query())
+            ->from('{{%webperf_data_samples}}')
+            ->select([
+                'AVG(pageload) AS avg',
+            ])
+            ->one();
+        if (!empty($stats['avg'])) {
+            $threshold = $stats['avg'] * self::OUTLIER_PAGELOAD_MULTIPLIER;
+            // Delete any samples that are far above average
+            try {
+                $result = $db->createCommand()->delete(
+                    '{{%webperf_data_samples}}',
+                    ['>', 'pageLoad', $threshold]
+                )->execute();
+                Craft::debug($result, __METHOD__);
+            } catch (\Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        }
+    }
+
+    /**
      * Trim samples that have the placeholder in the URL, aka they never
      * received the Boomerang beacon
      *
@@ -262,6 +296,7 @@ class DataSamples extends Component
      */
     public function trimDataSamples(int $limit = null): int
     {
+        $this->trimOutlierSamples();
         $affectedRows = 0;
         $db = Craft::$app->getDb();
         $quotedTable = $db->quoteTableName('{{%webperf_data_samples}}');
