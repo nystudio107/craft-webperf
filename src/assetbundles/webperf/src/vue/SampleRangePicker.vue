@@ -1,8 +1,10 @@
 <template>
-    <div class="readable inline-block" style="width: 200px">
+    <div class="readable inline-block">
         <vue-ctk-date-time-picker v-model="dateRange"
                                   :range="true"
+                                  :no-header="true"
                                   :only-date="true"
+                                  :no-value-to-custom-elem="true"
                                   :custom-shortcuts="customShortcuts"
                                   label="Data Sample Date Range"
                                   format="YYYY-MM-DD"
@@ -12,6 +14,17 @@
                                   :auto-close="true"
                                   @input="onInput()"
         >
+            <button type="button"
+                    class="btn menubtn text-sm leading-normal text-left"
+                    data-icon="date"
+                    tabindex="0"
+                    role="combobox"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="min-width: 237px;"
+            >
+                {{ dateRange.start }} &rarr; {{ dateRange.end }}
+            </button>
         </vue-ctk-date-time-picker>
     </div>
 </template>
@@ -26,7 +39,7 @@
         },
         data () {
             return {
-                dateRange: null,
+                dateRange: {},
                 customShortcuts: [
                     { label: 'Today', value: 'day', isSelected: false },
                     { label: 'Yesterday', value: '-day', isSelected: false },
