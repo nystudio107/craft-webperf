@@ -43,7 +43,7 @@
     <div id="cp-nav-content" v-cloak>
         {# -- Range Picker -- #}
         {% include "webperf/_includes/range-picker.twig" %}
-        <div class="pb-4 ml-2 mr-5">
+        <div class="pb-4">
             <div class="pane first">
                 {% if pageTitle | length %}
                     <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight"
@@ -83,7 +83,7 @@
                 </sample-pane-footer>
             </div>
         </div>
-        <div class="w-full flex-item-row items-start">
+        <div class="w-full flex-item-row items-start justify-between">
             <div class="flex-row three-up-page-detail-grid-item self-top">
                 {# -- Frontend -- #}
                 {% include "webperf/pages/_includes/frontend.twig" %}
@@ -99,7 +99,7 @@
         </div>
 
         {% include "webperf/_includes/speed-color-key.twig" %}
-        <div class="pane mx-2">
+        <div class="pane">
             <div class="text-base font-bold text-center">Performance Data Samples</div>
             <page-detail-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
