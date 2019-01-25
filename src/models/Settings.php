@@ -122,7 +122,7 @@ class Settings extends Model
             ['includeCraftProfiling', 'boolean'],
             ['staticCachedSite', 'boolean'],
             ['dataSamplesStoredLimit', 'integer'],
-            ['dataSamplesStoredLimit', 'default', 'value' => 10000],
+            ['dataSamplesStoredLimit', 'default', 'value' => 100000],
             ['automaticallyTrimDataSamples', 'boolean'],
             ['trimOutlierDataSamples', 'boolean'],
             ['rateLimitMs', 'integer'],
