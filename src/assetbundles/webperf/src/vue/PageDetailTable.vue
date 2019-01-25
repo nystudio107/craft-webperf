@@ -20,6 +20,13 @@
                   @vuetable:row-clicked="onRowClicked"
                   @vuetable:loaded="onLoaded"
         >
+            <template slot="sample-date" slot-scope="props">
+                <data-sample-date :date="props.rowData.dateUpdated"
+                                  :url="props.rowData.url"
+                                  :query="props.rowData.query"
+                >
+                </data-sample-date>
+            </template>
             <template slot="load-time-bar" slot-scope="props">
                 <request-bar-chart :rowData="props.rowData">
                 </request-bar-chart>
@@ -46,6 +53,7 @@
     import TriBlendColor from '../js/tri-color-blend';
     import RequestBarChart from './RequestBarChart.vue';
     import PageResultCell from './PageResultCell.vue';
+    import DataSampleDate from './DataSampleDate.vue';
 
     // Our component exports
     export default {
@@ -56,6 +64,7 @@
             'vuetable-filter-bar': VueTableFilterBar,
             'request-bar-chart': RequestBarChart,
             'page-result-cell': PageResultCell,
+            'data-sample-date': DataSampleDate,
         },
         props: {
             start: String,

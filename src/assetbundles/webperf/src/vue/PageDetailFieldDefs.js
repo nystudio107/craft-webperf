@@ -1,12 +1,11 @@
 // Field definitions for PagesIndexTable.vue
 export default [
     {
-        name: 'dateUpdated',
+        name: '__slot:sample-date',
         sortField: 'dateUpdated',
         title: 'Sample Date',
         titleClass: 'text-left',
         dataClass: 'text-left',
-        callback: 'dateFormatter',
         width: '14%',
     },
     {
