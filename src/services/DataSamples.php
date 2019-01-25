@@ -76,6 +76,10 @@ class DataSamples extends Component
             $query->andWhere(['siteId' => $siteId]);
         }
         $result = $query->one();
+        // Decode any emojis in the title
+        if (!empty($result['title'])) {
+            $result['title'] = html_entity_decode($result['title'], ENT_NOQUOTES, 'UTF-8');
+        }
 
         return $result['title'] ?? '';
     }
