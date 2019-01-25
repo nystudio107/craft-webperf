@@ -58,7 +58,7 @@ class TablesController extends Controller
     public function actionPagesIndex(
         string $start = '',
         string $end = '',
-        string $sort = 'pageLoad|desc',
+        string $sort = 'totalPageLoad|desc',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
@@ -66,7 +66,7 @@ class TablesController extends Controller
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
-        $sortField = 'pageLoad';
+        $sortField = 'totalPageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
@@ -78,9 +78,6 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
-        if ($sortField === 'totalPageLoad') {
-            $sortField = 'pageLoad';
-        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -88,6 +85,7 @@ class TablesController extends Controller
                 'url',
                 'MIN(title) AS title',
                 'COUNT(url) AS cnt',
+                'GREATEST(AVG(pageLoad), AVG(craftTotalMs)) AS totalPageLoad',
                 'AVG(pageLoad) AS pageLoad',
                 'AVG(domInteractive) AS domInteractive',
                 'AVG(firstContentfulPaint) AS firstContentfulPaint',
@@ -136,13 +134,8 @@ class TablesController extends Controller
                 if (empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'frontend';
                 }
-                if (empty($stat['pageLoad'])) {
-                    $pageLoad = $stat['craftTotalMs'];
-                } else {
-                    $pageLoad = $stat['pageLoad'];
-                }
-                if ($pageLoad > $maxTotalPageLoad) {
-                    $maxTotalPageLoad = $pageLoad;
+                if ($stat['totalPageLoad'] > $maxTotalPageLoad) {
+                    $maxTotalPageLoad = $stat['totalPageLoad'];
                 }
             }
             // Massage the stats
@@ -150,13 +143,8 @@ class TablesController extends Controller
             foreach ($stats as &$stat) {
                 $stat['id'] = $index++;
                 $stat['cnt'] = (int)$stat['cnt'];
+                $stat['totalPageLoad'] = (int)$stat['totalPageLoad'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
-                // If there is no frontend beacon timing, use the Craft timing
-                if (empty($stat['pageLoad'])) {
-                    $stat['totalPageLoad'] = (int)$stat['craftTotalMs'];
-                } else {
-                    $stat['totalPageLoad'] = (int)$stat['pageLoad'];
-                }
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
@@ -224,7 +212,7 @@ class TablesController extends Controller
     public function actionPageDetail(
         string $start = '',
         string $end = '',
-        string $sort = 'pageLoad|desc',
+        string $sort = 'totalPageLoad|desc',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
@@ -233,7 +221,7 @@ class TablesController extends Controller
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
-        $sortField = 'pageLoad';
+        $sortField = 'totalPageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
@@ -246,12 +234,13 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
-        if ($sortField === 'totalPageLoad') {
-            $sortField = 'pageLoad';
-        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
+            ->select([
+                '*',
+                'GREATEST(AVG(pageLoad), AVG(craftTotalMs)) AS totalPageLoad',
+            ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
@@ -288,24 +277,14 @@ class TablesController extends Controller
                 if (empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'frontend';
                 }
-                if (empty($stat['pageLoad'])) {
-                    $pageLoad = $stat['craftTotalMs'];
-                } else {
-                    $pageLoad = $stat['pageLoad'];
-                }
-                if ($pageLoad > $maxTotalPageLoad) {
-                    $maxTotalPageLoad = $pageLoad;
+                if ($stat['totalPageLoad'] > $maxTotalPageLoad) {
+                    $maxTotalPageLoad = (int)$stat['totalPageLoad'];
                 }
             }
             // Massage the stats
             foreach ($stats as &$stat) {
+                $stat['totalPageLoad'] = (int)$stat['totalPageLoad'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
-                // If there is no frontend beacon timing, use the Craft timing
-                if (empty($stat['pageLoad'])) {
-                    $stat['totalPageLoad'] = (int)$stat['craftTotalMs'];
-                } else {
-                    $stat['totalPageLoad'] = (int)$stat['pageLoad'];
-                }
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
