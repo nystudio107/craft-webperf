@@ -23,8 +23,8 @@
             <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
                 <page-result-cell :title="props.rowData.title"
                                   :url="props.rowData.url"
-                                  :width="computeWidth(props.rowData.totalPageLoad, maxValue)"
-                                  :color="triBlend.colorFromPercentage(((props.rowData.totalPageLoad / maxValue) * 100))"
+                                  :width="computeWidth(props.rowData.pageLoad, maxValue)"
+                                  :color="triBlend.colorFromPercentage(((props.rowData.pageLoad / maxValue) * 100))"
                 >
                 </page-result-cell>
             </template>
@@ -112,7 +112,7 @@
                 sortOrder: [
                     {
                         field: '__slot:load-time-bar',
-                        sortField: 'totalPageLoad',
+                        sortField: 'pageLoad',
                         direction: 'desc'
                     }
                 ],
@@ -157,8 +157,8 @@
                 this.moreParams.end = range.end;
                 this.$events.fire('refresh-table', this.$refs.vuetable);
             },
-            computeWidth(totalPageLoad, maxValue) {
-                let result = ((totalPageLoad / maxValue) * 100);
+            computeWidth(pageLoad, maxValue) {
+                let result = ((pageLoad / maxValue) * 100);
                 if (result > 100) {
                     result = 100;
                 }

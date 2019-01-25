@@ -49,6 +49,7 @@ class DataSample extends DbModel
         'requestId',
         'url',
         'queryString',
+        'pageLoad',
         'craftTotalMs',
         'craftDbMs',
         'craftDbCnt',

@@ -10,7 +10,7 @@ export default [
     },
     {
         name: '__slot:load-time-bar',
-        sortField: 'totalPageLoad',
+        sortField: 'pageLoad',
         title: 'Request Timeline',
         titleClass: 'center loadTimeBar',
         dataClass: 'center',

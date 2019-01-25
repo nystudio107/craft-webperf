@@ -58,7 +58,7 @@ class TablesController extends Controller
     public function actionPagesIndex(
         string $start = '',
         string $end = '',
-        string $sort = 'totalPageLoad|DESC',
+        string $sort = 'pageLoad|DESC',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
@@ -66,7 +66,7 @@ class TablesController extends Controller
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
-        $sortField = 'totalPageLoad';
+        $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
@@ -85,7 +85,6 @@ class TablesController extends Controller
                 'url',
                 'MIN(title) AS title',
                 'COUNT(url) AS cnt',
-                'GREATEST(AVG(pageLoad), AVG(craftTotalMs)) AS totalPageLoad',
                 'AVG(pageLoad) AS pageLoad',
                 'AVG(domInteractive) AS domInteractive',
                 'AVG(firstContentfulPaint) AS firstContentfulPaint',
@@ -125,18 +124,18 @@ class TablesController extends Controller
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
-                // Determine the stat type
+             // Determine the stat type
                 if (!empty($stat['pageLoad']) && !empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'both';
                 }
-                if (empty($stat['pageLoad'])) {
+                if (empty($stat['firstByte'])) {
                     $stat['type'] = 'craft';
                 }
                 if (empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'frontend';
                 }
-                if ($stat['totalPageLoad'] > $maxTotalPageLoad) {
-                    $maxTotalPageLoad = $stat['totalPageLoad'];
+                if ($stat['pageLoad'] > $maxTotalPageLoad) {
+                    $maxTotalPageLoad = $stat['pageLoad'];
                 }
             }
             // Massage the stats
@@ -211,7 +210,7 @@ class TablesController extends Controller
     public function actionPageDetail(
         string $start = '',
         string $end = '',
-        string $sort = 'totalPageLoad|DESC',
+        string $sort = 'pageLoad|DESC',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
@@ -220,7 +219,7 @@ class TablesController extends Controller
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
         $data = [];
-        $sortField = 'totalPageLoad';
+        $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
@@ -236,10 +235,6 @@ class TablesController extends Controller
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
-            ->select([
-                '*',
-                'GREATEST(pageLoad, craftTotalMs) AS totalPageLoad',
-            ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
@@ -270,14 +265,14 @@ class TablesController extends Controller
                 if (!empty($stat['pageLoad']) && !empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'both';
                 }
-                if (empty($stat['pageLoad'])) {
+                if (empty($stat['firstByte'])) {
                     $stat['type'] = 'craft';
                 }
                 if (empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'frontend';
                 }
-                if ($stat['totalPageLoad'] > $maxTotalPageLoad) {
-                    $maxTotalPageLoad = (int)$stat['totalPageLoad'];
+                if ($stat['pageLoad'] > $maxTotalPageLoad) {
+                    $maxTotalPageLoad = (int)$stat['pageLoad'];
                 }
             }
             // Massage the stats
@@ -298,10 +293,6 @@ class TablesController extends Controller
             // Format the data for the API
             $data['data'] = $stats;
             $query = (new Query())
-                ->select([
-                    '*',
-                    'GREATEST(AVG(pageLoad), AVG(craftTotalMs)) AS totalPageLoad',
-                ])
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
                 ->andWhere(['between', 'dateUpdated', $start, $end])

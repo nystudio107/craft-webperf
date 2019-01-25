@@ -38,7 +38,7 @@
 
     const requestBarGraphFields = [
         {
-            column: 'totalPageLoad',
+            column: 'pageLoad',
             color: 'bg-blue-dark',
             label: 'Page Loaded',
         },

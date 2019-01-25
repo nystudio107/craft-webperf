@@ -141,14 +141,16 @@ class Beacons extends Component
     {
         $stats = Webperf::$plugin->profileTarget->stats;
         $request = Craft::$app->getRequest();
+        $pageLoad = (int)($stats['database']['duration']
+            + $stats['twig']['duration']
+            + $stats['other']['duration']);
         // Allocate a new DataSample, and fill it in
         $sample = new DataSample([
             'requestId' => Webperf::$requestUuid,
             'url' => Webperf::$requestUrl ?? DataSample::PLACEHOLDER_URL,
             'queryString' => $request->getQueryString(),
-            'craftTotalMs' => (int)($stats['database']['duration']
-                + $stats['twig']['duration']
-                + $stats['other']['duration']),
+            'pageLoad' => $pageLoad,
+            'craftTotalMs' => $pageLoad,
             'craftDbMs' => (int)$stats['database']['duration'],
             'craftDbCnt' => (int)$stats['database']['count'],
             'craftTwigMs' => (int)$stats['twig']['duration'],
