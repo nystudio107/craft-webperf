@@ -58,7 +58,7 @@ class TablesController extends Controller
     public function actionPagesIndex(
         string $start = '',
         string $end = '',
-        string $sort = 'totalPageLoad|desc',
+        string $sort = 'totalPageLoad|DESC',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
@@ -121,6 +121,7 @@ class TablesController extends Controller
 
         $stats = $query->all();
         if ($stats) {
+            $user = Craft::$app->getUser()->getIdentity();
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
@@ -143,7 +144,6 @@ class TablesController extends Controller
             foreach ($stats as &$stat) {
                 $stat['id'] = $index++;
                 $stat['cnt'] = (int)$stat['cnt'];
-                $stat['totalPageLoad'] = (int)$stat['totalPageLoad'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
@@ -159,7 +159,6 @@ class TablesController extends Controller
                     'siteId' => $siteId,
                 ]);
                 // Override based on permissions
-                $user = Craft::$app->getUser()->getIdentity();
                 if (!$user->can('webperf:delete-data-samples')) {
                     $stat['deleteLink'] = '';
                 }
@@ -212,7 +211,7 @@ class TablesController extends Controller
     public function actionPageDetail(
         string $start = '',
         string $end = '',
-        string $sort = 'totalPageLoad|desc',
+        string $sort = 'totalPageLoad|DESC',
         int $page = 1,
         int $per_page = 20,
         $filter = '',
@@ -239,7 +238,7 @@ class TablesController extends Controller
         $query = (new Query())
             ->select([
                 '*',
-                'GREATEST(AVG(pageLoad), AVG(craftTotalMs)) AS totalPageLoad',
+                'GREATEST(pageLoad, craftTotalMs) AS totalPageLoad',
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
@@ -261,9 +260,9 @@ class TablesController extends Controller
             ->orderBy("{$sortField} {$sortType}")
             ->limit($per_page)
         ;
-
         $stats = $query->all();
         if ($stats) {
+            $user = Craft::$app->getUser()->getIdentity();
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
@@ -283,7 +282,6 @@ class TablesController extends Controller
             }
             // Massage the stats
             foreach ($stats as &$stat) {
-                $stat['totalPageLoad'] = (int)$stat['totalPageLoad'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
@@ -293,7 +291,6 @@ class TablesController extends Controller
                     'id' => $stat['id']
                 ]);
                 // Override based on permissions
-                $user = Craft::$app->getUser()->getIdentity();
                 if (!$user->can('webperf:delete-data-samples')) {
                     $stat['deleteLink'] = '';
                 }
@@ -301,6 +298,10 @@ class TablesController extends Controller
             // Format the data for the API
             $data['data'] = $stats;
             $query = (new Query())
+                ->select([
+                    '*',
+                    'GREATEST(AVG(pageLoad), AVG(craftTotalMs)) AS totalPageLoad',
+                ])
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
                 ->andWhere(['between', 'dateUpdated', $start, $end])
