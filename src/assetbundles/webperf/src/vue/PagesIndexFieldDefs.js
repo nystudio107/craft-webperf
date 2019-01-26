@@ -11,7 +11,7 @@ export default [
     {
         name: '__slot:load-time-bar',
         sortField: 'pageLoad',
-        title: 'Request Timeline',
+        title: 'Performance Timeline',
         titleClass: 'center loadTimeBar',
         dataClass: 'center',
         width: '20%',
