@@ -123,10 +123,11 @@ class DataSamples extends Component
             Craft::debug('Creating new data sample', __METHOD__);
             // Create a new record
             try {
-                $db->createCommand()->insert(
+                $result = $db->createCommand()->insert(
                     '{{%webperf_data_samples}}',
                     $dataSampleConfig
                 )->execute();
+                Craft::debug($result, __METHOD__);
             } catch (\Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
@@ -134,13 +135,14 @@ class DataSamples extends Component
             Craft::debug('Updating existing data sample', __METHOD__);
             // Update the existing record
             try {
-                $db->createCommand()->update(
+                $result = $db->createCommand()->update(
                     '{{%webperf_data_samples}}',
                     $dataSampleConfig,
                     [
                         'requestId' => $dataSample->requestId,
                     ]
                 )->execute();
+                Craft::debug($result, __METHOD__);
             } catch (\Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
