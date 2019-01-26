@@ -64,12 +64,15 @@ class FileController extends Controller
     /**
      * Export the statistics table as a CSV file
      *
+     * @param string   $pageUrl
+     * @param int|null $siteId
+     *
      * @throws \yii\web\ForbiddenHttpException
      */
-    public function actionExportDataSamples()
+    public function actionExportDataSamples(string $pageUrl = '', int $siteId = null)
     {
         PermissionHelper::controllerPermissionCheck('webperf:pages');
-        $this->exportCsvFile('webperf-data-samples', '{{%webperf_data_samples}}', self::EXPORT_DATA_SAMPLES_COLUMNS);
+        $this->exportCsvFile('webperf-data-samples', '{{%webperf_data_samples}}', self::EXPORT_DATA_SAMPLES_COLUMNS, $pageUrl, $siteId);
     }
 
     // Public Methods
@@ -79,10 +82,18 @@ class FileController extends Controller
      * @param string   $filename
      * @param string   $table
      * @param array    $columns
+     * @param string   $pageUrl
      * @param int|null $siteId
+     *
+     * @throws \League\Csv\CannotInsertRecord
      */
-    protected function exportCsvFile(string $filename, string $table, array $columns, int $siteId = null)
-    {
+    protected function exportCsvFile(
+        string $filename,
+        string $table,
+        array $columns,
+        string $pageUrl = '',
+        int $siteId = null
+    ) {
         // If your CSV document was created or is read on a Macintosh computer,
         // add the following lines before using the library to help PHP detect line ending in Mac OS X
         if (!ini_get('auto_detect_line_endings')) {
@@ -96,7 +107,12 @@ class FileController extends Controller
         if ($siteId !== null) {
             $query
                 ->where(['siteId' => $siteId])
-                ;
+            ;
+        }
+        if (!empty($pageUrl)) {
+            $query
+                ->where(['pageUrl' => $pageUrl])
+            ;
         }
         $data = $query
             ->all();
