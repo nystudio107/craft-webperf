@@ -25,11 +25,21 @@ class WebperfVariable extends ManifestVariable
     /**
      * Whether to include the beacon or not
      *
-     * @param bool $includeBeacon
+     * @param bool $include
      */
-    public function includeBeacon(bool $includeBeacon)
+    public function includeBeacon(bool $include)
     {
-        Webperf::$settings->includeBeacon = $includeBeacon;
+        Webperf::$settings->includeBeacon = $include;
+    }
+
+    /**
+     * Whether to include the Craft beacon or not
+     *
+     * @param bool $include
+     */
+    public function includeCraftBeacon(bool $include)
+    {
+        Webperf::$settings->includeCraftProfiling = $include;
     }
 
     /**
