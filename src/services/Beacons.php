@@ -16,6 +16,8 @@ use nystudio107\webperf\helpers\PluginTemplate;
 
 use nystudio107\seomatic\Seomatic;
 
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
+
 use Craft;
 use craft\base\Component;
 use craft\helpers\UrlHelper;
@@ -136,9 +138,18 @@ class Beacons extends Component
 
     /**
      * @return void
+     * @throws \yii\base\ExitException
      */
     public function includeCraftBeacon()
     {
+        // Filter out bot/spam requests via UserAgent
+        if (Webperf::$settings->filterBotUserAgents) {
+            $crawlerDetect = new CrawlerDetect;
+            // Check the user agent of the current 'visitor'
+            if ($crawlerDetect->isCrawler()) {
+                Craft::$app->end();
+            }
+        }
         $stats = Webperf::$plugin->profileTarget->stats;
         $request = Craft::$app->getRequest();
         $pageLoad = (int)($stats['database']['duration']
