@@ -200,6 +200,101 @@ class ChartsController extends Controller
     }
 
     /**
+     * The Dashboard stats average chart
+     *
+     * @param string $start
+     * @param string $end
+     * @param string $pageUrl
+     * @param int    $siteId
+     *
+     * @return Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionPagesAreaChart(
+        string $start,
+        string $end,
+        $pageUrl = '',
+        int $siteId = 0
+    ): Response {
+        PermissionHelper::controllerPermissionCheck('webperf:dashboard');
+        $data = [];
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $pageUrl = urldecode($pageUrl);
+        // Different dbs do it different ways
+        $stats = null;
+        $db = Craft::$app->getDb();
+        if ($db->getIsMysql()) {
+            // Query the db
+            $query = (new Query())
+                ->from('{{%webperf_data_samples}}')
+                ->select([
+                    'AVG(pageLoad) AS pageLoad',
+                    'AVG(domInteractive) AS domInteractive',
+                    'AVG(firstContentfulPaint) AS firstContentfulPaint',
+                    'AVG(firstPaint) AS firstPaint',
+                    'AVG(firstByte) AS firstByte',
+                    'AVG(connect) AS connect',
+                    'AVG(dns) AS dns',
+                    "DATE_FORMAT(dateUpdated, '%Y-%m-%d %l%p') AS sampleDate",
+                ])
+                ->where(['between', 'dateUpdated', $start, $end])
+                ;
+            if ((int)$siteId !== 0) {
+                $query->andWhere(['siteId' => $siteId]);
+            }
+            if ($pageUrl !== '') {
+                $query->andWhere(['url' => $pageUrl]);
+            }
+            $stats = $query
+                ->groupBy('sampleDate')
+                ->all();
+        }
+        if ($db->getIsPgsql()) {
+        }
+        // Massage the data
+        if ($stats) {
+            $data[] = [
+                'name' => 'DNS Lookup',
+                'data' => ArrayHelper::getColumn($stats, 'dns'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'Connect',
+                'data' => ArrayHelper::getColumn($stats, 'connect'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'First Byte',
+                'data' => ArrayHelper::getColumn($stats, 'firstByte'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'First Paint',
+                'data' => ArrayHelper::getColumn($stats, 'firstPaint'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'First Contentful Paint',
+                'data' => ArrayHelper::getColumn($stats, 'firstContentfulPaint'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'DOM Interactive',
+                'data' => ArrayHelper::getColumn($stats, 'domInteractive'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'Page Load',
+                'data' => ArrayHelper::getColumn($stats, 'pageLoad'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+        }
+
+        return $this->asJson($data);
+    }
+
+    /**
      * The Dashboard chart
      *
      * @param int $days

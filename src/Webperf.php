@@ -490,10 +490,17 @@ class Webperf extends Plugin
             => 'webperf/charts/dashboard-stats-average',
             '/webperf/charts/dashboard-stats-average/<column:{handle}>/<siteId:\d+>'
             => 'webperf/charts/dashboard-stats-average',
+
             '/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>'
             => 'webperf/charts/dashboard-slowest-pages',
             '/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>/<siteId:\d+>'
             => 'webperf/charts/dashboard-slowest-pages',
+
+            '/webperf/charts/pages-area-chart'
+            => 'webperf/charts/pages-area-chart',
+            '/webperf/charts/pages-area-chart/<siteId:\d+>'
+            => 'webperf/charts/pages-area-chart',
+
             '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];
     }
