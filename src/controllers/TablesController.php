@@ -277,6 +277,7 @@ class TablesController extends Controller
             }
             // Massage the stats
             foreach ($stats as &$stat) {
+                $stat['mobile'] = (bool)$stat['mobile'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // Decode any emojis in the title
                 if (!empty($stat['title'])) {
