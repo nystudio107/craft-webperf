@@ -83,6 +83,17 @@
                 </sample-pane-footer>
             </div>
         </div>
+        <div class="pane first">
+            <h1 class="text-center text-base text-3xl font-bold">Page Performance Timeline</h1>
+            <page-detail-area-chart
+                    title=""
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url="{{ pageUrl }}"
+                    :site-id="{{ currentSiteId }}"
+            >
+            </page-detail-area-chart>
+        </div>
         <div class="w-full flex-item-row items-start justify-between">
             <div class="flex-row three-up-page-detail-grid-item self-top">
                 {# -- Frontend -- #}
@@ -100,7 +111,7 @@
 
         {% include "webperf/_includes/speed-color-key.twig" %}
         <div class="pane">
-            <div class="text-base font-bold text-center">Performance Data Samples</div>
+            <h1 class="text-center text-base text-3xl font-bold">Performance Data Samples</h1>
             <page-detail-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"

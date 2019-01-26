@@ -76,13 +76,16 @@
                     // Clone the chartOptions object, and replace the needed values
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
-                        options.yaxis.max = Math.round(largestNumber([data[6]['data']])[0] + 1.5);
+                        options.yaxis.max = Math.round(largestNumber([data[9]['data']])[0] + 1.5);
                         options.labels = data[0]['labels'];
                         this.chartOptions = options;
                         this.series = data;
                     }
                 });
-            }
+            },
+            statFormatter(val) {
+                return Number(val / 1000).toFixed(2) + "s";
+            },
         },
         created () {
             this.getSeriesData();
@@ -105,9 +108,9 @@
                         }
                     },
                     colors: [
+                        '#EF5753', '#E3342F', '#CC1F1A',
                         '#FAAD63','#F6993F','#DE751F',
                         '#2779BD', '#3490DC', '#6CB2EB', '#BCDEFA',
-                           '#FCD9B6',
                     ],
                     stroke: {
                         curve: 'smooth',
@@ -134,11 +137,16 @@
                             width: 1
                         },
                     },
-                    labels: [],
                     yaxis: {
                         min: 0,
                         max: 0,
+                        labels: {
+                            formatter: (val) => {
+                                return this.statFormatter(val);
+                            },
+                        },
                     },
+                    labels: [],
                     title: {
                         text: this.title,
                         offsetX: 0,

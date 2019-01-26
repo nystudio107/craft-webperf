@@ -236,6 +236,9 @@ class ChartsController extends Controller
                     'AVG(firstByte) AS firstByte',
                     'AVG(connect) AS connect',
                     'AVG(dns) AS dns',
+                    'AVG(craftTotalMs) AS craftTotalMs',
+                    'AVG(craftTwigMs) AS craftTwigMs',
+                    'AVG(craftDbMs) AS craftDbMs',
                     "DATE_FORMAT(dateUpdated, '%Y-%m-%d %l%p') AS sampleDate",
                 ])
                 ->where(['between', 'dateUpdated', $start, $end])
@@ -254,6 +257,21 @@ class ChartsController extends Controller
         }
         // Massage the data
         if ($stats) {
+            $data[] = [
+                'name' => 'Database Queries',
+                'data' => ArrayHelper::getColumn($stats, 'craftDbMs'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'Twig Rendering',
+                'data' => ArrayHelper::getColumn($stats, 'craftTwigMs'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
+            $data[] = [
+                'name' => 'Craft Rendering',
+                'data' => ArrayHelper::getColumn($stats, 'craftTotalMs'),
+                'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
+            ];
             $data[] = [
                 'name' => 'DNS Lookup',
                 'data' => ArrayHelper::getColumn($stats, 'dns'),
