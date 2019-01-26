@@ -148,6 +148,7 @@ namespace nystudio107\webperf\controllers {
             }
             // Fill in information from the current request
             $request = Craft::$app->getRequest();
+            $sample->countryCode = '??';
             $ip = $request->userIP;
             if ($ip) {
                 $sample->countryCode = getCountryFromIP($ip);
@@ -160,8 +161,8 @@ namespace nystudio107\webperf\controllers {
             if ($userAgent) {
                 $parser = new Parser($userAgent);
                 $sample->device = $parser->device->model;
-                $sample->browser = $parser->browser->name;
-                $sample->os = $parser->os->name;
+                $sample->browser = $parser->browser->name . ' ' . $parser->browser->getVersion();
+                $sample->os = $parser->os->name . ' ' . $parser->os->getVersion();
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample
