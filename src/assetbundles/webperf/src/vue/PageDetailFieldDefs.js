@@ -53,7 +53,7 @@ export default [
         width: '8%',
     },
     {
-        name: 'device',
+        name: '__slot:sample-device',
         sortField: 'device',
         title: 'Device',
         titleClass: 'text-left',
@@ -119,6 +119,10 @@ export default [
     },
     {
         name: 'dns',
+        visible: false,
+    },
+    {
+        name: 'mobile',
         visible: false,
     },
 ];
