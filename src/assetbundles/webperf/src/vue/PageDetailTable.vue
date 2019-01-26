@@ -27,6 +27,12 @@
                 >
                 </data-sample-date>
             </template>
+            <template slot="sample-device" slot-scope="props">
+                <data-sample-device :mobile="props.rowData.mobile"
+                                  :device="props.rowData.device"
+                >
+                </data-sample-device>
+            </template>
             <template slot="load-time-bar" slot-scope="props">
                 <request-bar-chart :rowData="props.rowData">
                 </request-bar-chart>
@@ -54,6 +60,7 @@
     import RequestBarChart from './RequestBarChart.vue';
     import PageResultCell from './PageResultCell.vue';
     import DataSampleDate from './DataSampleDate.vue';
+    import DataSampleDevice from './DataSampleDevice.vue';
 
     // Our component exports
     export default {
@@ -65,6 +72,7 @@
             'request-bar-chart': RequestBarChart,
             'page-result-cell': PageResultCell,
             'data-sample-date': DataSampleDate,
+            'data-sample-device': DataSampleDevice,
         },
         props: {
             start: String,
