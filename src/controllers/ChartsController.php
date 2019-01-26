@@ -221,6 +221,13 @@ class ChartsController extends Controller
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
         $pageUrl = urldecode($pageUrl);
+        $dateStart = new \DateTime($start);
+        $dateEnd = new \DateTime($end);
+        $interval = date_diff($dateStart, $dateEnd);
+        $dateFormat = '"%Y-%m-%d %l%p"';
+        if ($interval->days > 30) {
+            $dateFormat = '"%Y-%m-%d"';
+        }
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
@@ -239,7 +246,7 @@ class ChartsController extends Controller
                     'AVG(craftTotalMs) AS craftTotalMs',
                     'AVG(craftTwigMs) AS craftTwigMs',
                     'AVG(craftDbMs) AS craftDbMs',
-                    "DATE_FORMAT(dateUpdated, '%Y-%m-%d %l%p') AS sampleDate",
+                    'DATE_FORMAT(dateUpdated, '.$dateFormat.') AS sampleDate',
                 ])
                 ->where(['between', 'dateUpdated', $start, $end])
                 ;
