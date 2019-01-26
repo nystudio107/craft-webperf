@@ -39,27 +39,27 @@
     const requestBarGraphFields = [
         {
             column: 'pageLoad',
-            color: 'bg-blue-dark',
+            color: 'bg-blue-lighter',
             label: 'Page Loaded',
         },
         {
             column: 'domInteractive',
-            color: 'bg-blue',
+            color: 'bg-blue-light',
             label: 'DOM Interactive',
         },
         {
             column: 'firstContentfulPaint',
-            color: 'bg-blue-light',
+            color: 'bg-blue',
             label: 'First Contentful Paint',
         },
         {
             column: 'firstPaint',
-            color: 'bg-blue-lighter',
+            color: 'bg-blue-dark',
             label: 'First Paint',
         },
         {
             column: 'firstByte',
-            color: 'bg-orange-dark',
+            color: 'bg-orange-light',
             label: 'First Byte',
         },
         {
@@ -69,12 +69,12 @@
         },
         {
             column: 'dns',
-            color: 'bg-orange-light',
+            color: 'bg-orange-dark',
             label: 'DNS Lookup',
         },
         {
             column: 'craftTotalMs',
-            color: 'bg-red-dark',
+            color: 'bg-red-light',
             label: 'Craft Rendering',
         },
         {
@@ -84,7 +84,7 @@
         },
         {
             column: 'craftDbMs',
-            color: 'bg-red-light',
+            color: 'bg-red-dark',
             label: 'Database Queries',
         },
     ];
@@ -132,7 +132,7 @@
                             while (searchNode) {
                                 if (!searchNode.nodes || (!searchNode.value) || (node.value > searchNode.value)) {
                                     node.nodes = searchNode.nodes;
-                                    node.parentValue = searchNode.parentValue;
+                                    node.parentValue = searchNode.parentValue || searchNode.value;
                                     searchNode.nodes = [node];
                                     searchNode = node.nodes || undefined;
                                 } else {

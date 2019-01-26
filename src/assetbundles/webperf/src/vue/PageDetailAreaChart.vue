@@ -1,5 +1,5 @@
 <template>
-    <apexcharts width="100%" height="400px" type="area" :options="chartOptions" :series="series"></apexcharts>
+    <apexcharts width="100%" height="450px" type="area" :options="chartOptions" :series="series"></apexcharts>
 </template>
 
 <script>
@@ -83,6 +83,11 @@
                     }
                 });
             },
+            onChangeRange (range) {
+                this.displayStart = range.start;
+                this.displayEnd = range.end;
+                this.getSeriesData();
+            },
             statFormatter(val) {
                 return Number(val / 1000).toFixed(2) + "s";
             },
@@ -91,6 +96,7 @@
             this.getSeriesData();
         },
         mounted() {
+            this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
         },
         data: function() {
             return {
@@ -105,11 +111,15 @@
                         },
                         animations: {
                             enabled: false,
-                        }
+                        },
+                    },
+                    tooltip: {
+                        enabled: true,
+                        inverseOrder: true,
                     },
                     colors: [
-                        '#EF5753', '#E3342F', '#CC1F1A',
-                        '#FAAD63','#F6993F','#DE751F',
+                        '#CC1F1A', '#E3342F', '#EF5753',
+                        '#DE751F', '#F6993F', '#FAAD63',
                         '#2779BD', '#3490DC', '#6CB2EB', '#BCDEFA',
                     ],
                     stroke: {
