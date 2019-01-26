@@ -95,6 +95,7 @@ class ProfileTarget extends Target
             $this->stats[$cat]['duration'] += (float)$timing['duration'] * 1000;
             $this->stats[$cat]['memory'] += (int)$timing['memoryDiff'];
         }
+        $this->stats['memory'] = memory_get_peak_usage(true);
         if ($final) {
             $this->export();
             Webperf::$plugin->beacons->includeCraftBeacon();
