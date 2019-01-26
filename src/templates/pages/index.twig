@@ -23,10 +23,10 @@
 {% block actionButton %}
     <div class="buttons">
         <div class="webperf-button-container">
-            <a href="{{ actionUrl('webperf/file/export-data-samples', {'siteId': currentSiteId}) }}" class="btn icon">{{ "Export Data Samples"|t }}</a>
+            <a href="{{ actionUrl('webperf/file/export-data-samples', {'pageUrl': '','siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export all Data Samples to a CSV file'|t }}">{{ "Export Data Samples"|t }}</a>
         </div>
         {% if currentUser.can("webperf:delete-data-samples") %}
-            <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}" class="btn delete icon">{{ "Clear Data Samples"|t }}</a>
+            <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}" class="btn delete icon" title="{{ 'Delete all Data Samples'|t }}">{{ "Delete Data Samples"|t }}</a>
         {% endif %}
     </div>
 {% endblock %}
@@ -46,15 +46,14 @@
         <div class="flex overflow-hidden w-full flex-no-wrap">
             <div class="flex-grow">
                 <div class="shadow">
-                    <pages-index-bar-chart
-                            title="404s by Month"
-                            sub-title="Discrete 404 URI hits in the last month"
-                            range="month"
+                    <page-detail-area-chart
+                            title="Performance Timeline"
                             start="{{ start }}"
                             end="{{ end }}"
+                            page-url=""
                             :site-id="{{ currentSiteId }}"
                     >
-                    </pages-index-bar-chart>
+                    </page-detail-area-chart>
                 </div>
             </div>
         </div>
