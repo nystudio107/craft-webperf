@@ -7,7 +7,7 @@
     import ApexCharts from 'vue-apexcharts';
 
     const chartDataBaseUrl = '/webperf/charts/pages-area-chart/';
-
+    
     // Get the largest number from the passed in arrays
     const largestNumber = (mainArray) => {
         return mainArray.map(function(subArray) {
@@ -80,8 +80,13 @@
                             ...this.chartOptions, ...{
                                 yaxis: {
                                     max: largest,
+                                    labels: {
+                                        formatter: (val) => {
+                                            return this.statFormatter(val);
+                                        },
+                                    },
                                 },
-                                labels: data[0]['labels'],
+                                labels: data[0]['labels']
                             }
                         };
                         this.series = data;
@@ -136,10 +141,10 @@
                     },
                     fill: {
                         type: 'solid',
-                        opacity: 1.0,
+                        opacity: 0.9,
                         gradient: {
-                            enabled: true
-                        }
+                            enabled: false,
+                        },
                     },
                     legend: {
                         formatter: undefined,
