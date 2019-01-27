@@ -11,8 +11,9 @@
 namespace nystudio107\webperf\services;
 
 use craft\db\Query;
+use nystudio107\webperf\base\CraftDataSample;
 use nystudio107\webperf\Webperf;
-use nystudio107\webperf\models\DataSample;
+use nystudio107\webperf\models\RecommendationDataSample;
 
 use Craft;
 use craft\base\Component;
@@ -282,7 +283,7 @@ class Recommendations extends Component
             $result = $db->createCommand()->delete(
                 '{{%webperf_data_samples}}',
                 [
-                    'and', ['url' => DataSample::PLACEHOLDER_URL],
+                    'and', ['url' => CraftDataSample::PLACEHOLDER_URL],
                     ['not', ['requestId' => $requestId]],
                 ]
             )->execute();

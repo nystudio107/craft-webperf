@@ -25,7 +25,7 @@ use yii\web\Response;
  * @package   Webperf
  * @since     1.0.0
  */
-class RecommendationsControllerController extends Controller
+class RecommendationsController extends Controller
 {
     // Constants
     // =========================================================================

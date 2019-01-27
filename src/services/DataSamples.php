@@ -10,12 +10,13 @@
 
 namespace nystudio107\webperf\services;
 
-use craft\db\Query;
 use nystudio107\webperf\Webperf;
-use nystudio107\webperf\models\DataSample;
+use nystudio107\webperf\base\CraftDataSample;
+use nystudio107\webperf\base\DbDataSampleInterface;
 
 use Craft;
 use craft\base\Component;
+use craft\db\Query;
 
 /**
  * @author    nystudio107
@@ -87,9 +88,9 @@ class DataSamples extends Component
     /**
      * Add a data sample to the webperf_data_samples table
      *
-     * @param DataSample $dataSample
+     * @param DbDataSampleInterface $dataSample
      */
-    public function addDataSample(DataSample $dataSample)
+    public function addDataSample(DbDataSampleInterface $dataSample)
     {
         // Validate the model before saving it to the db
         if ($dataSample->validate() === false) {
@@ -117,7 +118,7 @@ class DataSamples extends Component
             }
         }
         // Get the validated model attributes and save them to the db
-        $dataSampleConfig = $dataSample->getAttributes($dataSample->fields());
+        $dataSampleConfig = $dataSample->getAttributes();
         $db = Craft::$app->getDb();
         if ($isNew) {
             Craft::debug('Creating new data sample', __METHOD__);
@@ -284,7 +285,7 @@ class DataSamples extends Component
             $result = $db->createCommand()->delete(
                 '{{%webperf_data_samples}}',
                 [
-                    'and', ['url' => DataSample::PLACEHOLDER_URL],
+                    'and', ['url' => CraftDataSample::PLACEHOLDER_URL],
                     ['not', ['requestId' => $requestId]],
                 ]
             )->execute();

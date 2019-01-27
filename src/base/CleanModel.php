@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2019 nystudio107
  */
 
-namespace nystudio107\webperf\models;
+namespace nystudio107\webperf\base;
 
 use craft\base\Model;
 
@@ -17,7 +17,7 @@ use craft\base\Model;
  * @package   Webperf
  * @since     1.0.0
  */
-class DbModel extends Model
+abstract class CleanModel extends Model
 {
     // Static Protected Methods
     // =========================================================================

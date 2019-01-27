@@ -18,7 +18,7 @@ namespace nystudio107\webperf\controllers {
     use nystudio107\webperf\Webperf;
     use nystudio107\webperf\helpers\MultiSite;
     use nystudio107\webperf\helpers\Permission as PermissionHelper;
-    use nystudio107\webperf\models\DataSample;
+    use nystudio107\webperf\models\BoomerangDbDataSample;
 
     use Jaybizzle\CrawlerDetect\CrawlerDetect;
     use WhichBrowser\Parser;
@@ -95,7 +95,7 @@ namespace nystudio107\webperf\controllers {
                 }
             }
             // Allocate a new DataSample, and fill it in
-            $sample = new DataSample();
+            $sample = new BoomerangDbDataSample();
             $url = $params['u'];
             $sample->url = UrlHelper::stripQueryString($url);
             $sample->queryString = parse_url($url, PHP_URL_QUERY);
@@ -166,8 +166,7 @@ namespace nystudio107\webperf\controllers {
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample
-            $sample->setScenario(DataSample::SCENARIO_BOOMERANG_BEACON);
-            Craft::debug('Saving DataSample: '.print_r($sample, true), __METHOD__);
+            Craft::debug('Saving BoomerangDbDataSample: '.print_r($sample, true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
             Craft::$app->end();
         }

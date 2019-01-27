@@ -10,8 +10,8 @@
 
 namespace nystudio107\webperf;
 
+use nystudio107\webperf\base\CraftDataSample;
 use nystudio107\webperf\log\ProfileTarget;
-use nystudio107\webperf\models\DataSample;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
@@ -210,7 +210,7 @@ class Webperf extends Plugin
      */
     protected function setRequestUrl(bool $force = false)
     {
-        self::$requestUrl = DataSample::PLACEHOLDER_URL;
+        self::$requestUrl = CraftDataSample::PLACEHOLDER_URL;
         if (!self::$settings->includeBeacon || $force || self::$settings->staticCachedSite) {
             $request = Craft::$app->getRequest();
             self::$requestUrl = UrlHelper::stripQueryString(

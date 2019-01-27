@@ -10,8 +10,9 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\models\DataSample;
 use nystudio107\webperf\Webperf;
+use nystudio107\webperf\base\CraftDataSample;
+use nystudio107\webperf\models\CraftDbDataSample;
 use nystudio107\webperf\helpers\PluginTemplate;
 
 use nystudio107\seomatic\Seomatic;
@@ -156,9 +157,9 @@ class Beacons extends Component
             + $stats['twig']['duration']
             + $stats['other']['duration']);
         // Allocate a new DataSample, and fill it in
-        $sample = new DataSample([
+        $sample = new CraftDbDataSample([
             'requestId' => Webperf::$requestUuid,
-            'url' => Webperf::$requestUrl ?? DataSample::PLACEHOLDER_URL,
+            'url' => Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL,
             'queryString' => $request->getQueryString(),
             'pageLoad' => $pageLoad,
             'craftTotalMs' => $pageLoad,
@@ -173,7 +174,6 @@ class Beacons extends Component
                 + $stats['other']['memory']),
         ]);
         // Save the data sample
-        $sample->setScenario(DataSample::SCENARIO_CRAFT_BEACON);
         Craft::debug('Saving Craft DataSample: '.print_r($sample, true), __METHOD__);
         Webperf::$plugin->dataSamples->addDataSample($sample);
     }

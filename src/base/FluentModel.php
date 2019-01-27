@@ -20,27 +20,8 @@ use yii\base\InvalidArgumentException;
  * @package   Webperf
  * @since     1.0.0
  */
-abstract class FluentModel extends Model
+abstract class FluentModel extends CleanModel
 {
-
-    // Static Protected Methods
-    // =========================================================================
-
-    /**
-     * Remove any properties that don't exist in the model
-     *
-     * @param string $class
-     * @param array  $config
-     */
-    protected static function cleanProperties(string $class, array &$config)
-    {
-        foreach ($config as $propName => $propValue) {
-            if (!property_exists($class, $propName)) {
-                unset($config[$propName]);
-            }
-        }
-    }
-
     // Public Methods
     // =========================================================================
 
