@@ -73,13 +73,17 @@
                     'pageUrl': this.pageUrl,
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    // Clone the chartOptions object, and replace the needed values
-                    const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
                         let largest = largestNumber([data[9]['data']])[0];
-                        options.yaxis.max = Math.ceil((largest / 1000) + 1) * 1000;
-                        options.labels = data[0]['labels'];
-                        this.chartOptions = options;
+                        largest = Math.ceil((largest / 1000) + .5) * 1000;
+                        this.chartOptions = {
+                            ...this.chartOptions, ...{
+                                yaxis: {
+                                    max: largest,
+                                },
+                                labels: data[0]['labels'],
+                            }
+                        };
                         this.series = data;
                     }
                 });

@@ -95,7 +95,6 @@
                     'end': this.displayEnd,
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    // Clone the chartOptions object, and replace the needed values
                     data.forEach((element, index, array) => {
                         let val = element.avg / 1000;
                         let maxValue = this.maxValue;

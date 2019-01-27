@@ -81,8 +81,6 @@
                     'pageUrl': this.pageUrl,
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    // Clone the chartOptions object, and replace the needed values
-                    const options = Object.assign({}, this.chartOptions);
                     if (data.avg !== undefined) {
                         let val = data.avg / 1000;
                         if (val > this.displayMaxValue) {
@@ -90,9 +88,20 @@
                         }
                         val = (val * 100) / this.displayMaxValue;
                         let chartColor = this.triBlend.colorFromPercentage(val);
-                        options.colors = [chartColor];
-                        options.plotOptions.radialBar.dataLabels.value.color = chartColor;
-                        this.chartOptions = options;
+                        this.chartOptions = {
+                            ...this.chartOptions, ...{
+                                colors: [chartColor],
+                                plotOptions: {
+                                    radialBar: {
+                                        dataLabels: {
+                                            value: {
+                                                color: chartColor,
+                                            }
+                                        }
+                                    }
+                                },
+                            }
+                        };
                         this.series = [val];
                     }
                 });

@@ -89,8 +89,6 @@
                     'pageUrl': this.pageUrl
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    // Clone the chartOptions object, and replace the needed values
-                    const options = Object.assign({}, this.chartOptions);
                     if (data.avg !== undefined) {
                         let val = data.avg / 1000;
                         if (val > this.displayMaxValue) {
