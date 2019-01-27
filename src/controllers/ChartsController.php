@@ -224,10 +224,7 @@ class ChartsController extends Controller
         $dateStart = new \DateTime($start);
         $dateEnd = new \DateTime($end);
         $interval = date_diff($dateStart, $dateEnd);
-        $dateFormat = '"%Y-%m-%d %l%p:%i"';
-        if ($interval->days > 1) {
-            $dateFormat = '"%Y-%m-%d %l%p"';
-        }
+        $dateFormat = '"%Y-%m-%d %l%p"';
         if ($interval->days > 30) {
             $dateFormat = '"%Y-%m-%d"';
         }
