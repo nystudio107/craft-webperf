@@ -7,7 +7,7 @@
     import ApexCharts from 'vue-apexcharts';
 
     const chartDataBaseUrl = '/webperf/charts/pages-area-chart/';
-    
+
     // Get the largest number from the passed in arrays
     const largestNumber = (mainArray) => {
         return mainArray.map(function(subArray) {
