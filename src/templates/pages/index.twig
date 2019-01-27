@@ -26,7 +26,13 @@
             <a href="{{ actionUrl('webperf/file/export-data-samples', {'pageUrl': '','siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export all Data Samples to a CSV file'|t }}">{{ "Export Data Samples"|t }}</a>
         </div>
         {% if currentUser.can("webperf:delete-data-samples") %}
-            <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}" class="btn delete icon" title="{{ 'Delete all Data Samples'|t }}">{{ "Delete Data Samples"|t }}</a>
+            <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}"
+               class="btn delete icon"
+               title="{{ 'Delete all Data Samples'|t }}"
+               onclick="return confirm('Are you sure you want to delete all data samples?')"
+            >
+                {{ "Delete Data Samples"|t }}
+            </a>
         {% endif %}
     </div>
 {% endblock %}
