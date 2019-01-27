@@ -50,7 +50,7 @@
         {# -- Range Picker -- #}
         {% include "webperf/_includes/range-picker.twig" %}
         <div class="pane">
-            <h1 class="text-center text-base text-3xl font-bold">Page Performance Timeline</h1>
+            <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance History</h1>
             <page-detail-area-chart
                     title=""
                     start="{{ start }}"
@@ -61,7 +61,7 @@
             </page-detail-area-chart>
         </div>
         <div class="pane">
-            <h1 class="text-center text-base text-3xl font-bold">Page Aggregate Metrics</h1>
+            <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance Data Samples</h1>
             <pages-index-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"

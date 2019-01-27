@@ -90,7 +90,7 @@
             </div>
         </div>
         <div class="pane first">
-            <h1 class="text-center text-base text-3xl font-bold">Page Performance Timeline</h1>
+            <h1 class="text-center text-base text-3xl font-bold">Page Performance History</h1>
             <page-detail-area-chart
                     title=""
                     start="{{ start }}"
@@ -117,7 +117,7 @@
 
         {% include "webperf/_includes/speed-color-key.twig" %}
         <div class="pane">
-            <h1 class="text-center text-base text-3xl font-bold">Performance Data Samples</h1>
+            <h1 class="text-center text-base text-3xl font-bold">Page Performance Data Samples</h1>
             <page-detail-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"
