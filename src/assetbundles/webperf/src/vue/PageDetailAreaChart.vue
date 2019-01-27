@@ -76,7 +76,8 @@
                     // Clone the chartOptions object, and replace the needed values
                     const options = Object.assign({}, this.chartOptions);
                     if (data[0] !== undefined) {
-                        options.yaxis.max = Math.round(largestNumber([data[9]['data']])[0] + 1.5);
+                        let largest = largestNumber([data[9]['data']])[0];
+                        options.yaxis.max = Math.ceil((largest / 1000) + 1) * 1000;
                         options.labels = data[0]['labels'];
                         this.chartOptions = options;
                         this.series = data;
@@ -116,6 +117,9 @@
                     tooltip: {
                         enabled: true,
                         inverseOrder: true,
+                        x: {
+                            show: false,
+                        },
                     },
                     colors: [
                         '#CC1F1A', '#E3342F', '#EF5753',
@@ -150,6 +154,7 @@
                     yaxis: {
                         min: 0,
                         max: 0,
+                        seriesName: 'Time',
                         labels: {
                             formatter: (val) => {
                                 return this.statFormatter(val);
