@@ -1,8 +1,20 @@
 <template>
-    <div>
-        <div v-for="item in series">
-            <div>
-                {{ item.summary }}
+    <div class="flex justify-center readable">
+        <div class="flex-row" style="max-width: 400px;">
+            <div v-for="item in series">
+                <div class="field">
+                    <p class="notice text-2xl">
+                        <span v-html="item.summary"></span>
+                    </p>
+                    <div class="heading" style="padding-left: 26px;">
+                        <p class="instructions text-xl">
+                            <span v-html="item.detail"></span>
+                            <a class="go" v-if="learnMoreUrl !== ''" :href="learnMoreUrl" target="_blank" rel="noopener,nofollow">
+                                Learn More
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -18,6 +18,8 @@ use Craft;
 use craft\base\Component;
 use craft\db\Query;
 
+use yii\helpers\Markdown;
+
 /**
  * @author    nystudio107
  * @package   Webperf
@@ -50,8 +52,8 @@ class Recommendations extends Component
             $rec = new $recClass(['sample' => $sample]);
             if ($rec->recommendation()) {
                 $data[] = [
-                    'summary' => $rec->summary(),
-                    'detail' => $rec->detail(),
+                    'summary' => Markdown::processParagraph($rec->summary()),
+                    'detail' => Markdown::processParagraph($rec->detail()),
                     'learnMoreLink' => $rec->learnMoreLink(),
                 ];
             }
