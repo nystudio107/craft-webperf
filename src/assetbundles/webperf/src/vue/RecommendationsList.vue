@@ -10,9 +10,9 @@
                         <div class="heading" style="padding-left: 26px;">
                             <p class="instructions text-xl">
                                 <span v-html="item.detail"></span>
-                                <a class="go" v-if="learnMoreUrl !== ''" :href="learnMoreUrl" target="_blank" rel="noopener,nofollow">
-                                    Learn More
-                                </a>
+                                <span class="field inline-block m-0">
+                                    <a class="go notice" v-if="item.learnMoreUrl !== ''" :href="item.learnMoreUrl" target="_blank" rel="noopener,nofollow">Learn More</a>
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
         props: {
             start: String,
             end: String,
-            displayDevModeWarning: {
+            devModeWarning: {
                 type: Boolean,
                 default: false
             },

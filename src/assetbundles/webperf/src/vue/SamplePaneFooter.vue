@@ -4,7 +4,7 @@
             <p class="instructions">The {{ subject }} data is an <em>average</em> of <strong>{{ formatNumber(samples) }}</strong> data sample<span v-if="samples !== 1">s</span>.</p>
         </div>
         <p v-if="samples < 100" class="warning">Webperf has collected less than <strong>100</strong> data samples. The sample size is not statistically significant, so above averaged results may not be meaningful.</p>
-        <p v-if="displayDevModeWarning" class="warning">Craft performance will be slower than normal with <code>devMode</code> enabled due to extensive logging and disabling of some caches. <a href="https://craftcms.com/guides/what-dev-mode-does" target="_blank">Learn More</a>.</p>
+        <p v-if="displayDevModeWarning" class="warning">Craft performance will be slower than normal with <code>devMode</code> enabled due to extensive logging and disabling of some caches. <span class="field inline-block m-0"><a class="notice go" href="https://craftcms.com/guides/what-dev-mode-does" target="_blank">Learn More</a></span></p>
     </div>
 </template>
 

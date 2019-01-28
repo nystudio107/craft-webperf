@@ -52,3 +52,11 @@
   margin-left: -50px;
   top: 150%;
 }
+
+.webperf-tooltip-link.notice.go {
+  color: #f1f5f8!important;
+}
+
+.webperf-tooltip-link.notice.go:after {
+  color: #b9bfc6!important;
+}
