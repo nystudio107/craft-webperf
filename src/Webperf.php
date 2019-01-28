@@ -186,7 +186,7 @@ class Webperf extends Plugin
                 $uri = '';
             }
             // Ignore our own controllers
-            if (self::$settings->includeCraftProfiling && strpos($uri, 'webperf/') !== 0) {
+            if (self::$settings->includeCraftProfiling && strpos($uri, 'webperf/') === false) {
                 // Add in the ProfileTarget component
                 try {
                     $this->set('profileTarget', [
