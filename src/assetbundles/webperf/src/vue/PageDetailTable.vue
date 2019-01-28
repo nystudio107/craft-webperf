@@ -21,7 +21,7 @@
                   @vuetable:loaded="onLoaded"
         >
             <template slot="sample-date" slot-scope="props">
-                <data-sample-date :date="props.rowData.dateUpdated"
+                <data-sample-date :date="props.rowData.dateCreated"
                                   :url="props.rowData.url"
                                   :query="props.rowData.query"
                 >

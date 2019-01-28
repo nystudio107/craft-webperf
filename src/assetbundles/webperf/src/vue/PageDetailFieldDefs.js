@@ -2,7 +2,7 @@
 export default [
     {
         name: '__slot:sample-date',
-        sortField: 'dateUpdated',
+        sortField: 'dateCreated',
         title: 'Sample Date',
         titleClass: 'text-left',
         dataClass: 'text-left',
