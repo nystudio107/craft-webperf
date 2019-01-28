@@ -14,6 +14,7 @@ use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
 use Craft;
 use craft\db\Query;
+use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 
@@ -101,7 +102,7 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
-            ->where(['between', 'dateUpdated', $start, $end])
+            ->where(['between', 'dateCreated', $start, $end])
         ;
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
@@ -170,7 +171,7 @@ class TablesController extends Controller
             $query = (new Query())
                 ->from(['{{%webperf_data_samples}}'])
                 ->groupBy('url')
-                ->where(['between', 'dateUpdated', $start, $end])
+                ->where(['between', 'dateCreated', $start, $end])
                 ;
             if ($filter !== '') {
                 $query->andWhere(['like', 'url', $filter]);
@@ -238,7 +239,7 @@ class TablesController extends Controller
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
-            ->andWhere(['between', 'dateUpdated', $start, $end])
+            ->andWhere(['between', 'dateCreated', $start, $end])
         ;
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
@@ -277,6 +278,10 @@ class TablesController extends Controller
             }
             // Massage the stats
             foreach ($stats as &$stat) {
+                if (!empty($stats['dateCreated'])) {
+                    $date = DateTimeHelper::toDateTime($stats['dateCreated']);
+                    $stats['dateCreated'] = $date->format('Y-m-d H:i:s');
+                }
                 $stat['mobile'] = (bool)$stat['mobile'];
                 $stat['maxTotalPageLoad'] = (int)$maxTotalPageLoad;
                 // Decode any emojis in the title
@@ -296,7 +301,7 @@ class TablesController extends Controller
             $query = (new Query())
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
-                ->andWhere(['between', 'dateUpdated', $start, $end])
+                ->andWhere(['between', 'dateCreated', $start, $end])
             ;
             if ($filter !== '') {
                 $query

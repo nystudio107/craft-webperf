@@ -77,7 +77,7 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG('.$column.') AS avg',
                 ])
-                ->where(['between', 'dateUpdated', $start, $end])
+                ->where(['between', 'dateCreated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -94,7 +94,7 @@ class ChartsController extends Controller
                 ->select([
                     'AVG("'.$column.'") AS avg',
                 ])
-                ->where(['between', 'dateUpdated', $start, $end])
+                ->where(['between', 'dateCreated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -148,7 +148,7 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG('.$column.') AS avg',
                 ])
-                ->where(['between', 'dateUpdated', $start, $end])
+                ->where(['between', 'dateCreated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -169,7 +169,7 @@ class ChartsController extends Controller
                     'COUNT(url) AS cnt',
                     'AVG("'.$column.'") AS avg',
                 ])
-                ->where(['between', 'dateUpdated', $start, $end])
+                ->where(['between', 'dateCreated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
@@ -246,9 +246,9 @@ class ChartsController extends Controller
                     'AVG(craftTotalMs) AS craftTotalMs',
                     'AVG(craftTwigMs) AS craftTwigMs',
                     'AVG(craftDbMs) AS craftDbMs',
-                    'DATE_FORMAT(dateUpdated, '.$dateFormat.') AS sampleDate',
+                    'DATE_FORMAT(dateCreated, '.$dateFormat.') AS sampleDate',
                 ])
-                ->where(['between', 'dateUpdated', $start, $end])
+                ->where(['between', 'dateCreated', $start, $end])
                 ;
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
