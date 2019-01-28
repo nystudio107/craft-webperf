@@ -28,4 +28,31 @@ trait RecommendationTrait
      * @var RecommendationDataSample
      */
     public $sample;
+
+    /**
+     * Whether or not there is a recommendation for this rule
+     *
+     * @var bool
+     */
+    public $hasRecommendation;
+
+    /**
+     * Short summary of the recommendation; used as the title, parsed as markdown
+     *
+     * @var string
+     */
+    public $summary;
+
+    /**
+     * Long detail text of the recommendation, parsed as markdown
+     * @var string
+     */
+    public $detail;
+
+    /**
+     * URL to learn more about this recommendation
+     *
+     * @var string
+     */
+    public $learnMoreUrl;
 }

@@ -26,32 +26,4 @@ interface RecommendationInterface
      * @return void
      */
     public function evaluate();
-
-    /**
-     * Returns true if there is a recommendation to be had
-     *
-     * @return bool
-     */
-    public function recommendation(): bool;
-
-    /**
-     * Returns the summary of the recommendation
-     *
-     * @return string
-     */
-    public function summary(): string;
-
-    /**
-     * Returns a link to learn more about the recommendation
-     *
-     * @return string
-     */
-    public function learnMoreLink(): string;
-
-    /**
-     * Returns the detailed text for the recommendation
-     *
-     * @return string
-     */
-    public function detail(): string;
 }

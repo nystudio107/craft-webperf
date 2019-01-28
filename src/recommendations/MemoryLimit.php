@@ -12,6 +12,8 @@ namespace nystudio107\webperf\recommendations;
 
 use nystudio107\webperf\base\Recommendation;
 
+use Craft;
+
 /**
  * @author    nystudio107
  * @package   Webperf
@@ -19,6 +21,12 @@ use nystudio107\webperf\base\Recommendation;
  */
 class MemoryLimit extends Recommendation
 {
+    // Constants
+    // =========================================================================
+
+    const MIN_CRAFT_MEMORY = 64 * 1024 * 1024;
+    const MAX_CRAFT_MEMORY = 1024 * 1024 * 1024;
+
     // Public Methods
     // =========================================================================
 
@@ -27,37 +35,82 @@ class MemoryLimit extends Recommendation
      */
     public function evaluate()
     {
+        $phpMemoryLimit = $this->memoryLimit();
+        if ($phpMemoryLimit) {
+            $ratio = $phpMemoryLimit / $this->sample->craftTotalMemory;
+            $displayCraftTotalMemory = (($this->sample->craftTotalMemory / 1024) / 1024) . 'M';
+            $displayPhpMemoryLimit = (($phpMemoryLimit / 1024) / 1024) . 'M';
+            $displayCraftMinMemory = ((self::MIN_CRAFT_MEMORY / 1024) / 1024) . 'M';
+            $displayCraftMaxMemory = ((self::MAX_CRAFT_MEMORY / 1024) / 1024) . 'M';
+            $this->summary = Craft::t(
+                'webperf',
+                'Check the `memory_limit` setting in your `php.ini` file',
+                []
+            );
+            // See if they have enough memory allocated
+            if ($phpMemoryLimit < self::MIN_CRAFT_MEMORY) {
+                $this->hasRecommendation = true;
+                $this->detail = Craft::t(
+                    'webperf',
+                    'Pixel & Tonic recommends at least {displayCraftMinMemory} allocated to PHP for Craft CMS 3. You have only {displayPhpMemoryLimit} allocated in your `php.ini` file.',
+                    [
+                        'displayPhpMemoryLimit' => $displayPhpMemoryLimit,
+                        'displayCraftMinMemory' => $displayCraftMinMemory,
+                    ]
+                );
+                $this->learnMoreUrl = 'https://docs.craftcms.com/v3/requirements.html';
+
+                return;
+            }
+            // See if they have too much memory allocated
+            if ($phpMemoryLimit >= self::MAX_CRAFT_MEMORY) {
+                $this->hasRecommendation = true;
+                $this->detail = Craft::t(
+                    'webperf',
+                    'Your `php.ini` file has `memory_limit` set to {displayPhpMemoryLimit}. This may be set too high, since it is a per-process memory limit, and memory-intensive image transforms are done in a process separate from PHP.',
+                    [
+                        'displayPhpMemoryLimit' => $displayPhpMemoryLimit,
+                    ]
+                );
+                $this->learnMoreUrl = 'https://docs.craftcms.com/v3/requirements.html';
+
+                return;
+            }
+            // See if they have too much memory allocated
+            if ($ratio < 1.5) {
+                $this->hasRecommendation = true;
+                $this->detail = Craft::t(
+                    'webperf',
+                    'Your `php.ini` file has `memory_limit` set to {displayPhpMemoryLimit}, but Craft is using {displayCraftTotalMemory}. Consider raising your `memory_limit`  to maintain a `1.5x` buffer of available memory.',
+                    [
+                        'displayPhpMemoryLimit' => $displayPhpMemoryLimit,
+                        'displayCraftTotalMemory' => $displayCraftTotalMemory,
+                    ]
+                );
+                $this->learnMoreUrl = 'https://docs.craftcms.com/v3/requirements.html';
+
+                return;
+            }
+        }
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function recommendation(): bool
-    {
-        return true;
-    }
+    // Protected Methods
+    // =========================================================================
 
     /**
-     * @inheritdoc
+     * @return int
      */
-    public function summary(): string
+    protected function memoryLimit(): int
     {
-        return 'This is a summary';
-    }
+        $memoryLimit = ini_get('memory_limit');
+        if (preg_match('/^(\d+)(.)$/', $memoryLimit, $matches)) {
+            if (strtoupper($matches[2]) === 'M') {
+                $memoryLimit = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
+            } elseif (strtoupper($matches[2]) === 'K') {
+                $memoryLimit = $matches[1] * 1024; // nnnK -> nnn KB
+            }
+        }
 
-    /**
-     * @inheritdoc
-     */
-    public function detail(): string
-    {
-        return 'This is a detail';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function learnMoreLink(): string
-    {
-        return 'http://woof.com';
+        return $memoryLimit;
     }
 }

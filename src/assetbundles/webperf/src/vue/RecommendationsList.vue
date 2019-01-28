@@ -1,21 +1,20 @@
 <template>
     <div>
-        <div class="flex justify-center readable">
-            <div class="flex-row" style="max-width: 400px;">
-                <div v-for="item in series">
-                    <div class="field">
-                        <p class="notice text-2xl">
-                            <span v-html="item.summary"></span>
-                        </p>
-                        <div class="heading" style="padding-left: 26px;">
-                            <p class="instructions text-xl">
-                                <span v-html="item.detail"></span>
-                                <span class="field inline-block m-0">
-                                    <a class="go notice" v-if="item.learnMoreUrl !== ''" :href="item.learnMoreUrl" target="_blank" rel="noopener,nofollow">Learn More</a>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
+        <div v-if="!series.length" class="text-3xl text-center py-10">
+            &#x1f389; No recommendations found. Nice job!
+        </div>
+        <div v-for="item in series">
+            <div class="field pb-4">
+                <p class="warning text-2xl leading-normal">
+                    <span v-html="item.summary"></span>
+                </p>
+                <div class="heading" style="padding-left: 26px;">
+                    <p class="instructions text-xl leading-tight">
+                        <span v-html="item.detail"></span>
+                        <span class="field inline-block m-0">
+                            <a class="go notice" v-if="item.learnMoreUrl !== ''" :href="item.learnMoreUrl" target="_blank" rel="noopener,nofollow">Learn More</a>
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>

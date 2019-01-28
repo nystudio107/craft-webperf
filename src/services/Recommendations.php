@@ -12,6 +12,13 @@ namespace nystudio107\webperf\services;
 
 use nystudio107\webperf\base\Recommendation;
 use nystudio107\webperf\models\RecommendationDataSample;
+use nystudio107\webperf\recommendations\CraftQueryCount;
+use nystudio107\webperf\recommendations\CraftQueryTime;
+use nystudio107\webperf\recommendations\CraftTotalTime;
+use nystudio107\webperf\recommendations\CraftTwigTime;
+use nystudio107\webperf\recommendations\DomInteractive;
+use nystudio107\webperf\recommendations\FirstByte;
+use nystudio107\webperf\recommendations\FirstContentfulPaint;
 use nystudio107\webperf\recommendations\MemoryLimit;
 
 use Craft;
@@ -31,6 +38,13 @@ class Recommendations extends Component
     // =========================================================================
 
     const RECOMMENDATIONS_LIST = [
+        CraftQueryCount::class,
+        CraftQueryTime::class,
+        CraftTwigTime::class,
+        CraftTotalTime::class,
+        FirstByte::class,
+        FirstContentfulPaint::class,
+        DomInteractive::class,
         MemoryLimit::class,
     ];
 
@@ -50,11 +64,11 @@ class Recommendations extends Component
         foreach (self::RECOMMENDATIONS_LIST as $recClass) {
             /** @var Recommendation $rec */
             $rec = new $recClass(['sample' => $sample]);
-            if ($rec->recommendation()) {
+            if ($rec->hasRecommendation) {
                 $data[] = [
-                    'summary' => Markdown::processParagraph($rec->summary()),
-                    'detail' => Markdown::processParagraph($rec->detail()),
-                    'learnMoreLink' => $rec->learnMoreLink(),
+                    'summary' => Markdown::processParagraph($rec->summary),
+                    'detail' => Markdown::processParagraph($rec->detail),
+                    'learnMoreUrl' => $rec->learnMoreUrl,
                 ];
             }
         }
