@@ -324,7 +324,7 @@ class DataSamples extends Component
                           FROM (
                             SELECT id
                             FROM {$quotedTable}
-                            ORDER BY dateUpdated DESC
+                            ORDER BY dateCreated DESC
                             LIMIT {$limit}
                           ) foo
                         )
@@ -341,7 +341,7 @@ class DataSamples extends Component
                           FROM (
                             SELECT id
                             FROM {$quotedTable}
-                            ORDER BY \"dateUpdated\" DESC
+                            ORDER BY \"dateCreated\" DESC
                             LIMIT {$limit}
                           ) foo
                         )
