@@ -1,27 +1,39 @@
 <template>
-    <div class="flex justify-center readable">
-        <div class="flex-row" style="max-width: 400px;">
-            <div v-for="item in series">
-                <div class="field">
-                    <p class="notice text-2xl">
-                        <span v-html="item.summary"></span>
-                    </p>
-                    <div class="heading" style="padding-left: 26px;">
-                        <p class="instructions text-xl">
-                            <span v-html="item.detail"></span>
-                            <a class="go" v-if="learnMoreUrl !== ''" :href="learnMoreUrl" target="_blank" rel="noopener,nofollow">
-                                Learn More
-                            </a>
+    <div>
+        <div class="flex justify-center readable">
+            <div class="flex-row" style="max-width: 400px;">
+                <div v-for="item in series">
+                    <div class="field">
+                        <p class="notice text-2xl">
+                            <span v-html="item.summary"></span>
                         </p>
+                        <div class="heading" style="padding-left: 26px;">
+                            <p class="instructions text-xl">
+                                <span v-html="item.detail"></span>
+                                <a class="go" v-if="learnMoreUrl !== ''" :href="learnMoreUrl" target="_blank" rel="noopener,nofollow">
+                                    Learn More
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <sample-pane-footer
+                start="start"
+                end="end"
+                subject="recommendations"
+                column="id"
+                :site-id="siteId"
+                :display-dev-mode-warning="devModeWarning"
+        >
+        </sample-pane-footer>
     </div>
 </template>
 
 <script>
     import Axios from 'axios';
+    import SamplePaneFooter from '../vue/SamplePaneFooter.vue';
 
     const dataBaseUrl = '/webperf/recommendations/list/';
 
@@ -54,10 +66,15 @@
     // Our component exports
     export default {
         components: {
+            'sample-pane-footer': SamplePaneFooter,
         },
         props: {
             start: String,
             end: String,
+            displayDevModeWarning: {
+                type: Boolean,
+                default: false
+            },
             pageUrl: {
                 type: String,
                 default: '',

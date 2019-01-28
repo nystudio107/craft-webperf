@@ -12,14 +12,18 @@
 
 {# -- Recommendations -- #}
 {% if currentUser.can("webperf:recommendations") %}
+    {% set devModeWarning = craft.app.config.general.devMode ? 'true' : 'false' %}
     <div class="pane">
-        <h1 class="text-center text-base text-3xl font-bold">Recommendations</h1>
-        <recommendations-list
-                start="{{ start }}"
-                end="{{ end }}"
-                page-url="{{ pageUrl ?? '' }}"
-                :site-id="{{ currentSiteId ?? 0 }}"
-        >
-        </recommendations-list>
+        <div class="px-8">
+            <h1 class="text-center text-base text-3xl font-bold">Recommendations</h1>
+            <recommendations-list
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url="{{ pageUrl ?? '' }}"
+                    :site-id="{{ currentSiteId ?? 0 }}"
+                    :dev-mode-warning="{{ devModeWarning }}"
+            >
+            </recommendations-list>
+        </div>
     </div>
 {% endif %}
