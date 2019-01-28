@@ -39,6 +39,7 @@
         "hasCpSection": true,
         "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-webperf/master/CHANGELOG.md",
         "components": {
+            "recommendations": "nystudio107\\webperf\\services\\Recommendations",
             "dataSamples": "nystudio107\\webperf\\services\\DataSamples",
             "beacons": "nystudio107\\webperf\\services\\Beacons"
         },

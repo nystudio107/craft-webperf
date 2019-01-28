@@ -33,6 +33,14 @@ class RecommendationDataSample extends FluentModel
         rules as boomerangRules;
     }
 
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * @var int
+     */
+    public $cnt;
+
     // Public Methods
     // =========================================================================
 

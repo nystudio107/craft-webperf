@@ -10,6 +10,8 @@
 
 namespace nystudio107\webperf\base;
 
+use nystudio107\webperf\models\RecommendationDataSample;
+
 /**
  * @author    nystudio107
  * @package   Webperf
@@ -17,16 +19,13 @@ namespace nystudio107\webperf\base;
  */
 trait RecommendationTrait
 {
-    // Properties
+    // Public Properties
     // =========================================================================
 
     /**
-     * @var string
+     * The data sample to be evaluated
+     *
+     * @var RecommendationDataSample
      */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $description;
+    public $sample;
 }

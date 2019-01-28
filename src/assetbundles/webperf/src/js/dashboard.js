@@ -6,6 +6,7 @@ import DashboardSimpleBarChart from '../vue/DashboardSimpleBarChart.vue';
 import DashboardFileList from '../vue/DashboardFileList.vue';
 import SampleRangePicker from '../vue/SampleRangePicker.vue';
 import SamplePaneFooter from '../vue/SamplePaneFooter.vue';
+import RecommendationsList from '../vue/RecommendationsList.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
@@ -18,6 +19,7 @@ const vm = new Vue({
         'dashboard-file-list': DashboardFileList,
         'sample-range-picker': SampleRangePicker,
         'sample-pane-footer': SamplePaneFooter,
+        'recommendations-list': RecommendationsList,
     },
     data: {
     },

@@ -10,8 +10,6 @@
 
 namespace nystudio107\webperf\base;
 
-use craft\validators\ArrayValidator;
-
 /**
  * @author    nystudio107
  * @package   Webperf
@@ -24,20 +22,17 @@ abstract class Recommendation extends FluentModel implements RecommendationInter
 
     use RecommendationTrait;
 
-    // Static Methods
-    // =========================================================================
-
-    // Public Properties
-    // =========================================================================
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function addData($data, string $key)
+    public function init()
     {
-        $this->data[$key] = $data;
+        parent::init();
+        if ($this->sample) {
+            $this->evaluate();
+        }
     }
 }

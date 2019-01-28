@@ -19,21 +19,45 @@ use nystudio107\webperf\base\Recommendation;
  */
 class MemoryLimit extends Recommendation
 {
-
-    // Static Methods
-    // =========================================================================
-
-    // Public Properties
-    // =========================================================================
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function addData($data, string $key)
+    public function evaluate()
     {
-        $this->data[$key] = $data;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function recommendation(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function summary(): string
+    {
+        return 'This is a summary';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function detail(): string
+    {
+        return 'This is a detail';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function learnMoreLink(): string
+    {
+        return 'http://woof.com';
     }
 }

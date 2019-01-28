@@ -15,6 +15,7 @@ use nystudio107\webperf\log\ProfileTarget;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
+use nystudio107\webperf\services\Recommendations as RecommendationsService;
 use nystudio107\webperf\variables\WebperfVariable;
 use nystudio107\webperf\widgets\Metrics as MetricsWidget;
 
@@ -43,9 +44,10 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property  DataSamplesService  $dataSamples
- * @property  BeaconsService      $beacons
- * @property  ProfileTarget       $profileTarget
+ * @property  RecommendationsService  $recommendations
+ * @property  DataSamplesService      $dataSamples
+ * @property  BeaconsService          $beacons
+ * @property  ProfileTarget           $profileTarget
  */
 class Webperf extends Plugin
 {
@@ -502,6 +504,11 @@ class Webperf extends Plugin
             '/webperf/charts/pages-area-chart/<siteId:\d+>'
             => 'webperf/charts/pages-area-chart',
 
+            '/webperf/recommendations/list'
+            => 'webperf/recommendations/list',
+            '/webperf/recommendations/list/<siteId:\d+>'
+            => 'webperf/recommendations/list',
+
             '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];
     }
@@ -543,6 +550,9 @@ class Webperf extends Plugin
             ],
             'webperf:page-detail' => [
                 'label' => Craft::t('webperf', 'Page Detail'),
+            ],
+            'webperf:recommendations' => [
+                'label' => Craft::t('webperf', 'Recommendations'),
             ],
             'webperf:delete-data-samples' => [
                 'label' => Craft::t('webperf', 'Delete Data Samples'),

@@ -1,0 +1,25 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+* Webperf plugin for Craft CMS 3.x
+*
+* Monitor the performance of your webpages through real-world user timing data
+*
+* @link      https://nystudio107.com
+* @copyright Copyright (c) 2019 nystudio107
+*/
+#}
+
+{# -- Recommendations -- #}
+{% if currentUser.can("webperf:recommendations") %}
+    <div class="pane">
+        <h1 class="text-center text-base text-3xl font-bold">Recommendations</h1>
+        <recommendations-list
+                start="{{ start }}"
+                end="{{ end }}"
+                page-url="{{ pageUrl ?? '' }}"
+                :site-id="{{ currentSiteId ?? 0 }}"
+        >
+        </recommendations-list>
+    </div>
+{% endif %}

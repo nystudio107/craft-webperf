@@ -76,7 +76,11 @@
             {% include "webperf/dashboard/_includes/craft.twig" %}
         {% endif %}
 
+        {# -- Chart color key -- #}
         {% include "webperf/_includes/speed-color-key.twig" %}
+
+        {# -- Recommendations -- #}
+        {% include "webperf/_includes/recommendations.twig" %}
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}

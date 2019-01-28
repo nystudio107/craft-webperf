@@ -17,22 +17,41 @@ namespace nystudio107\webperf\base;
  */
 interface RecommendationInterface
 {
-
-    // Constants
-    // =========================================================================
-
-    // Static Methods
-    // =========================================================================
-
     // Public Methods
     // =========================================================================
 
     /**
-     * Add data to the container. If the $key already exists, it is overwritten
+     * Evaluate the passed in RecommendationDataSample
      *
-     * @param        $data
-     * @param string $key
+     * @return void
      */
-    public function addData($data, string $key);
+    public function evaluate();
 
+    /**
+     * Returns true if there is a recommendation to be had
+     *
+     * @return bool
+     */
+    public function recommendation(): bool;
+
+    /**
+     * Returns the summary of the recommendation
+     *
+     * @return string
+     */
+    public function summary(): string;
+
+    /**
+     * Returns a link to learn more about the recommendation
+     *
+     * @return string
+     */
+    public function learnMoreLink(): string;
+
+    /**
+     * Returns the detailed text for the recommendation
+     *
+     * @return string
+     */
+    public function detail(): string;
 }
