@@ -55,14 +55,17 @@ class ChartsController extends Controller
      * @throws ForbiddenHttpException
      */
     public function actionDashboardStatsAverage(
-        string $start,
-        string $end,
+        string $start = '',
+        string $end = '',
         string $column = 'pageLoad',
         $pageUrl = '',
         int $siteId = 0
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
+        if (empty($end) || empty($start)) {
+            return $this->asJson($data);
+        }
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
         $pageUrl = urldecode($pageUrl);
@@ -92,12 +95,16 @@ class ChartsController extends Controller
             $query = (new Query())
                 ->from('{{%webperf_data_samples}}')
                 ->select([
+                    'COUNT(url) AS cnt',
                     'AVG("'.$column.'") AS avg',
                 ])
                 ->where(['between', 'dateCreated', $start, $end])
                 ->andWhere(['not', [$column => null]]);
             if ((int)$siteId !== 0) {
                 $query->andWhere(['siteId' => $siteId]);
+            }
+            if ($pageUrl !== '') {
+                $query->andWhere(['url' => $pageUrl]);
             }
             $stats = $query->all();
         }
