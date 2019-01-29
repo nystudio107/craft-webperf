@@ -247,13 +247,24 @@ class DataSamples extends Component
         if (Webperf::$settings->trimOutlierDataSamples) {
             $db = Craft::$app->getDb();
             Craft::debug('Trimming outlier samples', __METHOD__);
-            // Get the average pageload time
-            $stats = (new Query())
-                ->from('{{%webperf_data_samples}}')
-                ->select([
-                    'AVG(pageload) AS avg',
-                ])
-                ->one();
+            if ($db->getIsMysql()) {
+                // Get the average pageload time
+                $stats = (new Query())
+                    ->from('{{%webperf_data_samples}}')
+                    ->select([
+                        'AVG(pageLoad) AS avg',
+                    ])
+                    ->one();
+            }
+            if ($db->getIsPgsql()) {
+                // Get the average pageload time
+                $stats = (new Query())
+                    ->from('{{%webperf_data_samples}}')
+                    ->select([
+                        'AVG("pageLoad") AS avg',
+                    ])
+                    ->one();
+            }
             if (!empty($stats['avg'])) {
                 $threshold = $stats['avg'] * self::OUTLIER_PAGELOAD_MULTIPLIER;
                 // Delete any samples that are far above average
