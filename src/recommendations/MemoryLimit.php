@@ -36,7 +36,7 @@ class MemoryLimit extends Recommendation
     public function evaluate()
     {
         $phpMemoryLimit = $this->memoryLimit();
-        if ($phpMemoryLimit) {
+        if ($phpMemoryLimit && $this->sample->craftTotalMemory) {
             $ratio = $phpMemoryLimit / $this->sample->craftTotalMemory;
             $displayCraftTotalMemory = (($this->sample->craftTotalMemory / 1024) / 1024) . 'M';
             $displayPhpMemoryLimit = (($phpMemoryLimit / 1024) / 1024) . 'M';
