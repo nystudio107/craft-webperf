@@ -23,6 +23,7 @@
                 end="end"
                 subject="recommendations"
                 column="id"
+                :page-url="pageUrl"
                 :site-id="siteId"
                 :display-dev-mode-warning="devModeWarning"
         >
