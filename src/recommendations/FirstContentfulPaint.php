@@ -36,7 +36,6 @@ class FirstContentfulPaint extends Recommendation
     {
         // See if there are too many database queries
         if ($this->sample->firstContentfulPaint >= self::MAX_FIRST_CONTENTFUL_PAINT_TIME) {
-            $displayFirstContentfulPaint = ($this->sample->firstContentfulPaint / 1000) . 's';
             $this->hasRecommendation = true;
             $this->summary = Craft::t(
                 'webperf',
@@ -47,7 +46,7 @@ class FirstContentfulPaint extends Recommendation
                 'webperf',
                 'The first contentful paint took {displayFirstContentfulPaint}. Try to avoid blocking the render by implementing [CriticalCSS](https://nystudio107.com/blog/implementing-critical-css), optimizing the [Critical Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/) by loading JavaScript asynchronously, and using the [font-display](https://css-tricks.com/font-display-masses/) property.',
                 [
-                    'displayFirstContentfulPaint' => $displayFirstContentfulPaint,
+                    'displayFirstContentfulPaint' => $this->displayMs($this->sample->firstContentfulPaint),
                 ]
             );
             $this->learnMoreUrl = 'https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint';

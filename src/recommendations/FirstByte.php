@@ -36,7 +36,6 @@ class FirstByte extends Recommendation
     {
         // See if there are too many database queries
         if ($this->sample->firstByte >= self::MAX_TOTAL_TIME) {
-            $displayFirstByte = ($this->sample->firstByte / 1000) . 's';
             $this->hasRecommendation = true;
             $this->summary = Craft::t(
                 'webperf',
@@ -47,7 +46,7 @@ class FirstByte extends Recommendation
                 'webperf',
                 'The time it took for the client to receive the first byte of data from the server was {displayFirstByte}. Look into decreasing that via the `{% cache %}` tag or some kind of static caching such as the [Blitz](https://github.com/putyourlightson/craft-blitz) plugin, [FastCGI Cache](https://nystudio107.com/blog/static-caching-with-craft-cms), or [Varnish](https://supercool.github.io/2015/06/08/making-craft-sing-with-varnish-and-nginx.html).',
                 [
-                    'displayFirstByte' => $displayFirstByte,
+                    'displayFirstByte' => $this->displayMs($this->sample->firstByte),
                 ]
             );
             $this->learnMoreUrl = 'https://craftcms.com/guides/why-is-my-site-slow';

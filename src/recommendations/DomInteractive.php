@@ -36,7 +36,6 @@ class DomInteractive extends Recommendation
     {
         // See if there are too many database queries
         if ($this->sample->domInteractive >= self::MAX_DOM_INTERACTIVE_TIME) {
-            $displayDomInteractive = ($this->sample->domInteractive / 1000) . 's';
             $this->hasRecommendation = true;
             $this->summary = Craft::t(
                 'webperf',
@@ -47,7 +46,7 @@ class DomInteractive extends Recommendation
                 'webperf',
                 'The time to interactive was {displayDomInteractive}. Try to reduce this by reducing the amount of JavaScript that is executed on your page, and ensure that [Marketing Tags](https://nystudio107.com/blog/tags-gone-wild) are kept in check.',
                 [
-                    'displayDomInteractive' => $displayDomInteractive,
+                    'displayDomInteractive' => $this->displayMs($this->sample->domInteractive),
                 ]
             );
             $this->learnMoreUrl = 'https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive';

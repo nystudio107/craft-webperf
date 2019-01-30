@@ -35,4 +35,16 @@ abstract class Recommendation extends FluentModel implements RecommendationInter
             $this->evaluate();
         }
     }
+
+    /**
+     * Display the passed in ms in seconds, to two decimal places
+     *
+     * @param int $number
+     *
+     * @return string
+     */
+    public function displayMs(int $number): string
+    {
+        return number_format((float)$number / 1000, 2).'s';
+    }
 }

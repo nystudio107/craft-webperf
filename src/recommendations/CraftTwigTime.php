@@ -36,7 +36,6 @@ class CraftTwigTime extends Recommendation
     {
         // See if there are too many database queries
         if ($this->sample->craftTwigMs >= self::MAX_TWIG_TIME) {
-            $displayCraftTwigMs = ($this->sample->craftTwigMs / 1000) . 's';
             $this->hasRecommendation = true;
             $this->summary = Craft::t(
                 'webperf',
@@ -47,7 +46,7 @@ class CraftTwigTime extends Recommendation
                 'webperf',
                 'The Twig templates took {displayCraftTwigMs} to render. Try to simplify the templates by doing less computation in Twig, and profiling them to see where the bottlenecks are.',
                 [
-                    'displayCraftTwigMs' => $displayCraftTwigMs,
+                    'displayCraftTwigMs' => $this->displayMs($this->sample->craftTwigMs),
                 ]
             );
             $this->learnMoreUrl = 'https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar';

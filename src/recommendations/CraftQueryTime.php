@@ -36,7 +36,6 @@ class CraftQueryTime extends Recommendation
     {
         // See if there are too many database queries
         if ($this->sample->craftDbMs >= self::MAX_QUERY_TIME) {
-            $displayCraftDbMs = ($this->sample->craftDbMs / 1000) . 's';
             $this->hasRecommendation = true;
             $this->summary = Craft::t(
                 'webperf',
@@ -47,7 +46,7 @@ class CraftQueryTime extends Recommendation
                 'webperf',
                 'The database queries took {displayCraftDbMs} to execute. Try to simplify the database queries, or leverage Eager Loading in Craft to speed them up.',
                 [
-                    'displayCraftDbMs' => $displayCraftDbMs,
+                    'displayCraftDbMs' => $this->displayMs($this->sample->craftDbMs),
                 ]
             );
             $this->learnMoreUrl = 'https://nystudio107.com/blog/speed-up-your-craft-cms-templates-with-eager-loading';

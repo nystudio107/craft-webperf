@@ -36,7 +36,6 @@ class CraftTotalTime extends Recommendation
     {
         // See if there are too many database queries
         if ($this->sample->craftTotalMs >= self::MAX_TOTAL_TIME) {
-            $displayCraftTotalMs = ($this->sample->craftTotalMs / 1000) . 's';
             $this->hasRecommendation = true;
             $this->summary = Craft::t(
                 'webperf',
@@ -47,7 +46,7 @@ class CraftTotalTime extends Recommendation
                 'webperf',
                 'It took Craft a total of {displayCraftTotalMs} to render. Ensure you are utilizing the `{% cache %}` tag effectively to solve concurrency issues.',
                 [
-                    'displayCraftTotalMs' => $displayCraftTotalMs,
+                    'displayCraftTotalMs' => $this->displayMs($this->sample->craftTotalMs),
                 ]
             );
             $this->learnMoreUrl = 'https://nystudio107.com/blog/the-craft-cache-tag-in-depth';
