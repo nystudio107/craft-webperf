@@ -75,7 +75,7 @@
                 await queryApi(chartsAPI, uri, params, (data) => {
                     if (data[0] !== undefined) {
                         let largest = largestNumber([data[9]['data']])[0];
-                        largest = Math.ceil((largest / 1000) + .5) * 1000;
+                        largest = Math.ceil((largest / 1000)) * 1000;
                         this.chartOptions = {
                             ...this.chartOptions, ...{
                                 yaxis: {
