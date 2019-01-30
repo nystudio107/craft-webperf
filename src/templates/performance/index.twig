@@ -1,0 +1,78 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Webperf plugin for Craft CMS 3.x
+ *
+ * Monitor the performance of your webpages through real-world user timing data
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2019 nystudio107
+ */
+#}
+
+{% requirePermission "webperf:page-detail" %}
+
+{% extends "webperf/_layouts/webperf-cp.twig" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block contextMenu %}
+    {% include "webperf/_includes/sites-menu.twig" with {'params': {}} %}
+{% endblock %}
+
+{% block actionButton %}
+    <div class="buttons">
+        <div class="webperf-button-container">
+            <a href="{{ actionUrl('webperf/file/export-data-samples', {'pageUrl': '','siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export all Data Samples to a CSV file'|t }}">{{ "Export Data Samples"|t }}</a>
+        </div>
+        {% if currentUser.can("webperf:delete-data-samples") %}
+            <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}"
+               class="btn delete icon"
+               title="{{ 'Delete all Data Samples'|t }}"
+               onclick="return confirm('Are you sure you want to delete all data samples?')"
+            >
+                {{ "Delete Data Samples"|t }}
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <style>
+        #content {
+            background: none !important;
+        }
+        .apexcharts-canvas {
+            margin: 0 auto!important;
+        }
+    </style>
+    <div id="cp-nav-content" v-cloak>
+        {# -- Range Picker -- #}
+        {% include "webperf/_includes/range-picker.twig" %}
+        <div class="pane first">
+            <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance History</h1>
+            <page-detail-area-chart
+                    title=""
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url=""
+                    :site-id="{{ currentSiteId }}"
+            >
+            </page-detail-area-chart>
+        </div>
+        <div class="pane">
+            <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance Data Samples</h1>
+            <pages-index-table :site-id="{{ currentSiteId }}"
+                               start="{{ start }}"
+                               end="{{ end }}"
+                               fast-color="{{ settings.dashboardFastColor }}"
+                               average-color="{{ settings.dashboardAverageColor }}"
+                               slow-color="{{ settings.dashboardSlowColor }}"
+            >
+            </pages-index-table>
+        </div>
+    </div>
+    {# include our JavaScript modules #}
+    {{ parent() }}
+    {{ craft.webperf.includeJsModule("pages-index.js", false) }}
+{% endblock %}

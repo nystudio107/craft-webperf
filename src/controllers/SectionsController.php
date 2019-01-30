@@ -115,7 +115,7 @@ class SectionsController extends Controller
     public function actionPagesIndex(string $siteHandle = null): Response
     {
         $variables = [];
-        PermissionHelper::controllerPermissionCheck('webperf:pages');
+        PermissionHelper::controllerPermissionCheck('webperf:performance');
         // Trim the statistics
         Webperf::$plugin->dataSamples->trimOrphanedSamples(1024);
         Webperf::$plugin->dataSamples->trimDataSamples();
@@ -163,7 +163,7 @@ class SectionsController extends Controller
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
         // Render the template
-        return $this->renderTemplate('webperf/pages/index', $variables);
+        return $this->renderTemplate('webperf/performance/index', $variables);
     }
 
     /**
@@ -233,6 +233,6 @@ class SectionsController extends Controller
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
         // Render the template
-        return $this->renderTemplate('webperf/pages/page-detail', $variables);
+        return $this->renderTemplate('webperf/performance/page-detail', $variables);
     }
 }

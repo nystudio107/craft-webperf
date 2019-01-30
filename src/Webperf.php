@@ -173,10 +173,10 @@ class Webperf extends Plugin
                 'url' => 'webperf/dashboard',
             ];
         }
-        if ($currentUser->can('webperf:pages')) {
-            $subNavs['pages'] = [
-                'label' => 'Pages',
-                'url' => 'webperf/pages',
+        if ($currentUser->can('webperf:performance')) {
+            $subNavs['performance'] = [
+                'label' => 'Performance',
+                'url' => 'webperf/performance',
             ];
         }
         if ($currentUser->can('webperf:settings')) {
@@ -547,11 +547,11 @@ class Webperf extends Plugin
             'webperf/dashboard' => 'webperf/sections/dashboard',
             'webperf/dashboard/<siteHandle:{handle}>' => 'webperf/sections/dashboard',
 
-            'webperf/pages' => 'webperf/sections/pages-index',
-            'webperf/pages/<siteHandle:{handle}>' => 'webperf/sections/pages-index',
+            'webperf/performance' => 'webperf/sections/pages-index',
+            'webperf/performance/<siteHandle:{handle}>' => 'webperf/sections/pages-index',
 
-            'webperf/page-detail' => 'webperf/sections/page-detail',
-            'webperf/page-detail/<siteHandle:{handle}>' => 'webperf/sections/page-detail',
+            'webperf/performance/page-detail' => 'webperf/sections/page-detail',
+            'webperf/performance/page-detail/<siteHandle:{handle}>' => 'webperf/sections/page-detail',
 
             'webperf/settings' => 'webperf/settings/plugin-settings',
         ];
@@ -568,8 +568,8 @@ class Webperf extends Plugin
             'webperf:dashboard' => [
                 'label' => Craft::t('webperf', 'Dashboard'),
             ],
-            'webperf:pages' => [
-                'label' => Craft::t('webperf', 'Pages'),
+            'webperf:performance' => [
+                'label' => Craft::t('webperf', 'Performance'),
             ],
             'webperf:page-detail' => [
                 'label' => Craft::t('webperf', 'Page Detail'),

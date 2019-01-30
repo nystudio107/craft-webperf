@@ -1,0 +1,138 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Webperf plugin for Craft CMS 3.x
+ *
+ * Monitor the performance of your webpages through real-world user timing data
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2019 nystudio107
+ */
+#}
+
+{% requirePermission "webperf:page-detail" %}
+
+{% extends "webperf/_layouts/webperf-cp.twig" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block contextMenu %}
+    {% include "webperf/_includes/sites-menu.twig" with {'params': {'pageUrl': pageUrl}} %}
+{% endblock %}
+
+{% block actionButton %}
+    <div class="buttons">
+        <div class="webperf-button-container">
+            <a href="{{ actionUrl('webperf/file/export-data-samples', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export Page Data Samples to a CSV file'|t }}">{{ "Export Data Samples"|t }}</a>
+        </div>
+        {% if currentUser.can("webperf:delete-data-samples") %}
+            <a href="{{ actionUrl('webperf/data-samples/delete-samples-by-url', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}"
+               class="btn delete icon"
+               title="{{ 'Delete Page Data Samples'|t }}"
+               onclick="return confirm('Are you sure you want to delete page data samples?')"
+            >
+                {{ "Delete Data Samples"|t }}
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <style>
+        #content {
+            background: none !important;
+        }
+        .apexcharts-canvas {
+            margin: 0 auto!important;
+        }
+    </style>
+    <div id="cp-nav-content" v-cloak>
+        {# -- Range Picker -- #}
+        {% include "webperf/_includes/range-picker.twig" %}
+        <div class="pb-4">
+            <div class="pane first">
+                {% if pageTitle | length %}
+                    <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight"
+                    >
+                        <a href="{{ pageUrl }}"
+                           target="_blank"
+                           style="color: rgb(26, 13, 171);"
+                        >
+                            {{ pageTitle }}
+                        </a>
+                    </h1>
+                {% else %}
+                    <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight text-grey-light"
+                    >
+                        <em>{{ 'Craft backend route'|t }}</em>
+                    </h1>
+                {% endif %}
+                <h2 class="w-full text-left text-base text-xl font-bold truncate-label mb-0 leading-tight mt-1"
+                >
+                    <a href="{{ pageUrl }}"
+                       class="hover:no-underline"
+                       target="_blank"
+                       style="color: rgb(0, 102, 33);"
+                       >
+                        {{ pageUrl }}
+                    </a>
+                </h2>
+                {% set devModeWarning = 'false' %}
+                <sample-pane-footer
+                        start="{{ start }}"
+                        end="{{ end }}"
+                        subject="charts"
+                        column="id"
+                        page-url="{{ pageUrl }}"
+                        :site-id="{{ currentSiteId }}"
+                        :display-dev-mode-warning="{{ devModeWarning }}"
+                >
+                </sample-pane-footer>
+            </div>
+        </div>
+        <div class="pane first">
+            <h1 class="text-center text-base text-3xl font-bold">Page Performance History</h1>
+            <page-detail-area-chart
+                    title=""
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url="{{ pageUrl }}"
+                    :site-id="{{ currentSiteId }}"
+            >
+            </page-detail-area-chart>
+        </div>
+        <div class="w-full flex-item-row items-start justify-between">
+            <div class="flex-row three-up-page-detail-grid-item self-top">
+                {# -- Frontend -- #}
+                {% include "webperf/performance/_includes/frontend.twig" %}
+            </div>
+            <div class="flex-row three-up-page-detail-grid-item self-top">
+                {# -- Backend -- #}
+                {% include "webperf/performance/_includes/backend.twig" %}
+            </div>
+            <div class="flex-row three-up-page-detail-grid-item self-top">
+                {# -- Craft -- #}
+                {% include "webperf/performance/_includes/craft.twig" %}
+            </div>
+        </div>
+
+        {# -- Chart color key -- #}
+        {% include "webperf/_includes/speed-color-key.twig" %}
+
+        {# -- Recommendations -- #}
+        {% include "webperf/_includes/recommendations.twig" %}
+
+        <div class="pane">
+            <h1 class="text-center text-base text-3xl font-bold">Page Performance Data Samples</h1>
+            <page-detail-table :site-id="{{ currentSiteId }}"
+                               start="{{ start }}"
+                               end="{{ end }}"
+                               page-url="{{ pageUrl }}"
+            >
+            </page-detail-table>
+        </div>
+    </div>
+    {# include our JavaScript modules #}
+    {{ parent() }}
+    {{ craft.webperf.includeJsModule("page-detail.js", false) }}
+{% endblock %}

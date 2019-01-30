@@ -71,7 +71,7 @@ class FileController extends Controller
      */
     public function actionExportDataSamples(string $pageUrl = '', int $siteId = null)
     {
-        PermissionHelper::controllerPermissionCheck('webperf:pages');
+        PermissionHelper::controllerPermissionCheck('webperf:performance');
         $this->exportCsvFile('webperf-data-samples', '{{%webperf_data_samples}}', self::EXPORT_DATA_SAMPLES_COLUMNS, $pageUrl, $siteId);
     }
 

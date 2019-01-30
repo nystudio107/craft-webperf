@@ -65,7 +65,7 @@ class TablesController extends Controller
         $filter = '',
         $siteId = 0
     ): Response {
-        PermissionHelper::controllerPermissionCheck('webperf:pages');
+        PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
         $sortType = 'DESC';
@@ -154,7 +154,7 @@ class TablesController extends Controller
                     'pageUrl' => $stat['url'],
                     'siteId' => $siteId
                 ]);
-                $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/page-detail', [
+                $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/performance/page-detail', [
                     'pageUrl' => $stat['url'],
                     'siteId' => $siteId,
                 ]);
@@ -219,7 +219,7 @@ class TablesController extends Controller
         $pageUrl = '',
         $siteId = 0
     ): Response {
-        PermissionHelper::controllerPermissionCheck('webperf:pages');
+        PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
         $sortType = 'DESC';

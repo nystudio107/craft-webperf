@@ -148,7 +148,7 @@ class ChartsController extends Controller
         if ($stats) {
             foreach ($stats as &$stat) {
                 $stat['cnt'] = (int)$stat['cnt'];
-                $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/page-detail', [
+                $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/performance/page-detail', [
                     'pageUrl' => $stat['url'],
                     'siteId' => $siteId,
                 ]);
