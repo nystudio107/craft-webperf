@@ -72,42 +72,22 @@ class ChartsController extends Controller
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
-        if ($db->getIsMysql()) {
-            // Query the db
-            $query = (new Query())
-                ->from('{{%webperf_data_samples}}')
-                ->select([
-                    'COUNT(url) AS cnt',
-                    'AVG('.$column.') AS avg',
-                ])
-                ->where(['between', 'dateCreated', $start, $end])
-                ->andWhere(['not', [$column => null]]);
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['siteId' => $siteId]);
-            }
-            if ($pageUrl !== '') {
-                $query->andWhere(['url' => $pageUrl]);
-            }
-            $stats = $query->all();
+        // Query the db
+        $query = (new Query())
+            ->from('{{%webperf_data_samples}}')
+            ->select([
+                'COUNT([[url]]) AS cnt',
+                'AVG([['.$column.']]) AS avg',
+            ])
+            ->where(['between', 'dateCreated', $start, $end])
+            ->andWhere(['not', [$column => null]]);
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
         }
-        if ($db->getIsPgsql()) {
-            // Query the db
-            $query = (new Query())
-                ->from('{{%webperf_data_samples}}')
-                ->select([
-                    'COUNT(url) AS cnt',
-                    'AVG("'.$column.'") AS avg',
-                ])
-                ->where(['between', 'dateCreated', $start, $end])
-                ->andWhere(['not', [$column => null]]);
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['siteId' => $siteId]);
-            }
-            if ($pageUrl !== '') {
-                $query->andWhere(['url' => $pageUrl]);
-            }
-            $stats = $query->all();
+        if ($pageUrl !== '') {
+            $query->andWhere(['url' => $pageUrl]);
         }
+        $stats = $query->all();
         // Massage the data
         if ($stats) {
             foreach ($stats as &$stat) {
@@ -145,48 +125,25 @@ class ChartsController extends Controller
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
-        if ($db->getIsMysql()) {
-            // Query the db
-            $query = (new Query())
-                ->from('{{%webperf_data_samples}}')
-                ->select([
-                    'url',
-                    'MIN(title) AS title',
-                    'COUNT(url) AS cnt',
-                    'AVG('.$column.') AS avg',
-                ])
-                ->where(['between', 'dateCreated', $start, $end])
-                ->andWhere(['not', [$column => null]]);
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['siteId' => $siteId]);
-            }
-            $query
-                ->orderBy('avg DESC')
-                ->groupBy('url')
-                ->limit($limit);
-            $stats = $query->all();
+        // Query the db
+        $query = (new Query())
+            ->from('{{%webperf_data_samples}}')
+            ->select([
+                '[[url]]',
+                'MIN([[title]]) AS title',
+                'COUNT([[url]]) AS cnt',
+                'AVG([['.$column.']]) AS avg',
+            ])
+            ->where(['between', 'dateCreated', $start, $end])
+            ->andWhere(['not', [$column => null]]);
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
         }
-        if ($db->getIsPgsql()) {
-            // Query the db
-            $query = (new Query())
-                ->from('{{%webperf_data_samples}}')
-                ->select([
-                    'url',
-                    'MIN("title") AS title',
-                    'COUNT(url) AS cnt',
-                    'AVG("'.$column.'") AS avg',
-                ])
-                ->where(['between', 'dateCreated', $start, $end])
-                ->andWhere(['not', [$column => null]]);
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['siteId' => $siteId]);
-            }
-            $query
-                ->orderBy('avg DESC')
-                ->groupBy('url')
-                ->limit($limit);
-            $stats = $query->all();
-        }
+        $query
+            ->orderBy('avg DESC')
+            ->groupBy('url')
+            ->limit($limit);
+        $stats = $query->all();
         // Massage the data
         if ($stats) {
             foreach ($stats as &$stat) {
@@ -231,44 +188,60 @@ class ChartsController extends Controller
         $dateStart = new \DateTime($start);
         $dateEnd = new \DateTime($end);
         $interval = date_diff($dateStart, $dateEnd);
-        $dateFormat = '"%Y-%m-%d %H"';
+        $dateFormat = "'%Y-%m-%d %H'";
         if ($interval->days > 30) {
-            $dateFormat = '"%Y-%m-%d"';
+            $dateFormat = "'%Y-%m-%d'";
         }
-        // Different dbs do it different ways
+            // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
+        if ($db->getIsPgsql()) {
+            $dateFormat = "'yyyy-mm-dd HH:MM'";
+            if ($interval->days > 30) {
+                $dateFormat = "'yyyy-mm-dd'";
+            }
+        }
+        // Query the db
+        $query = (new Query())
+            ->from('{{%webperf_data_samples}}')
+            ->select([
+                'AVG([[pageLoad]]) AS [[pageLoad]]',
+                'AVG([[domInteractive]]) AS [[domInteractive]]',
+                'AVG([[firstContentfulPaint]]) AS [[firstContentfulPaint]]',
+                'AVG([[firstPaint]]) AS [[firstPaint]]',
+                'AVG([[firstByte]]) AS [[firstByte]]',
+                'AVG([[connect]]) AS [[connect]]',
+                'AVG([[dns]]) AS [[dns]]',
+                'AVG([[craftTotalMs]]) AS [[craftTotalMs]]',
+                'AVG([[craftTwigMs]]) AS [[craftTwigMs]]',
+                'AVG([[craftDbMs]]) AS [[craftDbMs]]',
+            ])
+            ->where(['between', 'dateCreated', $start, $end])
+            ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+        if ($pageUrl !== '') {
+            $query->andWhere(['url' => $pageUrl]);
+        }
         if ($db->getIsMysql()) {
-            // Query the db
-            $query = (new Query())
-                ->from('{{%webperf_data_samples}}')
-                ->select([
-                    'AVG(pageLoad) AS pageLoad',
-                    'AVG(domInteractive) AS domInteractive',
-                    'AVG(firstContentfulPaint) AS firstContentfulPaint',
-                    'AVG(firstPaint) AS firstPaint',
-                    'AVG(firstByte) AS firstByte',
-                    'AVG(connect) AS connect',
-                    'AVG(dns) AS dns',
-                    'AVG(craftTotalMs) AS craftTotalMs',
-                    'AVG(craftTwigMs) AS craftTwigMs',
-                    'AVG(craftDbMs) AS craftDbMs',
-                    'DATE_FORMAT(dateCreated, '.$dateFormat.') AS sampleDate',
+            $query
+                ->addSelect([
+                    'DATE_FORMAT([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
                 ])
-                ->where(['between', 'dateCreated', $start, $end])
-                ;
-            if ((int)$siteId !== 0) {
-                $query->andWhere(['siteId' => $siteId]);
-            }
-            if ($pageUrl !== '') {
-                $query->andWhere(['url' => $pageUrl]);
-            }
-            $stats = $query
                 ->groupBy('sampleDate')
-                ->all();
+            ;
         }
         if ($db->getIsPgsql()) {
+            $query
+                ->addSelect([
+                    'to_char([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                ])
+                ->groupBy(['to_char([[dateCreated]], '.$dateFormat.')'])
+            ;
         }
+        $stats = $query
+            ->all();
         // Massage the data
         if ($stats) {
             $data[] = [

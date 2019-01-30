@@ -83,22 +83,22 @@ class TablesController extends Controller
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
             ->select([
-                'url',
-                'MIN(title) AS title',
-                'COUNT(url) AS cnt',
-                'AVG(pageLoad) AS pageLoad',
-                'AVG(domInteractive) AS domInteractive',
-                'AVG(firstContentfulPaint) AS firstContentfulPaint',
-                'AVG(firstPaint) AS firstPaint',
-                'AVG(firstByte) AS firstByte',
-                'AVG(connect) AS connect',
-                'AVG(dns) AS dns',
-                'AVG(craftTotalMs) AS craftTotalMs',
-                'AVG(craftDbCnt) AS craftDbCnt',
-                'AVG(craftDbMs) AS craftDbMs',
-                'AVG(craftTwigCnt) AS craftTwigCnt',
-                'AVG(craftTwigMs) AS craftTwigMs',
-                'AVG(craftTotalMemory) AS craftTotalMemory',
+                '[[url]]',
+                'MIN([[title]]) AS [[title]]',
+                'COUNT([[url]]) AS [[cnt]]',
+                'AVG([[pageLoad]]) AS [[pageLoad]]',
+                'AVG([[domInteractive]]) AS [[domInteractive]]',
+                'AVG([[firstContentfulPaint]]) AS [[firstContentfulPaint]]',
+                'AVG([[firstPaint]]) AS [[firstPaint]]',
+                'AVG([[firstByte]]) AS [[firstByte]]',
+                'AVG([[connect]]) AS [[connect]]',
+                'AVG([[dns]]) AS [[dns]]',
+                'AVG([[craftTotalMs]]) AS [[craftTotalMs]]',
+                'AVG([[craftDbCnt]]) AS [[craftDbCnt]]',
+                'AVG([[craftDbMs]]) AS [[craftDbMs]]',
+                'AVG([[craftTwigCnt]]) AS [[craftTwigCnt]]',
+                'AVG([[craftTwigMs]]) AS [[craftTwigMs]]',
+                'AVG([[craftTotalMemory]]) AS [[craftTotalMemory]]',
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
@@ -114,7 +114,7 @@ class TablesController extends Controller
             ;
         }
         $query
-            ->orderBy("{$sortField} {$sortType}")
+            ->orderBy("[[{$sortField}]] {$sortType}")
             ->groupBy('url')
             ->limit($per_page)
         ;
@@ -169,8 +169,9 @@ class TablesController extends Controller
             // Format the data for the API
             $data['data'] = $stats;
             $query = (new Query())
+                ->select(['[[url]]'])
                 ->from(['{{%webperf_data_samples}}'])
-                ->groupBy('url')
+                ->groupBy('[[url]]')
                 ->where(['between', 'dateCreated', $start, $end])
                 ;
             if ($filter !== '') {
@@ -299,6 +300,7 @@ class TablesController extends Controller
             // Format the data for the API
             $data['data'] = $stats;
             $query = (new Query())
+                ->select(['[[url]]'])
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
                 ->andWhere(['between', 'dateCreated', $start, $end])

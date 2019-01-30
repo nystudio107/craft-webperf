@@ -51,6 +51,7 @@ class DataSamples extends Component
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
+
         return $query->count();
     }
 
@@ -247,31 +248,17 @@ class DataSamples extends Component
         if (Webperf::$settings->trimOutlierDataSamples) {
             $db = Craft::$app->getDb();
             Craft::debug('Trimming outlier samples', __METHOD__);
-            if ($db->getIsMysql()) {
-                // Get the average pageload time
-                $stats = (new Query())
-                    ->from('{{%webperf_data_samples}}')
-                    ->select([
-                        'AVG(pageLoad) AS avg',
-                    ])
-                    ->one();
-            }
-            if ($db->getIsPgsql()) {
-                // Get the average pageload time
-                $stats = (new Query())
-                    ->from('{{%webperf_data_samples}}')
-                    ->select([
-                        'AVG("pageLoad") AS avg',
-                    ])
-                    ->one();
-            }
+            // Get the average pageload time
+            $stats = (new Query())
+                ->from('{{%webperf_data_samples}}')
+                ->average('[[pageLoad]]');
             if (!empty($stats['avg'])) {
                 $threshold = $stats['avg'] * self::OUTLIER_PAGELOAD_MULTIPLIER;
                 // Delete any samples that are far above average
                 try {
                     $result = $db->createCommand()->delete(
                         '{{%webperf_data_samples}}',
-                        ['>', 'pageLoad', $threshold]
+                        ['>', '[[pageLoad]]', $threshold]
                     )->execute();
                     Craft::debug($result, __METHOD__);
                 } catch (\Exception $e) {
