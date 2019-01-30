@@ -46,7 +46,7 @@ class CraftQueryCount extends Recommendation
                 'webperf',
                 'A total of {dbQueries} database queries were executed. Look into decreasing the number of database queries needed by leveraging Eager Loading in Craft CMS.',
                 [
-                    'dbQueries' => $this->sample->craftDbCnt,
+                    'dbQueries' => round($this->sample->craftDbCnt),
                 ]
             );
             $this->learnMoreUrl = 'https://nystudio107.com/blog/speed-up-your-craft-cms-templates-with-eager-loading';
