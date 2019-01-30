@@ -12,6 +12,7 @@ namespace nystudio107\webperf;
 
 use nystudio107\webperf\base\CraftDataSample;
 use nystudio107\webperf\log\ProfileTarget;
+use nystudio107\webperf\models\RecommendationDataSample;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
@@ -51,6 +52,12 @@ use yii\base\InvalidConfigException;
  */
 class Webperf extends Plugin
 {
+    // Constants
+    // =========================================================================
+
+    const RECOMMENDATIONS_CACHE_KEY = 'webperf-recommendations';
+    const RECOMMENDATIONS_CACHE_DURATION = 60;
+
     // Static Properties
     // =========================================================================
 
@@ -141,7 +148,23 @@ class Webperf extends Plugin
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
-        $navItem['badgeCount'] = '⚠';
+        $cache = Craft::$app->getCache();
+        // See if there are any recommendations to add as a badge
+        $recommendations = $cache->getOrSet(self::RECOMMENDATIONS_CACHE_KEY, function () {
+            $data = [];
+            $now = new \DateTime();
+            $end = $now->format('Y-m-d');
+            $start = $now->modify('-1 year')->format('Y-m-d');
+            $stats = Webperf::$plugin->recommendations->data('', $start, $end);
+            if (!empty($stats)) {
+                $recSample = new RecommendationDataSample($stats);
+                $data = Webperf::$plugin->recommendations->list($recSample);
+            }
+            return count($data);
+        }, self::RECOMMENDATIONS_CACHE_DURATION);
+        if ($recommendations) {
+            $navItem['badgeCount'] = $recommendations;
+        }
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('webperf:dashboard')) {
