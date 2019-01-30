@@ -99,24 +99,24 @@ class Recommendations extends Component
         // Query the db table
         $query = (new Query())
             ->select([
-                'COUNT([[url]]) AS cnt',
+                'COUNT([[url]]) AS [[cnt]]',
 
-                'AVG([[pageLoad]]) AS pageLoad',
-                'AVG([[domInteractive]]) AS domInteractive',
-                'AVG([[firstContentfulPaint]]) AS firstContentfulPaint',
-                'AVG([[firstPaint]]) AS firstPaint',
-                'AVG([[firstByte]]) AS firstByte',
-                'AVG([[connect]]) AS connect',
-                'AVG([[dns]]) AS dns',
+                'AVG([[pageLoad]]) AS [[pageLoad]]',
+                'AVG([[domInteractive]]) AS [[domInteractive]]',
+                'AVG([[firstContentfulPaint]]) AS [[firstContentfulPaint]]',
+                'AVG([[firstPaint]]) AS [[firstPaint]]',
+                'AVG([[firstByte]]) AS [[firstByte]]',
+                'AVG([[connect]]) AS [[connect]]',
+                'AVG([[dns]]) AS [[dns]]',
 
-                'AVG([[craftTotalMs]]) AS craftTotalMs',
-                'AVG([[craftDbMs]]) AS craftDbMs',
-                'AVG([[craftDbCnt]]) AS craftDbCnt',
-                'AVG([[craftTwigMs]]) AS craftTwigMs',
-                'AVG([[craftTwigCnt]]) AS craftTwigCnt',
-                'AVG([[craftOtherMs]]) AS craftOtherMs',
-                'AVG([[craftOtherCnt]]) AS craftOtherCnt',
-                'AVG([[craftTotalMemory]]) AS craftTotalMemory',
+                'AVG([[craftTotalMs]]) AS [[craftTotalMs]]',
+                'AVG([[craftDbMs]]) AS [[craftDbMs]]',
+                'AVG([[craftDbCnt]]) AS [[craftDbCnt]]',
+                'AVG([[craftTwigMs]]) AS [[craftTwigMs]]',
+                'AVG([[craftTwigCnt]]) AS [[craftTwigCnt]]',
+                'AVG([[craftOtherMs]]) AS [[craftOtherMs]]',
+                'AVG([[craftOtherCnt]]) AS [[craftOtherCnt]]',
+                'AVG([[craftTotalMemory]]) AS [[craftTotalMemory]]',
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->where(['between', 'dateCreated', $start, $end]);
