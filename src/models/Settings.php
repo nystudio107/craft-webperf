@@ -54,7 +54,7 @@ class Settings extends Model
     /**
      * @var int The number of data samples to store
      */
-    public $dataSamplesStoredLimit = 10000;
+    public $dataSamplesStoredLimit = 100000;
 
     /**
      * @var bool Whether the DataSamples should be trimmed after each new DataSample is added
