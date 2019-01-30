@@ -12,17 +12,17 @@
 
 {# -- Frontend -- #}
 <div class="pane first">
-    <h1 class="text-center text-base text-3xl font-bold">Frontend Profile</h1>
+    <h1 class="text-center text-base text-3xl font-bold">{{ "Browser Performance"|t("webperf") }}</h1>
     <div class="w-full flex-item-row items-start">
         <div class="flex-row three-up-sm-grid-item self-top">
             <div class="webperf-tooltip">
                 <span class="webperf-tooltiptext">
-                    The time it takes for the webpage to be fully loaded in the client's browser.
+                    {{ "The time it takes for the webpage to be fully loaded in the client's browser."|t("webperf") }}
                     <span class="field inline-block m-0">
                         <a href="https://developers.google.com/web/fundamentals/performance/speed-tools/"
                            target="_blank"
                            class="webperf-tooltip-link notice go"
-                        >Learn More</a>
+                        >{{ "Learn More"|t("webperf") }}</a>
                     </span>
                 </span>
                 <dashboard-radial-bar-chart
@@ -43,12 +43,12 @@
             <div class="">
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
-                        When the browser first begins to nominally paint content into the browser.
+                        {{  "When the browser first begins to nominally paint content into the browser."|t("webperf") }}
                         <span class="field inline-block m-0">
                             <a href="https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint"
                                target="_blank"
                                class="webperf-tooltip-link notice go"
-                            >Learn More</a>
+                            >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
                     <dashboard-simple-bar-chart
@@ -66,12 +66,12 @@
                 </div>
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
-                        The first meaningful content that the client sees "painted" in their browser.
+                        {{ "The first meaningful content that the client sees 'painted' in their browser."|t("webperf") }}
                         <span class="field inline-block m-0">
                             <a href="https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint"
                                target="_blank"
                                class="webperf-tooltip-link notice go"
-                            >Learn More</a>
+                            >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
                     <dashboard-simple-bar-chart
@@ -89,12 +89,12 @@
                 </div>
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
-                        How long it takes before the user can interact with elements on the page.
+                        {{ "How long it takes before the user can interact with elements on the page."|t("webperf") }}
                         <span class="field inline-block m-0">
                             <a href="https://developers.google.com/web/tools/lighthouse/audits/time-to-interactive"
                                target="_blank"
                                class="webperf-tooltip-link notice go"
-                            >Learn More</a>
+                            >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
                     <dashboard-simple-bar-chart

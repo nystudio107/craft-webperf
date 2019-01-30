@@ -12,17 +12,17 @@
 
 {# -- Craft -- #}
 <div class="pane">
-    <h1 class="text-center text-base text-3xl font-bold">Craft Profile</h1>
+    <h1 class="text-center text-base text-3xl font-bold">{{ "Craft Performance"|t("webperf") }}</h1>
     <div class="w-full flex-item-row items-start">
         <div class="flex-row three-up-sm-grid-item self-top">
             <div class="webperf-tooltip">
                 <span class="webperf-tooltiptext">
-                    The total amount of time it takes Craft to process the webpages.
+                    {{ "The total amount of time it takes Craft to process the webpages."|t("webperf") }}
                     <span class="field inline-block m-0">
                         <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
                            target="_blank"
                            class="webperf-tooltip-link notice go"
-                        >Learn More</a>
+                        >{{ "Learn More"|t("webperf") }}</a>
                     </span>
                 </span>
                 <dashboard-radial-bar-chart
@@ -43,12 +43,12 @@
             <div class="">
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
-                        How long it takes to execute the database queries for the webpages.
+                        {{ "How long it takes to execute the database queries for the webpages."|t("webperf") }}
                         <span class="field inline-block m-0">
                             <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
                                target="_blank"
                                class="webperf-tooltip-link notice go"
-                            >Learn More</a>
+                            >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
                     <dashboard-simple-bar-chart
@@ -66,12 +66,12 @@
                 </div>
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
-                        How long it takes Twig to render the templates for the webpages.
+                        {{ "How long it takes Twig to render the templates for the webpages."|t("webperf") }}
                         <span class="field inline-block m-0">
                             <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
                                target="_blank"
                                class="webperf-tooltip-link notice go"
-                            >Learn More</a>
+                            >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
                     <dashboard-simple-bar-chart
@@ -89,12 +89,12 @@
                 </div>
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
-                        Other profiled code (such as from plugins) in order to process the webpages.
+                        {{ "Other profiled code (such as from plugins) in order to process the webpages."|t("webperf") }}
                         <span class="field inline-block m-0">
                             <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
                                target="_blank"
                                class="webperf-tooltip-link notice go"
-                            >Learn More</a>
+                            >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
                     <dashboard-simple-bar-chart
