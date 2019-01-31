@@ -121,6 +121,11 @@ class Webperf extends Plugin
             self::$requestUuid = null;
         }
         $this->name = self::$settings->pluginName;
+        // Handle any console commands
+        $request = Craft::$app->getRequest();
+        if ($request->getIsConsoleRequest()) {
+            $this->controllerNamespace = 'nystudio107\webperf\console\controllers';
+        }
         // Add in our components
         $this->addComponents();
         // Install event listeners
