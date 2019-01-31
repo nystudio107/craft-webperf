@@ -23,15 +23,15 @@
 {% block actionButton %}
     <div class="buttons">
         <div class="webperf-button-container">
-            <a href="{{ actionUrl('webperf/file/export-data-samples', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export Page Data Samples to a CSV file'|t }}">{{ "Export Data Samples"|t }}</a>
+            <a href="{{ actionUrl('webperf/file/export-data-samples', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export Page Data Samples to a CSV file'|t("webperf") }}">{{ "Export Data Samples"|t("webperf") }}</a>
         </div>
         {% if currentUser.can("webperf:delete-data-samples") %}
             <a href="{{ actionUrl('webperf/data-samples/delete-samples-by-url', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}"
                class="btn delete icon"
-               title="{{ 'Delete Page Data Samples'|t }}"
+               title="{{ 'Delete Page Data Samples'|t("webperf") }}"
                onclick="return confirm('Are you sure you want to delete page data samples?')"
             >
-                {{ "Delete Data Samples"|t }}
+                {{ "Delete Data Samples"|t("webperf") }}
             </a>
         {% endif %}
     </div>
@@ -64,7 +64,7 @@
                 {% else %}
                     <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight text-grey-light"
                     >
-                        <em>{{ 'Craft backend route'|t }}</em>
+                        <em>{{ "Craft backend route"|t("webperf") }}</em>
                     </h1>
                 {% endif %}
                 <h2 class="w-full text-left text-base text-xl font-bold truncate-label mb-0 leading-tight mt-1"
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="pane first">
-            <h1 class="text-center text-base text-3xl font-bold">Page Performance History</h1>
+            <h1 class="text-center text-base text-3xl font-bold">{{ "Page Performance History"|t("webperf") }}</h1>
             <page-detail-area-chart
                     title=""
                     start="{{ start }}"
@@ -123,7 +123,7 @@
         {% include "webperf/_includes/recommendations.twig" %}
 
         <div class="pane">
-            <h1 class="text-center text-base text-3xl font-bold">Page Performance Data Samples</h1>
+            <h1 class="text-center text-base text-3xl font-bold">{{ "Page Performance Data Samples"|t("webperf") }}</h1>
             <page-detail-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"

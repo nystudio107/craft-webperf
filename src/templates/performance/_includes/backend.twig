@@ -12,16 +12,16 @@
 
 {# -- Backend -- #}
 <div class="pane">
-    <h1 class="text-center text-base text-3xl font-bold">Backend Profile</h1>
+    <h1 class="text-center text-base text-3xl font-bold">{{ "Backend Profile"|t("webperf") }}</h1>
     <div class="w-full flex-item-row items-start">
         <div class="webperf-tooltip w-full">
             <span class="webperf-tooltiptext">
-                How long it takes before the first byte of data is received from the server.
+                {{ "How long it takes before the first byte of data is received from the server."|t("webperf") }}
                 <span class="field inline-block m-0">
                     <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
                        target="_blank"
                        class="webperf-tooltip-link notice go"
-                    >Learn More</a>
+                    >{{ "Learn More"|t("webperf") }}</a>
                 </span>
             </span>
             <dashboard-radial-bar-chart
@@ -41,12 +41,12 @@
         <div class="w-full">
             <div class="webperf-tooltip">
                 <span class="webperf-tooltiptext">
-                    How long it takes to do a DNS lookup of the website's IP address.
+                    {{ "How long it takes to do a DNS lookup of the website's IP address."|t("webperf") }}
                     <span class="field inline-block m-0">
                         <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
                        target="_blank"
                        class="webperf-tooltip-link notice go"
-                        >Learn More</a>
+                        >{{ "Learn More"|t("webperf") }}</a>
                     </span>
                 </span>
                 <dashboard-simple-bar-chart
@@ -65,12 +65,12 @@
             </div>
             <div class="webperf-tooltip">
                 <span class="webperf-tooltiptext">
-                    How long it takes to negotiate a connection to the server.
+                    {{ "How long it takes to negotiate a connection to the server."|t("webperf") }}
                     <span class="field inline-block m-0">
                         <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
                            target="_blank"
                            class="webperf-tooltip-link notice go"
-                        >Learn More</a>
+                        >{{ "Learn More"|t("webperf") }}</a>
                     </span>
                 </span>
                 <dashboard-simple-bar-chart
@@ -89,12 +89,12 @@
             </div>
             <div class="webperf-tooltip invisible">
                 <span class="webperf-tooltiptext">
-                    How long it takes to negotiate a connection to the server.
+                    {{ "How long it takes to negotiate a connection to the server."|t("webperf") }}
                     <span class="field inline-block m-0">
                         <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
                            target="_blank"
                            class="webperf-tooltip-link notice go"
-                        >Learn More</a>
+                        >{{ "Learn More"|t("webperf") }}</a>
                     </span>
                 </span>
                 <dashboard-simple-bar-chart
