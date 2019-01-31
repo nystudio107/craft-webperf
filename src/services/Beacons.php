@@ -12,8 +12,10 @@ namespace nystudio107\webperf\services;
 
 use nystudio107\webperf\Webperf;
 use nystudio107\webperf\base\CraftDataSample;
-use nystudio107\webperf\models\CraftDbDataSample;
+use nystudio107\webperf\helpers\MultiSite;
 use nystudio107\webperf\helpers\PluginTemplate;
+use nystudio107\webperf\models\CraftDbErrorSample;
+use nystudio107\webperf\models\CraftDbDataSample;
 
 use nystudio107\seomatic\Seomatic;
 
@@ -21,6 +23,7 @@ use Jaybizzle\CrawlerDetect\CrawlerDetect;
 
 use Craft;
 use craft\base\Component;
+use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
 
 /**
@@ -151,6 +154,14 @@ class Beacons extends Component
                 Craft::$app->end();
             }
         }
+        $url = Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL;
+        // Get the site id
+        try {
+            $site = MultiSite::getSiteFromUrl($url);
+            $siteId = $site->id;
+        } catch (SiteNotFoundException $e) {
+            $siteId = null;
+        }
         $stats = Webperf::$plugin->profileTarget->stats;
         $request = Craft::$app->getRequest();
         $pageLoad = (int)($stats['database']['duration']
@@ -159,7 +170,9 @@ class Beacons extends Component
         // Allocate a new DataSample, and fill it in
         $sample = new CraftDbDataSample([
             'requestId' => Webperf::$requestUuid,
-            'url' => Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL,
+            'siteId' => $siteId,
+            'url' => $url,
+            'title' => $this->getDocumentTitle(),
             'queryString' => $request->getQueryString(),
             'pageLoad' => $pageLoad,
             'craftTotalMs' => $pageLoad,
@@ -176,6 +189,42 @@ class Beacons extends Component
         // Save the data sample
         Craft::debug('Saving Craft DataSample: '.print_r($sample, true), __METHOD__);
         Webperf::$plugin->dataSamples->addDataSample($sample);
+    }
+
+    /**
+     * @return void
+     * @throws \yii\base\ExitException
+     */
+    public function includeCraftErrorsBeacon()
+    {
+        // Filter out bot/spam requests via UserAgent
+        if (Webperf::$settings->filterBotUserAgents) {
+            $crawlerDetect = new CrawlerDetect;
+            // Check the user agent of the current 'visitor'
+            if ($crawlerDetect->isCrawler()) {
+                Craft::$app->end();
+            }
+        }
+        $url = Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL;
+        // Get the site id
+        try {
+            $site = MultiSite::getSiteFromUrl($url);
+            $siteId = $site->id;
+        } catch (SiteNotFoundException $e) {
+            $siteId = null;
+        }
+        $messages = Webperf::$plugin->errorsTarget->messages;
+        // Allocate a new DataSample, and fill it in
+        $sample = new CraftDbErrorSample([
+            'requestId' => Webperf::$requestUuid,
+            'siteId' => $siteId,
+            'url' => $url,
+            'title' => $this->getDocumentTitle(),
+            'pageErrors' => $messages,
+        ]);
+        // Save the data sample
+        Craft::debug('Saving Craft ErrorSample: '.print_r($sample, true), __METHOD__);
+        Webperf::$plugin->errorSamples->addErrorSample($sample);
     }
 
     // Protected Methods

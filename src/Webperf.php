@@ -11,6 +11,7 @@
 namespace nystudio107\webperf;
 
 use nystudio107\webperf\base\CraftDataSample;
+use nystudio107\webperf\log\ErrorsTarget;
 use nystudio107\webperf\log\ProfileTarget;
 use nystudio107\webperf\models\RecommendationDataSample;
 use nystudio107\webperf\models\Settings;
@@ -50,6 +51,7 @@ use yii\base\InvalidConfigException;
  * @property  DataSamplesService      $dataSamples
  * @property  ErrorSamplesService     $errorSamples
  * @property  BeaconsService          $beacons
+ * @property  ErrorsTarget            $errorsTarget
  * @property  ProfileTarget           $profileTarget
  */
 class Webperf extends Plugin
@@ -225,7 +227,26 @@ class Webperf extends Plugin
                     Craft::error($e->getMessage(), __METHOD__);
                 }
                 // Attach our log target
-                Craft::$app->getLog()->targets['webperf'] = $this->profileTarget;
+                Craft::$app->getLog()->targets['webperf-profile'] = $this->profileTarget;
+                // Add in the ErrorsTarget component
+                $except = [];
+                // If devMode is on, exclude errors/warnings from `seomatic`
+                if (Craft::$app->getConfig()->getGeneral()->devMode) {
+                    $except = ['seomatic'];
+                }
+                try {
+                    $this->set('errorsTarget', [
+                        'class' => ErrorsTarget::class,
+                        'levels' => ['error','warning'],
+                        'categories' => [],
+                        'logVars' => [],
+                        'except' => $except,
+                    ]);
+                } catch (InvalidConfigException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
+                }
+                // Attach our log target
+                Craft::$app->getLog()->targets['webperf-errors'] = $this->errorsTarget;
             }
         }
     }
