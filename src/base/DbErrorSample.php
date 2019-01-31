@@ -17,7 +17,7 @@ use yii\behaviors\AttributeTypecastBehavior;
  * @package   Webperf
  * @since     1.0.0
  */
-abstract class DbErrorSample extends FluentModel
+abstract class DbErrorSample extends FluentModel implements DbErrorSampleInterface
 {
     // Traits
     // =========================================================================
