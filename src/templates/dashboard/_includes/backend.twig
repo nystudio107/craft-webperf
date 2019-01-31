@@ -25,7 +25,7 @@
                         >{{ "Learn More"|t("webperf") }}</a>
                     </span>
                 </span>
-                <dashboard-radial-bar-chart
+                <radial-bar-chart
                         title="First Byte"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -36,7 +36,7 @@
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
-                </dashboard-radial-bar-chart>
+                </radial-bar-chart>
             </div>
         </div>
         <div class="flex-row three-up-grid-item self-top">
@@ -51,7 +51,7 @@
                             >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
-                    <dashboard-simple-bar-chart
+                    <simple-bar-chart
                         title="DNS Lookup"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -62,7 +62,7 @@
                         :max-value=".5"
                         :site-id="{{ currentSiteId }}"
                     >
-                    </dashboard-simple-bar-chart>
+                    </simple-bar-chart>
                 </div>
                 <div class="webperf-tooltip">
                     <span class="webperf-tooltiptext">
@@ -74,7 +74,7 @@
                             >{{ "Learn More"|t("webperf") }}</a>
                         </span>
                     </span>
-                    <dashboard-simple-bar-chart
+                    <simple-bar-chart
                         title="Connect"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -85,7 +85,7 @@
                         :max-value=".5"
                         :site-id="{{ currentSiteId }}"
                     >
-                    </dashboard-simple-bar-chart>
+                    </simple-bar-chart>
                 </div>
             </div>
         </div>

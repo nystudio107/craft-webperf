@@ -3,14 +3,14 @@
         <vuetable-filter-bar></vuetable-filter-bar>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfoTop"
-                                      infoTemplate="Displaying {from} to {to} of {total} data samples"
+                                      infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="paginationTop"
                                  @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
         <vuetable ref="vuetable"
-                  api-url="/webperf/tables/page-detail"
+                  api-url="/webperf/tables/pages-index"
                   :per-page="20"
                   :fields="fields"
                   :css="css"
@@ -20,27 +20,27 @@
                   @vuetable:row-clicked="onRowClicked"
                   @vuetable:loaded="onLoaded"
         >
-            <template slot="sample-date" slot-scope="props">
-                <data-sample-date :date="props.rowData.dateCreated"
+            <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
+                <page-result-cell :title="props.rowData.title"
                                   :url="props.rowData.url"
-                                  :query="props.rowData.query"
+                                  :width="computeWidth(props.rowData.pageLoad, maxValue)"
+                                  :color="triBlend.colorFromPercentage(((props.rowData.pageLoad / maxValue) * 100))"
                 >
-                </data-sample-date>
-            </template>
-            <template slot="sample-device" slot-scope="props">
-                <data-sample-device :mobile="props.rowData.mobile"
-                                  :device="props.rowData.device"
-                >
-                </data-sample-device>
+                </page-result-cell>
             </template>
             <template slot="load-time-bar" slot-scope="props">
                 <request-bar-chart :rowData="props.rowData">
                 </request-bar-chart>
             </template>
+            <template slot="data-samples" slot-scope="props">
+                <sample-size-warning :sample="props.rowData.cnt">
+                </sample-size-warning>
+                {{ props.rowData.cnt }}
+            </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
-                                      infoTemplate="Displaying {from} to {to} of {total} data samples"
+                                      infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="pagination"
                                  @vuetable-pagination:change-page="onChangePage"
@@ -51,16 +51,15 @@
 
 <script>
     import Vue from 'vue';
-    import FieldDefs from './PageDetailFieldDefs.js';
+    import FieldDefs from './PerformanceIndexFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
-    import VueTablePagination from './VuetablePagination.vue';
-    import VueTablePaginationInfo from './VuetablePaginationInfo.vue';
-    import VueTableFilterBar from './VuetableFilterBar.vue';
-    import TriBlendColor from '../js/tri-color-blend';
-    import RequestBarChart from './RequestBarChart.vue';
-    import PageResultCell from './PageResultCell.vue';
-    import DataSampleDate from './DataSampleDate.vue';
-    import DataSampleDevice from './DataSampleDevice.vue';
+    import VueTablePagination from '../common/VuetablePagination.vue';
+    import VueTablePaginationInfo from '../common/VuetablePaginationInfo.vue';
+    import VueTableFilterBar from '../common/VuetableFilterBar.vue';
+    import TriBlendColor from '../../../js/tri-color-blend.js';
+    import RequestBarChart from '../../charts/common/RequestBarChart.vue';
+    import PageResultCell from '../common/PageResultCell.vue';
+    import SampleSizeWarning from '../../common/SampleSizeWarning.vue';
 
     // Our component exports
     export default {
@@ -71,8 +70,7 @@
             'vuetable-filter-bar': VueTableFilterBar,
             'request-bar-chart': RequestBarChart,
             'page-result-cell': PageResultCell,
-            'data-sample-date': DataSampleDate,
-            'data-sample-device': DataSampleDevice,
+            'sample-size-warning': SampleSizeWarning,
         },
         props: {
             start: String,
@@ -93,7 +91,6 @@
                 type: Number,
                 default: 10000,
             },
-            pageUrl: String,
             siteId: {
                 type: Number,
                 default: 0,
@@ -103,13 +100,12 @@
             return {
                 moreParams: {
                     'siteId': this.siteId,
-                    'pageUrl': this.pageUrl,
                     'start': this.start,
                     'end': this.end,
                     'filter': '',
                 },
                 css: {
-                    tableClass: 'data fullwidth webperf-page-detail',
+                    tableClass: 'data fullwidth webperf-pages-index',
                     ascendingIcon: 'menubtn webperf-menubtn-asc',
                     descendingIcon: 'menubtn webperf-menubtn-desc'
                 },
@@ -152,11 +148,22 @@
                 this.$refs.vuetable.changePage(page);
             },
             onRowClicked(dataItem, event) {
+                if (dataItem.detailPageUrl.length) {
+                    window.location.href = dataItem.detailPageUrl;
+                }
             },
             onChangeRange (range) {
                 this.moreParams.start = range.start;
                 this.moreParams.end = range.end;
                 this.$events.fire('refresh-table', this.$refs.vuetable);
+            },
+            computeWidth(pageLoad, maxValue) {
+                let result = ((pageLoad / maxValue) * 100);
+                if (result > 100) {
+                    result = 100;
+                }
+
+                return result;
             },
             statFormatter(val) {
                 return Number(val / 1000).toFixed(2) + "s";
@@ -164,11 +171,8 @@
             countFormatter(val) {
                 return Number(val).toFixed(0);
             },
-            memoryFormatter(val) {
-                return Number(val / (1024 * 1024)).toFixed(2) + ' Mb';
-            },
-            dateFormatter(val) {
-                return val;
+            memoryFormatter(value) {
+                return Number(value / (1024 * 1024)).toFixed(2) + ' Mb';
             },
             deleteFormatter(value) {
                 if (value === '') {

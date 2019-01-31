@@ -10,7 +10,7 @@
  */
 #}
 
-{% requirePermission "webperf:page-detail" %}
+{% requirePermission "webperf:performance-detail" %}
 
 {% extends "webperf/_layouts/webperf-cp.twig" %}
 
@@ -51,28 +51,28 @@
         {% include "webperf/_includes/range-picker.twig" %}
         <div class="pane first">
             <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance History</h1>
-            <page-detail-area-chart
+            <performance-detail-area-chart
                     title=""
                     start="{{ start }}"
                     end="{{ end }}"
                     page-url=""
                     :site-id="{{ currentSiteId }}"
             >
-            </page-detail-area-chart>
+            </performance-detail-area-chart>
         </div>
         <div class="pane">
             <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance Data Samples</h1>
-            <pages-index-table :site-id="{{ currentSiteId }}"
+            <performance-index-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"
                                fast-color="{{ settings.dashboardFastColor }}"
                                average-color="{{ settings.dashboardAverageColor }}"
                                slow-color="{{ settings.dashboardSlowColor }}"
             >
-            </pages-index-table>
+            </performance-index-table>
         </div>
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}
-    {{ craft.webperf.includeJsModule("pages-index.js", false) }}
+    {{ craft.webperf.includeJsModule("performance-index.js", false) }}
 {% endblock %}

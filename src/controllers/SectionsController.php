@@ -177,7 +177,7 @@ class SectionsController extends Controller
     public function actionPageDetail(string $pageUrl, string $siteHandle = null): Response
     {
         $variables = [];
-        PermissionHelper::controllerPermissionCheck('webperf:page-detail');
+        PermissionHelper::controllerPermissionCheck('webperf:performance-detail');
         // Trim the statistics
         Webperf::$plugin->dataSamples->trimOrphanedSamples(1024);
         Webperf::$plugin->dataSamples->trimDataSamples();

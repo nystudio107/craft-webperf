@@ -24,7 +24,7 @@
                     >Learn More</a>
                 </span>
             </span>
-            <dashboard-radial-bar-chart
+            <radial-bar-chart
                     title="Craft Execution"
                     start="{{ start }}"
                     end="{{ end }}"
@@ -36,7 +36,7 @@
                     :max-value="2"
                     :site-id="{{ currentSiteId }}"
             >
-            </dashboard-radial-bar-chart>
+            </radial-bar-chart>
         </div>
         <div class="w-full">
             <div class="webperf-tooltip">
@@ -49,7 +49,7 @@
                         >Learn More</a>
                     </span>
                 </span>
-                <dashboard-simple-bar-chart
+                <simple-bar-chart
                         title="Database Queries"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -61,7 +61,7 @@
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
-                </dashboard-simple-bar-chart>
+                </simple-bar-chart>
             </div>
             <div class="webperf-tooltip">
                 <span class="webperf-tooltiptext">
@@ -73,7 +73,7 @@
                         >Learn More</a>
                     </span>
                 </span>
-                <dashboard-simple-bar-chart
+                <simple-bar-chart
                         title="Twig Rendering"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -85,7 +85,7 @@
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
-                </dashboard-simple-bar-chart>
+                </simple-bar-chart>
             </div>
             <div class="webperf-tooltip">
                 <span class="webperf-tooltiptext">
@@ -97,7 +97,7 @@
                         >Learn More</a>
                     </span>
                 </span>
-                <dashboard-simple-bar-chart
+                <simple-bar-chart
                         title="Other"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -109,7 +109,7 @@
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
                 >
-                </dashboard-simple-bar-chart>
+                </simple-bar-chart>
             </div>
         </div>
     </div>

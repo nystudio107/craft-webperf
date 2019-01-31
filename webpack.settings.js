@@ -32,8 +32,8 @@ module.exports = {
     },
     entries: {
         "dashboard": "dashboard.js",
-        "page-detail": "page-detail.js",
-        "pages-index": "pages-index.js",
+        "performance-detail": "performance-detail.js",
+        "performance-index": "performance-index.js",
         "webperf": "webperf.js",
 //        "widget": "widget.js"
     },

@@ -44,7 +44,7 @@
     </div>
 </template>
 <script>
-    import SampleSizeWarning from './SampleSizeWarning.vue';
+    import SampleSizeWarning from '../../common/SampleSizeWarning.vue';
     export default {
         name: 'dashboard-file-list-cell',
         components: {SampleSizeWarning},

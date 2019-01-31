@@ -5,7 +5,7 @@
 <script>
     import Axios from 'axios';
     import ApexCharts from 'vue-apexcharts';
-    import TriBlendColor from '../js/tri-color-blend';
+    import TriBlendColor from '../../../js/tri-color-blend.js';
 
     const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
 

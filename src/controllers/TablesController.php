@@ -162,7 +162,7 @@ class TablesController extends Controller
                 if (!$user->can('webperf:delete-data-samples')) {
                     $stat['deleteLink'] = '';
                 }
-                if (!$user->can('webperf:page-detail')) {
+                if (!$user->can('webperf:performance-detail')) {
                     $stat['detailPageUrl'] = '';
                 }
             }

@@ -1,28 +1,22 @@
 <template>
-    <section class="px-3 py-3">
-        <div class="text-left text-base font-bold px-2 pt-2">
-            Slowest pages
+    <div class="simple-bar-chart-wrapper px-5 py-3">
+        <div class="clearafter py-2">
+            <div class="simple-bar-chart-label text-base font-bold">{{ title }}</div>
+            <div class="simple-bar-chart-value text-base font-bold">{{ statFormatter(series[0]) }}</div>
         </div>
-        <div v-for="item in series" class="file-list-wrapper p-2">
-            <dashboard-file-list-cell :title="item.title"
-                                      :url="item.url"
-                                      :detail-page-url="item.detailPageUrl"
-                                      :data="statFormatter(item.data, item.maxValue)"
-                                      :cnt="item.cnt"
-                                      :width="item.data"
-                                      :color="item.barColor"
-            >
-            </dashboard-file-list-cell>
+        <div class="py-2">
+            <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
+                <div class="simple-bar-line h-3 rounded-full" :style="{ width: series[0] + '%', backgroundColor: barColor }"></div>
+            </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
     import Axios from 'axios';
-    import TriBlendColor from '../js/tri-color-blend';
-    import DashboardFileListCell from '../vue/DashboardFileListCell.vue';
+    import TriBlendColor from '../../../js/tri-color-blend.js';
 
-    const chartDataBaseUrl = '/webperf/charts/dashboard-slowest-pages/';
+    const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
 
     // Configure the api endpoint
     const configureApi = (url) => {
@@ -52,14 +46,17 @@
 
     // Our component exports
     export default {
-        name: 'dashboard-file-list',
         components: {
-            'dashboard-file-list-cell': DashboardFileListCell,
         },
         props: {
+            title: String,
             start: String,
             end: String,
             column: String,
+            pageUrl: {
+                type: String,
+                default: '',
+            },
             fastColor: {
                 type: String,
                 default: '#00C800',
@@ -72,10 +69,6 @@
                 type: String,
                 default: '#C80000',
             },
-            limit: {
-                type: Number,
-                default: 3,
-            },
             maxValue: Number,
             siteId: {
                 type: Number,
@@ -86,27 +79,25 @@
             // Load in our chart data asynchronously
             getSeriesData: async function() {
                 const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.column + '/' + this.limit;
+                let uri = this.column;
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
                 let params = {
                     'start': this.displayStart,
                     'end': this.displayEnd,
+                    'pageUrl': this.pageUrl
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    data.forEach((element, index, array) => {
-                        let val = element.avg / 1000;
-                        let maxValue = this.maxValue;
-                        if (val > maxValue) {
-                            maxValue = val;
+                    if (data.avg !== undefined) {
+                        let val = data.avg / 1000;
+                        if (val > this.displayMaxValue) {
+                            this.displayMaxValue = val;
                         }
-                        val = (val * 100) / maxValue;
-                        array[index].data = val;
-                        array[index].maxValue = maxValue;
-                        array[index].barColor = this.triBlend.colorFromPercentage(val);
-                    });
-                    this.series = data;
+                        val = (val * 100) / this.displayMaxValue;
+                        this.barColor = this.triBlend.colorFromPercentage(val);
+                        this.series = [val];
+                    }
                 });
             },
             onChangeRange (range) {
@@ -114,8 +105,8 @@
                 this.displayEnd = range.end;
                 this.getSeriesData();
             },
-            statFormatter(val, maxValue) {
-                val = (val * maxValue) / 100;
+            statFormatter(val) {
+                val = (val * this.displayMaxValue) / 100;
                 return Number(val).toFixed(2) + "s";
             }
         },
@@ -127,10 +118,11 @@
         },
         data: function() {
             return {
-                series: [
-                ],
+                barColor: '#000',
+                series: [0],
                 displayStart: this.start,
                 displayEnd: this.end,
+                displayMaxValue: this.maxValue,
                 triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },

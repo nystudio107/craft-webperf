@@ -10,7 +10,7 @@
  */
 #}
 
-{% requirePermission "webperf:page-detail" %}
+{% requirePermission "webperf:performance-detail" %}
 
 {% extends "webperf/_layouts/webperf-cp.twig" %}
 
@@ -92,14 +92,14 @@
         </div>
         <div class="pane first">
             <h1 class="text-center text-base text-3xl font-bold">{{ "Page Performance History"|t("webperf") }}</h1>
-            <page-detail-area-chart
+            <performance-detail-area-chart
                     title=""
                     start="{{ start }}"
                     end="{{ end }}"
                     page-url="{{ pageUrl }}"
                     :site-id="{{ currentSiteId }}"
             >
-            </page-detail-area-chart>
+            </performance-detail-area-chart>
         </div>
         <div class="w-full flex-item-row items-start justify-between">
             <div class="flex-row three-up-page-detail-grid-item self-top">
@@ -124,15 +124,15 @@
 
         <div class="pane">
             <h1 class="text-center text-base text-3xl font-bold">{{ "Page Performance Data Samples"|t("webperf") }}</h1>
-            <page-detail-table :site-id="{{ currentSiteId }}"
+            <performance-detail-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"
                                page-url="{{ pageUrl }}"
             >
-            </page-detail-table>
+            </performance-detail-table>
         </div>
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}
-    {{ craft.webperf.includeJsModule("page-detail.js", false) }}
+    {{ craft.webperf.includeJsModule("performance-detail.js", false) }}
 {% endblock %}

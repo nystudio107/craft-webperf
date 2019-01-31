@@ -1,22 +1,41 @@
 <template>
-    <div class="simple-bar-chart-wrapper px-5 py-3">
-        <div class="clearafter py-2">
-            <div class="simple-bar-chart-label text-base font-bold">{{ title }}</div>
-            <div class="simple-bar-chart-value text-base font-bold">{{ statFormatter(series[0]) }}</div>
+    <div>
+        <div v-if="!series.length" class="text-3xl text-center py-10">
+            &#x1f389; No recommendations found. Nice job!
         </div>
-        <div class="py-2">
-            <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
-                <div class="simple-bar-line h-3 rounded-full" :style="{ width: series[0] + '%', backgroundColor: barColor }"></div>
+        <div v-for="item in series">
+            <div class="field pb-4">
+                <p class="warning text-2xl leading-normal">
+                    <span v-html="item.summary"></span>
+                </p>
+                <div class="heading" style="padding-left: 26px;">
+                    <p class="instructions text-xl leading-tight">
+                        <span v-html="item.detail"></span>
+                        <span class="field inline-block m-0">
+                            <a class="go notice" v-if="item.learnMoreUrl !== ''" :href="item.learnMoreUrl" target="_blank" rel="noopener,nofollow">Learn More</a>
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
+        <sample-pane-footer
+                start="start"
+                end="end"
+                subject="recommendations"
+                column="id"
+                :page-url="pageUrl"
+                :site-id="siteId"
+                :display-dev-mode-warning="devModeWarning"
+        >
+        </sample-pane-footer>
     </div>
 </template>
 
 <script>
     import Axios from 'axios';
-    import TriBlendColor from '../js/tri-color-blend';
+    import SamplePaneFooter from './SamplePaneFooter.vue';
 
-    const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
+    const dataBaseUrl = '/webperf/recommendations/list/';
 
     // Configure the api endpoint
     const configureApi = (url) => {
@@ -47,29 +66,19 @@
     // Our component exports
     export default {
         components: {
+            'sample-pane-footer': SamplePaneFooter,
         },
         props: {
-            title: String,
             start: String,
             end: String,
-            column: String,
+            devModeWarning: {
+                type: Boolean,
+                default: false
+            },
             pageUrl: {
                 type: String,
                 default: '',
             },
-            fastColor: {
-                type: String,
-                default: '#00C800',
-            },
-            averageColor: {
-                type: String,
-                default: '#FFFF00',
-            },
-            slowColor: {
-                type: String,
-                default: '#C80000',
-            },
-            maxValue: Number,
             siteId: {
                 type: Number,
                 default: 0,
@@ -78,8 +87,8 @@
         methods: {
             // Load in our chart data asynchronously
             getSeriesData: async function() {
-                const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.column;
+                const chartsAPI = Axios.create(configureApi(dataBaseUrl));
+                let uri = '';
                 if (this.siteId !== 0) {
                     uri += '/' + this.siteId;
                 }
@@ -89,14 +98,8 @@
                     'pageUrl': this.pageUrl
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
-                    if (data.avg !== undefined) {
-                        let val = data.avg / 1000;
-                        if (val > this.displayMaxValue) {
-                            this.displayMaxValue = val;
-                        }
-                        val = (val * 100) / this.displayMaxValue;
-                        this.barColor = this.triBlend.colorFromPercentage(val);
-                        this.series = [val];
+                    if (data[0] !== undefined) {
+                        this.series = data;
                     }
                 });
             },
@@ -105,10 +108,6 @@
                 this.displayEnd = range.end;
                 this.getSeriesData();
             },
-            statFormatter(val) {
-                val = (val * this.displayMaxValue) / 100;
-                return Number(val).toFixed(2) + "s";
-            }
         },
         created () {
             this.getSeriesData();
@@ -118,12 +117,9 @@
         },
         data: function() {
             return {
-                barColor: '#000',
-                series: [0],
+                series: [],
                 displayStart: this.start,
                 displayEnd: this.end,
-                displayMaxValue: this.maxValue,
-                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
     }

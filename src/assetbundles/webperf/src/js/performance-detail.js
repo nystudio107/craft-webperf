@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueEvents from 'vue-events';
-import Confetti from '../vue/common/Confetti.vue';
+import PerformanceDetailAreaChart from '../vue/charts/performance/PerformanceDetailAreaChart.vue';
+import PerformanceDetailTable from '../vue/tables/performance/PerformanceDetailTable.vue';
 import RadialBarChart from '../vue/charts/common/RadialBarChart.vue';
 import SimpleBarChart from '../vue/charts/common/SimpleBarChart.vue';
-import DashboardFileList from '../vue/charts/dashboard/DashboardFileList.vue';
 import SampleRangePicker from '../vue/common/SampleRangePicker.vue';
 import SamplePaneFooter from '../vue/common/SamplePaneFooter.vue';
 import RecommendationsList from '../vue/common/RecommendationsList.vue';
@@ -13,16 +13,22 @@ Vue.use(VueEvents);
 const vm = new Vue({
     el: "#cp-nav-content",
     components: {
-        'confetti': Confetti,
+        'performance-detail-area-chart': PerformanceDetailAreaChart,
+        'performance-detail-table': PerformanceDetailTable,
         'radial-bar-chart': RadialBarChart,
         'simple-bar-chart': SimpleBarChart,
-        'dashboard-file-list': DashboardFileList,
         'sample-range-picker': SampleRangePicker,
         'sample-pane-footer': SamplePaneFooter,
         'recommendations-list': RecommendationsList,
     },
     data: {
     },
+    methods: {
+        onTableRefresh(vuetable) {
+            Vue.nextTick(() => vuetable.refresh());
+        }
+    },
     mounted() {
+        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
 });
