@@ -19,12 +19,14 @@ namespace nystudio107\webperf\controllers {
     use nystudio107\webperf\helpers\MultiSite;
     use nystudio107\webperf\helpers\Permission as PermissionHelper;
     use nystudio107\webperf\models\BoomerangDbDataSample;
+    use nystudio107\webperf\models\BoomerangDbErrorSample;
 
     use Jaybizzle\CrawlerDetect\CrawlerDetect;
     use WhichBrowser\Parser;
 
     use Craft;
     use craft\errors\SiteNotFoundException;
+    use craft\helpers\Json;
     use craft\helpers\UrlHelper;
     use craft\web\Controller;
 
@@ -166,8 +168,21 @@ namespace nystudio107\webperf\controllers {
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample
-            Craft::debug('Saving BoomerangDbDataSample: '.print_r($sample, true), __METHOD__);
+            Craft::debug('Saving BoomerangDbDataSample: '.print_r($sample->getAttributes(), true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
+            if (!empty($params['err'])) {
+                // Allocate a new ErrorSample, and fill it in
+                $errorSample = new BoomerangDbErrorSample([
+                    'requestId' => $sample->requestId,
+                    'siteId' => $sample->siteId,
+                    'url' => $sample->url,
+                    'title' => $sample->title,
+                    'pageErrors' => Json::decodeIfJson($params['err']),
+                ]);
+                // Save the error sample
+                Craft::debug('Saving Boomerang ErrorSample: '.print_r($errorSample->getAttributes(), true), __METHOD__);
+                Webperf::$plugin->errorSamples->addErrorSample($errorSample);
+            }
             Craft::$app->end();
         }
 

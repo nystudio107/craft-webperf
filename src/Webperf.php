@@ -232,7 +232,7 @@ class Webperf extends Plugin
                 $except = [];
                 // If devMode is on, exclude errors/warnings from `seomatic`
                 if (Craft::$app->getConfig()->getGeneral()->devMode) {
-                    $except = ['seomatic'];
+                    $except = ['nystudio107\seomatic\*'];
                 }
                 try {
                     $this->set('errorsTarget', [

@@ -16,6 +16,7 @@ use nystudio107\webperf\base\DbErrorSampleInterface;
 use Craft;
 use craft\base\Component;
 use craft\db\Query;
+use craft\helpers\Json;
 
 /**
  * @author    nystudio107
@@ -105,21 +106,26 @@ class ErrorSamples extends Component
         }
         // Get the validated model attributes and save them to the db
         $errorSampleConfig = $errorSample->getAttributes();
-        $db = Craft::$app->getDb();
-        Craft::debug('Creating new error sample', __METHOD__);
-        // Create a new record
-        try {
-            $result = $db->createCommand()->insert(
-                '{{%webperf_error_samples}}',
-                $errorSampleConfig
-            )->execute();
-            Craft::debug($result, __METHOD__);
-        } catch (\Exception $e) {
-            Craft::error($e->getMessage(), __METHOD__);
-        }
-        // After adding the ErrorSample, trim the webperf_error_samples db table
-        if (Webperf::$settings->automaticallyTrimErrorSamples) {
-            $this->trimErrorSamples();
+        if (!empty($errorSampleConfig['pageErrors'])) {
+            if (\is_array($errorSampleConfig['pageErrors'])) {
+                $errorSampleConfig['pageErrors'] = Json::encode($errorSampleConfig['pageErrors']);
+            }
+            $db = Craft::$app->getDb();
+            Craft::debug('Creating new error sample', __METHOD__);
+            // Create a new record
+            try {
+                $result = $db->createCommand()->insert(
+                    '{{%webperf_error_samples}}',
+                    $errorSampleConfig
+                )->execute();
+                Craft::debug($result, __METHOD__);
+            } catch (\Exception $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+            // After adding the ErrorSample, trim the webperf_error_samples db table
+            if (Webperf::$settings->automaticallyTrimErrorSamples) {
+                $this->trimErrorSamples();
+            }
         }
     }
 

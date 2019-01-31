@@ -21,19 +21,24 @@ use yii\log\Target;
  */
 class ErrorsTarget extends Target
 {
+    // Constants
+    // =========================================================================
+
+    const ERROR_LEVELS = [
+        1 => 'error',
+        2 => 'warning'
+    ];
+
     // Public Properties
     // =========================================================================
 
+    /**
+     * @var array accumulated page errors
+     */
+    public $pageErrors = [];
+
     // Public Methods
     // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-    }
 
     /**
      * Processes the given log messages.
@@ -46,8 +51,6 @@ class ErrorsTarget extends Target
      *                        message.
      * @param bool  $final    whether this method is called at the end of the
      *                        current application
-     *
-     * @throws \yii\base\ExitException
      */
     public function collect($messages, $final)
     {
@@ -60,6 +63,18 @@ class ErrorsTarget extends Target
             $this->messages,
             static::filterMessages($messages, $this->getLevels(), $this->categories, $this->except)
         );
+        foreach ($this->messages as $message) {
+            // Ignore objects/arrays
+            if (!\is_string($message[0])) {
+                continue;
+            }
+            $this->pageErrors[] = [
+                'level' => self::ERROR_LEVELS[$message[1]],
+                'message' => $message[0],
+                'category' => $message[2],
+            ];
+        }
+        $this->messages = [];
         if ($final) {
             $this->export();
             Webperf::$plugin->beacons->includeCraftErrorsBeacon();

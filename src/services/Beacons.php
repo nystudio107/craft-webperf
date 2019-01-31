@@ -142,7 +142,6 @@ class Beacons extends Component
 
     /**
      * @return void
-     * @throws \yii\base\ExitException
      */
     public function includeCraftBeacon()
     {
@@ -151,7 +150,7 @@ class Beacons extends Component
             $crawlerDetect = new CrawlerDetect;
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
-                Craft::$app->end();
+                return;
             }
         }
         $url = Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL;
@@ -187,13 +186,12 @@ class Beacons extends Component
                 + $stats['other']['memory']),
         ]);
         // Save the data sample
-        Craft::debug('Saving Craft DataSample: '.print_r($sample, true), __METHOD__);
+        Craft::debug('Saving Craft DataSample: '.print_r($sample->getAttributes(), true), __METHOD__);
         Webperf::$plugin->dataSamples->addDataSample($sample);
     }
 
     /**
      * @return void
-     * @throws \yii\base\ExitException
      */
     public function includeCraftErrorsBeacon()
     {
@@ -202,7 +200,7 @@ class Beacons extends Component
             $crawlerDetect = new CrawlerDetect;
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
-                Craft::$app->end();
+                return;
             }
         }
         $url = Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL;
@@ -213,8 +211,8 @@ class Beacons extends Component
         } catch (SiteNotFoundException $e) {
             $siteId = null;
         }
-        $messages = Webperf::$plugin->errorsTarget->messages;
-        // Allocate a new DataSample, and fill it in
+        $messages = Webperf::$plugin->errorsTarget->pageErrors;
+        // Allocate a new ErrorSample, and fill it in
         $sample = new CraftDbErrorSample([
             'requestId' => Webperf::$requestUuid,
             'siteId' => $siteId,
@@ -222,8 +220,8 @@ class Beacons extends Component
             'title' => $this->getDocumentTitle(),
             'pageErrors' => $messages,
         ]);
-        // Save the data sample
-        Craft::debug('Saving Craft ErrorSample: '.print_r($sample, true), __METHOD__);
+        // Save the error sample
+        Craft::debug('Saving Craft ErrorSample: '.print_r($sample->getAttributes(), true), __METHOD__);
         Webperf::$plugin->errorSamples->addErrorSample($sample);
     }
 
