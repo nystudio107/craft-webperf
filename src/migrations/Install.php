@@ -110,6 +110,23 @@ class Install extends Migration
                     'craftTotalMemory' => $this->integer(),
                 ]
             );
+
+            $this->createTable(
+                '{{%webperf_error_samples}}',
+                [
+                    'id' => $this->primaryKey(),
+                    'dateCreated' => $this->dateTime()->notNull(),
+                    'dateUpdated' => $this->dateTime()->notNull(),
+                    'uid' => $this->uid(),
+
+                    'requestId' => $this->bigInteger(),
+                    'siteId' => $this->integer(),
+                    'title' => $this->string(120),
+                    'url' => $this->string(255)->notNull()->defaultValue(''),
+                    'type' => $this->string(16)->defaultValue(''),
+                    'pageErrors' => $this->text(),
+                ]
+            );
         }
 
         return $tablesCreated;
@@ -127,6 +144,16 @@ class Install extends Migration
                 false
             ),
             '{{%webperf_data_samples}}',
+            'url',
+            false
+        );
+        $this->createIndex(
+            $this->db->getIndexName(
+                '{{%webperf_error_samples}}',
+                'url',
+                false
+            ),
+            '{{%webperf_error_samples}}',
             'url',
             false
         );
@@ -153,7 +180,17 @@ class Install extends Migration
             'CASCADE',
             'CASCADE'
         );
+        $this->addForeignKey(
+            $this->db->getForeignKeyName('{{%webperf_error_samples}}', 'siteId'),
+            '{{%webperf_error_samples}}',
+            'siteId',
+            '{{%sites}}',
+            'id',
+            'CASCADE',
+            'CASCADE'
+        );
     }
+
 
     /**
      * @return void
@@ -168,5 +205,6 @@ class Install extends Migration
     protected function removeTables()
     {
         $this->dropTableIfExists('{{%webperf_data_samples}}');
+        $this->dropTableIfExists('{{%webperf_error_samples}}');
     }
 }

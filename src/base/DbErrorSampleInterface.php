@@ -15,7 +15,7 @@ namespace nystudio107\webperf\base;
  * @package   Webperf
  * @since     1.0.0
  */
-interface DbErrorsInterface
+interface DbErrorSampleInterface
 {
     // Public Methods
     // =========================================================================

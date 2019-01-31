@@ -19,10 +19,15 @@ use craft\validators\ArrayValidator;
  * @package   Webperf
  * @since     1.0.0
  */
-trait DbErrorsTrait
+trait DbErrorSampleTrait
 {
     // Properties
     // =========================================================================
+
+    /**
+     * @var int
+     */
+    public $requestId;
 
     /**
      * @var int
@@ -58,6 +63,7 @@ trait DbErrorsTrait
     public function rules()
     {
         return [
+            ['requestId', 'integer'],
             ['siteId', 'integer'],
             ['title', DbStringValidator::class, 'max' => 120],
             ['url', DbStringValidator::class, 'max' => 255],

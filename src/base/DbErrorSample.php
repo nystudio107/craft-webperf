@@ -17,13 +17,13 @@ use yii\behaviors\AttributeTypecastBehavior;
  * @package   Webperf
  * @since     1.0.0
  */
-abstract class DbErrors extends FluentModel
+abstract class DbErrorSample extends FluentModel
 {
     // Traits
     // =========================================================================
 
-    use DbErrorsTrait {
-        rules as dbRules;
+    use DbErrorSampleTrait {
+        rules as dbErrorRules;
     }
 
     // Constants
@@ -39,7 +39,7 @@ abstract class DbErrors extends FluentModel
     {
         return array_merge(
             parent::rules(),
-            $this->dbRules(),
+            $this->dbErrorRules(),
             [
             ]
         );

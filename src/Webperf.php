@@ -15,6 +15,7 @@ use nystudio107\webperf\log\ProfileTarget;
 use nystudio107\webperf\models\RecommendationDataSample;
 use nystudio107\webperf\models\Settings;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
+use nystudio107\webperf\services\ErrorSamples as ErrorSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\Recommendations as RecommendationsService;
 use nystudio107\webperf\variables\WebperfVariable;
@@ -47,6 +48,7 @@ use yii\base\InvalidConfigException;
  *
  * @property  RecommendationsService  $recommendations
  * @property  DataSamplesService      $dataSamples
+ * @property  ErrorSamplesService     $errorSamples
  * @property  BeaconsService          $beacons
  * @property  ProfileTarget           $profileTarget
  */

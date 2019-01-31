@@ -41,6 +41,7 @@
         "components": {
             "recommendations": "nystudio107\\webperf\\services\\Recommendations",
             "dataSamples": "nystudio107\\webperf\\services\\DataSamples",
+            "errorSamples": "nystudio107\\webperf\\services\\ErrorSamples",
             "beacons": "nystudio107\\webperf\\services\\Beacons"
         },
         "class": "nystudio107\\webperf\\Webperf"

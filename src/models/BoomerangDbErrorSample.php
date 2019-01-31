@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\base\DbErrors;
+use nystudio107\webperf\base\DbErrorSample;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class JavaScriptDbErrors extends DbErrors
+class BoomerangDbErrorSample extends DbErrorSample
 {
     // Public Methods
     // =========================================================================
@@ -28,6 +28,6 @@ class JavaScriptDbErrors extends DbErrors
     public function init()
     {
         parent::init();
-        $this->type = 'javascript';
+        $this->type = 'boomerang';
     }
 }

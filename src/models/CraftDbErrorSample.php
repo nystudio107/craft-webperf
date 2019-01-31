@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\base\DbErrors;
+use nystudio107\webperf\base\DbErrorSample;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class CraftDbErrors extends DbErrors
+class CraftDbErrorSample extends DbErrorSample
 {
     // Public Methods
     // =========================================================================
