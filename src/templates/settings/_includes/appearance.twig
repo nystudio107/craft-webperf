@@ -1,0 +1,35 @@
+{% import "_includes/forms" as forms %}
+{% from "webperf/_includes/macros.twig" import configWarning %}
+<div id="appearance" class="hidden">
+    {% namespace "settings" %}
+    {{ forms.colorField({
+        label: "Dashboard Fast Color"|t("webperf"),
+        instructions: "The color used to indicate fast timings on the Webperf Dashboard"|t("webperf"),
+        id: "dashboardFastColor",
+        name: "dashboardFastColor",
+        value: settings.dashboardFastColor,
+        warning: configWarning("dashboardFastColor", "webperf"),
+        errors: settings.getErrors("dashboardFastColor"),
+    }) }}
+
+    {{ forms.colorField({
+        label: "Dashboard Average Color"|t("webperf"),
+        instructions: "The color used to indicate average timings on the Webperf Dashboard"|t("webperf"),
+        id: "dashboardAverageColor",
+        name: "dashboardAverageColor",
+        value: settings.dashboardAverageColor,
+        warning: configWarning("dashboardAverageColor", "webperf"),
+        errors: settings.getErrors("dashboardAverageColor"),
+    }) }}
+
+    {{ forms.colorField({
+        label: "Dashboard Slow Color"|t("webperf"),
+        instructions: "The color used to indicate slow timings on the Webperf Dashboard"|t("webperf"),
+        id: "dashboardSlowColor",
+        name: "dashboardSlowColor",
+        value: settings.dashboardSlowColor,
+        warning: configWarning("dashboardSlowColor", "webperf"),
+        errors: settings.getErrors("dashboardSlowColor"),
+    }) }}
+    {% endnamespace %}
+</div>

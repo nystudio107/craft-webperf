@@ -17,138 +17,31 @@
 {% import "_includes/forms" as forms %}
 {% from "webperf/_includes/macros.twig" import configWarning %}
 
+{% set tabs = {
+    "general": {label: "General"|t('webperf'), url: "#general"},
+    "performance": {label: "Performance"|t('webperf'), url: "#performance"},
+    "errors": {label: "Errors"|t('webperf'), url: "#errors"},
+    "appearance": {label: "Appearance"|t('webperf'), url: "#appearance"},
+} %}
+
 {% block content %}
 
     <input type="hidden" name="action" value="webperf/settings/save-plugin-settings">
     <input type="hidden" name="pluginHandle" value="webperf">
 
     {{ redirectInput("webperf/settings") }}
-    {% namespace "settings" %}
-        {{ forms.textField({
-            label: "Plugin name"|t("webperf"),
-            instructions: "The public-facing name of the plugin"|t("webperf"),
-            id: "pluginName",
-            name: "pluginName",
-            value: settings.pluginName,
-            warning: configWarning("pluginName", "webperf"),
-            errors: settings.getErrors("pluginName"),
-        }) }}
 
-        {{ forms.lightswitchField({
-            label: "Include User Timing Beacon"|t("webperf"),
-            instructions: "Whether or not the User Timing Beacon should be rendered on frontend pages."|t("webperf"),
-            id: "includeBeacon",
-            name: "includeBeacon",
-            on: settings.includeBeacon,
-            warning: configWarning("includeBeacon", "webperf"),
-            errors: settings.getErrors("includeBeacon"),
-        }) }}
+    {# -- General settings -- #}
+    {% include "webperf/settings/_includes/general.twig" %}
 
-        {{ forms.lightswitchField({
-            label: "Include Craft Timing Beacon"|t("webperf"),
-            instructions: "Whether or not the Craft profiling data should be recorded for site requests."|t("webperf"),
-            id: "includeCraftProfiling",
-            name: "includeCraftProfiling",
-            on: settings.includeCraftProfiling,
-            warning: configWarning("includeCraftProfiling", "webperf"),
-            errors: settings.getErrors("includeCraftProfiling"),
-        }) }}
+    {# -- Performance settings -- #}
+    {% include "webperf/settings/_includes/performance.twig" %}
 
-        {{ forms.lightswitchField({
-            label: "Static Cached Site"|t("webperf"),
-            instructions: "If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token."|t("webperf"),
-            id: "staticCachedSite",
-            name: "staticCachedSite",
-            on: settings.staticCachedSite,
-            warning: configWarning("staticCachedSite", "webperf"),
-            errors: settings.getErrors("staticCachedSite"),
-        }) }}
+    {# -- Errors settings -- #}
+    {% include "webperf/settings/_includes/errors.twig" %}
 
-        {{ forms.textField({
-            label: "Webperf Data Samples to Store"|t("webperf"),
-            instructions: "How many unique Webperf Data Samples should be stored before they are trimmed."|t("webperf"),
-            id: "dataSamplesStoredLimit",
-            name: "dataSamplesStoredLimit",
-            size: 10,
-            maxlength: 10,
-            value: settings.dataSamplesStoredLimit,
-            warning: configWarning("dataSamplesStoredLimit", "webperf"),
-            errors: settings.getErrors("dataSamplesStoredLimit"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Automatically Trim Data Samples"|t("webperf"),
-            instructions: "Whether the Data Samples should be trimmed after each new Data Sample is added"|t("webperf"),
-            id: "automaticallyTrimDataSamples",
-            name: "automaticallyTrimDataSamples",
-            on: settings.automaticallyTrimDataSamples,
-            warning: configWarning("automaticallyTrimDataSamples", "webperf"),
-            errors: settings.getErrors("automaticallyTrimDataSamples"),
-        }) }}
-
-        {{ forms.lightswitchField({
-            label: "Trim Outlier Data Samples"|t("webperf"),
-            instructions: "Whether outlier data samples that are 10x the mean should be deleted"|t("webperf"),
-            id: "trimOutlierDataSamples",
-            name: "trimOutlierDataSamples",
-            on: settings.trimOutlierDataSamples,
-            warning: configWarning("trimOutlierDataSamples", "webperf"),
-            errors: settings.getErrors("trimOutlierDataSamples"),
-        }) }}
-
-        {{ forms.textField({
-            label: "Rate Limit in ms"|t("webperf"),
-            instructions: "The number of milliseconds required between recording of frontend beacon data samples."|t("webperf"),
-            id: "rateLimitMs",
-            name: "rateLimitMs",
-            size: 6,
-            maxlength: 5,
-            value: settings.rateLimitMs,
-            warning: configWarning("rateLimitMs", "webperf"),
-            errors: settings.getErrors("rateLimitMs"),
-        }) }}
-
-        {{ forms.textField({
-            label: "WebPageTest.org API Key"|t("webperf"),
-            instructions: "To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
-            id: "webpageTestApiKey",
-            name: "webpageTestApiKey",
-            value: settings.webpageTestApiKey,
-            warning: configWarning("webpageTestApiKey", "webperf"),
-            errors: settings.getErrors("webpageTestApiKey"),
-        }) }}
-
-        {{ forms.colorField({
-            label: "Dashboard Fast Color"|t("webperf"),
-            instructions: "The color used to indicate fast timings on the Webperf Dashboard"|t("webperf"),
-            id: "dashboardFastColor",
-            name: "dashboardFastColor",
-            value: settings.dashboardFastColor,
-            warning: configWarning("dashboardFastColor", "webperf"),
-            errors: settings.getErrors("dashboardFastColor"),
-        }) }}
-
-        {{ forms.colorField({
-            label: "Dashboard Average Color"|t("webperf"),
-            instructions: "The color used to indicate average timings on the Webperf Dashboard"|t("webperf"),
-            id: "dashboardAverageColor",
-            name: "dashboardAverageColor",
-            value: settings.dashboardAverageColor,
-            warning: configWarning("dashboardAverageColor", "webperf"),
-            errors: settings.getErrors("dashboardAverageColor"),
-        }) }}
-
-        {{ forms.colorField({
-            label: "Dashboard Slow Color"|t("webperf"),
-            instructions: "The color used to indicate slow timings on the Webperf Dashboard"|t("webperf"),
-            id: "dashboardSlowColor",
-            name: "dashboardSlowColor",
-            value: settings.dashboardSlowColor,
-            warning: configWarning("dashboardSlowColor", "webperf"),
-            errors: settings.getErrors("dashboardSlowColor"),
-        }) }}
-
-    {% endnamespace %}
+    {# -- Appearance settings -- #}
+    {% include "webperf/settings/_includes/appearance.twig" %}
 
     {# include our JavaScript modules #}
     {{ parent() }}

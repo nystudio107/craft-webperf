@@ -1,0 +1,27 @@
+{% import "_includes/forms" as forms %}
+{% from "webperf/_includes/macros.twig" import configWarning %}
+<div id="errors" class="hidden">
+    {% namespace "settings" %}
+    {{ forms.textField({
+        label: "Error Samples to Store"|t("webperf"),
+        instructions: "How many unique Error Samples should be stored before they are trimmed."|t("webperf"),
+        id: "errorSamplesStoredLimit",
+        name: "errorSamplesStoredLimit",
+        size: 10,
+        maxlength: 10,
+        value: settings.errorSamplesStoredLimit,
+        warning: configWarning("errorSamplesStoredLimit", "webperf"),
+        errors: settings.getErrors("errorSamplesStoredLimit"),
+    }) }}
+
+    {{ forms.lightswitchField({
+        label: "Automatically Trim Error Samples"|t("webperf"),
+        instructions: "Whether the Error Samples should be trimmed after each new Error Sample is added"|t("webperf"),
+        id: "automaticallyTrimErrorSamples",
+        name: "automaticallyTrimErrorSamples",
+        on: settings.automaticallyTrimErrorSamples,
+        warning: configWarning("automaticallyTrimErrorSamples", "webperf"),
+        errors: settings.getErrors("automaticallyTrimErrorSamples"),
+    }) }}
+    {% endnamespace %}
+</div>
