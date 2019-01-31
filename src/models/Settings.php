@@ -77,6 +77,16 @@ class Settings extends Model
     public $webpageTestApiKey = '';
 
     /**
+     * @var int The number of error samples to store
+     */
+    public $errorSamplesStoredLimit = 1000;
+
+    /**
+     * @var bool Whether the ErrorSamples should be trimmed after each new ErrorSample is added
+     */
+    public $automaticallyTrimErrorSamples = true;
+
+    /**
      * @var bool Whether to filter bot user agents from generating profile hits or not
      *           NOT visible in the GUI currently
      */
@@ -128,11 +138,21 @@ class Settings extends Model
             ['rateLimitMs', 'integer'],
             ['rateLimitMs', 'default', 'value' => 500],
             ['webpageTestApiKey', 'string'],
+            ['errorSamplesStoredLimit', 'integer'],
+            ['errorSamplesStoredLimit', 'default', 'value' => 1000],
+            ['automaticallyTrimErrorSamples', 'boolean'],
             ['filterBotUserAgents', 'boolean'],
             ['dashboardFastColor', 'default', 'value' => '#00C800'],
             ['dashboardAverageColor', 'default', 'value' => '#FFA500'],
             ['dashboardSlowColor', 'default', 'value' => '#C80000'],
-            [['dashboardFastColor', 'dashboardAverageColor', 'dashboardSlowColor'], ColorValidator::class],
+            [
+                [
+                    'dashboardFastColor',
+                    'dashboardAverageColor',
+                    'dashboardSlowColor',
+                ],
+                ColorValidator::class
+            ],
         ];
     }
 }
