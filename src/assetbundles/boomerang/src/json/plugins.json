@@ -5,7 +5,6 @@
         "plugins/painttiming.js",
         "plugins/navtiming.js",
         "plugins/errors.js",
-        "plugins/compression.js",
         "plugins/mq.js",
         "plugins/webperf-boomer-init.js"
     ]
