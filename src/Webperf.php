@@ -599,8 +599,8 @@ class Webperf extends Plugin
             'webperf:performance' => [
                 'label' => Craft::t('webperf', 'Performance'),
             ],
-            'webperf:page-detail' => [
-                'label' => Craft::t('webperf', 'Page Detail'),
+            'webperf:performance-detail' => [
+                'label' => Craft::t('webperf', 'Performance Detail'),
             ],
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
