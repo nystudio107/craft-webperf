@@ -1,0 +1,126 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+* Webperf plugin for Craft CMS 3.x
+*
+* Monitor the performance of your webpages through real-world user timing data
+*
+* @link      https://nystudio107.com
+* @copyright Copyright (c) 2019 nystudio107
+*/
+#}
+
+{# -- Craft -- #}
+<div class="pane">
+    <h1 class="text-center text-base text-3xl font-bold">Craft Profile</h1>
+    <div class="w-full flex-item-row items-start">
+        <div class="webperf-tooltip w-full">
+            <span class="webperf-tooltiptext">
+                The total amount of time it takes Craft to process the webpages.
+                <span class="field inline-block m-0">
+                    <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
+                       target="_blank"
+                       class="webperf-tooltip-link notice go"
+                    >Learn More</a>
+                </span>
+            </span>
+            <radial-bar-chart
+                    title="Craft Execution"
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    column="craftTotalMs"
+                    page-url="{{ pageUrl }}"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
+                    :max-value="2"
+                    :site-id="{{ currentSiteId }}"
+            >
+            </radial-bar-chart>
+        </div>
+        <div class="w-full">
+            <div class="webperf-tooltip">
+                <span class="webperf-tooltiptext">
+                    How long it takes to execute the database queries for the webpages.
+                    <span class="field inline-block m-0">
+                        <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
+                           target="_blank"
+                           class="webperf-tooltip-link notice go"
+                        >Learn More</a>
+                    </span>
+                </span>
+                <simple-bar-chart
+                        title="Database Queries"
+                        start="{{ start }}"
+                        end="{{ end }}"
+                        column="craftDbMs"
+                        page-url="{{ pageUrl }}"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
+                        :max-value="2"
+                        :site-id="{{ currentSiteId }}"
+                >
+                </simple-bar-chart>
+            </div>
+            <div class="webperf-tooltip">
+                <span class="webperf-tooltiptext">
+                    How long it takes Twig to render the templates for the webpages.
+                    <span class="field inline-block m-0">
+                        <a href="https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar"
+                           target="_blank"
+                           class="webperf-tooltip-link notice go"
+                        >Learn More</a>
+                    </span>
+                </span>
+                <simple-bar-chart
+                        title="Twig Rendering"
+                        start="{{ start }}"
+                        end="{{ end }}"
+                        column="craftTwigMs"
+                        page-url="{{ pageUrl }}"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
+                        :max-value="2"
+                        :site-id="{{ currentSiteId }}"
+                >
+                </simple-bar-chart>
+            </div>
+            <div class="webperf-tooltip">
+                <span class="webperf-tooltiptext">
+                    Other profiled code (such as from plugins) in order to process the webpages.
+                    <span class="field inline-block m-0">
+                        <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing"
+                           target="_blank"
+                           class="webperf-tooltip-link notice go"
+                        >Learn More</a>
+                    </span>
+                </span>
+                <simple-bar-chart
+                        title="Other"
+                        start="{{ start }}"
+                        end="{{ end }}"
+                        column="craftOtherMs"
+                        page-url="{{ pageUrl }}"
+                        fast-color="{{ settings.dashboardFastColor }}"
+                        average-color="{{ settings.dashboardAverageColor }}"
+                        slow-color="{{ settings.dashboardSlowColor }}"
+                        :max-value="2"
+                        :site-id="{{ currentSiteId }}"
+                >
+                </simple-bar-chart>
+            </div>
+        </div>
+    </div>
+    <div class="buttons pt-4 pb-2">
+        {% set testUrl = url('https://gtmetrix.com/analyze.html', {
+            'url': pageUrl,
+        }) %}
+        {% set testName = 'Test on GTMetrix.com'|t %}
+        <a href="{{ testUrl }}"
+           class="btn icon m-auto">
+            {{ testName }}
+        </a>
+    </div>
+</div>

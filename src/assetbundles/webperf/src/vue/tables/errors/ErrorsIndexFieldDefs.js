@@ -1,0 +1,102 @@
+// Field definitions for PagesIndexTable.vue
+export default [
+    {
+        name: '__slot:page-listing-display',
+        sortField: 'url',
+        title: 'Page',
+        titleClass: 'center pageListingDisplay',
+        dataClass: 'center',
+        width: '30%',
+    },
+    {
+        name: '__slot:load-time-bar',
+        sortField: 'pageLoad',
+        title: 'Performance Timeline',
+        titleClass: 'center loadTimeBar',
+        dataClass: 'center',
+        width: '20%',
+    },
+    {
+        name: 'craftDbCnt',
+        sortField: 'craftDbCnt',
+        title: 'Queries',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '9%',
+    },
+    {
+        name: 'craftTwigCnt',
+        sortField: 'craftTwigCnt',
+        title: 'Templates',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '9%',
+    },
+    {
+        name: 'craftOtherCnt',
+        sortField: 'craftOtherCnt',
+        title: 'Other',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'countFormatter',
+        width: '9%',
+    },
+    {
+        name: 'craftTotalMemory',
+        sortField: 'craftTotalMemory',
+        title: 'Memory',
+        titleClass: 'text-right',
+        dataClass: 'text-right',
+        callback: 'memoryFormatter',
+        width: '9%',
+    },
+    {
+        name: '__slot:data-samples',
+        sortField: 'cnt',
+        title: 'Samples',
+        titleClass: 'text-center',
+        dataClass: 'text-center',
+        callback: 'countFormatter',
+        width: '9%',
+    },
+    {
+        name: 'deleteLink',
+        sortField: 'deleteLink',
+        title: '',
+        titleClass: 'text-center',
+        dataClass: 'text-center',
+        callback: 'deleteFormatter',
+        width: '5%',
+    },
+
+    {
+        name: 'maxTotalPageLoad',
+        visible: false,
+    },
+    {
+        name: 'domInteractive',
+        visible: false,
+    },
+    {
+        name: 'firstContentfulPaint',
+        visible: false,
+    },
+    {
+        name: 'firstPaint',
+        visible: false,
+    },
+    {
+        name: 'firstByte',
+        visible: false,
+    },
+    {
+        name: 'connect',
+        visible: false,
+    },
+    {
+        name: 'dns',
+        visible: false,
+    },
+];

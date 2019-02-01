@@ -12,9 +12,11 @@ namespace nystudio107\webperf\controllers;
 
 use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
+use Craft;
 use craft\db\Query;
 use craft\web\Controller;
 
+use League\Csv\CannotInsertRecord;
 use League\Csv\Writer;
 
 /**
@@ -53,6 +55,16 @@ class FileController extends Controller
         'craftOtherCnt',
         'craftTotalMemory',
     ];
+
+    const EXPORT_ERROR_SAMPLES_COLUMNS = [
+        'siteId',
+        'title',
+        'url',
+        'queryString',
+        'type',
+        'pageErrors',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -62,7 +74,7 @@ class FileController extends Controller
     // =========================================================================
 
     /**
-     * Export the statistics table as a CSV file
+     * Export the data samples table as a CSV file
      *
      * @param string   $pageUrl
      * @param int|null $siteId
@@ -72,7 +84,41 @@ class FileController extends Controller
     public function actionExportDataSamples(string $pageUrl = '', int $siteId = null)
     {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
-        $this->exportCsvFile('webperf-data-samples', '{{%webperf_data_samples}}', self::EXPORT_DATA_SAMPLES_COLUMNS, $pageUrl, $siteId);
+        try {
+            $this->exportCsvFile(
+                'webperf-data-samples',
+                '{{%webperf_data_samples}}',
+                self::EXPORT_DATA_SAMPLES_COLUMNS,
+                $pageUrl,
+                $siteId
+            );
+        } catch (CannotInsertRecord $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+    }
+
+    /**
+     * Export the error samples table as a CSV file
+     *
+     * @param string   $pageUrl
+     * @param int|null $siteId
+     *
+     * @throws \yii\web\ForbiddenHttpException
+     */
+    public function actionExportErrorSamples(string $pageUrl = '', int $siteId = null)
+    {
+        PermissionHelper::controllerPermissionCheck('webperf:errors');
+        try {
+            $this->exportCsvFile(
+                'webperf-error-samples',
+                '{{%webperf_error_samples}}',
+                self::EXPORT_ERROR_SAMPLES_COLUMNS,
+                $pageUrl,
+                $siteId
+            );
+        } catch (CannotInsertRecord $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
     }
 
     // Public Methods

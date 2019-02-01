@@ -1,0 +1,117 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Webperf plugin for Craft CMS 3.x
+ *
+ * Monitor the performance of your webpages through real-world user timing data
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2019 nystudio107
+ */
+#}
+
+{% requirePermission "webperf:errors-detail" %}
+
+{% extends "webperf/_layouts/webperf-cp.twig" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block contextMenu %}
+    {% include "webperf/_includes/sites-menu.twig" with {'params': {'pageUrl': pageUrl}} %}
+{% endblock %}
+
+{% block actionButton %}
+    <div class="buttons">
+        <div class="webperf-button-container">
+            <a href="{{ actionUrl('webperf/file/export-error-samples', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}" class="btn icon" title="{{ 'Export Page Error Samples to a CSV file'|t("webperf") }}">{{ "Export Error Samples"|t("webperf") }}</a>
+        </div>
+        {% if currentUser.can("webperf:delete-error-samples") %}
+            <a href="{{ actionUrl('webperf/error-samples/delete-samples-by-url', {'pageUrl': pageUrl,'siteId': currentSiteId}) }}"
+               class="btn delete icon"
+               title="{{ 'Delete Page Error Samples'|t("webperf") }}"
+               onclick="return confirm('Are you sure you want to delete page error samples?')"
+            >
+                {{ "Delete Error Samples"|t("webperf") }}
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <style>
+        #content {
+            background: none !important;
+        }
+        .apexcharts-canvas {
+            margin: 0 auto!important;
+        }
+    </style>
+    <div id="cp-nav-content" v-cloak>
+        {# -- Range Picker -- #}
+        {% include "webperf/_includes/range-picker.twig" %}
+        <div class="pb-4">
+            <div class="pane first">
+                {% if pageTitle | length %}
+                    <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight"
+                    >
+                        <a href="{{ pageUrl }}"
+                           target="_blank"
+                           style="color: rgb(26, 13, 171);"
+                        >
+                            {{ pageTitle }}
+                        </a>
+                    </h1>
+                {% else %}
+                    <h1 class="w-full text-left text-base text-2xl font-bold truncate-label mb-0 leading-tight text-grey-light"
+                    >
+                        <em>{{ "Craft backend route"|t("webperf") }}</em>
+                    </h1>
+                {% endif %}
+                <h2 class="w-full text-left text-base text-xl font-bold truncate-label mb-0 leading-tight mt-1"
+                >
+                    <a href="{{ pageUrl }}"
+                       class="hover:no-underline"
+                       target="_blank"
+                       style="color: rgb(0, 102, 33);"
+                       >
+                        {{ pageUrl }}
+                    </a>
+                </h2>
+                {% set devModeWarning = 'false' %}
+                <sample-pane-footer
+                        start="{{ start }}"
+                        end="{{ end }}"
+                        subject="charts"
+                        column="id"
+                        page-url="{{ pageUrl }}"
+                        :site-id="{{ currentSiteId }}"
+                        :display-dev-mode-warning="{{ devModeWarning }}"
+                >
+                </sample-pane-footer>
+            </div>
+        </div>
+        <div class="pane first">
+            <h1 class="text-center text-base text-3xl font-bold">{{ "Page Error History"|t("webperf") }}</h1>
+            <errors-detail-area-chart
+                    title=""
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url="{{ pageUrl }}"
+                    :site-id="{{ currentSiteId }}"
+            >
+            </errors-detail-area-chart>
+        </div>
+        <div class="pane">
+            <h1 class="text-center text-base text-3xl font-bold">{{ "Page Errors Data Samples"|t("webperf") }}</h1>
+            <errors-detail-table :site-id="{{ currentSiteId }}"
+                               start="{{ start }}"
+                               end="{{ end }}"
+                               page-url="{{ pageUrl }}"
+            >
+            </errors-detail-table>
+        </div>
+    </div>
+    {# include our JavaScript modules #}
+    {{ parent() }}
+    {{ craft.webperf.includeJsModule("errors-detail.js", false) }}
+{% endblock %}

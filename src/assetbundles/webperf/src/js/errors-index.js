@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import VueEvents from 'vue-events';
-import PerformanceIndexTable from '../vue/tables/performance/PerformanceIndexTable.vue';
+import ErrorsIndexTable from '../vue/tables/Errors/ErrorsIndexTable.vue';
 import SampleRangePicker from '../vue/common/SampleRangePicker.vue';
-import PerformanceDetailAreaChart from '../vue/charts/performance/PerformanceDetailAreaChart.vue';
+import ErrorsDetailAreaChart from '../vue/charts/Errors/ErrorsDetailAreaChart.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
 const vm = new Vue({
     el: "#cp-nav-content",
     components: {
-        'performance-index-table': PerformanceIndexTable,
+        'errors-index-table': ErrorsIndexTable,
         'sample-range-picker': SampleRangePicker,
-        'performance-detail-area-chart': PerformanceDetailAreaChart,
+        'errors-detail-area-chart': ErrorsDetailAreaChart,
     },
     data: {
     },

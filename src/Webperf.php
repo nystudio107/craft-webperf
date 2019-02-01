@@ -188,6 +188,12 @@ class Webperf extends Plugin
                 'url' => 'webperf/performance',
             ];
         }
+        if ($currentUser->can('webperf:errors')) {
+            $subNavs['errors'] = [
+                'label' => 'Errors',
+                'url' => 'webperf/errors',
+            ];
+        }
         if ($currentUser->can('webperf:settings')) {
             $subNavs['settings'] = [
                 'label' => 'Settings',
@@ -581,6 +587,12 @@ class Webperf extends Plugin
             'webperf/performance/page-detail' => 'webperf/sections/page-detail',
             'webperf/performance/page-detail/<siteHandle:{handle}>' => 'webperf/sections/page-detail',
 
+            'webperf/errors' => 'webperf/sections/errors-index',
+            'webperf/errors/<siteHandle:{handle}>' => 'webperf/sections/errors-index',
+
+            'webperf/errors/page-detail' => 'webperf/sections/errors-detail',
+            'webperf/errors/page-detail/<siteHandle:{handle}>' => 'webperf/errors/page-detail',
+
             'webperf/settings' => 'webperf/settings/plugin-settings',
         ];
     }
@@ -602,11 +614,20 @@ class Webperf extends Plugin
             'webperf:performance-detail' => [
                 'label' => Craft::t('webperf', 'Performance Detail'),
             ],
-            'webperf:recommendations' => [
-                'label' => Craft::t('webperf', 'Recommendations'),
-            ],
             'webperf:delete-data-samples' => [
                 'label' => Craft::t('webperf', 'Delete Data Samples'),
+            ],
+            'webperf:errors' => [
+                'label' => Craft::t('webperf', 'Errors'),
+            ],
+            'webperf:errors-detail' => [
+                'label' => Craft::t('webperf', 'Errors Detail'),
+            ],
+            'webperf:delete-error-samples' => [
+                'label' => Craft::t('webperf', 'Delete Error Samples'),
+            ],
+            'webperf:recommendations' => [
+                'label' => Craft::t('webperf', 'Recommendations'),
             ],
             'webperf:settings' => [
                 'label' => Craft::t('webperf', 'Settings'),

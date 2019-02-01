@@ -45,6 +45,11 @@ trait DbErrorSampleTrait
     public $url;
 
     /**
+     * @var string the query string
+     */
+    public $queryString;
+
+    /**
      * @var string the type of the errors (`javascript` or `craft`)
      */
     public $type;
@@ -67,6 +72,7 @@ trait DbErrorSampleTrait
             ['siteId', 'integer'],
             ['title', DbStringValidator::class, 'max' => 120],
             ['url', DbStringValidator::class, 'max' => 255],
+            ['queryString', DbStringValidator::class, 'max' => 255],
             ['type', DbStringValidator::class, 'max' => 16],
             ['pageErrors', ArrayValidator::class],
             [
@@ -74,6 +80,7 @@ trait DbErrorSampleTrait
                     'title',
                     'type',
                     'url',
+                    'queryString',
                 ],
                 'string'
             ],
