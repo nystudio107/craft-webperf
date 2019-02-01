@@ -138,5 +138,22 @@ return [
     'Check the `memory_limit` setting in your `php.ini` file' => 'Check the `memory_limit` setting in your `php.ini` file',
     'The database queries took {displayCraftDbMs} to execute. Try to simplify the database queries, or leverage Eager Loading in Craft to speed them up.' => 'The database queries took {displayCraftDbMs} to execute. Try to simplify the database queries, or leverage Eager Loading in Craft to speed them up.',
     'Your `php.ini` file has `memory_limit` set to {displayPhpMemoryLimit}, but Craft is using {displayCraftTotalMemory}. Consider raising your `memory_limit`  to maintain a buffer of available memory.' => 'Your `php.ini` file has `memory_limit` set to {displayPhpMemoryLimit}, but Craft is using {displayCraftTotalMemory}. Consider raising your `memory_limit`  to maintain a buffer of available memory.',
-    'Look into decreasing the Twig template rendering time' => 'Look into decreasing the Twig template rendering time'
+    'Look into decreasing the Twig template rendering time' => 'Look into decreasing the Twig template rendering time',
+    'Trimming data samples' => 'Trimming data samples',
+    'Export Page Error Samples to a CSV file' => 'Export Page Error Samples to a CSV file',
+    'Couldn\'t delete error sample.' => 'Couldn\'t delete error sample.',
+    'Error samples deleted.' => 'Error samples deleted.',
+    'Delete all Error Samples' => 'Delete all Error Samples',
+    'Delete Page Error Samples' => 'Delete Page Error Samples',
+    'Page Error History' => 'Page Error History',
+    'Couldn\'t delete error samples.' => 'Couldn\'t delete error samples.',
+    'Page Errors Data Samples' => 'Page Errors Data Samples',
+    'Trimming error samples' => 'Trimming error samples',
+    'Export all Error Samples to a CSV file' => 'Export all Error Samples to a CSV file',
+    'Export Error Samples' => 'Export Error Samples',
+    'All error samples deleted.' => 'All error samples deleted.',
+    'Error sample deleted.' => 'Error sample deleted.',
+    'Errors Detail' => 'Errors Detail',
+    'Performance Detail' => 'Performance Detail',
+    'Delete Error Samples' => 'Delete Error Samples'
 ];
