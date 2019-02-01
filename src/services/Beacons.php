@@ -212,11 +212,13 @@ class Beacons extends Component
             $siteId = null;
         }
         $messages = Webperf::$plugin->errorsTarget->pageErrors;
+        $request = Craft::$app->getRequest();
         // Allocate a new ErrorSample, and fill it in
         $sample = new CraftDbErrorSample([
             'requestId' => Webperf::$requestUuid,
             'siteId' => $siteId,
             'url' => $url,
+            'queryString' => $request->getQueryString(),
             'title' => $this->getDocumentTitle(),
             'pageErrors' => $messages,
         ]);

@@ -123,6 +123,7 @@ class Install extends Migration
                     'siteId' => $this->integer(),
                     'title' => $this->string(120),
                     'url' => $this->string(255)->notNull()->defaultValue(''),
+                    'queryString' => $this->string(255)->defaultValue(''),
                     'type' => $this->string(16)->defaultValue(''),
                     'pageErrors' => $this->text(),
                 ]
