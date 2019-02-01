@@ -164,7 +164,7 @@ class ChartsController extends Controller
     }
 
     /**
-     * The Dashboard stats average chart
+     * The Performance stats average chart
      *
      * @param string $start
      * @param string $end
@@ -294,6 +294,109 @@ class ChartsController extends Controller
                 'data' => ArrayHelper::getColumn($stats, 'pageLoad'),
                 'labels' => ArrayHelper::getColumn($stats, 'sampleDate'),
             ];
+        }
+
+        return $this->asJson($data);
+    }
+
+
+    /**
+     * The Dashboard stats average chart
+     *
+     * @param string $start
+     * @param string $end
+     * @param string $pageUrl
+     * @param int    $siteId
+     *
+     * @return Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionErrorsAreaChart(
+        string $start,
+        string $end,
+        $pageUrl = '',
+        int $siteId = 0
+    ): Response {
+        PermissionHelper::controllerPermissionCheck('webperf:errors');
+        $data = [];
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $pageUrl = urldecode($pageUrl);
+        $dateStart = new \DateTime($start);
+        $dateEnd = new \DateTime($end);
+        $interval = date_diff($dateStart, $dateEnd);
+        $dateFormat = "'%Y-%m-%d %H'";
+        if ($interval->days > 30) {
+            $dateFormat = "'%Y-%m-%d'";
+        }
+        // Different dbs do it different ways
+        $stats = null;
+        $db = Craft::$app->getDb();
+        if ($db->getIsPgsql()) {
+            $dateFormat = "'yyyy-mm-dd HH:MM'";
+            if ($interval->days > 30) {
+                $dateFormat = "'yyyy-mm-dd'";
+            }
+        }
+        // Query the db
+        $query = (new Query())
+            ->from('{{%webperf_error_samples}}')
+            ->select([
+                '[[type]]',
+                'COUNT([[type]]) AS [[cnt]]',
+            ])
+            ->where(['between', 'dateCreated', $start, $end])
+        ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+        if ($pageUrl !== '') {
+            $query->andWhere(['url' => $pageUrl]);
+        }
+        if ($db->getIsMysql()) {
+            $query
+                ->addSelect([
+                    'DATE_FORMAT([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                ])
+                ->groupBy('[[sampleDate]], [[type]]')
+            ;
+        }
+        if ($db->getIsPgsql()) {
+            $query
+                ->addSelect([
+                    'to_char([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                ])
+                ->groupBy(['to_char([[dateCreated]], '.$dateFormat.'), [[type]]'])
+            ;
+        }
+        $stats = $query
+            ->all();
+        // Massage the data
+        if ($stats) {
+            $craftErrors = [
+                'name' => 'Craft Errors',
+                'data' => [],
+                'labels' => [],
+            ];
+            $boomerangErrors = [
+                'name' => 'Browser JavaScript Errors',
+                'data' => [],
+                'labels' => [],
+            ];
+            foreach ($stats as $stat) {
+                switch ($stat['type']) {
+                    case 'boomerang':
+                        $boomerangErrors['data'][] = (int)$stat['cnt'];
+                        $boomerangErrors['labels'][] = $stat['sampleDate'];
+                        break;
+                    case 'craft':
+                        $craftErrors['data'][] = (int)$stat['cnt'];
+                        $craftErrors['labels'][] = $stat['sampleDate'];
+                        break;
+                }
+            }
+            $data[] = $boomerangErrors;
+            $data[] = $craftErrors;
         }
 
         return $this->asJson($data);

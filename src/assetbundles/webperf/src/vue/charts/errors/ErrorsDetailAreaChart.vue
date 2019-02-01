@@ -6,7 +6,7 @@
     import Axios from 'axios';
     import ApexCharts from 'vue-apexcharts';
 
-    const chartDataBaseUrl = '/webperf/charts/pages-area-chart/';
+    const chartDataBaseUrl = '/webperf/charts/errors-area-chart/';
 
     // Get the largest number from the passed in arrays
     const largestNumber = (mainArray) => {
@@ -74,15 +74,17 @@
                 };
                 await queryApi(chartsAPI, uri, params, (data) => {
                     if (data[0] !== undefined) {
-                        let largest = largestNumber([data[9]['data']])[0];
-                        largest = Math.ceil((largest / 1000)) * 1000;
+                        let largest1 = largestNumber([data[0]['data']])[0];
+                        let largest2 = largestNumber([data[1]['data']])[0];
+                        let largest = largest1 > largest2 ? largest1 : largest2;
                         this.chartOptions = {
                             ...this.chartOptions, ...{
                                 yaxis: {
                                     max: largest,
+                                    tickAmount: largest,
                                     labels: {
                                         formatter: (val) => {
-                                            return this.statFormatter(val);
+                                            return val;
                                         },
                                     },
                                 },
@@ -97,9 +99,6 @@
                 this.displayStart = range.start;
                 this.displayEnd = range.end;
                 this.getSeriesData();
-            },
-            statFormatter(val) {
-                return Number(val / 1000).toFixed(2) + "s";
             },
         },
         created () {
@@ -131,9 +130,8 @@
                         },
                     },
                     colors: [
-                        '#CC1F1A', '#E3342F', '#EF5753',
-                        '#DE751F', '#F6993F', '#FAAD63',
-                        '#2779BD', '#3490DC', '#6CB2EB', '#BCDEFA',
+                        '#1F9D55',
+                        '#CC1F1A',
                     ],
                     stroke: {
                         curve: 'smooth',
@@ -141,7 +139,7 @@
                     },
                     fill: {
                         type: 'solid',
-                        opacity: 0.9,
+                        opacity: 0.5,
                         gradient: {
                             enabled: false,
                         },
@@ -163,10 +161,11 @@
                     yaxis: {
                         min: 0,
                         max: 0,
-                        seriesName: 'Time',
+                        seriesName: 'Errors',
+                        tickAmount: 1,
                         labels: {
                             formatter: (val) => {
-                                return this.statFormatter(val);
+                                return val;
                             },
                         },
                     },
