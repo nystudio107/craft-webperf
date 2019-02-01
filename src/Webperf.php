@@ -561,6 +561,11 @@ class Webperf extends Plugin
             '/webperf/charts/pages-area-chart/<siteId:\d+>'
             => 'webperf/charts/pages-area-chart',
 
+            '/webperf/charts/errors-area-chart'
+            => 'webperf/charts/errors-area-chart',
+            '/webperf/charts/errors-area-chart/<siteId:\d+>'
+            => 'webperf/charts/errors-area-chart',
+
             '/webperf/recommendations/list'
             => 'webperf/recommendations/list',
             '/webperf/recommendations/list/<siteId:\d+>'
