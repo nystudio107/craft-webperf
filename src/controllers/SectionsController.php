@@ -122,7 +122,7 @@ class SectionsController extends Controller
         // Get the site to edit
         $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
         $pluginName = Webperf::$settings->pluginName;
-        $templateTitle = Craft::t('webperf', 'Pages');
+        $templateTitle = Craft::t('webperf', 'Performance');
         $view = Craft::$app->getView();
         // Asset bundle
         try {
@@ -136,7 +136,7 @@ class SectionsController extends Controller
         );
         // Enabled sites
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'pages';
+        $variables['controllerHandle'] = 'performance';
 
         // Basic variables
         $variables['fullPageForm'] = false;
@@ -151,11 +151,11 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/pages'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
-        $variables['selectedSubnavItem'] = 'pages';
+        $variables['selectedSubnavItem'] = 'performance';
         $variables['settings'] = Webperf::$settings;
         // Set the default date range
         $now = new \DateTime();
@@ -184,7 +184,7 @@ class SectionsController extends Controller
         // Get the site to edit
         $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
         $pluginName = Webperf::$settings->pluginName;
-        $templateTitle = Craft::t('webperf', 'Page Detail');
+        $templateTitle = Craft::t('webperf', 'Performance Detail');
         $view = Craft::$app->getView();
         // Asset bundle
         try {
@@ -198,7 +198,7 @@ class SectionsController extends Controller
         );
         // Enabled sites
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $variables['controllerHandle'] = 'page-detail';
+        $variables['controllerHandle'] = 'performance/page-detail';
 
         // Basic variables
         $variables['fullPageForm'] = false;
@@ -212,18 +212,18 @@ class SectionsController extends Controller
                 'url' => UrlHelper::cpUrl('webperf'),
             ],
             [
-                'label' => Craft::t('webperf', 'Pages'),
-                'url' => UrlHelper::cpUrl('webperf/pages'.$siteHandleUri),
+                'label' => Craft::t('webperf', 'Performance'),
+                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/page-detail'.$siteHandleUri, [
+                'url' => UrlHelper::cpUrl('webperf/performance/page-detail'.$siteHandleUri, [
                     'pageUrl' => $pageUrl
                 ]),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
-        $variables['selectedSubnavItem'] = 'pages';
+        $variables['selectedSubnavItem'] = 'performance';
         $variables['pageUrl'] = $pageUrl;
         $variables['pageTitle'] = Webperf::$plugin->dataSamples->pageTitle($pageUrl, $siteId);
         $variables['settings'] = Webperf::$settings;
@@ -234,5 +234,135 @@ class SectionsController extends Controller
 
         // Render the template
         return $this->renderTemplate('webperf/performance/page-detail', $variables);
+    }
+
+
+    /**
+     * @param string|null $siteHandle
+     *
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
+     */
+    public function actionErrorsIndex(string $siteHandle = null): Response
+    {
+        $variables = [];
+        PermissionHelper::controllerPermissionCheck('webperf:errors');
+        // Trim the statistics
+        Webperf::$plugin->errorSamples->trimErrorSamples();
+        // Get the site to edit
+        $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
+        $pluginName = Webperf::$settings->pluginName;
+        $templateTitle = Craft::t('webperf', 'Errors');
+        $view = Craft::$app->getView();
+        // Asset bundle
+        try {
+            $view->registerAssetBundle(WebperfDashboardAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/webperf/assetbundles/webperf/dist',
+            true
+        );
+        // Enabled sites
+        MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $variables['controllerHandle'] = 'errors';
+
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = $pluginName;
+        $variables['title'] = $templateTitle;
+        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url' => UrlHelper::cpUrl('webperf'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
+            ],
+        ];
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
+        $variables['selectedSubnavItem'] = 'errors';
+        $variables['settings'] = Webperf::$settings;
+        // Set the default date range
+        $now = new \DateTime();
+        $variables['end'] = $now->format('Y-m-d');
+        $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
+
+        // Render the template
+        return $this->renderTemplate('webperf/errors/index', $variables);
+    }
+
+    /**
+     * @param string      $pageUrl
+     * @param string|null $siteHandle
+     *
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
+     */
+    public function actionErrorsDetail(string $pageUrl, string $siteHandle = null): Response
+    {
+        $variables = [];
+        PermissionHelper::controllerPermissionCheck('webperf:errors-detail');
+        // Trim the statistics
+        Webperf::$plugin->errorSamples->trimErrorSamples();
+        // Get the site to edit
+        $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
+        $pluginName = Webperf::$settings->pluginName;
+        $templateTitle = Craft::t('webperf', 'Errors Detail');
+        $view = Craft::$app->getView();
+        // Asset bundle
+        try {
+            $view->registerAssetBundle(WebperfDashboardAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/webperf/assetbundles/webperf/dist',
+            true
+        );
+        // Enabled sites
+        MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $variables['controllerHandle'] = 'errors/page-detail';
+
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = $pluginName;
+        $variables['title'] = $templateTitle;
+        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url' => UrlHelper::cpUrl('webperf'),
+            ],
+            [
+                'label' => Craft::t('webperf', 'Errors'),
+                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
+            ],
+            [
+                'label' => $templateTitle,
+                'url' => UrlHelper::cpUrl('webperf/errors/page-detail'.$siteHandleUri, [
+                    'pageUrl' => $pageUrl
+                ]),
+            ],
+        ];
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
+        $variables['selectedSubnavItem'] = 'errors';
+        $variables['pageUrl'] = $pageUrl;
+        $variables['pageTitle'] = Webperf::$plugin->errorSamples->pageTitle($pageUrl, $siteId);
+        $variables['settings'] = Webperf::$settings;
+        // Set the default date range
+        $now = new \DateTime();
+        $variables['end'] = $now->format('Y-m-d');
+        $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
+
+        // Render the template
+        return $this->renderTemplate('webperf/errors/page-detail', $variables);
     }
 }
