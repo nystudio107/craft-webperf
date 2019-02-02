@@ -81,7 +81,7 @@
                             ...this.chartOptions, ...{
                                 yaxis: {
                                     max: largest,
-                                    tickAmount: largest,
+                                    tickAmount: largest > 10 ? 10 : largest,
                                     labels: {
                                         formatter: (val) => {
                                             return val;
