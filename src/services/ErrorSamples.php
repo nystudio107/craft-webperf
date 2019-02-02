@@ -90,6 +90,32 @@ class ErrorSamples extends Component
     }
 
     /**
+     * Get the total number of errors optionally limited by siteId, between
+     * $start and $end
+     *
+     * @param int    $siteId
+     * @param string $start
+     * @param string $end
+     *
+     * @return int|string
+     */
+    public function totalErrorSamplesRange(int $siteId, string $start, string $end)
+    {
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        // Get the total number of errors
+        $query = (new Query())
+            ->from(['{{%webperf_error_samples}}'])
+            ->where(['between', 'dateCreated', $start, $end])
+        ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+
+        return $query->count();
+    }
+
+    /**
      * Get the page title from errors by URL and optionally siteId
      *
      * @param string   $url

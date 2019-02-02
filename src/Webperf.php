@@ -62,6 +62,9 @@ class Webperf extends Plugin
     const RECOMMENDATIONS_CACHE_KEY = 'webperf-recommendations';
     const RECOMMENDATIONS_CACHE_DURATION = 60;
 
+    const ERRORS_CACHE_KEY = 'webperf-errors';
+    const ERRORS_CACHE_DURATION = 60;
+
     // Static Properties
     // =========================================================================
 
@@ -157,23 +160,9 @@ class Webperf extends Plugin
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
-        $cache = Craft::$app->getCache();
-        // See if there are any recommendations to add as a badge
-        $recommendations = $cache->getOrSet(self::RECOMMENDATIONS_CACHE_KEY, function () {
-            $data = [];
-            $now = new \DateTime();
-            $end = $now->format('Y-m-d');
-            $start = $now->modify('-1 year')->format('Y-m-d');
-            $stats = Webperf::$plugin->recommendations->data('', $start, $end);
-            if (!empty($stats)) {
-                $recSample = new RecommendationDataSample($stats);
-                $data = Webperf::$plugin->recommendations->list($recSample);
-            }
-            return count($data);
-        }, self::RECOMMENDATIONS_CACHE_DURATION);
-        if ($recommendations) {
-            $navItem['badgeCount'] = $recommendations;
-        }
+        $recommendations = $this->getRecommendationsCount();
+        $errors = $this->getErrorsCount();
+        $navItem['badgeCount'] = $errors.$recommendations;
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('webperf:dashboard')) {
@@ -192,6 +181,7 @@ class Webperf extends Plugin
             $subNavs['errors'] = [
                 'label' => 'Errors',
                 'url' => 'webperf/errors',
+                'badge' => $errors,
             ];
         }
         if ($currentUser->can('webperf:settings')) {
@@ -644,5 +634,61 @@ class Webperf extends Plugin
                 'label' => Craft::t('webperf', 'Settings'),
             ],
         ];
+    }
+
+    /**
+     * Get a string value with the number of recommendations
+     *
+     * @return string
+     */
+    protected function getRecommendationsCount(): string
+    {
+        $cache = Craft::$app->getCache();
+        // See if there are any recommendations to add as a badge
+        $recommendations = $cache->getOrSet(self::RECOMMENDATIONS_CACHE_KEY, function () {
+            $data = [];
+            $now = new \DateTime();
+            $end = $now->format('Y-m-d');
+            $start = $now->modify('-30 days')->format('Y-m-d');
+            $stats = Webperf::$plugin->recommendations->data('', $start, $end);
+            if (!empty($stats)) {
+                $recSample = new RecommendationDataSample($stats);
+                $data = Webperf::$plugin->recommendations->list($recSample);
+            }
+
+            return count($data);
+        }, self::RECOMMENDATIONS_CACHE_DURATION);
+
+        if (!$recommendations) {
+            $recommendations = '';
+        }
+
+        return (string)$recommendations;
+    }
+
+    /**
+     * Get a string value with the number of errors
+     *
+     * @return string
+     */
+    protected function getErrorsCount(): string
+    {
+        $cache = Craft::$app->getCache();
+        // See if there are any recommendations to add as a badge
+        $errors = $cache->getOrSet(self::ERRORS_CACHE_KEY, function () {
+            $now = new \DateTime();
+            $end = $now->format('Y-m-d');
+            $start = $now->modify('-30 days')->format('Y-m-d');
+            
+            return Webperf::$plugin->errorSamples->totalErrorSamplesRange(0, $start, $end);
+        }, self::ERRORS_CACHE_DURATION);
+
+        if (!$errors) {
+            $errors = '';
+        } else {
+            $errors = '⚠';
+        }
+
+        return (string)$errors;
     }
 }
