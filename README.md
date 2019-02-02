@@ -4,7 +4,9 @@
 
 Monitor the performance of your webpages through real-world user timing data
 
-![Screenshot](resources/img/plugin-logo.png)
+![Screenshot](resources/img/plugin-banner.jpg)
+
+**Note**: _The license fee for this plugin is $59.00 via the Craft Plugin Store._
 
 ## This plugin is in development
 
