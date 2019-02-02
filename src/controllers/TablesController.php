@@ -454,7 +454,132 @@ class TablesController extends Controller
             ];
         }
 
-        Craft::debug('shit: '.print_r($data, true), __METHOD__);
+        return $this->asJson($data);
+    }
+
+
+    /**
+     * Handle requests for the performance detail table
+     *
+     * @param string $sort
+     * @param int    $page
+     * @param int    $per_page
+     * @param string $filter
+     * @param string $pageUrl
+     * @param string $start
+     * @param string $end
+     * @param int    $siteId
+     *
+     * @return Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionErrorsDetail(
+        string $start = '',
+        string $end = '',
+        string $sort = 'dateCreated|DESC',
+        int $page = 1,
+        int $per_page = 20,
+        $filter = '',
+        $pageUrl = '',
+        $siteId = 0
+    ): Response {
+        PermissionHelper::controllerPermissionCheck('webperf:errors');
+        $data = [];
+        $sortField = 'dateCreated';
+        $sortType = 'DESC';
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $pageUrl = urldecode($pageUrl);
+        // Figure out the sorting type
+        if ($sort !== '') {
+            if (strpos($sort, '|') === false) {
+                $sortField = $sort;
+            } else {
+                list($sortField, $sortType) = explode('|', $sort);
+            }
+        }
+        // Query the db table
+        $offset = ($page - 1) * $per_page;
+        $query = (new Query())
+            ->from(['{{%webperf_error_samples}}'])
+            ->offset($offset)
+            ->where(['url' => $pageUrl])
+            ->andWhere(['between', 'dateCreated', $start, $end])
+        ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+        if ($filter !== '') {
+            $query
+                ->andWhere(['like', 'pageErrors', $filter])
+                /*
+                ->orWhere(['like', 'device', $filter])
+                ->orWhere(['like', 'os', $filter])
+                ->orWhere(['like', 'browser', $filter])
+                ->orWhere(['like', 'countryCode', $filter])
+                */
+            ;
+        }
+        $query
+            ->orderBy("{$sortField} {$sortType}")
+            ->limit($per_page)
+        ;
+        $stats = $query->all();
+        if ($stats) {
+            $user = Craft::$app->getUser()->getIdentity();
+            // Massage the stats
+            foreach ($stats as &$stat) {
+                if (!empty($stats['dateCreated'])) {
+                    $date = DateTimeHelper::toDateTime($stats['dateCreated']);
+                    $stats['dateCreated'] = $date->format('Y-m-d H:i:s');
+                }
+                if (isset($stat['mobile'])) {
+                    $stat['mobile'] = (bool)$stat['mobile'];
+                }
+                // Decode any emojis in the title
+                if (!empty($stat['title'])) {
+                    $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
+                }
+                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/error-samples/delete-sample-by-id', [
+                    'id' => $stat['id']
+                ]);
+                // Override based on permissions
+                if (!$user->can('webperf:delete-error-samples')) {
+                    $stat['deleteLink'] = '';
+                }
+            }
+            // Format the data for the API
+            $data['data'] = $stats;
+            $query = (new Query())
+                ->select(['[[url]]'])
+                ->from(['{{%webperf_error_samples}}'])
+                ->where(['url' => $pageUrl])
+                ->andWhere(['between', 'dateCreated', $start, $end])
+            ;
+            if ($filter !== '') {
+                $query
+                    ->andWhere(['like', 'pageErrors', $filter])
+                    /*
+                    ->orWhere(['like', 'device', $filter])
+                    ->orWhere(['like', 'os', $filter])
+                    ->orWhere(['like', 'browser', $filter])
+                    ->orWhere(['like', 'countryCode', $filter])
+                    */
+                ;
+            }
+            $count = $query->count();
+            $data['links']['pagination'] = [
+                'total' => $count,
+                'per_page' => $per_page,
+                'current_page' => $page,
+                'last_page' => ceil($count / $per_page),
+                'next_page_url' => null,
+                'prev_page_url' => null,
+                'from' => $offset + 1,
+                'to' => $offset + ($count > $per_page ? $per_page : $count),
+            ];
+        }
+
         return $this->asJson($data);
     }
 

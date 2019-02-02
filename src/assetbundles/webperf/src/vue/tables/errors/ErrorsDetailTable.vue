@@ -10,7 +10,7 @@
             ></vuetable-pagination>
         </div>
         <vuetable ref="vuetable"
-                  api-url="/webperf/tables/page-detail"
+                  api-url="/webperf/tables/errors-detail"
                   :per-page="20"
                   :fields="fields"
                   :css="css"
@@ -20,7 +20,7 @@
                   @vuetable:row-clicked="onRowClicked"
                   @vuetable:loaded="onLoaded"
         >
-            <template slot="sample-date" slot-scope="props">
+            <template slot="error-date" slot-scope="props">
                 <data-sample-date :date="props.rowData.dateCreated"
                                   :url="props.rowData.url"
                                   :query="props.rowData.query"
@@ -56,7 +56,6 @@
     import VueTablePagination from '../common/VuetablePagination.vue';
     import VueTablePaginationInfo from '../common/VuetablePaginationInfo.vue';
     import VueTableFilterBar from '../common/VuetableFilterBar.vue';
-    import TriBlendColor from '../../../js/tri-color-blend.js';
     import RequestBarChart from '../../charts/common/RequestBarChart.vue';
     import PageResultCell from '../common/PageResultCell.vue';
     import DataSampleDate from '../common/DataSampleDate.vue';
@@ -115,13 +114,12 @@
                 },
                 sortOrder: [
                     {
-                        field: '__slot:load-time-bar',
-                        sortField: 'pageLoad',
+                        field: '__slot:error-date',
+                        sortField: 'dateCreated',
                         direction: 'desc'
                     }
                 ],
                 fields: FieldDefs,
-                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
         mounted() {
