@@ -18,7 +18,6 @@ const vm = new Vue({
         'simple-bar-chart': SimpleBarChart,
         'sample-range-picker': SampleRangePicker,
         'sample-pane-footer': SamplePaneFooter,
-        'recommendations-list': RecommendationsList,
     },
     data: {
     },

@@ -379,7 +379,7 @@ class ChartsController extends Controller
                 'labels' => [],
             ];
             $boomerangErrors = [
-                'name' => 'Browser JavaScript Errors',
+                'name' => 'JavaScript Errors',
                 'data' => [],
                 'labels' => [],
             ];

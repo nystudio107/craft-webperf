@@ -43,7 +43,7 @@ class TablesController extends Controller
     // =========================================================================
 
     /**
-     * Handle requests for the dashboard statistics table
+     * Handle requests for the performance index table
      *
      * @param string $sort
      * @param int    $page
@@ -195,7 +195,7 @@ class TablesController extends Controller
     }
 
     /**
-     * Handle requests for the dashboard statistics table
+     * Handle requests for the performance detail table
      *
      * @param string $sort
      * @param int    $page
@@ -326,6 +326,135 @@ class TablesController extends Controller
             ];
         }
 
+        return $this->asJson($data);
+    }
+
+    /**
+     * Handle requests for the pages index table
+     *
+     * @param string $sort
+     * @param int    $page
+     * @param int    $per_page
+     * @param string $filter
+     * @param string $start
+     * @param string $end
+     * @param int    $siteId
+     *
+     * @return Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionErrorsIndex(
+        string $start = '',
+        string $end = '',
+        string $sort = 'url|DESC',
+        int $page = 1,
+        int $per_page = 20,
+        $filter = '',
+        $siteId = 0
+    ): Response {
+        PermissionHelper::controllerPermissionCheck('webperf:errors');
+        $data = [];
+        $sortField = 'url';
+        $sortType = 'DESC';
+        // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
+        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        // Figure out the sorting type
+        if ($sort !== '') {
+            if (strpos($sort, '|') === false) {
+                $sortField = $sort;
+            } else {
+                list($sortField, $sortType) = explode('|', $sort);
+            }
+        }
+        // Query the db table
+        $offset = ($page - 1) * $per_page;
+        $query = (new Query())
+            ->select([
+                '[[url]]',
+                'MIN([[title]]) as [[title]]',
+                'MAX([[dateCreated]]) as [[latestErrorDate]]',
+                'SUM([[type]] = \'craft\') as [[craftCount]]',
+                'SUM([[type]] = \'boomerang\') as [[boomerangCount]]',
+                'COUNT([[url]]) AS cnt',
+            ])
+            ->from(['{{%webperf_error_samples}}'])
+            ->offset($offset)
+            ->where(['between', 'dateCreated', $start, $end])
+        ;
+        if ((int)$siteId !== 0) {
+            $query->andWhere(['siteId' => $siteId]);
+        }
+        if ($filter !== '') {
+            $query
+                ->andWhere(['like', 'url', $filter])
+                ->orWhere(['like', 'title', $filter])
+                ->orWhere(['like', 'pageErrors', $filter])
+            ;
+        }
+        $query
+            ->orderBy("[[{$sortField}]] {$sortType}")
+            ->groupBy('url')
+            ->limit($per_page)
+        ;
+
+        $stats = $query->all();
+        if ($stats) {
+            $user = Craft::$app->getUser()->getIdentity();
+            // Massage the stats
+            foreach ($stats as &$stat) {
+                $stat['cnt'] = (int)$stat['cnt'];
+                $stat['craftCount'] = (int)$stat['craftCount'];
+                $stat['boomerangCount'] = (int)$stat['boomerangCount'];
+                // Decode any emojis in the title
+                if (!empty($stat['title'])) {
+                    $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
+                }
+                // Set up the appropriate helper links
+                $stat['deleteLink'] = UrlHelper::actionUrl('webperf/error-samples/delete-samples-by-url', [
+                    'pageUrl' => $stat['url'],
+                    'siteId' => $siteId
+                ]);
+                $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/errors/page-detail', [
+                    'pageUrl' => $stat['url'],
+                    'siteId' => $siteId,
+                ]);
+                // Override based on permissions
+                if (!$user->can('webperf:delete-error-samples')) {
+                    $stat['deleteLink'] = '';
+                }
+                if (!$user->can('webperf:errors-detail')) {
+                    $stat['detailPageUrl'] = '';
+                }
+            }
+            // Format the data for the API
+            $data['data'] = $stats;
+            $query = (new Query())
+                ->select(['[[url]]'])
+                ->from(['{{%webperf_error_samples}}'])
+                ->groupBy('[[url]]')
+                ->where(['between', 'dateCreated', $start, $end])
+            ;
+            if ($filter !== '') {
+                $query
+                    ->andWhere(['like', 'url', $filter])
+                    ->orWhere(['like', 'title', $filter])
+                    ->orWhere(['like', 'pageErrors', $filter])
+                ;
+            }
+            $count = $query->count();
+            $data['links']['pagination'] = [
+                'total' => $count,
+                'per_page' => $per_page,
+                'current_page' => $page,
+                'last_page' => ceil($count / $per_page),
+                'next_page_url' => null,
+                'prev_page_url' => null,
+                'from' => $offset + 1,
+                'to' => $offset + ($count > $per_page ? $per_page : $count),
+            ];
+        }
+
+        Craft::debug('shit: '.print_r($data, true), __METHOD__);
         return $this->asJson($data);
     }
 

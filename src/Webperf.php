@@ -545,6 +545,8 @@ class Webperf extends Plugin
             // Tables
             '/webperf/tables/pages-index' => 'webperf/tables/pages-index',
             '/webperf/tables/page-detail' => 'webperf/tables/page-detail',
+            '/webperf/tables/errors-index' => 'webperf/tables/errors-index',
+            '/webperf/tables/errors-detail' => 'webperf/tables/errors-detail',
             // Charts
             '/webperf/charts/dashboard-stats-average/<column:{handle}>'
             => 'webperf/charts/dashboard-stats-average',

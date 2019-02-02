@@ -78,16 +78,6 @@
                     </a>
                 </h2>
                 {% set devModeWarning = 'false' %}
-                <sample-pane-footer
-                        start="{{ start }}"
-                        end="{{ end }}"
-                        subject="charts"
-                        column="id"
-                        page-url="{{ pageUrl }}"
-                        :site-id="{{ currentSiteId }}"
-                        :display-dev-mode-warning="{{ devModeWarning }}"
-                >
-                </sample-pane-footer>
             </div>
         </div>
         <div class="pane first">
@@ -102,7 +92,7 @@
             </errors-detail-area-chart>
         </div>
         <div class="pane">
-            <h1 class="text-center text-base text-3xl font-bold">{{ "Page Errors Data Samples"|t("webperf") }}</h1>
+            <h1 class="text-center text-base text-3xl font-bold">{{ "Page Errors Detail"|t("webperf") }}</h1>
             <errors-detail-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"

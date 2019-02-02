@@ -66,6 +66,18 @@ th.vuetable-th-countryCode {
   text-align: left!important;
 }
 
+th.vuetable-th-slot-total-errors {
+  text-align: right!important;
+}
+
+th.vuetable-th-slot-craft-errors {
+  text-align: right!important;
+}
+
+th.vuetable-th-slot-boomerang-errors {
+  text-align: right!important;
+}
+
 table.webperf-pages-index tbody.vuetable-body tr:hover {
   background-color: #DCEEFE;
   cursor: pointer;

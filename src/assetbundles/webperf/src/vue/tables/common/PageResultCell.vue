@@ -32,7 +32,7 @@
                 </a>
             </cite>
         </div>
-        <div class="py-2">
+        <div v-if="width" class="py-2">
             <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
                 <div class="simple-bar-line h-2 rounded-full" :style="{ width: width + '%', backgroundColor: color }"></div>
             </div>

@@ -50,7 +50,9 @@
         {# -- Range Picker -- #}
         {% include "webperf/_includes/range-picker.twig" %}
         <div class="pane first">
-            <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Errors History</h1>
+            <h1 class="text-center text-base text-3xl font-bold">
+                {{ "Aggregate Page Errors History"|t("webperf") }}
+            </h1>
             <errors-detail-area-chart
                     title=""
                     start="{{ start }}"
@@ -61,7 +63,9 @@
             </errors-detail-area-chart>
         </div>
         <div class="pane">
-            <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Errors Data Samples</h1>
+            <h1 class="text-center text-base text-3xl font-bold">
+                {{ "Aggregate Page Errors"|t("webperf") }}
+            </h1>
             <errors-index-table :site-id="{{ currentSiteId }}"
                                start="{{ start }}"
                                end="{{ end }}"

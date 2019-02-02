@@ -10,7 +10,7 @@
             ></vuetable-pagination>
         </div>
         <vuetable ref="vuetable"
-                  api-url="/webperf/tables/pages-index"
+                  api-url="/webperf/tables/errors-index"
                   :per-page="20"
                   :fields="fields"
                   :css="css"
@@ -20,22 +20,32 @@
                   @vuetable:row-clicked="onRowClicked"
                   @vuetable:loaded="onLoaded"
         >
-            <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
+            <template slot="page-listing-display" slot-scope="props">
                 <page-result-cell :title="props.rowData.title"
                                   :url="props.rowData.url"
-                                  :width="computeWidth(props.rowData.pageLoad, maxValue)"
-                                  :color="triBlend.colorFromPercentage(((props.rowData.pageLoad / maxValue) * 100))"
+                                  :width="0"
+                                  color="none"
                 >
                 </page-result-cell>
             </template>
-            <template slot="load-time-bar" slot-scope="props">
-                <request-bar-chart :rowData="props.rowData">
-                </request-bar-chart>
+            <template slot="sample-date" slot-scope="props">
+                <data-sample-date :date="props.rowData.latestErrorDate"
+                                  :url="props.rowData.url"
+                                  :query="props.rowData.query"
+                >
+                </data-sample-date>
             </template>
-            <template slot="data-samples" slot-scope="props">
-                <sample-size-warning :sample="props.rowData.cnt">
-                </sample-size-warning>
-                {{ props.rowData.cnt }}
+            <template slot="craft-errors" slot-scope="props">
+                <error-warning :sample="props.rowData.craftCount">
+                </error-warning>
+            </template>
+            <template slot="boomerang-errors" slot-scope="props">
+                <error-warning :sample="props.rowData.boomerangCount">
+                </error-warning>
+            </template>
+            <template slot="total-errors" slot-scope="props">
+                <error-warning :sample="props.rowData.cnt">
+                </error-warning>
             </template>
         </vuetable>
         <div class="vuetable-pagination clearafter">
@@ -56,10 +66,9 @@
     import VueTablePagination from '../common/VuetablePagination.vue';
     import VueTablePaginationInfo from '../common/VuetablePaginationInfo.vue';
     import VueTableFilterBar from '../common/VuetableFilterBar.vue';
-    import TriBlendColor from '../../../js/tri-color-blend.js';
-    import RequestBarChart from '../../charts/common/RequestBarChart.vue';
     import PageResultCell from '../common/PageResultCell.vue';
-    import SampleSizeWarning from '../../common/SampleSizeWarning.vue';
+    import DataSampleDate from '../common/DataSampleDate.vue';
+    import ErrorWarning from '../../common/ErrorWarning.vue';
 
     // Our component exports
     export default {
@@ -68,9 +77,9 @@
             'vuetable-pagination': VueTablePagination,
             'vuetable-pagination-info': VueTablePaginationInfo,
             'vuetable-filter-bar': VueTableFilterBar,
-            'request-bar-chart': RequestBarChart,
             'page-result-cell': PageResultCell,
-            'sample-size-warning': SampleSizeWarning,
+            'data-sample-date': DataSampleDate,
+            'error-warning': ErrorWarning,
         },
         props: {
             start: String,
@@ -111,13 +120,12 @@
                 },
                 sortOrder: [
                     {
-                        field: '__slot:load-time-bar',
-                        sortField: 'pageLoad',
+                        field: '__slot:total-errors',
+                        sortField: 'cnt',
                         direction: 'desc'
                     }
                 ],
                 fields: FieldDefs,
-                triBlend: new TriBlendColor(this.fastColor, this.averageColor, this.slowColor),
             }
         },
         mounted() {

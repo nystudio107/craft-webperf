@@ -203,7 +203,10 @@ class Beacons extends Component
                 return;
             }
         }
-        $url = Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL;
+        $request = Craft::$app->getRequest();
+        $url = UrlHelper::stripQueryString(
+            urldecode($request->getAbsoluteUrl())
+        );
         // Get the site id
         try {
             $site = MultiSite::getSiteFromUrl($url);
@@ -212,7 +215,6 @@ class Beacons extends Component
             $siteId = null;
         }
         $messages = Webperf::$plugin->errorsTarget->pageErrors;
-        $request = Craft::$app->getRequest();
         // Allocate a new ErrorSample, and fill it in
         $sample = new CraftDbErrorSample([
             'requestId' => Webperf::$requestUuid,
