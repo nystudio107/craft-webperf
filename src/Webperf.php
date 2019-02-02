@@ -245,10 +245,14 @@ class Webperf extends Plugin
                 if (Craft::$app->getConfig()->getGeneral()->devMode) {
                     $except = ['nystudio107\seomatic\*'];
                 }
+                $levels = ['error'];
+                if (self::$settings->includeCraftWarnings) {
+                    $levels[] = 'warning';
+                }
                 try {
                     $this->set('errorsTarget', [
                         'class' => ErrorsTarget::class,
-                        'levels' => ['error','warning'],
+                        'levels' => $levels,
                         'categories' => [],
                         'logVars' => [],
                         'except' => $except,

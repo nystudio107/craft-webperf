@@ -77,6 +77,11 @@ class Settings extends Model
     public $webpageTestApiKey = '';
 
     /**
+     * @var bool Whether Craft `warning` messages should be recorded in addition to `error` messages
+     */
+    public $includeCraftWarnings = true;
+
+    /**
      * @var int The number of error samples to store
      */
     public $errorSamplesStoredLimit = 1000;
@@ -138,6 +143,7 @@ class Settings extends Model
             ['rateLimitMs', 'integer'],
             ['rateLimitMs', 'default', 'value' => 500],
             ['webpageTestApiKey', 'string'],
+            ['includeCraftWarnings', 'boolean'],
             ['errorSamplesStoredLimit', 'integer'],
             ['errorSamplesStoredLimit', 'default', 'value' => 1000],
             ['automaticallyTrimErrorSamples', 'boolean'],

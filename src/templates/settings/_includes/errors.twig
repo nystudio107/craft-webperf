@@ -2,7 +2,17 @@
 {% from "webperf/_includes/macros.twig" import configWarning %}
 <div id="errors" class="hidden">
     {% namespace "settings" %}
-    {{ forms.textField({
+        {{ forms.lightswitchField({
+            label: "Include Craft `warnings` as well as `errors`"|md|t("webperf"),
+            instructions: "Whether Craft `warning` messages should be recorded in addition to `error` messages"|t("webperf"),
+            id: "includeCraftWarnings",
+            name: "includeCraftWarnings",
+            on: settings.includeCraftWarnings,
+            warning: configWarning("includeCraftWarnings", "webperf"),
+            errors: settings.getErrors("includeCraftWarnings"),
+        }) }}
+
+        {{ forms.textField({
         label: "Error Samples to Store"|t("webperf"),
         instructions: "How many unique Error Samples should be stored before they are trimmed."|t("webperf"),
         id: "errorSamplesStoredLimit",
