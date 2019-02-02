@@ -60,6 +60,10 @@
             >
             </performance-detail-area-chart>
         </div>
+
+        {# -- Recommendations -- #}
+        {% include "webperf/_includes/recommendations.twig" %}
+
         <div class="pane">
             <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance Data Samples</h1>
             <performance-index-table :site-id="{{ currentSiteId }}"
