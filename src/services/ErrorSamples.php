@@ -12,6 +12,7 @@ namespace nystudio107\webperf\services;
 
 use nystudio107\webperf\Webperf;
 use nystudio107\webperf\base\DbErrorSampleInterface;
+use nystudio107\webperf\events\ErrorSampleEvent;
 
 use Craft;
 use craft\base\Component;
@@ -27,6 +28,41 @@ class ErrorSamples extends Component
 {
     // Constants
     // =========================================================================
+
+    /**
+     * @event ErrorSampleEvent The event that is triggered before the error sample is saved
+     * You may set [[ErrorSampleEvent::isValid]] to `false` to prevent the error sample from getting saved.
+     *
+     * ```php
+     * use nystudio107\webperf\services\ErrorSamples;
+     * use nystudio107\retour\events\ErrorSampleEvent;
+     *
+     * Event::on(ErrorSamples::class,
+     *     ErrorSamples::EVENT_BEFORE_SAVE_ERROR_SAMPLE,
+     *     function(ErrorSampleEvent $event) {
+     *         // potentially set $event->isValid;
+     *     }
+     * );
+     * ```
+     */
+    const EVENT_BEFORE_SAVE_ERROR_SAMPLE = 'beforeSaveErrorSample';
+
+    /**
+     * @event ErrorSampleEvent The event that is triggered after the redirect is saved
+     *
+     * ```php
+     * use nystudio107\webperf\services\ErrorSamples;
+     * use nystudio107\webperf\events\ErrorSampleEvent;
+     *
+     * Event::on(ErrorSamples::class,
+     *     ErrorSamples::EVENT_AFTER_SAVE_ERROR_SAMPLE,
+     *     function(ErrorSampleEvent $event) {
+     *         // the error sample was saved
+     *     }
+     * );
+     * ```
+     */
+    const EVENT_AFTER_SAVE_ERROR_SAMPLE = 'afterSaveErrorSample';
 
     // Public Methods
     // =========================================================================
@@ -104,6 +140,14 @@ class ErrorSamples extends Component
 
             return;
         }
+        // Trigger a 'beforeSaveErrorSample' event
+        $event = new ErrorSampleEvent([
+            'errorSample' => $errorSample,
+        ]);
+        $this->trigger(self::EVENT_BEFORE_SAVE_ERROR_SAMPLE, $event);
+        if (!$event->isValid) {
+            return;
+        }
         // Get the validated model attributes and save them to the db
         $errorSampleConfig = $errorSample->getAttributes();
         if (!empty($errorSampleConfig['pageErrors'])) {
@@ -122,6 +166,8 @@ class ErrorSamples extends Component
             } catch (\Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
+            // Trigger a 'afterSaveErrorSample' event
+            $this->trigger(self::EVENT_AFTER_SAVE_ERROR_SAMPLE, $event);
             // After adding the ErrorSample, trim the webperf_error_samples db table
             if (Webperf::$settings->automaticallyTrimErrorSamples) {
                 $this->trimErrorSamples();

@@ -13,6 +13,7 @@ namespace nystudio107\webperf\services;
 use nystudio107\webperf\Webperf;
 use nystudio107\webperf\base\CraftDataSample;
 use nystudio107\webperf\base\DbDataSampleInterface;
+use nystudio107\webperf\events\DataSampleEvent;
 
 use Craft;
 use craft\base\Component;
@@ -29,6 +30,41 @@ class DataSamples extends Component
     // =========================================================================
 
     const OUTLIER_PAGELOAD_MULTIPLIER = 10;
+
+    /**
+     * @event DataSampleEvent The event that is triggered before the data sample is saved
+     * You may set [[DataSampleEvent::isValid]] to `false` to prevent the data sample from getting saved.
+     *
+     * ```php
+     * use nystudio107\webperf\services\DataSamples;
+     * use nystudio107\webperf\events\DataSampleEvent;
+     *
+     * Event::on(DataSamples::class,
+     *     DataSamples::EVENT_BEFORE_SAVE_DATA_SAMPLE,
+     *     function(DataSampleEvent $event) {
+     *         // potentially set $event->isValid;
+     *     }
+     * );
+     * ```
+     */
+    const EVENT_BEFORE_SAVE_DATA_SAMPLE = 'beforeSaveDataSample';
+
+    /**
+     * @event DataSampleEvent The event that is triggered after the redirect is saved
+     *
+     * ```php
+     * use nystudio107\webperf\services\DataSamples;
+     * use nystudio107\webperf\events\DataSampleEvent;
+     *
+     * Event::on(DataSamples::class,
+     *     DataSamples::EVENT_AFTER_SAVE_DATA_SAMPLE,
+     *     function(DataSampleEvent $event) {
+     *         // the data sample was saved
+     *     }
+     * );
+     * ```
+     */
+    const EVENT_AFTER_SAVE_DATA_SAMPLE = 'afterSaveDataSample';
 
     // Public Methods
     // =========================================================================
@@ -118,6 +154,15 @@ class DataSamples extends Component
                 $isNew = false;
             }
         }
+        // Trigger a 'beforeSaveDataSample' event
+        $event = new DataSampleEvent([
+            'isNew' => $isNew,
+            'dataSample' => $dataSample,
+        ]);
+        $this->trigger(self::EVENT_BEFORE_SAVE_DATA_SAMPLE, $event);
+        if (!$event->isValid) {
+            return;
+        }
         // Get the validated model attributes and save them to the db
         $dataSampleConfig = $dataSample->getAttributes();
         $db = Craft::$app->getDb();
@@ -149,6 +194,8 @@ class DataSamples extends Component
                 Craft::error($e->getMessage(), __METHOD__);
             }
         }
+        // Trigger a 'afterSaveDataSample' event
+        $this->trigger(self::EVENT_AFTER_SAVE_DATA_SAMPLE, $event);
         // Trim orphaned samples
         $this->trimOrphanedSamples($dataSample->requestId);
         // After adding the DataSample, trim the webperf_data_samples db table
