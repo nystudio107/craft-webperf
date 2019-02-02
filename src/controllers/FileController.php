@@ -150,7 +150,7 @@ class FileController extends Controller
             ->from([$table])
             ->select($columns)
             ;
-        if ($siteId !== null) {
+        if (!empty($siteId)) {
             $query
                 ->where(['siteId' => $siteId])
             ;
