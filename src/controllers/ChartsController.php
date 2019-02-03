@@ -383,22 +383,29 @@ class ChartsController extends Controller
                 'data' => [],
                 'labels' => [],
             ];
+            $index = 0;
             foreach ($stats as $stat) {
+                $boomerangErrors['data'][$index] = 0;
+                $boomerangErrors['labels'][$index] = $stat['sampleDate'];
+                $craftErrors['data'][$index] = 0;
+                $craftErrors['labels'][$index] = $stat['sampleDate'];
                 switch ($stat['type']) {
                     case 'boomerang':
-                        $boomerangErrors['data'][] = (int)$stat['cnt'];
-                        $boomerangErrors['labels'][] = $stat['sampleDate'];
+                        $boomerangErrors['data'][$index] = (int)$stat['cnt'];
+                        $boomerangErrors['labels'][$index] = $stat['sampleDate'];
                         break;
                     case 'craft':
-                        $craftErrors['data'][] = (int)$stat['cnt'];
-                        $craftErrors['labels'][] = $stat['sampleDate'];
+                        $craftErrors['data'][$index] = (int)$stat['cnt'];
+                        $craftErrors['labels'][$index] = $stat['sampleDate'];
                         break;
                 }
+                $index++;
             }
             $data[] = $boomerangErrors;
             $data[] = $craftErrors;
         }
 
+        Craft::error('poop: '.print_r($data, true), __METHOD__);
         return $this->asJson($data);
     }
 
