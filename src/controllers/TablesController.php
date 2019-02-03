@@ -501,10 +501,24 @@ class TablesController extends Controller
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
+            ->select([
+                '[[webperf_error_samples.url]]',
+                '[[webperf_error_samples.id]]',
+                '[[webperf_error_samples.dateCreated]]',
+                '[[webperf_error_samples.pageErrors]]',
+                '[[webperf_error_samples.id]]',
+
+                '[[webperf_data_samples.device]]',
+                '[[webperf_data_samples.os]]',
+                '[[webperf_data_samples.browser]]',
+                '[[webperf_data_samples.countryCode]]',
+                '[[webperf_data_samples.mobile]]',
+            ])
             ->from(['{{%webperf_error_samples}}'])
             ->offset($offset)
-            ->where(['url' => $pageUrl])
-            ->andWhere(['between', 'dateCreated', $start, $end])
+            ->where(['[[webperf_error_samples.url]]' => $pageUrl])
+            ->andWhere(['between', '[[webperf_error_samples.dateCreated]]', $start, $end])
+            ->leftJoin('{{%webperf_data_samples}} webperf_data_samples', '[[webperf_data_samples.requestId]] = [[webperf_error_samples.requestId]]')
         ;
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
@@ -580,6 +594,7 @@ class TablesController extends Controller
             ];
         }
 
+        Craft::error('crap: '.print_r($data, true), __METHOD__);
         return $this->asJson($data);
     }
 
