@@ -27,6 +27,12 @@
                 >
                 </data-sample-date>
             </template>
+            <template slot="error-sample" slot-scope="props">
+                <error-sample :page-errors="props.rowData.pageErrors"
+                                  :type="props.rowData.type"
+                >
+                </error-sample>
+            </template>
             <template slot="sample-device" slot-scope="props">
                 <data-sample-device :mobile="props.rowData.mobile"
                                   :device="props.rowData.device"
@@ -60,6 +66,7 @@
     import PageResultCell from '../common/PageResultCell.vue';
     import DataSampleDate from '../common/DataSampleDate.vue';
     import DataSampleDevice from '../common/DataSampleDevice.vue';
+    import ErrorSample from './ErrorSample.vue';
 
     // Our component exports
     export default {
@@ -72,6 +79,7 @@
             'page-result-cell': PageResultCell,
             'data-sample-date': DataSampleDate,
             'data-sample-device': DataSampleDevice,
+            'error-sample': ErrorSample,
         },
         props: {
             start: String,

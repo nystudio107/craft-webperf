@@ -504,6 +504,7 @@ class TablesController extends Controller
             ->select([
                 '[[webperf_error_samples.url]]',
                 '[[webperf_error_samples.id]]',
+                '[[webperf_error_samples.type]]',
                 '[[webperf_error_samples.dateCreated]]',
                 '[[webperf_error_samples.pageErrors]]',
                 '[[webperf_error_samples.id]]',

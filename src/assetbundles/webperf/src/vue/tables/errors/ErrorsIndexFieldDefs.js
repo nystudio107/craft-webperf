@@ -1,4 +1,4 @@
-// Field definitions for PagesIndexTable.vue
+// Field definitions for ErrorsIndexTable.vue
 export default [
     {
         name: '__slot:page-listing-display',

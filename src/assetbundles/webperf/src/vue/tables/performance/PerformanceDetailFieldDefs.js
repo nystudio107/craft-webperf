@@ -1,4 +1,4 @@
-// Field definitions for PagesIndexTable.vue
+// Field definitions for PagesDetailTable.vue
 export default [
     {
         name: '__slot:sample-date',

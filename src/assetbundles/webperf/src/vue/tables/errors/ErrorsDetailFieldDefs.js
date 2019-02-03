@@ -1,19 +1,19 @@
-// Field definitions for PagesIndexTable.vue
+// Field definitions for ErrorsDetailTable.vue
 export default [
     {
         name: '__slot:error-date',
         sortField: 'dateCreated',
         title: 'Error Date',
         titleClass: 'text-left',
-        dataClass: 'text-left',
+        dataClass: 'text-left align-top',
         width: '15%',
     },
     {
-        name: 'pageErrors',
+        name: '__slot:error-sample',
         sortField: 'pageErrors',
         title: 'Errors',
         titleClass: 'text-left',
-        dataClass: 'text-left',
+        dataClass: 'text-left align-top',
         width: '42%',
     },
 
@@ -22,7 +22,7 @@ export default [
         sortField: 'device',
         title: 'Device',
         titleClass: 'text-left',
-        dataClass: 'text-left',
+        dataClass: 'text-left align-top',
         width: '10%',
     },
     {
@@ -30,7 +30,7 @@ export default [
         sortField: 'os',
         title: 'OS',
         titleClass: 'text-left',
-        dataClass: 'text-left',
+        dataClass: 'text-left align-top',
         width: '10%',
     },
     {
@@ -38,7 +38,7 @@ export default [
         sortField: 'browser',
         title: 'Browser',
         titleClass: 'text-left',
-        dataClass: 'text-left',
+        dataClass: 'text-left align-top',
         width: '10%',
     },
     {
@@ -46,7 +46,7 @@ export default [
         sortField: 'countryCode',
         title: 'Country',
         titleClass: 'text-left',
-        dataClass: 'text-left',
+        dataClass: 'text-left align-top',
         width: '10%',
     },
     {
@@ -54,7 +54,7 @@ export default [
         sortField: 'deleteLink',
         title: '',
         titleClass: 'text-center',
-        dataClass: 'text-center',
+        dataClass: 'text-center align-top',
         callback: 'deleteFormatter',
         width: '3%',
     },
