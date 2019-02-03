@@ -679,7 +679,7 @@ class Webperf extends Plugin
             $now = new \DateTime();
             $end = $now->format('Y-m-d');
             $start = $now->modify('-30 days')->format('Y-m-d');
-            
+
             return Webperf::$plugin->errorSamples->totalErrorSamplesRange(0, $start, $end);
         }, self::ERRORS_CACHE_DURATION);
 
