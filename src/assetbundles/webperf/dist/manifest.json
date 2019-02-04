@@ -5,6 +5,8 @@
   "vendor.css": "css/vendor.css",
   "vendor.js": "js/vendor.js",
   "vendor.js.map": "js/vendor.js.map",
+  "alerts.js": "js/alerts.js",
+  "alerts.js.map": "js/alerts.js.map",
   "dashboard.js": "js/dashboard.js",
   "dashboard.js.map": "js/dashboard.js.map",
   "errors-detail.js": "js/errors-detail.js",
