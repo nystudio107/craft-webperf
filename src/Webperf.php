@@ -167,26 +167,26 @@ class Webperf extends Plugin
         // Only show sub-navs the user has permission to view
         if ($currentUser->can('webperf:dashboard')) {
             $subNavs['dashboard'] = [
-                'label' => 'Dashboard',
+                'label' => Craft::t('webperf', 'Dashboard'),
                 'url' => 'webperf/dashboard',
             ];
         }
         if ($currentUser->can('webperf:performance')) {
             $subNavs['performance'] = [
-                'label' => 'Performance',
+                'label' => Craft::t('webperf', 'Performance'),
                 'url' => 'webperf/performance',
             ];
         }
         if ($currentUser->can('webperf:errors')) {
             $subNavs['errors'] = [
-                'label' => 'Errors',
+                'label' => Craft::t('webperf', 'Errors').' '.$errors,
                 'url' => 'webperf/errors',
                 'badge' => $errors,
             ];
         }
         if ($currentUser->can('webperf:settings')) {
             $subNavs['settings'] = [
-                'label' => 'Settings',
+                'label' => Craft::t('webperf', 'Settings'),
                 'url' => 'webperf/settings',
             ];
         }
