@@ -365,4 +365,57 @@ class SectionsController extends Controller
         // Render the template
         return $this->renderTemplate('webperf/errors/page-detail', $variables);
     }
+
+    /**
+     * @param string|null $siteHandle
+     *
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException
+     */
+    public function actionAlerts(string $siteHandle = null): Response
+    {
+        $variables = [];
+        PermissionHelper::controllerPermissionCheck('webperf:alerts');
+        // Get the site to edit
+        $siteId = MultiSiteHelper::getSiteIdFromHandle($siteHandle);
+        $pluginName = Webperf::$settings->pluginName;
+        $templateTitle = Craft::t('webperf', 'Alerts');
+        $view = Craft::$app->getView();
+        // Asset bundle
+        try {
+            $view->registerAssetBundle(WebperfDashboardAsset::class);
+        } catch (InvalidConfigException $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+        }
+        $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
+            '@nystudio107/webperf/assetbundles/webperf/dist',
+            true
+        );
+        // Enabled sites
+        MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
+        $variables['controllerHandle'] = 'alerts';
+        // Basic variables
+        $variables['fullPageForm'] = false;
+        $variables['docsUrl'] = self::DOCUMENTATION_URL;
+        $variables['pluginName'] = $pluginName;
+        $variables['title'] = $templateTitle;
+        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $variables['crumbs'] = [
+            [
+                'label' => $pluginName,
+                'url' => UrlHelper::cpUrl('webperf'),
+            ],
+            [
+                'label' => $templateTitle,
+                'url' => UrlHelper::cpUrl('webperf/alerts'.$siteHandleUri),
+            ],
+        ];
+        $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
+        $variables['selectedSubnavItem'] = 'alerts';
+        $variables['settings'] = Webperf::$settings;
+
+        // Render the template
+        return $this->renderTemplate('webperf/alerts/index', $variables);
+    }
 }

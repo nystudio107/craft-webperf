@@ -184,6 +184,12 @@ class Webperf extends Plugin
                 'badge' => $errors,
             ];
         }
+        if ($currentUser->can('webperf:alerts')) {
+            $subNavs['alerts'] = [
+                'label' => 'Alerts',
+                'url' => 'webperf/alerts',
+            ];
+        }
         if ($currentUser->can('webperf:settings')) {
             $subNavs['settings'] = [
                 'label' => Craft::t('webperf', 'Settings'),
@@ -594,6 +600,9 @@ class Webperf extends Plugin
             'webperf/errors/page-detail' => 'webperf/sections/errors-detail',
             'webperf/errors/page-detail/<siteHandle:{handle}>' => 'webperf/errors/page-detail',
 
+            'webperf/alerts' => 'webperf/sections/alerts',
+            'webperf/alerts/<siteHandle:{handle}>' => 'webperf/sections/alerts',
+
             'webperf/settings' => 'webperf/settings/plugin-settings',
         ];
     }
@@ -611,21 +620,28 @@ class Webperf extends Plugin
             ],
             'webperf:performance' => [
                 'label' => Craft::t('webperf', 'Performance'),
-            ],
-            'webperf:performance-detail' => [
-                'label' => Craft::t('webperf', 'Performance Detail'),
-            ],
-            'webperf:delete-data-samples' => [
-                'label' => Craft::t('webperf', 'Delete Data Samples'),
+                'nested' => [
+                    'webperf:performance-detail' => [
+                        'label' => Craft::t('webperf', 'Performance Detail'),
+                    ],
+                    'webperf:delete-data-samples' => [
+                        'label' => Craft::t('webperf', 'Delete Data Samples'),
+                    ],
+                ],
             ],
             'webperf:errors' => [
                 'label' => Craft::t('webperf', 'Errors'),
+                'nested' => [
+                    'webperf:errors-detail' => [
+                        'label' => Craft::t('webperf', 'Errors Detail'),
+                    ],
+                    'webperf:delete-error-samples' => [
+                        'label' => Craft::t('webperf', 'Delete Error Samples'),
+                    ],
+                ],
             ],
-            'webperf:errors-detail' => [
-                'label' => Craft::t('webperf', 'Errors Detail'),
-            ],
-            'webperf:delete-error-samples' => [
-                'label' => Craft::t('webperf', 'Delete Error Samples'),
+            'webperf:alerts' => [
+                'label' => Craft::t('webperf', 'Alerts'),
             ],
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
