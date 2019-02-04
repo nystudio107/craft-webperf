@@ -611,21 +611,25 @@ class Webperf extends Plugin
             ],
             'webperf:performance' => [
                 'label' => Craft::t('webperf', 'Performance'),
-            ],
-            'webperf:performance-detail' => [
-                'label' => Craft::t('webperf', 'Performance Detail'),
-            ],
-            'webperf:delete-data-samples' => [
-                'label' => Craft::t('webperf', 'Delete Data Samples'),
+                'nested' => [
+                    'webperf:performance-detail' => [
+                        'label' => Craft::t('webperf', 'Performance Detail'),
+                    ],
+                    'webperf:delete-data-samples' => [
+                        'label' => Craft::t('webperf', 'Delete Data Samples'),
+                    ],
+                ],
             ],
             'webperf:errors' => [
                 'label' => Craft::t('webperf', 'Errors'),
-            ],
-            'webperf:errors-detail' => [
-                'label' => Craft::t('webperf', 'Errors Detail'),
-            ],
-            'webperf:delete-error-samples' => [
-                'label' => Craft::t('webperf', 'Delete Error Samples'),
+                'nested' => [
+                    'webperf:errors-detail' => [
+                        'label' => Craft::t('webperf', 'Errors Detail'),
+                    ],
+                    'webperf:delete-error-samples' => [
+                        'label' => Craft::t('webperf', 'Delete Error Samples'),
+                    ],
+                ],
             ],
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
