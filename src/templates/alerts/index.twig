@@ -1,0 +1,38 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Webperf plugin for Craft CMS 3.x
+ *
+ * Monitor the performance of your webpages through real-world user timing data
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2019 nystudio107
+ */
+#}
+
+{% requirePermission "webperf:alerts" %}
+
+{% extends "webperf/_layouts/webperf-cp.twig" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block contextMenu %}
+    {% include "webperf/_includes/sites-menu.twig" with {'params': {}} %}
+{% endblock %}
+
+{% block actionButton %}
+{% endblock %}
+
+{% block content %}
+    <style>
+        #content {
+            background: none !important;
+        }
+    </style>
+    <div id="cp-nav-content" v-cloak>
+
+    </div>
+    {# include our JavaScript modules #}
+    {{ parent() }}
+    {{ craft.webperf.includeJsModule("alerts.js", false) }}
+{% endblock %}

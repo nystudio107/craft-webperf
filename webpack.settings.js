@@ -31,11 +31,12 @@ module.exports = {
         cssName: "styles"
     },
     entries: {
+        "alerts": "alerts.js",
         "dashboard": "dashboard.js",
-        "performance-detail": "performance-detail.js",
-        "performance-index": "performance-index.js",
         "errors-detail": "errors-detail.js",
         "errors-index": "errors-index.js",
+        "performance-detail": "performance-detail.js",
+        "performance-index": "performance-index.js",
         "webperf": "webperf.js",
 //        "widget": "widget.js"
     },
