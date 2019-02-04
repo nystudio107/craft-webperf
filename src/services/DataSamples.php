@@ -29,7 +29,7 @@ class DataSamples extends Component
     // Constants
     // =========================================================================
 
-    const OUTLIER_PAGELOAD_MULTIPLIER = 10;
+    const OUTLIER_PAGELOAD_MULTIPLIER = 5;
 
     /**
      * @event DataSampleEvent The event that is triggered before the data sample is saved
