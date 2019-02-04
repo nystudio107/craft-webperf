@@ -501,6 +501,7 @@ class TablesController extends Controller
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
+            ->from(['{{%webperf_error_samples}} webperf_error_samples'])
             ->select([
                 '[[webperf_error_samples.url]]',
                 '[[webperf_error_samples.id]]',
@@ -515,7 +516,6 @@ class TablesController extends Controller
                 '[[webperf_data_samples.countryCode]]',
                 '[[webperf_data_samples.mobile]]',
             ])
-            ->from(['{{%webperf_error_samples}}'])
             ->offset($offset)
             ->where(['[[webperf_error_samples.url]]' => $pageUrl])
             ->andWhere(['between', '[[webperf_error_samples.dateCreated]]', $start, $end])
