@@ -374,8 +374,6 @@ class TablesController extends Controller
                 '[[url]]',
                 'MIN([[title]]) as [[title]]',
                 'MAX([[dateCreated]]) as [[latestErrorDate]]',
-                'SUM([[type]] = \'craft\') as [[craftCount]]',
-                'SUM([[type]] = \'boomerang\') as [[boomerangCount]]',
                 'COUNT([[url]]) AS cnt',
             ])
             ->from(['{{%webperf_error_samples}}'])
