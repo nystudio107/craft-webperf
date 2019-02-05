@@ -23,7 +23,7 @@
  */
 
 return [
-    
+
     /**
      * @var string The public-facing name of the plugin
      */
