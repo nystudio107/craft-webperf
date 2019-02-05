@@ -91,6 +91,11 @@ return [
     'filterBotUserAgents' => true,
 
     /**
+     * @var bool Whether the performance summary sidebar should be shown on entry, category, and product pages
+     */
+    'displaySidebar' => true,
+
+    /**
      * @var string The dashboard 'fast' color for charts
      */
     'dashboardFastColor' => '#00C800',

@@ -10,7 +10,9 @@
 
 namespace nystudio107\webperf;
 
+use nystudio107\webperf\assetbundles\webperf\WebperfAsset;
 use nystudio107\webperf\base\CraftDataSample;
+use nystudio107\webperf\helpers\PluginTemplate;
 use nystudio107\webperf\log\ErrorsTarget;
 use nystudio107\webperf\log\ProfileTarget;
 use nystudio107\webperf\models\RecommendationDataSample;
@@ -23,6 +25,7 @@ use nystudio107\webperf\variables\WebperfVariable;
 use nystudio107\webperf\widgets\Metrics as MetricsWidget;
 
 use Craft;
+use craft\base\Element;
 use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
@@ -500,6 +503,66 @@ class Webperf extends Plugin
      */
     protected function handleAdminCpRequest()
     {
+        if (self::$settings->displaySidebar) {
+            $view = Craft::$app->getView();
+            // Entries sidebar
+            $view->hook('cp.entries.edit.details', function (&$context) {
+                /** @var  Element $element */
+                $element = $context['entry'] ?? null;
+
+                return $this->renderSidebar($element);
+            });
+            // Category Groups sidebar
+            $view->hook('cp.categories.edit.details', function (&$context) {
+                /** @var  Element $element */
+                $element = $context['category'] ?? null;
+
+                return $this->renderSidebar($element);
+            });
+            // Commerce Product Types sidebar
+            $view->hook('cp.commerce.product.edit.details', function (&$context) {
+                /** @var  Element $element */
+                $element = $context['product'] ?? null;
+
+                return $this->renderSidebar($element);
+            });
+        }
+    }
+
+    /**
+     * @param Element $element
+     *
+     * @return string
+     */
+    protected function renderSidebar(Element $element): string
+    {
+        $html = '';
+        if ($element !== null && $element->url !== null) {
+            $view = Craft::$app->getView();
+            try {
+                $view->registerAssetBundle(WebperfAsset::class);
+            } catch (InvalidConfigException $e) {
+            }
+            try {
+                $now = new \DateTime();
+            } catch (\Exception $e) {
+                return $html;
+            }
+            $end = $now->format('Y-m-d');
+            $start = $now->modify('-30 days')->format('Y-m-d');
+            $html .= PluginTemplate::renderPluginTemplate(
+                '_sidebars/webperf-sidebar.twig',
+                [
+                    'settings' => self::$settings,
+                    'pageUrl' => $element->url,
+                    'start' => $start,
+                    'end' => $end,
+                    'currentSiteId' => $element->siteId ?? 0,
+                ]
+            );
+        }
+
+        return $html;
     }
 
     /**

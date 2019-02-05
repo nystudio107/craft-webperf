@@ -1,0 +1,82 @@
+{% do view.registerAssetBundle("nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset") %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/webperf/assetbundles/webperf/dist', true) %}
+
+{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+
+{{ craft.webperf.includeCssModule("styles.css", false) }}
+{{ craft.webperf.includeCssModule("vendor.css", false) }}
+
+{% set jsModules = [
+    'webperf.js',
+    'vendor.js',
+    'sidebar.js',
+] %}
+{{ registerJsModules(jsModules) }}
+
+<hr />
+<div class="meta">
+    <div id="cp-nav-content" class="pane"v-cloak>
+        <radial-bar-chart
+                title="Page Loaded"
+                start="{{ start }}"
+                end="{{ end }}"
+                page-url="{{ pageUrl }}"
+                column="pageLoad"
+                fast-color="{{ settings.dashboardFastColor }}"
+                average-color="{{ settings.dashboardAverageColor }}"
+                slow-color="{{ settings.dashboardSlowColor }}"
+                :max-value="10"
+                :site-id="{{ currentSiteId }}"
+        >
+        </radial-bar-chart>
+        <simple-bar-chart
+                title="Craft Execution"
+                start="{{ start }}"
+                end="{{ end }}"
+                page-url="{{ pageUrl }}"
+                column="craftTotalMs"
+                fast-color="{{ settings.dashboardFastColor }}"
+                average-color="{{ settings.dashboardAverageColor }}"
+                slow-color="{{ settings.dashboardSlowColor }}"
+                :max-value="5"
+                :site-id="{{ currentSiteId }}"
+        >
+        </simple-bar-chart>
+        <simple-bar-chart
+                title="First Byte"
+                start="{{ start }}"
+                end="{{ end }}"
+                page-url="{{ pageUrl }}"
+                column="firstByte"
+                fast-color="{{ settings.dashboardFastColor }}"
+                average-color="{{ settings.dashboardAverageColor }}"
+                slow-color="{{ settings.dashboardSlowColor }}"
+                :max-value="5"
+                :site-id="{{ currentSiteId }}"
+        >
+        </simple-bar-chart>
+
+        <div class="buttons pt-4 pb-2">
+            {% set buttonUrl = actionUrl('webperf/sections/page-detail', {
+                'pageUrl': pageUrl,
+            }) %}
+            {% set buttonName = "Page Performance Details"|t("webperf") %}
+            <a href="{{ buttonUrl }}"
+               class="btn icon m-auto">
+                {{ buttonName }}
+            </a>
+        </div>
+
+        <sample-pane-footer
+                start="{{ start }}"
+                end="{{ end }}"
+                subject="charts"
+                page-url="{{ pageUrl }}"
+                column="pageLoad"
+                :site-id="{{ currentSiteId }}"
+                :display-dev-mode-warning="false"
+        >
+        </sample-pane-footer>
+
+    </div>
+</div>

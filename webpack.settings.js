@@ -37,6 +37,7 @@ module.exports = {
         "errors-index": "errors-index.js",
         "performance-detail": "performance-detail.js",
         "performance-index": "performance-index.js",
+        "sidebar": "sidebar.js",
         "webperf": "webperf.js",
 //        "widget": "widget.js"
     },

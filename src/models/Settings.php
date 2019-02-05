@@ -98,6 +98,11 @@ class Settings extends Model
     public $filterBotUserAgents = true;
 
     /**
+     * @var bool Whether the performance summary sidebar should be shown on entry, category, and product pages
+     */
+    public $displaySidebar = true;
+
+    /**
      * @var string The dashboard 'fast' color for charts
      */
     public $dashboardFastColor = '#00C800';
@@ -148,6 +153,7 @@ class Settings extends Model
             ['errorSamplesStoredLimit', 'default', 'value' => 1000],
             ['automaticallyTrimErrorSamples', 'boolean'],
             ['filterBotUserAgents', 'boolean'],
+            ['displaySidebar', 'boolean'],
             ['dashboardFastColor', 'default', 'value' => '#00C800'],
             ['dashboardAverageColor', 'default', 'value' => '#FFA500'],
             ['dashboardSlowColor', 'default', 'value' => '#C80000'],
