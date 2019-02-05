@@ -6,7 +6,7 @@ Webperf helps you build & maintain high quality websites through Real User Measu
 
 ![Screenshot](resources/img/plugin-banner.jpg)
 
-**Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
+**Note**: _The license fee for this plugin is $59.00 via the Craft Plugin Store._
 
 ## This plugin is in development
 
@@ -79,6 +79,25 @@ Once Webperf is installed, it needs to collect performance data samples from use
 ### Appearance Settings
 
 ![Screenshot](resources/screenshots/webperf-settings-appearance.png)
+
+### User Permissions
+
+![Screenshot](resources/screenshots/webperf-user-permissions.png)
+
+You can control access to various Webperf settings and functions on a per-user group basis. Go to Settings → Users → User Groups to edit your use groups settings:
+
+* **Dashboard** - Access to the Webperf Dashboard page
+* **Performance** - Access to the Webperf Performance page
+* **Performance Detail** - Access to the Webperf Performance Detail page
+* **Delete Data Samples** - The ability to delete performance data samples
+* **Errors** - Access to the Webperf Errors page
+* **Errors Detail** - Access to the Webperf Errors Detail page
+* **Delete Error Samples** - The ability to delete error samples
+* **Alerts** - Access to the Alerts page
+* **Recommendations** - The ability to see the Recommendations on the Dashboard & Performance pages
+* **Settings** - Access to the Webperf settings page
+
+Ensure that you've also enabled plugin access to the Webperf plugin as well for any user groups you want to grant access to Webperf.
 
 ## Using Webperf
 
