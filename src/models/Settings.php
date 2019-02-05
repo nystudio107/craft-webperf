@@ -79,7 +79,7 @@ class Settings extends Model
     /**
      * @var bool Whether Craft `warning` messages should be recorded in addition to `error` messages
      */
-    public $includeCraftWarnings = true;
+    public $includeCraftWarnings = false;
 
     /**
      * @var int The number of error samples to store
