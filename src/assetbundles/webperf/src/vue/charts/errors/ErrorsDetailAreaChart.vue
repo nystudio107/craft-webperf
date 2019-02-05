@@ -84,7 +84,7 @@
                                     tickAmount: largest > 10 ? 10 : largest,
                                     labels: {
                                         formatter: (val) => {
-                                            return val;
+                                            return round(val);
                                         },
                                     },
                                 },
@@ -165,7 +165,7 @@
                         tickAmount: 1,
                         labels: {
                             formatter: (val) => {
-                                return val;
+                                return round(val);
                             },
                         },
                     },
