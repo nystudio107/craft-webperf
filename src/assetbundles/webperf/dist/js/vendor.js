@@ -2,8 +2,8 @@
  * @project        Webperf
  * @name           vendor.js
  * @author         Andrew Welch
- * @build          Mon, Feb 4, 2019 11:35 PM ET
- * @release        bc2c4da75c66baf408915b3b7c0afad65c840fca [develop]
+ * @build          Tue, Feb 5, 2019 1:50 PM ET
+ * @release        8db268f04c253c1d756cdbf61f611e1833ab487a [develop]
  * @copyright      Copyright (c) 2019 nystudio107
  *
  */
