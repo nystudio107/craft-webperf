@@ -23,8 +23,86 @@
  */
 
 return [
+    
+    /**
+     * @var string The public-facing name of the plugin
+     */
+    'pluginName' => 'Webperf',
 
-    // This controls blah blah blah
-    "someAttribute" => true,
+    /**
+     * @var bool Whether or not to include the beacon on the page
+     */
+    'includeBeacon' => true,
+
+    /**
+     * @var bool Whether or not to include the Craft profiling of pages
+     */
+    'includeCraftProfiling' => true,
+
+    /**
+     * @var bool If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token
+     */
+    'staticCachedSite' => false,
+
+    /**
+     * @var int The number of data samples to store
+     */
+    'dataSamplesStoredLimit' => 100000,
+
+    /**
+     * @var bool Whether the DataSamples should be trimmed after each new DataSample is added
+     */
+    'automaticallyTrimDataSamples' => true,
+
+    /**
+     * @var bool Whether outlier data samples that are 10x the mean should be deleted
+     */
+    'trimOutlierDataSamples' => true,
+
+    /**
+     * @var int The number of milliseconds required between recording of frontend beacon data samples
+     */
+    'rateLimitMs' => 500,
+
+    /**
+     * @var string API Key for WebPageTest.org
+     */
+    'webpageTestApiKey' => '',
+
+    /**
+     * @var bool Whether Craft `warning` messages should be recorded in addition to `error` messages
+     */
+    'includeCraftWarnings' => false,
+
+    /**
+     * @var int The number of error samples to store
+     */
+    'errorSamplesStoredLimit' => 1000,
+
+    /**
+     * @var bool Whether the ErrorSamples should be trimmed after each new ErrorSample is added
+     */
+    'automaticallyTrimErrorSamples' => true,
+
+    /**
+     * @var bool Whether to filter bot user agents from generating profile hits or not
+     *           NOT visible in the GUI currently
+     */
+    'filterBotUserAgents' => true,
+
+    /**
+     * @var string The dashboard 'fast' color for charts
+     */
+    'dashboardFastColor' => '#00C800',
+
+    /**
+     * @var string The dashboard 'average' color for charts
+     */
+    'dashboardAverageColor' => '#FFFF00',
+
+    /**
+     * @var string The dashboard 'slow' color for charts
+     */
+    'dashboardSlowColor' => '#C80000',
 
 ];
