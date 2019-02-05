@@ -366,6 +366,7 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        $db = Craft::$app->getDb();
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -381,6 +382,20 @@ class TablesController extends Controller
             ->offset($offset)
             ->where(['between', 'dateCreated', $start, $end])
         ;
+        if ($db->getIsMysql()) {
+            $query
+                ->addSelect([
+                    'SUM([[type]] = \'craft\') as [[craftCount]]',
+                    'SUM([[type]] = \'boomerang\') as [[boomerangCount]]',
+                ]);
+        }
+        if ($db->getIsPgsql()) {
+            $query
+                ->addSelect([
+                    'SUM(case when [[type]] = \'craft\' then 1 else 0 end) as [[craftCount]]',
+                    'SUM(case when [[type]] = \'boomerang\' then 1 else 0 end) as [[boomerangCount]]',
+                ]);
+        }
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
