@@ -503,7 +503,9 @@ class Webperf extends Plugin
      */
     protected function handleAdminCpRequest()
     {
-        if (self::$settings->displaySidebar) {
+        $currentUser = Craft::$app->getUser()->getIdentity();
+        // Only show sub-navs the user has permission to view
+        if (self::$settings->displaySidebar && $currentUser->can('webperf:sidebar')) {
             $view = Craft::$app->getView();
             // Entries sidebar
             $view->hook('cp.entries.edit.details', function (&$context) {
@@ -708,6 +710,9 @@ class Webperf extends Plugin
             ],
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
+            ],
+            'webperf:sidebar' => [
+                'label' => Craft::t('webperf', 'Performance Sidebar'),
             ],
             'webperf:settings' => [
                 'label' => Craft::t('webperf', 'Settings'),
