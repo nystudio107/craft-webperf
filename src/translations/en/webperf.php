@@ -155,5 +155,21 @@ return [
     'Error sample deleted.' => 'Error sample deleted.',
     'Errors Detail' => 'Errors Detail',
     'Performance Detail' => 'Performance Detail',
-    'Delete Error Samples' => 'Delete Error Samples'
+    'Delete Error Samples' => 'Delete Error Samples',
+    'Page Performance Detail' => 'Page Performance Detail',
+    'Include Browser Beacon' => 'Include Browser Beacon',
+    'Include Craft `warnings` as well as `errors`' => 'Include Craft `warnings` as well as `errors`',
+    'Performance Sidebar' => 'Performance Sidebar',
+    'Whether or not the asynchronous User Timing Beacon should be rendered on frontend pages.' => 'Whether or not the asynchronous User Timing Beacon should be rendered on frontend pages.',
+    'Page Errors Detail' => 'Page Errors Detail',
+    'Whether Craft `warning` messages should be recorded in addition to `error` messages' => 'Whether Craft `warning` messages should be recorded in addition to `error` messages',
+    'Aggregate Page Errors History' => 'Aggregate Page Errors History',
+    'Whether outlier data samples that are 5x the mean should be deleted' => 'Whether outlier data samples that are 5x the mean should be deleted',
+    'Include Craft Beacon' => 'Include Craft Beacon',
+    'Page Errors Details' => 'Page Errors Details',
+    'Aggregate Page Errors' => 'Aggregate Page Errors',
+    'View Detail' => 'View Detail',
+    'Alerts' => 'Alerts',
+    'Page Performance Details' => 'Page Performance Details',
+    'Aggregate Page Errors Data Samples' => 'Aggregate Page Errors Data Samples'
 ];
