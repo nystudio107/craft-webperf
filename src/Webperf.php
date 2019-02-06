@@ -167,37 +167,39 @@ class Webperf extends Plugin
         $errors = $this->getErrorsCount();
         $navItem['badgeCount'] = $errors.$recommendations;
         $currentUser = Craft::$app->getUser()->getIdentity();
-        // Only show sub-navs the user has permission to view
-        if ($currentUser->can('webperf:dashboard')) {
-            $subNavs['dashboard'] = [
-                'label' => Craft::t('webperf', 'Dashboard'),
-                'url' => 'webperf/dashboard',
-            ];
-        }
-        if ($currentUser->can('webperf:performance')) {
-            $subNavs['performance'] = [
-                'label' => Craft::t('webperf', 'Performance'),
-                'url' => 'webperf/performance',
-            ];
-        }
-        if ($currentUser->can('webperf:errors')) {
-            $subNavs['errors'] = [
-                'label' => Craft::t('webperf', 'Errors').' '.$errors,
-                'url' => 'webperf/errors',
-                'badge' => $errors,
-            ];
-        }
-        if ($currentUser->can('webperf:alerts')) {
-            $subNavs['alerts'] = [
-                'label' => 'Alerts',
-                'url' => 'webperf/alerts',
-            ];
-        }
-        if ($currentUser->can('webperf:settings')) {
-            $subNavs['settings'] = [
-                'label' => Craft::t('webperf', 'Settings'),
-                'url' => 'webperf/settings',
-            ];
+        if ($currentUser) {
+            // Only show sub-navs the user has permission to view
+            if ($currentUser->can('webperf:dashboard')) {
+                $subNavs['dashboard'] = [
+                    'label' => Craft::t('webperf', 'Dashboard'),
+                    'url' => 'webperf/dashboard',
+                ];
+            }
+            if ($currentUser->can('webperf:performance')) {
+                $subNavs['performance'] = [
+                    'label' => Craft::t('webperf', 'Performance'),
+                    'url' => 'webperf/performance',
+                ];
+            }
+            if ($currentUser->can('webperf:errors')) {
+                $subNavs['errors'] = [
+                    'label' => Craft::t('webperf', 'Errors').' '.$errors,
+                    'url' => 'webperf/errors',
+                    'badge' => $errors,
+                ];
+            }
+            if ($currentUser->can('webperf:alerts')) {
+                $subNavs['alerts'] = [
+                    'label' => 'Alerts',
+                    'url' => 'webperf/alerts',
+                ];
+            }
+            if ($currentUser->can('webperf:settings')) {
+                $subNavs['settings'] = [
+                    'label' => Craft::t('webperf', 'Settings'),
+                    'url' => 'webperf/settings',
+                ];
+            }
         }
         $navItem = array_merge($navItem, [
             'subnav' => $subNavs,
@@ -505,7 +507,7 @@ class Webperf extends Plugin
     {
         $currentUser = Craft::$app->getUser()->getIdentity();
         // Only show sub-navs the user has permission to view
-        if (self::$settings->displaySidebar && $currentUser->can('webperf:sidebar')) {
+        if (self::$settings->displaySidebar && $currentUser && $currentUser->can('webperf:sidebar')) {
             $view = Craft::$app->getView();
             // Entries sidebar
             $view->hook('cp.entries.edit.details', function (&$context) {
