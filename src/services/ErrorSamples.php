@@ -93,13 +93,14 @@ class ErrorSamples extends Component
      * Get the total number of errors optionally limited by siteId, between
      * $start and $end
      *
-     * @param int    $siteId
-     * @param string $start
-     * @param string $end
+     * @param int           $siteId
+     * @param string        $start
+     * @param string        $end
+     * @param string|null   $type
      *
-     * @return int|string
+     * @return int
      */
-    public function totalErrorSamplesRange(int $siteId, string $start, string $end)
+    public function totalErrorSamplesRange(int $siteId, string $start, string $end, $type = null): int
     {
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end.'+1 day'));
@@ -108,6 +109,11 @@ class ErrorSamples extends Component
             ->from(['{{%webperf_error_samples}}'])
             ->where(['between', 'dateCreated', $start, $end])
         ;
+        if ($type !== null) {
+            $query
+                ->andWhere(['type' => $type])
+                ;
+        }
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
