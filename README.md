@@ -95,6 +95,7 @@ You can control access to various Webperf settings and functions on a per-user g
 * **Delete Error Samples** - The ability to delete error samples
 * **Alerts** - Access to the Alerts page
 * **Recommendations** - The ability to see the Recommendations on the Dashboard & Performance pages
+* **Performance Sidebar** - Whether the performance summary sidebar should be shown on entry, category, and product pages
 * **Settings** - Access to the Webperf settings page
 
 Ensure that you've also enabled plugin access to the Webperf plugin as well for any user groups you want to grant access to Webperf.
