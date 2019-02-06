@@ -125,7 +125,7 @@ class ManifestVariable
     public function getModuleUri(string $moduleName, string $type = 'modern', $config = null)
     {
         return Template::raw(
-            ManifestHelper::getModule(self::$config, $moduleName, $type)
+            ManifestHelper::getModule(self::$config, $moduleName, $type, true)
         );
     }
 
