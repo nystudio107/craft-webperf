@@ -19,21 +19,37 @@
     <div id="cp-nav-content" v-cloak>
         {# -- Performance sidebar pane -- #}
         {% if currentUser.can("webperf:performance") %}
-            <div class="pane">
-                <radial-bar-chart
-                        title="Page Loaded"
-                        start="{{ start }}"
-                        end="{{ end }}"
-                        page-url="{{ pageUrl }}"
-                        column="pageLoad"
-                        fast-color="{{ settings.dashboardFastColor }}"
-                        average-color="{{ settings.dashboardAverageColor }}"
-                        slow-color="{{ settings.dashboardSlowColor }}"
-                        :max-value="10"
-                        :site-id="{{ currentSiteId }}"
-                >
-                </radial-bar-chart>
-                <simple-bar-chart
+            <div class="w-full flex-item-row items-start justify-between flex-no-wrap">
+                <div class="flex-row w-1/3 self-top" style="flex-basis: 33%">
+                    <small-radial-bar-chart
+                            title="Page Loaded"
+                            start="{{ start }}"
+                            end="{{ end }}"
+                            page-url="{{ pageUrl }}"
+                            column="pageLoad"
+                            fast-color="{{ settings.dashboardFastColor }}"
+                            average-color="{{ settings.dashboardAverageColor }}"
+                            slow-color="{{ settings.dashboardSlowColor }}"
+                            :max-value="10"
+                            :site-id="{{ currentSiteId }}"
+                    >
+                    </small-radial-bar-chart>
+                </div>
+                    <div class="flex-row w-2/3 self-top pt-12" style="flex-basis: 66%">
+                        <small-simple-bar-chart
+                                title="First Byte"
+                                start="{{ start }}"
+                                end="{{ end }}"
+                                page-url="{{ pageUrl }}"
+                                column="firstByte"
+                                fast-color="{{ settings.dashboardFastColor }}"
+                                average-color="{{ settings.dashboardAverageColor }}"
+                                slow-color="{{ settings.dashboardSlowColor }}"
+                                :max-value="5"
+                                :site-id="{{ currentSiteId }}"
+                        >
+                        </small-simple-bar-chart>
+                        <small-simple-bar-chart
                         title="Craft Execution"
                         start="{{ start }}"
                         end="{{ end }}"
@@ -44,78 +60,66 @@
                         slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="5"
                         :site-id="{{ currentSiteId }}"
-                >
-                </simple-bar-chart>
-                <simple-bar-chart
-                        title="First Byte"
-                        start="{{ start }}"
-                        end="{{ end }}"
-                        page-url="{{ pageUrl }}"
-                        column="firstByte"
-                        fast-color="{{ settings.dashboardFastColor }}"
-                        average-color="{{ settings.dashboardAverageColor }}"
-                        slow-color="{{ settings.dashboardSlowColor }}"
-                        :max-value="5"
-                        :site-id="{{ currentSiteId }}"
-                >
-                </simple-bar-chart>
-                {% if currentUser.can("webperf:performance-detail") %}
-                    <div class="buttons pt-4 pb-2">
-                        {% set buttonUrl = actionUrl('webperf/sections/page-detail', {
-                            'pageUrl': pageUrl,
-                        }) %}
-                        {% set buttonName = "Page Performance Details"|t("webperf") %}
-                        <a href="{{ buttonUrl }}"
-                           class="btn icon m-auto">
-                            {{ buttonName }}
-                        </a>
+                        >
+                        </small-simple-bar-chart>
                     </div>
-                {% endif %}
-                <sample-pane-footer
-                        start="{{ start }}"
-                        end="{{ end }}"
-                        subject="charts"
-                        page-url="{{ pageUrl }}"
-                        column="pageLoad"
-                        :site-id="{{ currentSiteId }}"
-                        :display-dev-mode-warning="false"
-                >
-                </sample-pane-footer>
-            </div>
+                </div>
+            {% if currentUser.can("webperf:performance-detail") %}
+                <div class="buttons pt-0 mt-0 pb-2">
+                    {% set buttonUrl = actionUrl('webperf/sections/page-detail', {
+                        'pageUrl': pageUrl,
+                    }) %}
+                    {% set buttonName = "Page Performance Details"|t("webperf") %}
+                    <a href="{{ buttonUrl }}"
+                       class="btn icon m-auto">
+                        {{ buttonName }}
+                    </a>
+                </div>
+            {% endif %}
+            <small-sample-pane-footer
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    subject="charts"
+                    page-url="{{ pageUrl }}"
+                    column="pageLoad"
+                    :site-id="{{ currentSiteId }}"
+                    :display-dev-mode-warning="false"
+            >
+            </small-sample-pane-footer>
         {% endif %}
         {# -- Errors sidebar pane #}
-        {% if currentUser.can("webperf:performance") %}
-            <div class="pane">
-                <h1 class="text-center text-base text-base font-bold mb-2">{{ "Errors"|t("webperf") }}</h1>
-                {% set jsErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, 'boomerang') %}
-                <div class="field text-sm font-normal inline-block mb-0">
-                    {% if jsErrors > 0 %}
-                        <p class="warning display-block webperf-error-color">{{ jsErrors }} JavaScript errors</p>
-                    {% else %}
-                        <p class="display-block text-grey">No JavaScript errors</p>
-                    {% endif %}
-                </div>
-                {% set craftErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, 'craft') %}
-                <div class="field text-sm font-normal inline-block mb-0">
-                    {% if craftErrors > 0 %}
-                        <p class="warning display-block webperf-error-color">{{ craftErrors }} Craft errors</p>
-                    {% else %}
-                        <p class="display-block text-grey">No Craft errors</p>
-                    {% endif %}
-                </div>
-                {% if currentUser.can("webperf:errors-detail") %}
-                    <div class="buttons pt-2 pb-2">
-                        {% set buttonUrl = actionUrl('webperf/sections/errors-detail', {
-                            'pageUrl': pageUrl,
-                        }) %}
-                        {% set buttonName = "Page Errors Details"|t("webperf") %}
-                        <a href="{{ buttonUrl }}"
-                           class="btn icon m-auto">
-                            {{ buttonName }}
-                        </a>
-                    </div>
+        {% if currentUser.can("webperf:errors") %}
+            <hr />
+            <h4 class="text-center text-base text-base font-bold mb-2 text-grey-darker">{{ "Errors"|t("webperf") }}</h4>
+            {% set jsErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, 'boomerang') %}
+            <div class="field text-sm font-normal inline-block mb-0">
+                {% if jsErrors > 0 %}
+                    <p class="warning display-block webperf-error-color">{{ jsErrors }} JavaScript errors</p>
+                {% else %}
+                    <p class="display-block text-grey">No JavaScript errors</p>
                 {% endif %}
             </div>
-        {% endif %}
-    </div>
+            {% set craftErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, 'craft') %}
+            <div class="field text-sm font-normal mb-0">
+                {% if craftErrors > 0 %}
+                    <p class="warning display-block webperf-error-color">{{ craftErrors }} Craft errors</p>
+                {% else %}
+                    <p class="display-block text-grey">No Craft errors</p>
+                {% endif %}
+            </div>
+            {% if currentUser.can("webperf:errors-detail") %}
+                <div class="buttons pt-2 pb-2">
+                    {% set buttonUrl = actionUrl('webperf/sections/errors-detail', {
+                        'pageUrl': pageUrl,
+                    }) %}
+                    {% set buttonName = "Page Errors Details"|t("webperf") %}
+                    <a href="{{ buttonUrl }}"
+                       class="btn icon m-auto">
+                        {{ buttonName }}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>
+<hr />

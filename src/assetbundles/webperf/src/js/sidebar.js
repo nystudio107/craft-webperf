@@ -1,15 +1,15 @@
 import Vue from 'vue';
-import RadialBarChart from '../vue/charts/common/RadialBarChart.vue';
-import SimpleBarChart from '../vue/charts/common/SimpleBarChart.vue';
-import SamplePaneFooter from '../vue/common/SamplePaneFooter.vue';
+import SmallRadialBarChart from '../vue/charts/common/SmallRadialBarChart.vue';
+import SmallSimpleBarChart from '../vue/charts/common/SmallSimpleBarChart.vue';
+import SmallSamplePaneFooter from '../vue/common/SmallSamplePaneFooter.vue';
 
 // Create our vue instance
 const vm = new Vue({
     el: "#cp-nav-content",
     components: {
-        'radial-bar-chart': RadialBarChart,
-        'simple-bar-chart': SimpleBarChart,
-        'sample-pane-footer': SamplePaneFooter,
+        'small-radial-bar-chart': SmallRadialBarChart,
+        'small-simple-bar-chart': SmallSimpleBarChart,
+        'small-sample-pane-footer': SmallSamplePaneFooter,
     },
     data: {
     },
