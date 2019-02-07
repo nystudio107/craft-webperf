@@ -78,4 +78,14 @@ class WebperfVariable extends ManifestVariable
     {
         return Webperf::$plugin->errorSamples->totalErrorSamplesRange($siteId, $start, $end, $type);
     }
+
+    /**
+     * Return whether we are running Craft 3.1 or later
+     *
+     * @return bool
+     */
+    public function craft31(): bool
+    {
+        return Webperf::$craft31;
+    }
 }

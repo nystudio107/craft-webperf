@@ -101,6 +101,11 @@ class Webperf extends Plugin
      */
     public static $renderType = 'html';
 
+    /**
+     * @var bool
+     */
+    public static $craft31 = false;
+
     // Public Properties
     // =========================================================================
 
@@ -118,6 +123,7 @@ class Webperf extends Plugin
     public function init()
     {
         parent::init();
+
         // Initialize properties
         self::$plugin = $this;
         self::$settings = $this->getSettings();
@@ -126,6 +132,7 @@ class Webperf extends Plugin
         } catch (\Exception $e) {
             self::$requestUuid = null;
         }
+        self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
         $this->name = self::$settings->pluginName;
         // Handle any console commands
         $request = Craft::$app->getRequest();
