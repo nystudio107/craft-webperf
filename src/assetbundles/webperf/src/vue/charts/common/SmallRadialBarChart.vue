@@ -145,7 +145,7 @@
                                 size: '65%',
                             },
                             track: {
-                                background: "#AAA",
+                                background: "#dae1e7",
                                 strokeWidth: '97%',
                                 margin: 5, // margin is in pixels
                                 shadow: {
