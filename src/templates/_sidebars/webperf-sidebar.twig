@@ -91,7 +91,7 @@
         {% if currentUser.can("webperf:errors") %}
             <hr />
             <h4 class="text-center text-base text-base font-bold mb-2 text-grey-darker">{{ "Errors"|t("webperf") }}</h4>
-            {% set jsErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, 'boomerang') %}
+            {% set jsErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, pageUrl, 'boomerang') %}
             <div class="field text-sm font-normal inline-block mb-0">
                 {% if jsErrors > 0 %}
                     <p class="warning display-block webperf-error-color">{{ jsErrors }} JavaScript errors</p>
@@ -99,7 +99,7 @@
                     <p class="display-block text-grey">No JavaScript errors</p>
                 {% endif %}
             </div>
-            {% set craftErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, 'craft') %}
+            {% set craftErrors = craft.webperf.totalErrorSamplesRange(currentSiteId, start, end, pageUrl, 'craft') %}
             <div class="field text-sm font-normal mb-0">
                 {% if craftErrors > 0 %}
                     <p class="warning display-block webperf-error-color">{{ craftErrors }} Craft errors</p>

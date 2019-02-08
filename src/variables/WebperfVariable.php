@@ -67,16 +67,17 @@ class WebperfVariable extends ManifestVariable
      * Get the total number of errors optionally limited by siteId, between
      * $start and $end
      *
-     * @param int           $siteId
-     * @param string        $start
-     * @param string        $end
-     * @param string|null   $type
+     * @param int         $siteId
+     * @param string      $start
+     * @param string      $end
+     * @param string|null $pageUrl
+     * @param string|null $type
      *
      * @return int
      */
-    public function totalErrorSamplesRange(int $siteId, string $start, string $end, $type = null): int
+    public function totalErrorSamplesRange(int $siteId, string $start, string $end, $pageUrl = null, $type = null): int
     {
-        return Webperf::$plugin->errorSamples->totalErrorSamplesRange($siteId, $start, $end, $type);
+        return Webperf::$plugin->errorSamples->totalErrorSamplesRange($siteId, $start, $end, $pageUrl, $type);
     }
 
     /**
