@@ -102,6 +102,8 @@ Ensure that you've also enabled plugin access to the Webperf plugin as well for 
 
 ## Using Webperf
 
+![Screenshot](resources/screenshots/webperf-sidebar.png)
+
 ### Dashboard
 
 #### Overview
