@@ -299,8 +299,8 @@ class DataSamples extends Component
             $stats = (new Query())
                 ->from('{{%webperf_data_samples}}')
                 ->average('[[pageLoad]]');
-            if (!empty($stats['avg'])) {
-                $threshold = $stats['avg'] * self::OUTLIER_PAGELOAD_MULTIPLIER;
+            if (!empty($stats)) {
+                $threshold = $stats * self::OUTLIER_PAGELOAD_MULTIPLIER;
                 // Delete any samples that are far above average
                 try {
                     $result = $db->createCommand()->delete(
