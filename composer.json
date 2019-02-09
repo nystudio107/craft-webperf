@@ -2,7 +2,7 @@
     "name": "nystudio107/craft-webperf",
     "description": "Monitor the performance of your webpages through real-world user timing data",
     "type": "craft-plugin",
-    "version": "1.0.0-beta.42",
+    "version": "1.0.0-beta.43",
     "keywords": [
         "craft",
         "cms",
