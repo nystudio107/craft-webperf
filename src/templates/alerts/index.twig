@@ -30,7 +30,13 @@
         }
     </style>
     <div id="cp-nav-content" v-cloak>
-
+        <div class="pane">
+            {% if not webhooks %}
+            <div class="field text-sm font-normal inline-block">
+                <p class="warning display-block">The <a href="{{ cpUrl("plugin-store/webhooks") }}">Webhooks</a> plugin must be installed for the Alerts to function.</p>
+            </div>
+            {% endif %}
+        </div>
     </div>
     {# include our JavaScript modules #}
     {{ parent() }}

@@ -35,6 +35,8 @@ class SectionsController extends Controller
 
     const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-webperf/';
 
+    const WEBHOOKS_PLUGIN_HANDLE = 'webhooks';
+
     // Protected Properties
     // =========================================================================
 
@@ -414,6 +416,7 @@ class SectionsController extends Controller
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'alerts';
         $variables['settings'] = Webperf::$settings;
+        $variables['webhooks'] = Craft::$app->getPlugins()->getPlugin(self::WEBHOOKS_PLUGIN_HANDLE);
 
         // Render the template
         return $this->renderTemplate('webperf/alerts/index', $variables);
