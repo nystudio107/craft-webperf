@@ -175,5 +175,9 @@ return [
     'Aggregate Page Performance' => 'Aggregate Page Performance',
     'Display Sidebar' => 'Display Sidebar',
     'Whether the performance summary sidebar should be shown on entry, category, and product pages.' => 'Whether the performance summary sidebar should be shown on entry, category, and product pages.',
-    'Whether outlier data samples that are `10x` the mean should be deleted' => 'Whether outlier data samples that are `10x` the mean should be deleted'
+    'Whether outlier data samples that are `10x` the mean should be deleted' => 'Whether outlier data samples that are `10x` the mean should be deleted',
+    '[Regular expressions](https://regexr.com/) to match URLs to exclude from tracking.' => '[Regular expressions](https://regexr.com/) to match URLs to exclude from tracking.',
+    'Enter regular expressions to exclude certain URLs from tracking.' => 'Enter regular expressions to exclude certain URLs from tracking.',
+    'Exclude Patterns' => 'Exclude Patterns',
+    'RegEx pattern to exclude' => 'RegEx pattern to exclude'
 ];
