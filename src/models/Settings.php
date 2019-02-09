@@ -81,10 +81,10 @@ class Settings extends Model
      */
     public $excludePatterns = [
         0 => [
-            'pattern' => '/webperf/.*$',
+            'pattern' => '/webperf/.*',
         ],
         1 => [
-            'pattern' => '/cpresources/.*$',
+            'pattern' => '/cpresources/.*',
         ]
     ];
 
@@ -132,6 +132,9 @@ class Settings extends Model
     // Public Methods
     // =========================================================================
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

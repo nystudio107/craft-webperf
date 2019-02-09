@@ -74,11 +74,11 @@ return [
      */
     'excludePatterns' => [
         0 => [
-            'pattern' => '/webperf/.*$',
+            'pattern' => '/webperf/.*',
         ],
         1 => [
-            'pattern' => '/cpresources/.*$',
-        ]
+            'pattern' => '/cpresources/.*',
+        ],
     ],
 
     /**
