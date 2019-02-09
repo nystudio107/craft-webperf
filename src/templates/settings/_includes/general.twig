@@ -53,7 +53,7 @@
     }) }}
     {{ forms.editableTableField({
         label: "Exclude Patterns"|t("webperf"),
-        instructions: "[Regular expressions](https://regexr.com/) to match URLs to exclude from tracking."|t("webperf"),
+        instructions: "[Regular expressions](https://regexr.com/) to match URLs that should be excluded from tracking."|t("webperf"),
         id: 'excludePatterns',
         name: 'excludePatterns',
         required: false,
@@ -65,6 +65,7 @@
                 heading: "RegEx pattern to exclude"|t("webperf"),
                 type: "singleline",
                 width: "100%",
+                code: true,
             },
         },
         rows: settings.excludePatterns,
