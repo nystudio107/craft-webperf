@@ -9,35 +9,37 @@
                                  @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
-        <vuetable ref="vuetable"
-                  api-url="/webperf/tables/page-detail"
-                  :per-page="20"
-                  :fields="fields"
-                  :css="css"
-                  :sort-order="sortOrder"
-                  :append-params="moreParams"
-                  @vuetable:pagination-data="onPaginationData"
-                  @vuetable:row-clicked="onRowClicked"
-                  @vuetable:loaded="onLoaded"
-        >
-            <template slot="sample-date" slot-scope="props">
-                <data-sample-date :date="props.rowData.dateCreated"
-                                  :url="props.rowData.url"
-                                  :query="props.rowData.query"
-                >
-                </data-sample-date>
-            </template>
-            <template slot="sample-device" slot-scope="props">
-                <data-sample-device :mobile="props.rowData.mobile"
-                                  :device="props.rowData.device"
-                >
-                </data-sample-device>
-            </template>
-            <template slot="load-time-bar" slot-scope="props">
-                <request-bar-chart :rowData="props.rowData">
-                </request-bar-chart>
-            </template>
-        </vuetable>
+        <div class="overflow-x-auto overflow-y-hidden">
+            <vuetable ref="vuetable"
+                      api-url="/webperf/tables/page-detail"
+                      :per-page="20"
+                      :fields="fields"
+                      :css="css"
+                      :sort-order="sortOrder"
+                      :append-params="moreParams"
+                      @vuetable:pagination-data="onPaginationData"
+                      @vuetable:row-clicked="onRowClicked"
+                      @vuetable:loaded="onLoaded"
+            >
+                <template slot="sample-date" slot-scope="props">
+                    <data-sample-date :date="props.rowData.dateCreated"
+                                      :url="props.rowData.url"
+                                      :query="props.rowData.query"
+                    >
+                    </data-sample-date>
+                </template>
+                <template slot="sample-device" slot-scope="props">
+                    <data-sample-device :mobile="props.rowData.mobile"
+                                      :device="props.rowData.device"
+                    >
+                    </data-sample-device>
+                </template>
+                <template slot="load-time-bar" slot-scope="props">
+                    <request-bar-chart :rowData="props.rowData">
+                    </request-bar-chart>
+                </template>
+            </vuetable>
+        </div>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
                                       infoTemplate="Displaying {from} to {to} of {total} data samples"

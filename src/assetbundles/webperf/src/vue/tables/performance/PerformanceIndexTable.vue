@@ -9,35 +9,37 @@
                                  @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
-        <vuetable ref="vuetable"
-                  api-url="/webperf/tables/pages-index"
-                  :per-page="20"
-                  :fields="fields"
-                  :css="css"
-                  :sort-order="sortOrder"
-                  :append-params="moreParams"
-                  @vuetable:pagination-data="onPaginationData"
-                  @vuetable:row-clicked="onRowClicked"
-                  @vuetable:loaded="onLoaded"
-        >
-            <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
-                <page-result-cell :title="props.rowData.title"
-                                  :url="props.rowData.url"
-                                  :width="computeWidth(props.rowData.pageLoad, maxValue)"
-                                  :color="triBlend.colorFromPercentage(((props.rowData.pageLoad / maxValue) * 100))"
-                >
-                </page-result-cell>
-            </template>
-            <template slot="load-time-bar" slot-scope="props">
-                <request-bar-chart :rowData="props.rowData">
-                </request-bar-chart>
-            </template>
-            <template slot="data-samples" slot-scope="props">
-                <sample-size-warning :sample="props.rowData.cnt">
-                </sample-size-warning>
-                {{ props.rowData.cnt }}
-            </template>
-        </vuetable>
+        <div class="overflow-x-auto overflow-y-hidden">
+            <vuetable ref="vuetable"
+                      api-url="/webperf/tables/pages-index"
+                      :per-page="20"
+                      :fields="fields"
+                      :css="css"
+                      :sort-order="sortOrder"
+                      :append-params="moreParams"
+                      @vuetable:pagination-data="onPaginationData"
+                      @vuetable:row-clicked="onRowClicked"
+                      @vuetable:loaded="onLoaded"
+            >
+                <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
+                    <page-result-cell :title="props.rowData.title"
+                                      :url="props.rowData.url"
+                                      :width="computeWidth(props.rowData.pageLoad, maxValue)"
+                                      :color="triBlend.colorFromPercentage(((props.rowData.pageLoad / maxValue) * 100))"
+                    >
+                    </page-result-cell>
+                </template>
+                <template slot="load-time-bar" slot-scope="props">
+                    <request-bar-chart :rowData="props.rowData">
+                    </request-bar-chart>
+                </template>
+                <template slot="data-samples" slot-scope="props">
+                    <sample-size-warning :sample="props.rowData.cnt">
+                    </sample-size-warning>
+                    {{ props.rowData.cnt }}
+                </template>
+            </vuetable>
+        </div>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
                                       infoTemplate="Displaying {from} to {to} of {total} pages"

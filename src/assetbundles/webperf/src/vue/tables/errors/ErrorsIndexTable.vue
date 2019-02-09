@@ -9,45 +9,47 @@
                                  @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
-        <vuetable ref="vuetable"
-                  api-url="/webperf/tables/errors-index"
-                  :per-page="20"
-                  :fields="fields"
-                  :css="css"
-                  :sort-order="sortOrder"
-                  :append-params="moreParams"
-                  @vuetable:pagination-data="onPaginationData"
-                  @vuetable:row-clicked="onRowClicked"
-                  @vuetable:loaded="onLoaded"
-        >
-            <template slot="page-listing-display" slot-scope="props">
-                <page-result-cell :title="props.rowData.title"
-                                  :url="props.rowData.url"
-                                  :width="0"
-                                  color="none"
-                >
-                </page-result-cell>
-            </template>
-            <template slot="sample-date" slot-scope="props">
-                <data-sample-date :date="props.rowData.latestErrorDate"
-                                  :url="props.rowData.url"
-                                  :query="props.rowData.query"
-                >
-                </data-sample-date>
-            </template>
-            <template slot="craft-errors" slot-scope="props">
-                <error-warning :sample="props.rowData.craftCount">
-                </error-warning>
-            </template>
-            <template slot="boomerang-errors" slot-scope="props">
-                <error-warning :sample="props.rowData.boomerangCount">
-                </error-warning>
-            </template>
-            <template slot="total-errors" slot-scope="props">
-                <error-warning :sample="props.rowData.cnt">
-                </error-warning>
-            </template>
-        </vuetable>
+        <div class="overflow-x-auto overflow-y-hidden">
+            <vuetable ref="vuetable"
+                      api-url="/webperf/tables/errors-index"
+                      :per-page="20"
+                      :fields="fields"
+                      :css="css"
+                      :sort-order="sortOrder"
+                      :append-params="moreParams"
+                      @vuetable:pagination-data="onPaginationData"
+                      @vuetable:row-clicked="onRowClicked"
+                      @vuetable:loaded="onLoaded"
+            >
+                <template slot="page-listing-display" slot-scope="props">
+                    <page-result-cell :title="props.rowData.title"
+                                      :url="props.rowData.url"
+                                      :width="0"
+                                      color="none"
+                    >
+                    </page-result-cell>
+                </template>
+                <template slot="sample-date" slot-scope="props">
+                    <data-sample-date :date="props.rowData.latestErrorDate"
+                                      :url="props.rowData.url"
+                                      :query="props.rowData.query"
+                    >
+                    </data-sample-date>
+                </template>
+                <template slot="craft-errors" slot-scope="props">
+                    <error-warning :sample="props.rowData.craftCount">
+                    </error-warning>
+                </template>
+                <template slot="boomerang-errors" slot-scope="props">
+                    <error-warning :sample="props.rowData.boomerangCount">
+                    </error-warning>
+                </template>
+                <template slot="total-errors" slot-scope="props">
+                    <error-warning :sample="props.rowData.cnt">
+                    </error-warning>
+                </template>
+            </vuetable>
+        </div>
         <div class="vuetable-pagination clearafter">
             <vuetable-pagination-info ref="paginationInfo"
                                       infoTemplate="Displaying {from} to {to} of {total} pages"
