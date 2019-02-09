@@ -171,5 +171,9 @@ return [
     'View Detail' => 'View Detail',
     'Alerts' => 'Alerts',
     'Page Performance Details' => 'Page Performance Details',
-    'Aggregate Page Errors Data Samples' => 'Aggregate Page Errors Data Samples'
+    'Aggregate Page Errors Data Samples' => 'Aggregate Page Errors Data Samples',
+    'Aggregate Page Performance' => 'Aggregate Page Performance',
+    'Display Sidebar' => 'Display Sidebar',
+    'Whether the performance summary sidebar should be shown on entry, category, and product pages.' => 'Whether the performance summary sidebar should be shown on entry, category, and product pages.',
+    'Whether outlier data samples that are `10x` the mean should be deleted' => 'Whether outlier data samples that are `10x` the mean should be deleted'
 ];
