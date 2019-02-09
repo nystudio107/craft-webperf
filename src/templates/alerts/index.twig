@@ -29,6 +29,10 @@
             background: none !important;
         }
     </style>
+    <input type="hidden" name="action" value="webperf/sections/save-alerts">
+    {{ csrfInput() }}
+    {{ redirectInput("retour/redirects") }}
+
     <div id="cp-nav-content" v-cloak>
         <div class="pane">
             {% if not webhooks %}

@@ -398,7 +398,7 @@ class SectionsController extends Controller
         MultiSiteHelper::setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'alerts';
         // Basic variables
-        $variables['fullPageForm'] = false;
+        $variables['fullPageForm'] = true;
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
