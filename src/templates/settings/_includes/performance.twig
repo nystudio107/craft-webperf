@@ -26,7 +26,7 @@
 
     {{ forms.lightswitchField({
         label: "Trim Outlier Data Samples"|t("webperf"),
-        instructions: "Whether outlier data samples that are 5x the mean should be deleted"|t("webperf"),
+        instructions: "Whether outlier data samples that are `10x` the mean should be deleted"|t("webperf"),
         id: "trimOutlierDataSamples",
         name: "trimOutlierDataSamples",
         on: settings.trimOutlierDataSamples,
