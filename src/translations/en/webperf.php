@@ -179,5 +179,6 @@ return [
     '[Regular expressions](https://regexr.com/) to match URLs to exclude from tracking.' => '[Regular expressions](https://regexr.com/) to match URLs to exclude from tracking.',
     'Enter regular expressions to exclude certain URLs from tracking.' => 'Enter regular expressions to exclude certain URLs from tracking.',
     'Exclude Patterns' => 'Exclude Patterns',
-    'RegEx pattern to exclude' => 'RegEx pattern to exclude'
+    'RegEx pattern to exclude' => 'RegEx pattern to exclude',
+    '[Regular expressions](https://regexr.com/) to match URLs that should be excluded from tracking.' => '[Regular expressions](https://regexr.com/) to match URLs that should be excluded from tracking.'
 ];
