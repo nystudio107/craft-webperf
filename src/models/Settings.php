@@ -77,6 +77,18 @@ class Settings extends Model
     public $webpageTestApiKey = '';
 
     /**
+     * @var array [Regular expressions](https://regexr.com/) to match URLs to exclude from tracking
+     */
+    public $excludePatterns = [
+        0 => [
+            'pattern' => '/webperf/.*$',
+        ],
+        1 => [
+            'pattern' => '/cpresources/.*$',
+        ]
+    ];
+
+    /**
      * @var bool Whether Craft `warning` messages should be recorded in addition to `error` messages
      */
     public $includeCraftWarnings = false;

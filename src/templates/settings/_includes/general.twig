@@ -51,5 +51,24 @@
         warning: configWarning("webpageTestApiKey", "webperf"),
         errors: settings.getErrors("webpageTestApiKey"),
     }) }}
+    {{ forms.editableTableField({
+        label: "Exclude Patterns"|t("webperf"),
+        instructions: "[Regular expressions](https://regexr.com/) to match URLs to exclude from tracking."|t("webperf"),
+        id: 'excludePatterns',
+        name: 'excludePatterns',
+        required: false,
+        defaultValues: {
+            pattern: "",
+        },
+        cols: {
+            pattern: {
+                heading: "RegEx pattern to exclude"|t("webperf"),
+                type: "singleline",
+                width: "100%",
+            },
+        },
+        rows: settings.excludePatterns,
+        errors: settings.getErrors("excludePatterns"),
+    }) }}
     {% endnamespace %}
 </div>

@@ -123,7 +123,6 @@ class Webperf extends Plugin
     public function init()
     {
         parent::init();
-
         // Initialize properties
         self::$plugin = $this;
         self::$settings = $this->getSettings();
@@ -215,6 +214,13 @@ class Webperf extends Plugin
         return $navItem;
     }
 
+    /**
+     * Clear all the caches!
+     */
+    public function clearAllCaches()
+    {
+    }
+
     // Protected Methods
     // =========================================================================
 
@@ -232,7 +238,7 @@ class Webperf extends Plugin
                 $uri = '';
             }
             // Ignore our own controllers
-            if (self::$settings->includeCraftProfiling && strpos($uri, 'webperf/') === false) {
+            if (self::$settings->includeCraftProfiling && !$this->excludeUri($uri)) {
                 // Add in the ProfileTarget component
                 try {
                     $this->set('profileTarget', [
@@ -437,9 +443,15 @@ class Webperf extends Plugin
      */
     protected function handleSiteRequest()
     {
+        $request = Craft::$app->getRequest();
+        try {
+            $uri = $request->getPathInfo();
+        } catch (InvalidConfigException $e) {
+            $uri = '';
+        }
         // Don't include the beacon for response codes >= 400
         $response = Craft::$app->getResponse();
-        if ($response->statusCode < 400) {
+        if ($response->statusCode < 400 && !$this->excludeUri($uri)) {
             // Handler: View::EVENT_END_PAGE
             Event::on(
                 View::class,
@@ -577,10 +589,20 @@ class Webperf extends Plugin
     }
 
     /**
-     * Clear all the caches!
+     * @param $uri
+     *
+     * @return bool
      */
-    public function clearAllCaches()
+    protected function excludeUri($uri): bool
     {
+        foreach (self::$settings->excludePatterns as $excludePattern) {
+            $pattern = '`'.$excludePattern['pattern'].'`i';
+            if (preg_match($pattern, $uri) === 1) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
