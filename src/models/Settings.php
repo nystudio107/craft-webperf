@@ -129,6 +129,64 @@ class Settings extends Model
      */
     public $dashboardSlowColor = '#C80000';
 
+    // Threshold levels
+    // =========================================================================
+
+    /**
+     * @var int Threshold in seconds for the dns metric, beyond which it will be considered slow
+     */
+    public $dnsThreshold = 0.5;
+
+    /**
+     * @var int Threshold in seconds for the connect metric, beyond which it will be considered slow
+     */
+    public $connectThreshold = 0.5;
+
+    /**
+     * @var int Threshold in seconds for the first byte metric, beyond which it will be considered slow
+     */
+    public $firstByteThreshold = 2.0;
+
+    /**
+     * @var int Threshold in seconds for the first paint metric, beyond which it will be considered slow
+     */
+    public $firstPaintThreshold = 5.0;
+
+    /**
+     * @var int Threshold in seconds for the first contentful paint metric, beyond which it will be considered slow
+     */
+    public $firstContentfulPaintThreshold = 5.0;
+
+    /**
+     * @var int Threshold in seconds for the DOM interactive metric, beyond which it will be considered slow
+     */
+    public $domInteractiveThreshold = 5.0;
+
+    /**
+     * @var int Threshold in seconds for the page load metric, beyond which it will be considered slow
+     */
+    public $pageLoadThreshold = 10.0;
+
+    /**
+     * @var int Threshold in seconds for the Craft execution metric, beyond which it will be considered slow
+     */
+    public $craftTotalMsThreshold = 2.0;
+
+    /**
+     * @var int Threshold in seconds for the database queries metric, beyond which it will be considered slow
+     */
+    public $craftDbMsThreshold = 2.0;
+
+    /**
+     * @var int Threshold in seconds for the Twig rendering metric, beyond which it will be considered slow
+     */
+    public $craftTwigMsThreshold = 2.0;
+
+    /**
+     * @var int Threshold in seconds for the Craft other metric, beyond which it will be considered slow
+     */
+    public $craftOtherMsThreshold = 2.0;
+
     // Public Methods
     // =========================================================================
 
@@ -180,6 +238,24 @@ class Settings extends Model
                 ],
                 ColorValidator::class
             ],
+            [
+                [
+                    'dnsThreshold',
+                    'connectThreshold',
+                    'firstByteThreshold',
+                    'firstPaintThreshold',
+                    'firstContentfulPaintThreshold',
+                    'domInteractiveThreshold',
+                    'pageLoadThreshold',
+                    'craftTotalMsThreshold',
+                    'craftDbMsThreshold',
+                    'craftTwigMsThreshold',
+                    'craftOtherMsThreshold',
+                ],
+                'number',
+                'min' => 0.1,
+                'max' => 100,
+            ]
         ];
     }
 }

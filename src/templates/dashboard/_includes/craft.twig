@@ -33,7 +33,7 @@
                         fast-color="{{ settings.dashboardFastColor }}"
                         average-color="{{ settings.dashboardAverageColor }}"
                         slow-color="{{ settings.dashboardSlowColor }}"
-                        :max-value="2"
+                        :max-value="{{ settings.craftTotalMsThreshold }}"
                         :site-id="{{ currentSiteId }}"
                 >
                 </radial-bar-chart>
@@ -59,7 +59,7 @@
                             fast-color="{{ settings.dashboardFastColor }}"
                             average-color="{{ settings.dashboardAverageColor }}"
                             slow-color="{{ settings.dashboardSlowColor }}"
-                            :max-value="2"
+                            :max-value="{{ settings.craftDbMsThreshold }}"
                             :site-id="{{ currentSiteId }}"
                     >
                     </simple-bar-chart>
@@ -82,7 +82,7 @@
                             fast-color="{{ settings.dashboardFastColor }}"
                             average-color="{{ settings.dashboardAverageColor }}"
                             slow-color="{{ settings.dashboardSlowColor }}"
-                            :max-value="2"
+                            :max-value="{{ settings.craftTwigMsThreshold }}"
                             :site-id="{{ currentSiteId }}"
                     >
                     </simple-bar-chart>
@@ -105,7 +105,7 @@
                             fast-color="{{ settings.dashboardFastColor }}"
                             average-color="{{ settings.dashboardAverageColor }}"
                             slow-color="{{ settings.dashboardSlowColor }}"
-                            :max-value="2"
+                            :max-value="{{ settings.craftOtherMsThreshold }}"
                             :site-id="{{ currentSiteId }}"
                     >
                     </simple-bar-chart>
@@ -121,7 +121,7 @@
                     average-color="{{ settings.dashboardAverageColor }}"
                     slow-color="{{ settings.dashboardSlowColor }}"
                     :limit="3"
-                    :max-value="2"
+                    :max-value="{{ settings.craftTotalMsThreshold }}"
                     :site-id="{{ currentSiteId }}"
             >
             </dashboard-file-list>

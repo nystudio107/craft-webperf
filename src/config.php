@@ -122,4 +122,62 @@ return [
      */
     'dashboardSlowColor' => '#C80000',
 
+        // Threshold levels
+    // =========================================================================
+
+    /**
+     * @var int Threshold in seconds for the dns metric, beyond which it will be considered slow
+     */
+    'dnsThreshold' => 0.5,
+
+    /**
+     * @var int Threshold in seconds for the connect metric, beyond which it will be considered slow
+     */
+    'connectThreshold' => 0.5,
+
+    /**
+     * @var int Threshold in seconds for the first byte metric, beyond which it will be considered slow
+     */
+    'firstByteThreshold' => 2.0,
+
+    /**
+     * @var int Threshold in seconds for the first paint metric, beyond which it will be considered slow
+     */
+    'firstPaintThreshold' => 5.0,
+
+    /**
+     * @var int Threshold in seconds for the first contentful paint metric, beyond which it will be considered slow
+     */
+    'firstContentfulPaintThreshold' => 5.0,
+
+    /**
+     * @var int Threshold in seconds for the DOM interactive metric, beyond which it will be considered slow
+     */
+    'domInteractiveThreshold' => 5.0,
+
+    /**
+     * @var int Threshold in seconds for the page load metric, beyond which it will be considered slow
+     */
+    'pageLoadThreshold' => 10.0,
+
+    /**
+     * @var int Threshold in seconds for the Craft execution metric, beyond which it will be considered slow
+     */
+    'craftTotalMsThreshold' => 2.0,
+
+    /**
+     * @var int Threshold in seconds for the database queries metric, beyond which it will be considered slow
+     */
+    'craftDbMsThreshold' => 2.0,
+
+    /**
+     * @var int Threshold in seconds for the Twig rendering metric, beyond which it will be considered slow
+     */
+    'craftTwigMsThreshold' => 2.0,
+
+    /**
+     * @var int Threshold in seconds for the Craft other metric, beyond which it will be considered slow
+     */
+    'craftOtherMsThreshold' => 2.0,
+
 ];

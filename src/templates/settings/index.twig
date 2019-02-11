@@ -22,6 +22,7 @@
     "performance": {label: "Performance"|t('webperf'), url: "#performance"},
     "errors": {label: "Errors"|t('webperf'), url: "#errors"},
     "appearance": {label: "Appearance"|t('webperf'), url: "#appearance"},
+    "thresholds": {label: "Thresholds"|t('webperf'), url: "#thresholds"},
 } %}
 
 {% block content %}
@@ -42,6 +43,9 @@
 
     {# -- Appearance settings -- #}
     {% include "webperf/settings/_includes/appearance.twig" %}
+
+    {# -- Threshold settings -- #}
+    {% include "webperf/settings/_includes/thresholds.twig" %}
 
     {# include our JavaScript modules #}
     {{ parent() }}
