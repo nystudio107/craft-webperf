@@ -104,7 +104,7 @@
         "@babel/polyfill": "^7.0.0",
         "apexcharts": "^2.1.4",
         "axios": "^0.18.0",
-        "boomerangjs": "1.621.0",
+        "boomerangjs": "^1.621.0",
         "tailwindcss": "^0.7.3",
         "vee-validate": "^2.1.7",
         "vue": "^2.5.17",
