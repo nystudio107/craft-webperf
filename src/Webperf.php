@@ -194,12 +194,14 @@ class Webperf extends Plugin
                     'badge' => $errors,
                 ];
             }
+            /* @TODO Alerts implementation
             if ($currentUser->can('webperf:alerts')) {
                 $subNavs['alerts'] = [
                     'label' => 'Alerts',
                     'url' => 'webperf/alerts',
                 ];
             }
+             */
             if ($currentUser->can('webperf:settings')) {
                 $subNavs['settings'] = [
                     'label' => Craft::t('webperf', 'Settings'),
@@ -740,9 +742,11 @@ class Webperf extends Plugin
                     ],
                 ],
             ],
+            /* @TODO Alerts implementation
             'webperf:alerts' => [
                 'label' => Craft::t('webperf', 'Alerts'),
             ],
+            */
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
             ],
