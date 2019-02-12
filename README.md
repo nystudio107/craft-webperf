@@ -58,6 +58,8 @@ Webperf uses the battle-tested [Boomerang](https://akamai.github.io/boomerang/) 
 
 The performance and error statistics that Webperf records contain no user identifiable information. No IP addresses are recorded, and the samples are anonymous.
 
+You own your data; it isn't sent to any third party.
+
 ## Configuring Webperf
 
 As soon as you install Webperf, it automatically will add an asynchronous, non-blocking iframe to your pages that collects anonymous performance data. You don't need to add any template code for this to happen.
