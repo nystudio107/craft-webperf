@@ -8,10 +8,6 @@ Webperf helps you build & maintain high quality websites through Real User Measu
 
 **Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
 
-## This plugin is in development
-
-This plugin isn't finished; don't use it yet. No, really.
-
 ## Requirements
 
 This plugin requires Craft CMS 3.0.0 or later.
@@ -38,7 +34,7 @@ Webperf uses [Real User Measurement](https://en.wikipedia.org/wiki/Real_user_mon
 
 Webperf also gathers Craft specific information such as database queries, Twig rendering time, memory used, and overall TTFB (Time To First Byte) performance timings. Webperf will also record any front JavaScript errors as well as Craft CMS errors in one place for ease of discovery.
 
-Webperf then presents this performance information in concise graphs that give you insights into how your website performs. Webperf even provides you with bullet-pointed recommendations on how you can fix any performance problems that are found. And [performance affects conversions](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates/) as well as user experience.
+Webperf then presents this performance information in concise graphs that give you insight into how your website performs. Webperf even provides you with bullet-pointed recommendations on how you can fix any performance problems that are found. And [performance affects conversions](https://www.cloudflare.com/learning/performance/more/website-performance-conversion-rates/) as well as user experience.
 
 Webperf leverages the the performance profiling that web browsers & Craft CMS already do. It has been optimized to minimize the [Observer Effect](https://en.wikipedia.org/wiki/Observer_effect_(information_technology)), collecting data without impacting performance.
 
@@ -60,7 +56,7 @@ Webperf uses the battle-tested [Boomerang](https://akamai.github.io/boomerang/) 
 
 ## Configuring Webperf
 
-As soon as you install Webperf, it automatically will add an asynchronous, non-blocking iframe to your pages that collects performance data. You don't need to add any template code for this to happen.
+As soon as you install Webperf, it automatically will add an asynchronous, non-blocking iframe to your pages that collects anonymous performance data. You don't need to add any template code for this to happen.
 
 Once Webperf is installed, it needs to collect performance data samples from users visiting your website. So install it, and sit back and allow it to collect enough data samples to give you a picture of your website's performance.
 
@@ -68,17 +64,38 @@ Once Webperf is installed, it needs to collect performance data samples from use
 
 ![Screenshot](resources/screenshots/webperf-settings-general.png)
 
+ * **Plugin name** - The public-facing name of the plugin
+ * **Include Browser Beacon** - Whether or not the asynchronous User Timing Beacon should be rendered on frontend pages.
+ * **Include Craft Beacon** - Whether or not the Craft profiling data should be recorded for site requests.
+ * **Static Cached Site** - If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token.
+ * **WebPageTest.org API Key** - To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)
+ * **Exclude Patterns** - [Regular expressions](https://regexr.com/) to match URLs that should be excluded from tracking.
+
 ### Performance Settings
 
 ![Screenshot](resources/screenshots/webperf-settings-performance.png)
+
+ * **Webperf Data Samples to Store** - How many unique Webperf Data Samples should be stored before they are trimmed.
+ * **Automatically Trim Data Samples** - Whether the Data Samples should be trimmed after each new Data Sample is added
+ * **Trim Outlier Data Samples** - Whether outlier data samples that are `10x` the mean should be deleted
+ * **Rate Limit in ms** - The number of milliseconds required between recording of frontend beacon data samples.
 
 ### Errors Settings
 
 ![Screenshot](resources/screenshots/webperf-settings-errors.png)
 
+ * **Include Craft `warnings` as well as `errors`** - Whether Craft `warning` messages should be recorded in addition to error messages
+ * **Error Samples to Store** - How many unique Error Samples should be stored before they are trimmed.
+ * **Automatically Trim Error Samples** - Whether the Error Samples should be trimmed after each new Error Sample is added
+
 ### Appearance Settings
 
 ![Screenshot](resources/screenshots/webperf-settings-appearance.png)
+
+ * **Display Sidebar** - Whether the performance summary sidebar should be shown on entry, category, and product pages.
+ * **Dashboard Fast Color** - The color used to indicate fast timings on the Webperf Dashboard. Defaults to `#00c800`
+ * **Dashboard Average Color** - The color used to indicate average timings on the Webperf Dashboard. Defaults to `#ffff00`
+ * **Dashboard Slow Color** - The color used to indicate slow timings on the Webperf Dashboard. Defaults to `#c80000`
 
 ### User Permissions
 
@@ -93,7 +110,6 @@ You can control access to various Webperf settings and functions on a per-user g
 * **Errors** - Access to the Webperf Errors page
 * **Errors Detail** - Access to the Webperf Errors Detail page
 * **Delete Error Samples** - The ability to delete error samples
-* **Alerts** - Access to the Alerts page
 * **Recommendations** - The ability to see the Recommendations on the Dashboard & Performance pages
 * **Performance Sidebar** - Whether the performance summary sidebar should be shown on entry, category, and product pages
 * **Settings** - Access to the Webperf settings page
@@ -102,13 +118,23 @@ Ensure that you've also enabled plugin access to the Webperf plugin as well for 
 
 ## Using Webperf
 
-![Screenshot](resources/screenshots/webperf-sidebar.png)
+Webperf is a passive Real User Measurement system that extracts the performance that people experience when they visit your website. Since devices, connections, and Internet conditions vary, the more people visit your website, the better overall performance picture you'll have.
+
+Webperf shows a warning ⚠ next to any metric that is composed of fewer than 100 samples, because there may not be enough data for it to be statistically significant.
+
+If you are using a multi-site setup, on all of Webperf's pages there will be a site switcher that lets you choose between viewing data for all sites, or for a specific site alone.
 
 ### Dashboard
 
 #### Overview
 
 ![Screenshot](resources/screenshots/webperf-dashboard.png)
+
+The Webperf Dashboard gives you an overall picture of how all of the pages on your site perform.
+
+#### Browser Performance
+
+
 
 #### Recommendations
 
@@ -150,10 +176,16 @@ Ensure that you've also enabled plugin access to the Webperf plugin as well for 
 
 ![Screenshot](resources/screenshots/webperf-errors-detail-table.png)
 
+### Sidebar
+
+![Screenshot](resources/screenshots/webperf-sidebar.png)
+
 ## Webperf Roadmap
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* User definable "Alerts" that can be consumed by the Webhooks plugin
+* Have the Recommendations be a type of "Alert"
+* Comparison of multiple periods side by side to show comparative performance
 
 Brought to you by [nystudio107](https://nystudio107.com)
