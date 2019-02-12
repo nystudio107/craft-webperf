@@ -1,0 +1,139 @@
+{% import "_includes/forms" as forms %}
+{% from "webperf/_includes/macros.twig" import configWarning %}
+<div id="thresholds" class="hidden">
+    {% namespace "settings" %}
+
+        {{ forms.textField({
+            label: "Page Loaded Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the Page Loaded metric, beyond which it will be considered slow."|t("webperf"),
+            id: "pageLoadThreshold",
+            name: "pageLoadThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.pageLoadThreshold,
+            warning: configWarning("pageLoadThreshold", "webperf"),
+            errors: settings.getErrors("pageLoadThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "DOM Interactive Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the DOM Interactive metric, beyond which it will be considered slow."|t("webperf"),
+            id: "domInteractiveThreshold",
+            name: "domInteractiveThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.domInteractiveThreshold,
+            warning: configWarning("domInteractiveThreshold", "webperf"),
+            errors: settings.getErrors("domInteractiveThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "First Contentful Paint Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the First Contentful Paint metric, beyond which it will be considered slow."|t("webperf"),
+            id: "firstContentfulPaintThreshold",
+            name: "firstContentfulPaintThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.firstContentfulPaintThreshold,
+            warning: configWarning("firstContentfulPaintThreshold", "webperf"),
+            errors: settings.getErrors("firstContentfulPaintThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "First Paint Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the First Paint metric, beyond which it will be considered slow."|t("webperf"),
+            id: "firstPaintThreshold",
+            name: "firstPaintThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.firstPaintThreshold,
+            warning: configWarning("firstPaintThreshold", "webperf"),
+            errors: settings.getErrors("firstPaintThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "First Byte Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the First Byte metric, beyond which it will be considered slow."|t("webperf"),
+            id: "firstByteThreshold",
+            name: "firstByteThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.firstByteThreshold,
+            warning: configWarning("firstByteThreshold", "webperf"),
+            errors: settings.getErrors("firstByteThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Connect Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the Connect metric, beyond which it will be considered slow."|t("webperf"),
+            id: "connectThreshold",
+            name: "connectThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.connectThreshold,
+            warning: configWarning("connectThreshold", "webperf"),
+            errors: settings.getErrors("connectThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "DNS Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the DNS metric, beyond which it will be considered slow."|t("webperf"),
+            id: "dnsThreshold",
+            name: "dnsThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.dnsThreshold,
+            warning: configWarning("dnsThreshold", "webperf"),
+            errors: settings.getErrors("dnsThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Craft Execution Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the Craft Execution metric, beyond which it will be considered slow."|t("webperf"),
+            id: "craftTotalMsThreshold",
+            name: "craftTotalMsThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.craftTotalMsThreshold,
+            warning: configWarning("craftTotalMsThreshold", "webperf"),
+            errors: settings.getErrors("craftTotalMsThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Database Queries Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the Database Queries metric, beyond which it will be considered slow."|t("webperf"),
+            id: "craftDbMsThreshold",
+            name: "craftDbMsThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.craftDbMsThreshold,
+            warning: configWarning("craftDbMsThreshold", "webperf"),
+            errors: settings.getErrors("craftDbMsThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Twig Rendering Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the Twig Rendering metric, beyond which it will be considered slow."|t("webperf"),
+            id: "craftTwigMsThreshold",
+            name: "craftTwigMsThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.craftTwigMsThreshold,
+            warning: configWarning("craftTwigMsThreshold", "webperf"),
+            errors: settings.getErrors("craftTwigMsThreshold"),
+        }) }}
+
+        {{ forms.textField({
+            label: "Craft Other Threshold"|t("webperf"),
+            instructions: "Threshold in seconds for the Craft Other metric, beyond which it will be considered slow."|t("webperf"),
+            id: "craftOtherMsThreshold",
+            name: "craftOtherMsThreshold",
+            size: 4,
+            maxlength: 4,
+            value: settings.craftOtherMsThreshold,
+            warning: configWarning("craftOtherMsThreshold", "webperf"),
+            errors: settings.getErrors("craftOtherMsThreshold"),
+        }) }}
+
+    {% endnamespace %}
+</div>

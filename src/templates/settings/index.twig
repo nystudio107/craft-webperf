@@ -43,6 +43,11 @@
     {# -- Appearance settings -- #}
     {% include "webperf/settings/_includes/appearance.twig" %}
 
+    {# -- Threshold settings -- #}
+    {# Disabled from view for now
+    {% include "webperf/settings/_includes/thresholds.twig" %}
+    #}
+
     {# include our JavaScript modules #}
     {{ parent() }}
 {% endblock %}

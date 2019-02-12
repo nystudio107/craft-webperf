@@ -153,6 +153,11 @@ class Beacons extends Component
                 return;
             }
         }
+        // Don't include the beacon for response codes >= 400
+        $response = Craft::$app->getResponse();
+        if ($response->statusCode >= 400) {
+            return;
+        }
         $url = Webperf::$requestUrl ?? CraftDataSample::PLACEHOLDER_URL;
         // Get the site id
         try {
@@ -202,6 +207,11 @@ class Beacons extends Component
             if ($crawlerDetect->isCrawler()) {
                 return;
             }
+        }
+        // Don't include the beacon for response codes >= 400
+        $response = Craft::$app->getResponse();
+        if ($response->statusCode >= 400) {
+            return;
         }
         $request = Craft::$app->getRequest();
         $url = UrlHelper::stripQueryString(

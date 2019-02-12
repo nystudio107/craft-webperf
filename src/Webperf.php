@@ -194,12 +194,14 @@ class Webperf extends Plugin
                     'badge' => $errors,
                 ];
             }
+            /* @TODO Alerts implementation
             if ($currentUser->can('webperf:alerts')) {
                 $subNavs['alerts'] = [
                     'label' => 'Alerts',
                     'url' => 'webperf/alerts',
                 ];
             }
+             */
             if ($currentUser->can('webperf:settings')) {
                 $subNavs['settings'] = [
                     'label' => Craft::t('webperf', 'Settings'),
@@ -449,9 +451,8 @@ class Webperf extends Plugin
         } catch (InvalidConfigException $e) {
             $uri = '';
         }
-        // Don't include the beacon for response codes >= 400
-        $response = Craft::$app->getResponse();
-        if ($response->statusCode < 400 && !$this->excludeUri($uri)) {
+        // Check for URIs to exclude
+        if (!$this->excludeUri($uri)) {
             // Handler: View::EVENT_END_PAGE
             Event::on(
                 View::class,
@@ -461,17 +462,21 @@ class Webperf extends Plugin
                         'View::EVENT_END_PAGE',
                         __METHOD__
                     );
-                    $view = Craft::$app->getView();
-                    // The page is done rendering, include our beacon
-                    if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
-                        switch (self::$renderType) {
-                            case 'html':
-                                Webperf::$plugin->beacons->includeHtmlBeacon();
-                                self::$beaconIncluded = true;
-                                break;
-                            case 'amp-html':
-                                Webperf::$plugin->beacons->includeAmpHtmlScript();
-                                break;
+                    // Don't include the beacon for response codes >= 400
+                    $response = Craft::$app->getResponse();
+                    if ($response->statusCode < 400) {
+                        $view = Craft::$app->getView();
+                        // The page is done rendering, include our beacon
+                        if (Webperf::$settings->includeBeacon && $view->getIsRenderingPageTemplate()) {
+                            switch (self::$renderType) {
+                                case 'html':
+                                    Webperf::$plugin->beacons->includeHtmlBeacon();
+                                    self::$beaconIncluded = true;
+                                    break;
+                                case 'amp-html':
+                                    Webperf::$plugin->beacons->includeAmpHtmlScript();
+                                    break;
+                            }
                         }
                     }
                 }
@@ -737,9 +742,11 @@ class Webperf extends Plugin
                     ],
                 ],
             ],
+            /* @TODO Alerts implementation
             'webperf:alerts' => [
                 'label' => Craft::t('webperf', 'Alerts'),
             ],
+            */
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
             ],
