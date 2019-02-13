@@ -6,7 +6,7 @@ Webperf helps you build & maintain high quality websites through Real User Measu
 
 ![Screenshot](resources/img/plugin-banner.jpg)
 
-**Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
+**Note**: _The license fee for this plugin is $59.00 via the Craft Plugin Store._
 
 ## Requirements
 
