@@ -2,7 +2,7 @@
     "name": "nystudio107/craft-webperf",
     "description": "Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "craft",
         "cms",
@@ -11,7 +11,7 @@
         "webperf"
     ],
     "support": {
-        "docs": "https://github.com/nystudio107/craft-webperf/blob/master/README.md",
+        "docs": "https://github.com/nystudio107/craft-webperf/blob/v1/README.md",
         "issues": "https://github.com/nystudio107/craft-webperf/issues"
     },
     "license": "proprietary",
@@ -37,7 +37,7 @@
         "handle": "webperf",
         "hasCpSettings": true,
         "hasCpSection": true,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-webperf/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-webperf/v1/CHANGELOG.md",
         "components": {
             "recommendations": "nystudio107\\webperf\\services\\Recommendations",
             "dataSamples": "nystudio107\\webperf\\services\\DataSamples",

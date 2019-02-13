@@ -6,7 +6,7 @@ Webperf helps you build & maintain high quality websites through Real User Measu
 
 ![Screenshot](resources/img/plugin-banner.jpg)
 
-**Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
+**Note**: _The license fee for this plugin is $59.00 via the Craft Plugin Store._
 
 ## Requirements
 
@@ -57,6 +57,8 @@ Webperf uses the battle-tested [Boomerang](https://akamai.github.io/boomerang/) 
 ## GDPR & Privacy
 
 The performance and error statistics that Webperf records contain no user identifiable information. No IP addresses are recorded, and the samples are anonymous.
+
+You own your data; it isn't sent to any third party.
 
 ## Configuring Webperf
 
