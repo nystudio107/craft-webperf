@@ -22,18 +22,15 @@ use nystudio107\webperf\services\ErrorSamples as ErrorSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\Recommendations as RecommendationsService;
 use nystudio107\webperf\variables\WebperfVariable;
-use nystudio107\webperf\widgets\Metrics as MetricsWidget;
 
 use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
-use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUserPermissionsEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\helpers\UrlHelper;
-use craft\services\Dashboard;
 use craft\services\UserPermissions;
 use craft\web\Application;
 use craft\web\twig\variables\CraftVariable;
@@ -415,14 +412,6 @@ class Webperf extends Plugin
                 );
             }
         );
-        // Handler: Dashboard::EVENT_REGISTER_WIDGET_TYPES
-        Event::on(
-            Dashboard::class,
-            Dashboard::EVENT_REGISTER_WIDGET_TYPES,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = MetricsWidget::class;
-            }
-        );
         // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
         Event::on(
             UserPermissions::class,
@@ -674,8 +663,6 @@ class Webperf extends Plugin
             => 'webperf/recommendations/list',
             '/webperf/recommendations/list/<siteId:\d+>'
             => 'webperf/recommendations/list',
-
-            '/webperf/charts/widget/<days>' => 'webperf/charts/widget',
         ];
     }
     /**
