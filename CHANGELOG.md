@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.2 - 2019-02-20
+### Changed
+* Removed the unimplemented Widget stub
+
 ## 1.0.1 - 2019-02-12
 ### Changed
 * Fixed the docs and changelog URLs in composer.json
