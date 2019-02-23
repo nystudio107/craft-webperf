@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.3 - 2019-02-22
+### Changed
+* Updated the beacon to remove `AutoXHR` and add in `MD5`
+* If you're using Craft 3.1, Webperf will use Craft [environmental variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) for secrets
+
 ## 1.0.2 - 2019-02-20
 ### Changed
 * Removed the unimplemented Widget stub
