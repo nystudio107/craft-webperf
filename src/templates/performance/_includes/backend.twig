@@ -115,10 +115,14 @@
         </div>
     </div>
     <div class="buttons pt-4 pb-2">
+        {% set webpageTestApiKey = settings.webpageTestApiKey %}
+        {% if craft.webperf.craft31 %}
+            {% set webpageTestApiKey = parseEnv(webpageTestApiKey) %}
+        {% endif %}
         {% if settings.webpageTestApiKey | length %}
             {% set testUrl = url('https://www.webpagetest.org/runtest.php', {
                 'url': pageUrl,
-                'k': settings.webpageTestApiKey
+                'k': webpageTestApiKey
             }) %}
             {% set testName = 'Test on WebPageTest.org'|t %}
         {% else %}

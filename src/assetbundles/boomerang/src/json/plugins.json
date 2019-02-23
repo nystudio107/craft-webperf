@@ -1,10 +1,10 @@
 {
     "plugins": [
-        "plugins/auto-xhr.js",
         "plugins/rt.js",
         "plugins/painttiming.js",
         "plugins/navtiming.js",
         "plugins/errors.js",
+        "plugins/md5.js",
         "plugins/mq.js",
         "plugins/webperf-boomer-init.js"
     ]
