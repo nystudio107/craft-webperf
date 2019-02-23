@@ -42,15 +42,28 @@
         errors: settings.getErrors("staticCachedSite"),
     }) }}
 
-    {{ forms.textField({
-        label: "WebPageTest.org API Key"|t("webperf"),
-        instructions: "To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
-        id: "webpageTestApiKey",
-        name: "webpageTestApiKey",
-        value: settings.webpageTestApiKey,
-        warning: configWarning("webpageTestApiKey", "webperf"),
-        errors: settings.getErrors("webpageTestApiKey"),
-    }) }}
+    {% if craft.webperf.craft31 %}
+        {{ forms.autosuggestField({
+            label: "WebPageTest.org API Key"|t("webperf"),
+            instructions: "To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
+            suggestEnvVars: true,
+            id: "webpageTestApiKey",
+            name: "webpageTestApiKey",
+            value: settings.webpageTestApiKey,
+            warning: configWarning("webpageTestApiKey", "webperf"),
+            errors: settings.getErrors("webpageTestApiKey"),
+        }) }}
+    {% else %}
+        {{ forms.textField({
+            label: "WebPageTest.org API Key"|t("webperf"),
+            instructions: "To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
+            id: "webpageTestApiKey",
+            name: "webpageTestApiKey",
+            value: settings.webpageTestApiKey,
+            warning: configWarning("webpageTestApiKey", "webperf"),
+            errors: settings.getErrors("webpageTestApiKey"),
+        }) }}
+    {% endif %}
     {{ forms.editableTableField({
         label: "Exclude Patterns"|t("webperf"),
         instructions: "[Regular expressions](https://regexr.com/) to match URLs that should be excluded from tracking."|t("webperf"),
