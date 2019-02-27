@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.4 - 2019-02-26
+### Changed
+* Fixed an issue with Craft 3.1.5 no longer allowing non-numeric values in the nav `badgeCount`
+* Fixed a potential division by zero error in the memory limit recommendation
+
 ## 1.0.3 - 2019-02-22
 ### Changed
 * Updated the beacon to remove `AutoXHR` and add in `MD5`

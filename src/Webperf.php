@@ -168,7 +168,10 @@ class Webperf extends Plugin
         $navItem = parent::getCpNavItem();
         $recommendations = $this->getRecommendationsCount();
         $errors = $this->getErrorsCount();
-        $navItem['badgeCount'] = $errors.$recommendations;
+        if (!empty($errors)) {
+            $navItem['label'] .= ' '.$errors;
+        }
+        $navItem['badgeCount'] = $recommendations;
         $currentUser = Craft::$app->getUser()->getIdentity();
         if ($currentUser) {
             // Only show sub-navs the user has permission to view
