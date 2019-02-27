@@ -111,6 +111,6 @@ class MemoryLimit extends Recommendation
             }
         }
 
-        return $memoryLimit;
+        return (int)$memoryLimit;
     }
 }
