@@ -168,6 +168,9 @@ class Webperf extends Plugin
         $navItem = parent::getCpNavItem();
         $recommendations = $this->getRecommendationsCount();
         $errors = $this->getErrorsCount();
+        if (!empty($errors)) {
+            $navItem['label'] .= ' '.$errors;
+        }
         $navItem['badgeCount'] = $recommendations;
         $currentUser = Craft::$app->getUser()->getIdentity();
         if ($currentUser) {
