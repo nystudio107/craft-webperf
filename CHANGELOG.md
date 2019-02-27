@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.5 - 2019-02-27
+### Changed
+* Fixed a `A non well formed numeric value` if you have your `memory_limit` set a certain way in your `php.ini`
+
 ## 1.0.4 - 2019-02-26
 ### Changed
 * Fixed an issue with Craft 3.1.5 no longer allowing non-numeric values in the nav `badgeCount`
