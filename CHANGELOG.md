@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.6 - 2019-02-28
+### Changed
+* Fixed a potential division by zero error in the memory limit recommendation under rare circumstances
+
 ## 1.0.5 - 2019-02-27
 ### Changed
 * Fixed a `A non well formed numeric value` if you have your `memory_limit` set a certain way in your `php.ini`
