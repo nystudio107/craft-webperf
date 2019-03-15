@@ -202,7 +202,12 @@ class Webperf extends Plugin
                 ];
             }
              */
-            if ($currentUser->can('webperf:settings')) {
+            $editableSettings = true;
+            $general = Craft::$app->getConfig()->getGeneral();
+            if (self::$craft31 && !$general->allowAdminChanges) {
+                $editableSettings = false;
+            }
+            if ($currentUser->can('webperf:settings') && $editableSettings) {
                 $subNavs['settings'] = [
                     'label' => Craft::t('webperf', 'Settings'),
                     'url' => 'webperf/settings',

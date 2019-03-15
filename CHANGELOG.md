@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.7 - 2019-03-15
+### Changed
+* Fixed a potential `Undefined property` in the MetricsController 
+* Don't allow editing of the plugin settings if `allowAdminChanges` is false
+* Fixed an issue where an error would be thrown on the Performance Detail page if you were not running Craft 3.1 or later
+
 ## 1.0.6 - 2019-02-28
 ### Changed
 * Fixed a potential division by zero error in the memory limit recommendation under rare circumstances

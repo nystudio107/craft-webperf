@@ -162,9 +162,9 @@ namespace nystudio107\webperf\controllers {
             $userAgent = $request->userAgent;
             if ($userAgent) {
                 $parser = new Parser($userAgent);
-                $sample->device = $parser->device->model;
-                $sample->browser = $parser->browser->name . ' ' . $parser->browser->getVersion();
-                $sample->os = $parser->os->name . ' ' . $parser->os->getVersion();
+                $sample->device = ($parser->device->model ?? '');
+                $sample->browser = ($parser->browser->name ?? '') . ' ' . $parser->browser->getVersion();
+                $sample->os = ($parser->os->name ?? '') . ' ' . $parser->os->getVersion();
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample
