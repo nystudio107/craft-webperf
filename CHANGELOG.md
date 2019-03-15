@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 1.0.7 - 2019-03-15
 ### Changed
 * Fixed a potential `Undefined property` in the MetricsController 
+* Don't allow editing of the plugin settings if `allowAdminChanges` is false
 
 ## 1.0.6 - 2019-02-28
 ### Changed
