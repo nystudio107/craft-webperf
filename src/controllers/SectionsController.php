@@ -229,6 +229,10 @@ class SectionsController extends Controller
         $variables['pageUrl'] = $pageUrl;
         $variables['pageTitle'] = Webperf::$plugin->dataSamples->pageTitle($pageUrl, $siteId);
         $variables['settings'] = Webperf::$settings;
+        $variables['webpageTestApiKey'] = Webperf::$settings->webpageTestApiKey;
+        if (Webperf::$craft31 && $variables['webpageTestApiKey']) {
+            $variables['webpageTestApiKey'] = Craft::parseEnv($variables['webpageTestApiKey']);
+        }
         // Set the default date range
         $now = new \DateTime();
         $variables['end'] = $now->format('Y-m-d');
