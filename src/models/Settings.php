@@ -10,8 +10,11 @@
 
 namespace nystudio107\webperf\models;
 
+use nystudio107\webperf\Webperf;
+
 use Craft;
 use craft\base\Model;
+use craft\behaviors\EnvAttributeParserBehavior;
 use craft\validators\ArrayValidator;
 use craft\validators\ColorValidator;
 
@@ -268,11 +271,23 @@ class Settings extends Model
      */
     public function behaviors()
     {
-        return [
+        $craft31Behaviors = [];
+        if (Webperf::$craft31) {
+            $craft31Behaviors = [
+                'parser' => [
+                    'class' => EnvAttributeParserBehavior::class,
+                    'attributes' => [
+                        'webpageTestApiKey',
+                    ],
+                ]
+            ];
+        }
+
+        return array_merge($craft31Behaviors, [
             'typecast' => [
                 'class' => AttributeTypecastBehavior::class,
                 // 'attributeTypes' will be composed automatically according to `rules()`
             ],
-        ];
+        ]);
     }
 }
