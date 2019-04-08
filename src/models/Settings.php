@@ -12,7 +12,10 @@ namespace nystudio107\webperf\models;
 
 use Craft;
 use craft\base\Model;
+use craft\validators\ArrayValidator;
 use craft\validators\ColorValidator;
+
+use yii\behaviors\AttributeTypecastBehavior;
 
 use putyourlightson\blitz\Blitz;
 
@@ -221,6 +224,7 @@ class Settings extends Model
             ['rateLimitMs', 'integer'],
             ['rateLimitMs', 'default', 'value' => 500],
             ['webpageTestApiKey', 'string'],
+            ['excludePatterns', ArrayValidator::class],
             ['includeCraftWarnings', 'boolean'],
             ['errorSamplesStoredLimit', 'integer'],
             ['errorSamplesStoredLimit', 'default', 'value' => 1000],
@@ -256,6 +260,19 @@ class Settings extends Model
                 'min' => 0.1,
                 'max' => 100,
             ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'typecast' => [
+                'class' => AttributeTypecastBehavior::class,
+                // 'attributeTypes' will be composed automatically according to `rules()`
+            ],
         ];
     }
 }
