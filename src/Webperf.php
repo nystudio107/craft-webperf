@@ -598,10 +598,12 @@ class Webperf extends Plugin
     protected function excludeUri($uri): bool
     {
         $uri = '/'.ltrim($uri, '/');
-        foreach (self::$settings->excludePatterns as $excludePattern) {
-            $pattern = '`'.$excludePattern['pattern'].'`i';
-            if (preg_match($pattern, $uri) === 1) {
-                return true;
+        if (!empty(self::$settings->excludePatterns)) {
+            foreach (self::$settings->excludePatterns as $excludePattern) {
+                $pattern = '`'.$excludePattern['pattern'].'`i';
+                if (preg_match($pattern, $uri) === 1) {
+                    return true;
+                }
             }
         }
 
