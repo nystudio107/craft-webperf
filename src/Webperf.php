@@ -237,7 +237,7 @@ class Webperf extends Plugin
     protected function addComponents()
     {
         $request = Craft::$app->getRequest();
-        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+        if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest() && !$request->getIsLivePreview()) {
             $this->setRequestUrl();
             try {
                 $uri = $request->getPathInfo();
@@ -365,7 +365,7 @@ class Webperf extends Plugin
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
                 // Only respond to non-console site requests
-                if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+                if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()  && !$request->getIsLivePreview()) {
                     $this->handleSiteRequest();
                 }
                 // Respond to Control Panel requests
