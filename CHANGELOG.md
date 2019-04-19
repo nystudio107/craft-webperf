@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.8 - 2018.04.19
+### Changed
+* Fixed an issue where an empty **Exclude Patterns** table and the use of Project Config on Craft 3.1 or later could cause an exception to be thrown when a 404 is thrown
+* Fixed an issue where Webperf would fire during Live Preview when it shouldn't
+* Updated Twig namespacing to be compliant with deprecated class aliases in 2.7.x
+
 ## 1.0.7 - 2019-03-15
 ### Changed
 * Fixed a potential `Undefined property` in the MetricsController 
