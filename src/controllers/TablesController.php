@@ -608,7 +608,6 @@ class TablesController extends Controller
             ];
         }
 
-        Craft::error('crap: '.print_r($data, true), __METHOD__);
         return $this->asJson($data);
     }
 
