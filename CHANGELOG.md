@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.9 - 2018.04.23
+### Changed
+* Removed vestigial debugging code
+
 ## 1.0.8 - 2018.04.19
 ### Changed
 * Fixed an issue where an empty **Exclude Patterns** table and the use of Project Config on Craft 3.1 or later could cause an exception to be thrown when a 404 is thrown
