@@ -405,7 +405,6 @@ class ChartsController extends Controller
             $data[] = $craftErrors;
         }
 
-        Craft::error('poop: '.print_r($data, true), __METHOD__);
         return $this->asJson($data);
     }
 

@@ -29,6 +29,8 @@ class ErrorSamples extends Component
     // Constants
     // =========================================================================
 
+    const LAST_ERRORSAMPLES_TRIM_CACHE_KEY = 'webperf-last-errorsamples-trim';
+
     /**
      * @event ErrorSampleEvent The event that is triggered before the error sample is saved
      * You may set [[ErrorSampleEvent::isValid]] to `false` to prevent the error sample from getting saved.
@@ -207,7 +209,7 @@ class ErrorSamples extends Component
             // Trigger a 'afterSaveErrorSample' event
             $this->trigger(self::EVENT_AFTER_SAVE_ERROR_SAMPLE, $event);
             // After adding the ErrorSample, trim the webperf_error_samples db table
-            if (Webperf::$settings->automaticallyTrimErrorSamples) {
+            if (Webperf::$settings->automaticallyTrimErrorSamples && !$this->rateLimited()) {
                 $this->trimErrorSamples();
             }
         }
@@ -362,5 +364,28 @@ class ErrorSamples extends Component
         }
 
         return $affectedRows;
+    }
+
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Don't trim more than a given interval, so that performance is not affected
+     *
+     * @return bool
+     */
+    protected function rateLimited(): bool
+    {
+        $limited = false;
+        $now = round(microtime(true) * 1000);
+        $cache = Craft::$app->getCache();
+        $then = $cache->get(self::LAST_ERRORSAMPLES_TRIM_CACHE_KEY);
+        if (($then !== false) && ($now - (int)$then < Webperf::$settings->samplesRateLimitMs)) {
+            $limited = true;
+        }
+        $cache->set(self::LAST_ERRORSAMPLES_TRIM_CACHE_KEY, $now, 0);
+
+        return $limited;
     }
 }

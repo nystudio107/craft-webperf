@@ -29,6 +29,8 @@ class DataSamples extends Component
     // Constants
     // =========================================================================
 
+    const LAST_DATASAMPLES_TRIM_CACHE_KEY = 'webperf-last-datasamples-trim';
+
     const OUTLIER_PAGELOAD_MULTIPLIER = 10;
 
     /**
@@ -199,7 +201,7 @@ class DataSamples extends Component
         // Trim orphaned samples
         $this->trimOrphanedSamples($dataSample->requestId);
         // After adding the DataSample, trim the webperf_data_samples db table
-        if (Webperf::$settings->automaticallyTrimDataSamples) {
+        if (Webperf::$settings->automaticallyTrimDataSamples && !$this->rateLimited()) {
             $this->trimDataSamples();
         }
     }
@@ -407,5 +409,27 @@ class DataSamples extends Component
         }
 
         return $affectedRows;
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Don't trim more than a given interval, so that performance is not affected
+     *
+     * @return bool
+     */
+    protected function rateLimited(): bool
+    {
+        $limited = false;
+        $now = round(microtime(true) * 1000);
+        $cache = Craft::$app->getCache();
+        $then = $cache->get(self::LAST_DATASAMPLES_TRIM_CACHE_KEY);
+        if (($then !== false) && ($now - (int)$then < Webperf::$settings->samplesRateLimitMs)) {
+            $limited = true;
+        }
+        $cache->set(self::LAST_DATASAMPLES_TRIM_CACHE_KEY, $now, 0);
+
+        return $limited;
     }
 }

@@ -203,7 +203,6 @@ namespace nystudio107\webperf\controllers {
             $then = $cache->get(self::LAST_BEACON_CACHE_KEY);
             if (($then !== false) && ($now - (int)$then < Webperf::$settings->rateLimitMs)) {
                 $limited = true;
-                Craft::warning('Beacon ignored due to rate limiting', __METHOD__);
             }
             $cache->set(self::LAST_BEACON_CACHE_KEY, $now, 0);
 
