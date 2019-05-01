@@ -73,6 +73,11 @@ class Settings extends Model
     public $trimOutlierDataSamples = true;
 
     /**
+     * @var int The number of milliseconds required between trimming of data samples
+     */
+    public $samplesRateLimitMs = 3600000;
+
+    /**
      * @var int The number of milliseconds required between recording of frontend beacon data samples
      */
     public $rateLimitMs = 500;

@@ -33,7 +33,22 @@
         warning: configWarning("trimOutlierDataSamples", "webperf"),
         errors: settings.getErrors("trimOutlierDataSamples"),
     }) }}
-
+    
+    {{ forms.selectField({
+        label: "Sample Trimming Rate Limit"|t("webperf"),
+        instructions: "The amount of time required between trimming of data samples."|t("webperf"),
+        id: "samplesRateLimitMs",
+        name: "samplesRateLimitMs",
+        options: {
+            3600000: "Once per hour"|t("webperf"),
+            86400000: "Once per day"|t("webperf"),
+            604800000: "Once per week"|t("webperf"),
+        },
+        value: settings.samplesRateLimitMs,
+        warning: configWarning("samplesRateLimitMs", "webperf"),
+        errors: settings.getErrors("samplesRateLimitMs"),
+    }) }}
+    
     {{ forms.textField({
         label: "Rate Limit in ms"|t("webperf"),
         instructions: "The number of milliseconds required between recording of frontend beacon data samples."|t("webperf"),
