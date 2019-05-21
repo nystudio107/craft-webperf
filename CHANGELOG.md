@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.10 - 2018.05.21
+### Changed
+* Updated to the latest version of the beacon (Boomerang 1.650.0), which fixes some issues
+* Updated build system
+
 ## 1.0.9 - 2018.05.01
 ### Changed
 * Removed vestigial debugging code
