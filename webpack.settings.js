@@ -30,6 +30,11 @@ module.exports = {
     vars: {
         cssName: "styles"
     },
+    babelLoaderConfig: {
+        exclude: [
+            /(node_modules|bower_components)/
+        ],
+    },
     entries: {
         "alerts": "alerts.js",
         "dashboard": "dashboard.js",

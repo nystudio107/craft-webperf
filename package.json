@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "description": "Monitor the performance of your webpages through real-world user timing data",
     "keywords": [],
-    "homepage": "https://github.com/nystudio107/craft-webperf",
+    "homepage": "https://nystudio107.com/plugins/webperf",
     "bugs": {
         "email": "info@nystudio107.com",
-        "url": "https://github.com/nystudio107/craft-webperf/issues"
+        "url": "https://nystudio107.com/plugins/webperf/support"
     },
     "license": "SEE LICENSE IN LICENSE.md",
     "author": {
