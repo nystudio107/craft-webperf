@@ -89,10 +89,6 @@ class SectionsController extends Controller
                 'label' => $pluginName,
                 'url' => UrlHelper::cpUrl('webperf'),
             ],
-            [
-                'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/dashboard'.$siteHandleUri),
-            ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'dashboard';
@@ -150,10 +146,6 @@ class SectionsController extends Controller
             [
                 'label' => $pluginName,
                 'url' => UrlHelper::cpUrl('webperf'),
-            ],
-            [
-                'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -216,12 +208,6 @@ class SectionsController extends Controller
             [
                 'label' => Craft::t('webperf', 'Performance'),
                 'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
-            ],
-            [
-                'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/performance/page-detail'.$siteHandleUri, [
-                    'pageUrl' => $pageUrl
-                ]),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -286,10 +272,6 @@ class SectionsController extends Controller
                 'label' => $pluginName,
                 'url' => UrlHelper::cpUrl('webperf'),
             ],
-            [
-                'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
-            ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'errors';
@@ -351,12 +333,6 @@ class SectionsController extends Controller
                 'label' => Craft::t('webperf', 'Errors'),
                 'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
             ],
-            [
-                'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/errors/page-detail'.$siteHandleUri, [
-                    'pageUrl' => $pageUrl
-                ]),
-            ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'errors';
@@ -411,10 +387,6 @@ class SectionsController extends Controller
             [
                 'label' => $pluginName,
                 'url' => UrlHelper::cpUrl('webperf'),
-            ],
-            [
-                'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/alerts'.$siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
