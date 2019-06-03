@@ -66,6 +66,8 @@ As soon as you install Webperf, it automatically will add an asynchronous, non-b
 
 Once Webperf is installed, it needs to collect performance data samples from users visiting your website. So install it, and sit back and allow it to collect enough data samples to give you a picture of your website's performance.
 
+In case you are statically caching pages on your website, they will need to be purged in order for the Webperf iframe to be added to your code. This only needs to happen when Webperf is first installed.
+
 ### Minify
 
 If you have the [Minify](https://plugins.craftcms.com/minify) plugin installed, the JavaScript that loads the beacon will be automatically minified for you.
