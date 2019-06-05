@@ -13,7 +13,7 @@
                 >
                     {{ title }}
                 </a>
-                <span v-else class="text-grey-light"><em>Craft backend route</em></span>
+                <span v-else class="text-gray-300"><em>Craft backend route</em></span>
             </div>
             <div class="simple-bar-chart-value">
                 <sample-size-warning :sample="cnt">
@@ -37,7 +37,7 @@
             <div class="simple-bar-chart-value text-sm font-bold">{{ data }}</div>
         </div>
         <div class="py-1">
-            <div class="file-list-chart-track rounded-full bg-grey-lighter">
+            <div class="file-list-chart-track rounded-full bg-gray-200">
                 <div class="simple-bar-line h-2 rounded-full" :style="{ width: width + '%', backgroundColor: color }"></div>
             </div>
         </div>

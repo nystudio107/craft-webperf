@@ -1,11 +1,11 @@
 <template>
     <div class="simple-bar-chart-wrapper px-3 py-1">
         <div class="clearafter py-1">
-            <div class="simple-bar-chart-label text-sm font-bold text-grey-darker">{{ title }}</div>
-            <div class="simple-bar-chart-value text-sm font-bold text-grey-darker">{{ statFormatter(series[0]) }}</div>
+            <div class="simple-bar-chart-label text-sm font-bold text-gray-600">{{ title }}</div>
+            <div class="simple-bar-chart-value text-sm font-bold text-gray-600">{{ statFormatter(series[0]) }}</div>
         </div>
         <div class="py-1">
-            <div class="simple-bar-chart-track rounded-full bg-grey-light">
+            <div class="simple-bar-chart-track rounded-full bg-gray-300">
                 <div class="simple-bar-line h-1 rounded-full" :style="{ width: series[0] + '%', backgroundColor: barColor }"></div>
             </div>
         </div>
@@ -114,7 +114,9 @@
             this.getSeriesData();
         },
         mounted() {
-            this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
+            if (this.$events !== undefined) {
+                this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
+            }
         },
         data: function() {
             return {

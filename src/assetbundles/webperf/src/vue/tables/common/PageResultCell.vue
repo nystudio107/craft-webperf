@@ -13,7 +13,7 @@
                 >
                     {{ title }}
                 </a>
-                <span v-else class="text-grey-light"><em>Craft backend route</em></span>
+                <span v-else class="text-gray-300"><em>Craft backend route</em></span>
 
             </div>
         </div>
@@ -33,7 +33,7 @@
             </cite>
         </div>
         <div v-if="width" class="py-2">
-            <div class="simple-bar-chart-track rounded-full bg-grey-lighter">
+            <div class="simple-bar-chart-track rounded-full bg-gray-200">
                 <div class="simple-bar-line h-2 rounded-full" :style="{ width: width + '%', backgroundColor: color }"></div>
             </div>
         </div>

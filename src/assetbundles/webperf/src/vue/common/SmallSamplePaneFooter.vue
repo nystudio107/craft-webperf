@@ -95,7 +95,9 @@
             this.getSeriesData();
         },
         mounted() {
-            this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
+            if (this.$events !== undefined) {
+                this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
+            }
         },
         data: function() {
             return {
