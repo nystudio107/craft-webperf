@@ -103,7 +103,9 @@
             }
         },
         mounted() {
-            this.$events.$on('refresh-table-components', eventData => this.onTableRefresh(eventData));
+            if (this.$events !== undefined) {
+                this.$events.$on('refresh-table-components', eventData => this.onTableRefresh(eventData));
+            }
         },
         created() {
             this.calculateNodes();
