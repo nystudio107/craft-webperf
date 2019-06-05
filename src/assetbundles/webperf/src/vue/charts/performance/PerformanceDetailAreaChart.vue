@@ -86,6 +86,9 @@
                                         },
                                     },
                                 },
+                                xaxis: {
+                                    categories: data[0]['labels'],
+                                },
                                 labels: data[0]['labels']
                             }
                         };
@@ -123,6 +126,9 @@
                             enabled: false,
                         },
                     },
+                    dataLabels: {
+                        enabled: false,
+                    },
                     tooltip: {
                         enabled: true,
                         inverseOrder: true,
@@ -152,6 +158,7 @@
                         offsetY: -10,
                     },
                     xaxis: {
+                        type: 'category',
                         labels: {
                             show: false,
                             minHeight: '20px',
