@@ -5,6 +5,10 @@
  *
  */
 
+div.datepicker.flex.flex-direction-column {
+  right: 0;
+}
+
 .date-time-picker .flex > * {
   margin-bottom: 0;
 }

@@ -79,11 +79,23 @@
                         this.chartOptions = {
                             ...this.chartOptions, ...{
                                 yaxis: {
+                                    min: 0,
                                     max: largest,
                                     labels: {
                                         formatter: (val) => {
                                             return this.statFormatter(val);
                                         },
+                                    },
+                                },
+                                xaxis: {
+                                    categories: data[0]['labels'],
+                                    type: 'category',
+                                    labels: {
+                                        show: false,
+                                        minHeight: '20px',
+                                    },
+                                    crosshairs: {
+                                        width: 1
                                     },
                                 },
                                 labels: data[0]['labels']
@@ -123,6 +135,9 @@
                             enabled: false,
                         },
                     },
+                    dataLabels: {
+                        enabled: false,
+                    },
                     tooltip: {
                         enabled: true,
                         inverseOrder: true,
@@ -152,6 +167,7 @@
                         offsetY: -10,
                     },
                     xaxis: {
+                        type: 'category',
                         labels: {
                             show: false,
                             minHeight: '20px',
