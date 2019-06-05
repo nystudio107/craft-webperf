@@ -79,6 +79,7 @@
                         this.chartOptions = {
                             ...this.chartOptions, ...{
                                 yaxis: {
+                                    min: 0,
                                     max: largest,
                                     labels: {
                                         formatter: (val) => {
@@ -88,6 +89,14 @@
                                 },
                                 xaxis: {
                                     categories: data[0]['labels'],
+                                    type: 'category',
+                                    labels: {
+                                        show: false,
+                                        minHeight: '20px',
+                                    },
+                                    crosshairs: {
+                                        width: 1
+                                    },
                                 },
                                 labels: data[0]['labels']
                             }

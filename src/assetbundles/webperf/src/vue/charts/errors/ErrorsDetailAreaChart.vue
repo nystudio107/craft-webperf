@@ -80,12 +80,24 @@
                         this.chartOptions = {
                             ...this.chartOptions, ...{
                                 yaxis: {
+                                    min: 0,
                                     max: largest,
                                     tickAmount: largest > 10 ? 10 : largest,
                                     labels: {
                                         formatter: (val) => {
                                             return Math.round(val);
                                         },
+                                    },
+                                },
+                                xaxis: {
+                                    categories: data[0]['labels'],
+                                    type: 'category',
+                                    labels: {
+                                        show: false,
+                                        minHeight: '20px',
+                                    },
+                                    crosshairs: {
+                                        width: 1
                                     },
                                 },
                                 labels: data[0]['labels']
