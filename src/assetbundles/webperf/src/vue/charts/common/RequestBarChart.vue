@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-no-wrap">
         <div class="flex-shrink" v-if="rowData.type === 'both'" title="Combined Frontend & Craft Beacon">
-            <div class="w-2 h-2 bg-blue-300 rounded-full mb-1">
+            <div class="w-2 h-2 bg-blue-700 rounded-full mb-1">
             </div>
-            <div class="w-2 h-2 bg-orange-300 rounded-full">
+            <div class="w-2 h-2 bg-orange-700 rounded-full">
             </div>
         </div>
         <div class="flex-shrink" v-if="rowData.type === 'frontend'" title="Frontend Beacon only">
-            <div class="w-2 h-2 bg-blue-300 rounded-full mb-1">
+            <div class="w-2 h-2 bg-blue-700 rounded-full mb-1">
             </div>
             <div class="w-2 h-2 bg-transparent rounded-full">
             </div>
@@ -15,7 +15,7 @@
         <div class="flex-shrink" v-if="rowData.type === 'craft'" title="Craft Beacon only">
             <div class="w-2 h-2 bg-transparent rounded-full mb-1">
             </div>
-            <div class="w-2 h-2 bg-orange-300 rounded-full">
+            <div class="w-2 h-2 bg-orange-700 rounded-full">
             </div>
         </div>
         <div class="flex-grow">
@@ -39,12 +39,12 @@
     const requestBarGraphFields = [
         {
             column: 'pageLoad',
-            color: 'bg-blue-700',
+            color: 'bg-blue-200',
             label: 'Page Loaded',
         },
         {
             column: 'domInteractive',
-            color: 'bg-blue-600',
+            color: 'bg-blue-400',
             label: 'DOM Interactive',
         },
         {
@@ -54,12 +54,12 @@
         },
         {
             column: 'firstPaint',
-            color: 'bg-blue-300',
+            color: 'bg-blue-700',
             label: 'First Paint',
         },
         {
             column: 'firstByte',
-            color: 'bg-orange-600',
+            color: 'bg-orange-400',
             label: 'First Byte',
         },
         {
@@ -69,12 +69,12 @@
         },
         {
             column: 'dns',
-            color: 'bg-orange-300',
+            color: 'bg-orange-700',
             label: 'DNS Lookup',
         },
         {
             column: 'craftTotalMs',
-            color: 'bg-red-600',
+            color: 'bg-red-400',
             label: 'Craft Rendering',
         },
         {
@@ -84,7 +84,7 @@
         },
         {
             column: 'craftDbMs',
-            color: 'bg-red-300',
+            color: 'bg-red-700',
             label: 'Database Queries',
         },
     ];
