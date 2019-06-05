@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.11 - 2018.06.05
+### Changed
+* Fixed an issue where the sidebar preview would log JavaScript errors
+* Updated to Tailwind CSS `^1.0.0`
+* Updated to the latest ApexCharts, fixed issues due to changed APIs
+
 ## 1.0.10 - 2018.05.21
 ### Changed
 * Updated to the latest version of the beacon (Boomerang 1.650.0), which fixes some issues
