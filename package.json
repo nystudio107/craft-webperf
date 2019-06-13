@@ -57,7 +57,7 @@
         "@babel/register": "^7.0.0",
         "@babel/runtime": "^7.0.0",
         "babel-loader": "^8.0.2",
-        "clean-webpack-plugin": "^0.1.19",
+        "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^4.5.2",
         "css-loader": "^1.0.0",
         "cssnano": "^4.1.0",
@@ -104,7 +104,7 @@
     "dependencies": {
         "@babel/polyfill": "^7.0.0",
         "apexcharts": "^3.6.6",
-        "axios": "^0.18.0",
+        "axios": "^0.19.0",
         "boomerangjs": "^1.621.0",
         "tailwindcss": "^1.0.0",
         "vee-validate": "^2.1.7",
