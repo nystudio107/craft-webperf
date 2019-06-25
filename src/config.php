@@ -84,6 +84,12 @@ return [
         1 => [
             'pattern' => '/cpresources/.*',
         ],
+        2 => [
+            'pattern' => '/retour/.*',
+        ],
+        3 => [
+            'pattern' => '/seomatic/.*',
+        ],
     ],
 
     /**
