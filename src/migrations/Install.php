@@ -51,7 +51,7 @@ class Install extends Migration
         return true;
     }
 
-   /**
+    /**
      * @inheritdoc
      */
     public function safeDown()
@@ -150,12 +150,52 @@ class Install extends Migration
         );
         $this->createIndex(
             $this->db->getIndexName(
+                '{{%webperf_data_samples}}',
+                'dateCreated',
+                false
+            ),
+            '{{%webperf_data_samples}}',
+            'dateCreated',
+            false
+        );
+        $this->createIndex(
+            $this->db->getIndexName(
+                '{{%webperf_data_samples}}',
+                'requestId',
+                false
+            ),
+            '{{%webperf_data_samples}}',
+            'requestId',
+            false
+        );
+        $this->createIndex(
+            $this->db->getIndexName(
                 '{{%webperf_error_samples}}',
                 'url',
                 false
             ),
             '{{%webperf_error_samples}}',
             'url',
+            false
+        );
+        $this->createIndex(
+            $this->db->getIndexName(
+                '{{%webperf_error_samples}}',
+                'dateCreated',
+                false
+            ),
+            '{{%webperf_error_samples}}',
+            'dateCreated',
+            false
+        );
+        $this->createIndex(
+            $this->db->getIndexName(
+                '{{%webperf_error_samples}}',
+                'requestId',
+                false
+            ),
+            '{{%webperf_error_samples}}',
+            'requestId',
             false
         );
         // Additional commands depending on the db driver
