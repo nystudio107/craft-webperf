@@ -2,9 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.12 - 2018.06.27
+## 1.0.12 - 2018.06.25
 ### Changed
 * Added the frontend routes for `/retour` and `/seomatic/` to the default exclusino list
+* Added database indexes to improve performance
 
 ## 1.0.11 - 2018.06.05
 ### Changed
