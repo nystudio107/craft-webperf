@@ -1,7 +1,7 @@
 {% if headless is not defined or not headless %}
     var webperf_config = {
-        url: '{{ boomerangScriptUrl }}',
-        title: '{{ boomerangTitle }}' || document.title || '',
-        requestId: '{{ boomerangRequestId }}',
+        url: '{{ boomerangScriptUrl | escape("js") }}',
+        title: '{{ boomerangTitle | escape("js") }}' || document.title || '',
+        requestId: '{{ boomerangRequestId | escape("js") }}',
     };
 {% endif %}
