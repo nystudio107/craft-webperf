@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.13 - 2018.08.06
+### Changed
+* Updated assets build to update to the latest npm packages
+* Fixed a `bootstrap` error when viewing entries that had the Maps field in them, and the Webperf sidebar is visible
+
 ## 1.0.12 - 2018.06.25
 ### Changed
 * Fixed an issue where an error could be thrown rendering the Webperf Twig template if the title contained characters that need escaping in a JavaScript context
