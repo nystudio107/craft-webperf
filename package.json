@@ -107,6 +107,7 @@
         "axios": "^0.19.0",
         "boomerangjs": "^1.621.0",
         "core-js": "^3.0.0",
+        "regenerator-runtime": "^0.13.2",
         "tailwindcss": "^1.0.0",
         "vee-validate": "^2.1.7",
         "vue": "^2.5.17",
