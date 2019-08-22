@@ -4,7 +4,7 @@
 
 Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance
 
-![Screenshot](./docs/docs/resources/img/plugin-banner.jpg)
+![Screenshot](./resources/img/plugin-banner.jpg)
 
 **Note**: _The license fee for this plugin is $59.00 via the Craft Plugin Store._
 
@@ -27,17 +27,5 @@ To install the plugin, follow these instructions.
 3. Install the plugin via `./craft install/plugin webperf` via the CLI, or in the Control Panel, go to Settings → Plugins and click the “Install” button for Webperf.
 
 You can also install Webperf via the **Plugin Store** in the Craft Control Panel.
-
-## Documentation
-
-Click here -> [Webperf Documentation](https://nystudio107.com/plugins/webperf/documentation)
-
-## Webperf Roadmap
-
-Some things to do, and ideas for potential features:
-
-* User definable "Alerts" that can be consumed by the Webhooks plugin
-* Have the Recommendations be a type of "Alert"
-* Comparison of multiple periods side by side to show comparative performance
 
 Brought to you by [nystudio107](https://nystudio107.com)
