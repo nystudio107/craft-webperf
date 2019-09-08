@@ -59,6 +59,7 @@
                     end="{{ end }}"
                     page-url=""
                     :site-id="{{ currentSiteId }}"
+                    :api-url="'{{ actionUrl('webperf/charts/errors-area-chart') }}'"
             >
             </errors-detail-area-chart>
         </div>
@@ -66,12 +67,14 @@
             <h1 class="text-center text-base text-3xl font-bold">
                 {{ "Aggregate Page Errors"|t("webperf") }}
             </h1>
-            <errors-index-table :site-id="{{ currentSiteId }}"
-                               start="{{ start }}"
-                               end="{{ end }}"
-                               fast-color="{{ settings.dashboardFastColor }}"
-                               average-color="{{ settings.dashboardAverageColor }}"
-                               slow-color="{{ settings.dashboardSlowColor }}"
+            <errors-index-table
+                    :site-id="{{ currentSiteId }}"
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
+                    :api-url="'{{ actionUrl('webperf/tables/errors-index') }}'"
             >
             </errors-index-table>
         </div>

@@ -644,35 +644,25 @@ class Webperf extends Plugin
             // Render
             '/webperf/render/amp-iframe' => 'webperf/render/amp-iframe',
             // Tables
-            '/webperf/tables/pages-index' => 'webperf/tables/pages-index',
-            '/webperf/tables/page-detail' => 'webperf/tables/page-detail',
-            '/webperf/tables/errors-index' => 'webperf/tables/errors-index',
-            '/webperf/tables/errors-detail' => 'webperf/tables/errors-detail',
+            //'/webperf/tables/pages-index' => 'webperf/tables/pages-index',
+            //'/webperf/tables/page-detail' => 'webperf/tables/page-detail',
+            //'/webperf/tables/errors-index' => 'webperf/tables/errors-index',
+            //'/webperf/tables/errors-detail' => 'webperf/tables/errors-detail',
             // Charts
-            '/webperf/charts/dashboard-stats-average/<column:{handle}>'
-            => 'webperf/charts/dashboard-stats-average',
-            '/webperf/charts/dashboard-stats-average/<column:{handle}>/<siteId:\d+>'
-            => 'webperf/charts/dashboard-stats-average',
+            //'/webperf/charts/dashboard-stats-average/<column:{handle}>' => 'webperf/charts/dashboard-stats-average',
+            //'/webperf/charts/dashboard-stats-average/<column:{handle}>/<siteId:\d+>' => 'webperf/charts/dashboard-stats-average',
 
-            '/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>'
-            => 'webperf/charts/dashboard-slowest-pages',
-            '/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>/<siteId:\d+>'
-            => 'webperf/charts/dashboard-slowest-pages',
+            //'/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>' => 'webperf/charts/dashboard-slowest-pages',
+            //'/webperf/charts/dashboard-slowest-pages/<column:{handle}>/<limit:\d+>/<siteId:\d+>' => 'webperf/charts/dashboard-slowest-pages',
 
-            '/webperf/charts/pages-area-chart'
-            => 'webperf/charts/pages-area-chart',
-            '/webperf/charts/pages-area-chart/<siteId:\d+>'
-            => 'webperf/charts/pages-area-chart',
+            //'/webperf/charts/pages-area-chart' => 'webperf/charts/pages-area-chart',
+            //'/webperf/charts/pages-area-chart/<siteId:\d+>' => 'webperf/charts/pages-area-chart',
 
-            '/webperf/charts/errors-area-chart'
-            => 'webperf/charts/errors-area-chart',
-            '/webperf/charts/errors-area-chart/<siteId:\d+>'
-            => 'webperf/charts/errors-area-chart',
+            //'/webperf/charts/errors-area-chart' => 'webperf/charts/errors-area-chart',
+            //'/webperf/charts/errors-area-chart/<siteId:\d+>' => 'webperf/charts/errors-area-chart',
 
-            '/webperf/recommendations/list'
-            => 'webperf/recommendations/list',
-            '/webperf/recommendations/list/<siteId:\d+>'
-            => 'webperf/recommendations/list',
+            //'/webperf/recommendations/list' => 'webperf/recommendations/list',
+            //'/webperf/recommendations/list/<siteId:\d+>' => 'webperf/recommendations/list',
         ];
     }
     /**

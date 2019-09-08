@@ -35,6 +35,7 @@
                         slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="{{ settings.craftTotalMsThreshold }}"
                         :site-id="{{ currentSiteId }}"
+                        :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                 >
                 </radial-bar-chart>
             </div>
@@ -61,6 +62,7 @@
                             slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="{{ settings.craftDbMsThreshold }}"
                             :site-id="{{ currentSiteId }}"
+                            :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                     >
                     </simple-bar-chart>
                 </div>
@@ -84,6 +86,7 @@
                             slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="{{ settings.craftTwigMsThreshold }}"
                             :site-id="{{ currentSiteId }}"
+                            :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                     >
                     </simple-bar-chart>
                 </div>
@@ -107,6 +110,7 @@
                             slow-color="{{ settings.dashboardSlowColor }}"
                             :max-value="{{ settings.craftOtherMsThreshold }}"
                             :site-id="{{ currentSiteId }}"
+                            :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                     >
                     </simple-bar-chart>
                 </div>
@@ -123,6 +127,7 @@
                     :limit="3"
                     :max-value="{{ settings.craftTotalMsThreshold }}"
                     :site-id="{{ currentSiteId }}"
+                    :api-url="'{{ actionUrl('webperf/charts/dashboard-slowest-pages') }}'"
             >
             </dashboard-file-list>
         </div>
@@ -136,6 +141,7 @@
                 column="craftTotalMs"
                 :site-id="{{ currentSiteId }}"
                 :display-dev-mode-warning="{{ devModeWarning }}"
+                :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
         >
         </sample-pane-footer>
     </div>

@@ -86,6 +86,7 @@
                         page-url="{{ pageUrl }}"
                         :site-id="{{ currentSiteId }}"
                         :display-dev-mode-warning="{{ devModeWarning }}"
+                        :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                 >
                 </sample-pane-footer>
             </div>
@@ -98,6 +99,7 @@
                     end="{{ end }}"
                     page-url="{{ pageUrl }}"
                     :site-id="{{ currentSiteId }}"
+                    :api-url="'{{ actionUrl('webperf/charts/pages-area-chart') }}'"
             >
             </performance-detail-area-chart>
         </div>
@@ -124,10 +126,12 @@
 
         <div class="pane">
             <h1 class="text-center text-base text-3xl font-bold">{{ "Page Performance Data Samples"|t("webperf") }}</h1>
-            <performance-detail-table :site-id="{{ currentSiteId }}"
-                               start="{{ start }}"
-                               end="{{ end }}"
-                               page-url="{{ pageUrl }}"
+            <performance-detail-table
+                    :site-id="{{ currentSiteId }}"
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url="{{ pageUrl }}"
+                    :api-url="'{{ actionUrl('webperf/tables/page-detail') }}'"
             >
             </performance-detail-table>
         </div>

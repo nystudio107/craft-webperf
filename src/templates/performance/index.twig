@@ -57,6 +57,7 @@
                     end="{{ end }}"
                     page-url=""
                     :site-id="{{ currentSiteId }}"
+                    :api-url="'{{ actionUrl('webperf/charts/pages-area-chart') }}'"
             >
             </performance-detail-area-chart>
         </div>
@@ -66,13 +67,15 @@
 
         <div class="pane">
             <h1 class="text-center text-base text-3xl font-bold">Aggregate Page Performance Data Samples</h1>
-            <performance-index-table :site-id="{{ currentSiteId }}"
-                                     start="{{ start }}"
-                                     end="{{ end }}"
-                                     :max-value="{{ settings.pageLoadThreshold * 1000 }}"
-                                     fast-color="{{ settings.dashboardFastColor }}"
-                                     average-color="{{ settings.dashboardAverageColor }}"
-                                     slow-color="{{ settings.dashboardSlowColor }}"
+            <performance-index-table
+                    :site-id="{{ currentSiteId }}"
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    :max-value="{{ settings.pageLoadThreshold * 1000 }}"
+                    fast-color="{{ settings.dashboardFastColor }}"
+                    average-color="{{ settings.dashboardAverageColor }}"
+                    slow-color="{{ settings.dashboardSlowColor }}"
+                    :api-url="'{{ actionUrl('webperf/tables/pages-index') }}'"
             >
             </performance-index-table>
         </div>

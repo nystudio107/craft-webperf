@@ -35,6 +35,7 @@
                     slow-color="{{ settings.dashboardSlowColor }}"
                     :max-value="2"
                     :site-id="{{ currentSiteId }}"
+                    :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
             >
             </radial-bar-chart>
         </div>
@@ -60,6 +61,7 @@
                         slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
+                        :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                 >
                 </simple-bar-chart>
             </div>
@@ -84,6 +86,7 @@
                         slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
+                        :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                 >
                 </simple-bar-chart>
             </div>
@@ -108,6 +111,7 @@
                         slow-color="{{ settings.dashboardSlowColor }}"
                         :max-value="2"
                         :site-id="{{ currentSiteId }}"
+                        :api-url="'{{ actionUrl('webperf/charts/dashboard-stats-average') }}'"
                 >
                 </simple-bar-chart>
             </div>

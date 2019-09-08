@@ -22,8 +22,6 @@
     import TriBlendColor from '../../../js/tri-color-blend.js';
     import DashboardFileListCell from './DashboardFileListCell.vue';
 
-    const chartDataBaseUrl = '/webperf/charts/dashboard-slowest-pages/';
-
     // Configure the api endpoint
     const configureApi = (url) => {
         return {
@@ -35,19 +33,15 @@
     };
     // Query our API endpoint via an XHR GET
     const queryApi = (api, uri, params, callback) => {
-        let delimiter='?';
-        for (const key of Object.keys(params)) {
-            uri = uri + delimiter + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-            delimiter = '&';
-        }
-        api.get(uri
-        ).then((result) => {
-            if (callback) {
-                callback(result.data);
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
+        api.get(uri, {params: params})
+            .then((result) => {
+                if (callback) {
+                    callback(result.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     };
 
     // Our component exports
@@ -80,21 +74,23 @@
             siteId: {
                 type: Number,
                 default: 0,
-            }
+            },
+            apiUrl: {
+                type: String,
+                default: '',
+            },
         },
         methods: {
             // Load in our chart data asynchronously
             getSeriesData: async function() {
-                const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.column + '/' + this.limit;
-                if (this.siteId !== 0) {
-                    uri += '/' + this.siteId;
-                }
+                const chartsAPI = Axios.create(configureApi(this.apiUrl));
                 let params = {
+                    'column': this.column,
                     'start': this.displayStart,
                     'end': this.displayEnd,
+                    'siteId': this.siteId,
                 };
-                await queryApi(chartsAPI, uri, params, (data) => {
+                await queryApi(chartsAPI, '', params, (data) => {
                     data.forEach((element, index, array) => {
                         let val = element.avg / 1000;
                         let maxValue = this.maxValue;
