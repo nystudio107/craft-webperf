@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.14 - 2019.09.09
+### Changed
+* Replaced frontend api route with an actionUrl()
+
 ## 1.0.13 - 2018.08.07
 ### Changed
 * Updated assets build to update to the latest npm packages
