@@ -23,6 +23,7 @@
                         page-url="{{ pageUrl ?? '' }}"
                         :site-id="{{ currentSiteId ?? 0 }}"
                         :dev-mode-warning="{{ devModeWarning }}"
+                        :api-url="'{{ actionUrl('webperf/recommendations/list') }}'"
                 >
                 </recommendations-list>
             </div>

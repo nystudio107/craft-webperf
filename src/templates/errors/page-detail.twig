@@ -88,15 +88,18 @@
                     end="{{ end }}"
                     page-url="{{ pageUrl }}"
                     :site-id="{{ currentSiteId }}"
+                    :api-url="'{{ actionUrl('webperf/charts/errors-area-chart') }}'"
             >
             </errors-detail-area-chart>
         </div>
         <div class="pane">
             <h1 class="text-center text-base text-3xl font-bold">{{ "Page Errors Detail"|t("webperf") }}</h1>
-            <errors-detail-table :site-id="{{ currentSiteId }}"
-                               start="{{ start }}"
-                               end="{{ end }}"
-                               page-url="{{ pageUrl }}"
+            <errors-detail-table
+                    :site-id="{{ currentSiteId }}"
+                    start="{{ start }}"
+                    end="{{ end }}"
+                    page-url="{{ pageUrl }}"
+                    :api-url="'{{ actionUrl('webperf/tables/errors-detail') }}'"
             >
             </errors-detail-table>
         </div>

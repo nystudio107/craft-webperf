@@ -11,7 +11,7 @@
         </div>
         <div class="overflow-x-auto overflow-y-hidden">
             <vuetable ref="vuetable"
-                      api-url="/webperf/tables/page-detail"
+                      :api-url=apiUrl
                       :per-page="20"
                       :fields="fields"
                       :css="css"
@@ -99,7 +99,11 @@
             siteId: {
                 type: Number,
                 default: 0,
-            }
+            },
+            apiUrl: {
+                type: String,
+                default: '',
+            },
         },
         data: function() {
             return {

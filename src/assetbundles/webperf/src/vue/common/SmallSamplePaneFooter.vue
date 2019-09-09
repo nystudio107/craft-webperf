@@ -10,8 +10,6 @@
 <script>
     import Axios from 'axios';
 
-    const chartDataBaseUrl = '/webperf/charts/dashboard-stats-average/';
-
     // Configure the api endpoint
     const configureApi = (url) => {
         return {
@@ -23,19 +21,15 @@
     };
     // Query our API endpoint via an XHR GET
     const queryApi = (api, uri, params, callback) => {
-        let delimiter='?';
-        for (const key of Object.keys(params)) {
-            uri = uri + delimiter + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-            delimiter = '&';
-        }
-        api.get(uri
-        ).then((result) => {
-            if (callback) {
-                callback(result.data);
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
+        api.get(uri, {params: params})
+            .then((result) => {
+                if (callback) {
+                    callback(result.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     };
 
     // Our component exports
@@ -61,22 +55,24 @@
             siteId: {
                 type: Number,
                 default: 0,
-            }
+            },
+            apiUrl: {
+                type: String,
+                default: '',
+            },
         },
         methods: {
             // Load in our chart data asynchronously
             getSeriesData: async function() {
-                const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
-                let uri = this.column;
-                if (this.siteId !== 0) {
-                    uri += '/' + this.siteId;
-                }
+                const chartsAPI = Axios.create(configureApi(this.apiUrl));
                 let params = {
+                    'column': this.column,
                     'start': this.displayStart,
                     'end': this.displayEnd,
                     'pageUrl': this.pageUrl,
+                    'siteId': this.siteId,
                 };
-                await queryApi(chartsAPI, uri, params, (data) => {
+                await queryApi(chartsAPI, '', params, (data) => {
                     if (data.cnt !== undefined) {
                         this.samples = data.cnt;
                     }
