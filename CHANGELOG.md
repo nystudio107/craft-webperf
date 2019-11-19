@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.15 - 2019.11.19
+### Changed
+* Updated packages as per `npm audit fix`
+
 ## 1.0.14 - 2019.09.09
 ### Changed
 * Replaced frontend api route with an actionUrl()
