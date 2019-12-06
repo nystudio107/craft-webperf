@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.16 - 2019.12.06
+### Fixed
+* Fixed a low-impact SQL injection vulnerability
+
 ## 1.0.15 - 2019.11.19
 ### Changed
 * Updated packages as per `npm audit fix`
