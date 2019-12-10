@@ -31,6 +31,11 @@ class TablesController extends Controller
     // Constants
     // =========================================================================
 
+    const SORT_MAP = [
+        'DESC' => SORT_DESC,
+        'ASC' => SORT_ASC,
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -79,6 +84,8 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        $sortType = strtoupper($sortType);
+        $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -114,7 +121,7 @@ class TablesController extends Controller
             ;
         }
         $query
-            ->orderBy("[[{$sortField}]] {$sortType}")
+            ->orderBy([$sortField => $sortType])
             ->groupBy('url')
             ->limit($per_page)
         ;
@@ -234,6 +241,8 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        $sortType = strtoupper($sortType);
+        $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -254,7 +263,7 @@ class TablesController extends Controller
             ;
         }
         $query
-            ->orderBy("{$sortField} {$sortType}")
+            ->orderBy([$sortField => $sortType])
             ->limit($per_page)
         ;
         $stats = $query->all();
@@ -366,6 +375,8 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        $sortType = strtoupper($sortType);
+        $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
         $db = Craft::$app->getDb();
         // Query the db table
         $offset = ($page - 1) * $per_page;
@@ -405,7 +416,7 @@ class TablesController extends Controller
             ;
         }
         $query
-            ->orderBy("[[{$sortField}]] {$sortType}")
+            ->orderBy([$sortField => $sortType])
             ->groupBy('url')
             ->limit($per_page)
         ;
@@ -511,6 +522,8 @@ class TablesController extends Controller
                 list($sortField, $sortType) = explode('|', $sort);
             }
         }
+        $sortType = strtoupper($sortType);
+        $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -549,7 +562,7 @@ class TablesController extends Controller
             ;
         }
         $query
-            ->orderBy("{$sortField} {$sortType}")
+            ->orderBy([$sortField => $sortType])
             ->limit($per_page)
         ;
         $stats = $query->all();

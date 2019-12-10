@@ -97,6 +97,7 @@
         data: function() {
             return {
                 samples: 0,
+                displayStart: this.start,
                 displayEnd: this.end,
                 displayMaxValue: this.maxValue,
             }
