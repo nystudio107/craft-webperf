@@ -6,6 +6,7 @@
                                   :only-date="true"
                                   :no-value-to-custom-elem="true"
                                   :custom-shortcuts="customShortcuts"
+                                  shortcut="last365Days"
                                   label="Data Sample Date Range"
                                   format="YYYY-MM-DD"
                                   formatted="YYYY-MM-DD"
@@ -41,13 +42,13 @@
             return {
                 dateRange: {},
                 customShortcuts: [
-                    { label: 'Today', value: 'day', isSelected: false },
-                    { label: 'Yesterday', value: '-day', isSelected: false },
-                    { label: 'This Month', value: 'month', isSelected: false },
-                    { label: 'Last Month', value: '-month', isSelected: false },
-                    { label: 'This Year', value: 'year', isSelected: false },
-                    { label: 'Last Year', value: '-year', isSelected: false },
-                    { label: 'Last 365 days', value: 365, isSelected: true }
+                    { key: 'today', label: 'Today', value: 'day' },
+                    { key: 'yesterday', label: 'Yesterday', value: '-day' },
+                    { key: 'thisMonth', label: 'This Month', value: 'month' },
+                    { key: 'lastMonth', label: 'Last Month', value: '-month' },
+                    { key: 'thisYear', label: 'This Year', value: 'year' },
+                    { key: 'lastYear', label: 'Last Year', value: '-year' },
+                    { key: 'last365Days', label: 'Last 365 days', value: 365 }
                 ],
             }
         },
