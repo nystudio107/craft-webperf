@@ -18,6 +18,7 @@ use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 
@@ -34,6 +35,46 @@ class TablesController extends Controller
     const SORT_MAP = [
         'DESC' => SORT_DESC,
         'ASC' => SORT_ASC,
+    ];
+
+    const ALLOWED_PAGE_INDEX_SORT_FIELDS = [
+        'url',
+        'pageLoad',
+        'craftDbCnt',
+        'craftTwigCnt',
+        'craftOtherCnt',
+        'craftTotalMemory',
+        'cnt',
+    ];
+
+    const ALLOWED_PAGE_DETAIL_SORT_FIELDS = [
+        'dateCreated',
+        'pageLoad',
+        'craftDbCnt',
+        'craftTwigCnt',
+        'craftOtherCnt',
+        'craftTotalMemory',
+        'device',
+        'os',
+        'browser',
+        'countryCode',
+    ];
+
+    const ALLOWED_ERRORS_INDEX_SORT_FIELDS = [
+        'url',
+        'latestErrorDate',
+        'craftCount',
+        'boomerangCount',
+        'cnt',
+    ];
+
+    const ALLOWED_ERRORS_DETAIL_SORT_FIELDS = [
+        'dateCreated',
+        'pageErrors',
+        'device',
+        'os',
+        'browser',
+        'countryCode',
     ];
 
     // Protected Properties
@@ -60,6 +101,7 @@ class TablesController extends Controller
      *
      * @return Response
      * @throws ForbiddenHttpException
+     * @throws BadRequestHttpException
      */
     public function actionPagesIndex(
         string $start = '',
@@ -86,6 +128,10 @@ class TablesController extends Controller
         }
         $sortType = strtoupper($sortType);
         $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
+        // Validate untrusted data
+        if (!in_array($sortField, self::ALLOWED_PAGE_INDEX_SORT_FIELDS, true)) {
+            throw new BadRequestHttpException(Craft::t('webperf', 'Invalid sort field specified.'));
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -215,6 +261,7 @@ class TablesController extends Controller
      *
      * @return Response
      * @throws ForbiddenHttpException
+     * @throws BadRequestHttpException
      */
     public function actionPageDetail(
         string $start = '',
@@ -243,6 +290,10 @@ class TablesController extends Controller
         }
         $sortType = strtoupper($sortType);
         $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
+        // Validate untrusted data
+        if (!in_array($sortField, self::ALLOWED_PAGE_DETAIL_SORT_FIELDS, true)) {
+            throw new BadRequestHttpException(Craft::t('webperf', 'Invalid sort field specified.'));
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
@@ -351,6 +402,7 @@ class TablesController extends Controller
      *
      * @return Response
      * @throws ForbiddenHttpException
+     * @throws BadRequestHttpException
      */
     public function actionErrorsIndex(
         string $start = '',
@@ -377,6 +429,10 @@ class TablesController extends Controller
         }
         $sortType = strtoupper($sortType);
         $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
+        // Validate untrusted data
+        if (!in_array($sortField, self::ALLOWED_ERRORS_INDEX_SORT_FIELDS, true)) {
+            throw new BadRequestHttpException(Craft::t('webperf', 'Invalid sort field specified.'));
+        }
         $db = Craft::$app->getDb();
         // Query the db table
         $offset = ($page - 1) * $per_page;
@@ -496,6 +552,7 @@ class TablesController extends Controller
      *
      * @return Response
      * @throws ForbiddenHttpException
+     * @throws BadRequestHttpException
      */
     public function actionErrorsDetail(
         string $start = '',
@@ -524,6 +581,10 @@ class TablesController extends Controller
         }
         $sortType = strtoupper($sortType);
         $sortType = self::SORT_MAP[$sortType] ?? self::SORT_MAP['DESC'];
+        // Validate untrusted data
+        if (!in_array($sortField, self::ALLOWED_ERRORS_DETAIL_SORT_FIELDS, true)) {
+            throw new BadRequestHttpException(Craft::t('webperf', 'Invalid sort field specified.'));
+        }
         // Query the db table
         $offset = ($page - 1) * $per_page;
         $query = (new Query())
