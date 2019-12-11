@@ -160,5 +160,12 @@ return [
     'Threshold in seconds for the DNS metric, beyond which it will be considered slow.' => 'Threshold in seconds for the DNS metric, beyond which it will be considered slow.',
     'First Paint Threshold' => 'First Paint Threshold',
     'Threshold in seconds for the Page Loaded metric, beyond which it will be considered slow.' => 'Threshold in seconds for the Page Loaded metric, beyond which it will be considered slow.',
-    'Threshold in seconds for the Connect metric, beyond which it will be considered slow.' => 'Threshold in seconds for the Connect metric, beyond which it will be considered slow.'
+    'Threshold in seconds for the Connect metric, beyond which it will be considered slow.' => 'Threshold in seconds for the Connect metric, beyond which it will be considered slow.',
+    'Once per hour' => 'Once per hour',
+    'Once per day' => 'Once per day',
+    'Invalid sort field specified.' => 'Invalid sort field specified.',
+    'The amount of time required between trimming of data samples.' => 'The amount of time required between trimming of data samples.',
+    'Sample Trimming Rate Limit' => 'Sample Trimming Rate Limit',
+    'Tags' => 'Tags',
+    'Once per week' => 'Once per week'
 ];
