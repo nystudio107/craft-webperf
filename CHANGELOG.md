@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.18 - 2020.03.11
+### Fixed
+* Fixed an issue where outlier samples were not being properly trimmed due to the computed threshold being non-integral
+
 ## 1.0.17 - 2019.12.11
 ### Security
 * Throw an exception if an invalid sort field is passed into the controller methods, to eliminate a low-impact SQL injection vulnerability
