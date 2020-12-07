@@ -1,7 +1,4 @@
 {
-  "vendor.css": "css/vendor.css",
-  "vendor.js": "js/vendor.js",
-  "vendor.js.map": "js/vendor.js.map",
   "alerts.js": "js/alerts.js",
   "alerts.js.map": "js/alerts.js.map",
   "dashboard.js": "js/dashboard.js",
@@ -16,12 +13,11 @@
   "performance-index.js.map": "js/performance-index.js.map",
   "sidebar.js": "js/sidebar.js",
   "sidebar.js.map": "js/sidebar.js.map",
-  "styles.css": "css/styles.css",
-  "styles.js": "js/styles.js",
-  "styles.js.map": "js/styles.js.map",
   "webperf.js": "js/webperf.js",
+  "webperf.svg": "img/Webperf-icon.svg",
   "webperf.js.map": "js/webperf.js.map",
-  "css/styles.css.map": "css/styles.css.map",
-  "css/vendor.css.map": "css/vendor.css.map",
+  "runtime.js": "js/runtime.js",
+  "runtime.js.map": "js/runtime.js.map",
+  "styles.css": "css/styles.css",
   "img/Webperf-icon.svg": "img/Webperf-icon.svg"
 }
