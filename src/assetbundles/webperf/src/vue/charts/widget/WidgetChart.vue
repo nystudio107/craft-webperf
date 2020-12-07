@@ -7,7 +7,7 @@
     import Axios from 'axios';
     import ApexCharts from 'vue-apexcharts';
 
-    const chartDataBaseUrl = '/retour/charts/widget/';
+    const chartDataBaseUrl = '/webperf/charts/widget/';
 
     // Configure the api endpoint
     const configureApi = (url) => {

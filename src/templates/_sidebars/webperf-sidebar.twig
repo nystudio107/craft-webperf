@@ -4,11 +4,9 @@
 {% from 'webperf/_includes/macros.twig' import registerJsModules %}
 
 {{ craft.webperf.includeCssModule("styles.css", false) }}
-{{ craft.webperf.includeCssModule("vendor.css", false) }}
 
 {% set jsModules = [
-    'vendor.js',
-    'styles.js',
+    'runtime.js',
     'sidebar.js',
 ] %}
 {{ registerJsModules(jsModules) }}
