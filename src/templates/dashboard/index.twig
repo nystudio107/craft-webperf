@@ -16,6 +16,8 @@
 
 {% import "_includes/forms" as forms %}
 
+{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+
 {% block contextMenu %}
     {% include "webperf/_includes/sites-menu.twig" with {'params': {}} %}
 {% endblock %}
@@ -83,7 +85,12 @@
         {# -- Recommendations -- #}
         {% include "webperf/_includes/recommendations.twig" %}
     </div>
-    {# include our JavaScript modules #}
+{% endblock %}
+
+{% block foot %}
     {{ parent() }}
-    {{ craft.webperf.includeJsModule("dashboard.js", false) }}
+    {% set jsModules = [
+        'dashboard.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}

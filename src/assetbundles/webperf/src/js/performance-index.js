@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import VueEvents from 'vue-events';
 import PerformanceIndexTable from '../vue/tables/performance/PerformanceIndexTable.vue';
 import SampleRangePicker from '../vue/common/SampleRangePicker.vue';

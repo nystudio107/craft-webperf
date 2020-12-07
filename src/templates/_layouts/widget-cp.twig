@@ -1,7 +1,16 @@
+{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+
 {% block head %}
-    {{ craft.webperf.includeJsModule("vendor.js", false) }}
-    {{ craft.webperf.includeJsModule("webperf.js", false) }}
 {% endblock %}
 
 {% block content %}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'runtime.js',
+        'webperf.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}

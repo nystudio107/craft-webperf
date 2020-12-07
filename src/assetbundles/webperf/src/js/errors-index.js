@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import VueEvents from 'vue-events';
 import ErrorsIndexTable from '../vue/tables/Errors/ErrorsIndexTable.vue';
 import SampleRangePicker from '../vue/common/SampleRangePicker.vue';

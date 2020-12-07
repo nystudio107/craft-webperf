@@ -31,7 +31,7 @@
     </style>
     <input type="hidden" name="action" value="webperf/sections/save-alerts">
     {{ csrfInput() }}
-    {{ redirectInput("retour/redirects") }}
+    {{ redirectInput("webperf/alerts") }}
 
     <div id="cp-nav-content" v-cloak>
         <div class="pane">
@@ -42,7 +42,12 @@
             {% endif %}
         </div>
     </div>
-    {# include our JavaScript modules #}
+{% endblock %}
+
+{% block foot %}
     {{ parent() }}
-    {{ craft.webperf.includeJsModule("alerts.js", false) }}
+    {% set jsModules = [
+        'alerts.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}

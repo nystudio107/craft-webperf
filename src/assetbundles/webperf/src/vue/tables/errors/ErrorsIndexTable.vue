@@ -62,7 +62,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import FieldDefs from './ErrorsIndexFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
     import VueTablePagination from '../common/VuetablePagination.vue';

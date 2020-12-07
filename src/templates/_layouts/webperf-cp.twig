@@ -1,10 +1,17 @@
 {% extends "_layouts/cp" %}
 
+{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+
 {% block head %}
     {{ parent() }}
     {{ craft.webperf.includeCssModule("styles.css") }}
-    {{ craft.webperf.includeCssModule("vendor.css") }}
-    {{ craft.webperf.includeJsModule("styles.js", false) }}
-    {{ craft.webperf.includeJsModule("vendor.js", false) }}
-    {{ craft.webperf.includeJsModule("webperf.js", false) }}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
+    {% set jsModules = [
+        'runtime.js',
+        'webperf.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}
