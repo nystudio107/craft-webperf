@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://webperf/../src/assetbundles/webperf/src/img/Webperf-icon.svg"],"names":[],"mappings":";;;;;;;;uGAAe,M","file":"js/webperf.js","sourcesContent":["export default __webpack_public_path__ + \"img/Webperf-icon.svg\";"],"sourceRoot":""}
