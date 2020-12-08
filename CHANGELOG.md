@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.19 - UNRELEASED
+### Changed
+* Moved the CSS/JS buildchain over to webpack 5
+* Updated to latest npm deps
+
 ## 1.0.18 - 2020.03.11
 ### Fixed
 * Fixed an issue where outlier samples were not being properly trimmed due to the computed threshold being non-integral
