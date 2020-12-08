@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.19 - UNRELEASED
+## 1.0.19 - 2020.12.08
 ### Changed
 * Moved the CSS/JS buildchain over to webpack 5
 * Updated to latest npm deps
