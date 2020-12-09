@@ -2,7 +2,7 @@ module.exports = {
     title: 'Webperf Documentation',
     description: 'Documentation for the Webperf plugin',
     base: '/docs/webperf/',
-    dest: '../../../../sites/nystudio107/web/docs/webperf',
+    dest: '../../../sites/nystudio107/web/docs/webperf',
     themeConfig: {
         displayAllHeaders: true,
         sidebar: [

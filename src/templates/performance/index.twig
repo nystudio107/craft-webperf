@@ -16,6 +16,8 @@
 
 {% import "_includes/forms" as forms %}
 
+{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+
 {% block contextMenu %}
     {% include "webperf/_includes/sites-menu.twig" with {'params': {}} %}
 {% endblock %}
@@ -80,7 +82,12 @@
             </performance-index-table>
         </div>
     </div>
-    {# include our JavaScript modules #}
+{% endblock %}
+
+{% block foot %}
     {{ parent() }}
-    {{ craft.webperf.includeJsModule("performance-index.js", false) }}
+    {% set jsModules = [
+        'performance-index.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}

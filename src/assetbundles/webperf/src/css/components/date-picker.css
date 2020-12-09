@@ -14,7 +14,6 @@ div.datepicker.flex.flex-direction-column {
 }
 
 .date-time-picker .flex {
-  align-items: normal;
   flex-wrap: nowrap;
 }
 

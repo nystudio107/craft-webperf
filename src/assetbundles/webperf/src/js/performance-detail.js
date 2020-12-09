@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import VueEvents from 'vue-events';
 import PerformanceDetailAreaChart from '../vue/charts/performance/PerformanceDetailAreaChart.vue';
 import PerformanceDetailTable from '../vue/tables/performance/PerformanceDetailTable.vue';

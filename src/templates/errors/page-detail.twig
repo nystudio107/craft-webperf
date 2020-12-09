@@ -16,6 +16,8 @@
 
 {% import "_includes/forms" as forms %}
 
+{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+
 {% block contextMenu %}
     {% include "webperf/_includes/sites-menu.twig" with {'params': {'pageUrl': pageUrl}} %}
 {% endblock %}
@@ -104,7 +106,12 @@
             </errors-detail-table>
         </div>
     </div>
-    {# include our JavaScript modules #}
+{% endblock %}
+
+{% block foot %}
     {{ parent() }}
-    {{ craft.webperf.includeJsModule("errors-detail.js", false) }}
+    {% set jsModules = [
+        'errors-detail.js',
+    ] %}
+    {{ registerJsModules(jsModules) }}
 {% endblock %}

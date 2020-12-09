@@ -1,3 +1,3 @@
 // Import our CSS
-import styles from '../css/app.pcss';
-import icon from '../img/Webperf-icon.svg';
+import '../css/app.pcss';
+import '../img/Webperf-icon.svg';

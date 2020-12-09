@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import VueEvents from 'vue-events';
 import ErrorsDetailAreaChart from '../vue/charts/Errors/ErrorsDetailAreaChart.vue';
 import ErrorsDetailTable from '../vue/tables/Errors/ErrorsDetailTable.vue';

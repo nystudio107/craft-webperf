@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import VueEvents from 'vue-events';
 import Confetti from '../vue/common/Confetti.vue';
 import RadialBarChart from '../vue/charts/common/RadialBarChart.vue';
