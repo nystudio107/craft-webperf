@@ -4,6 +4,7 @@
 
 {% block head %}
     {{ parent() }}
+    {{ craft.webperf.includeCssModule("vendors.css") }}
     {{ craft.webperf.includeCssModule("styles.css") }}
 {% endblock %}
 
@@ -11,6 +12,8 @@
     {{ parent() }}
     {% set jsModules = [
         'runtime.js',
+        'vendors.js',
+        'commons.js',
         'webperf.js',
     ] %}
     {{ registerJsModules(jsModules) }}
