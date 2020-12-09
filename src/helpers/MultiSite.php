@@ -254,7 +254,7 @@ class MultiSite
      *
      * @return string|null
      */
-    protected static function getBaseUrl(Site $site): string
+    protected static function getBaseUrl(Site $site)
     {
         if ($site->baseUrl) {
             return rtrim(self::parseEnv($site->baseUrl), '/') . '/';
