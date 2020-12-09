@@ -18,6 +18,11 @@
   "webperf.js.map": "js/webperf.js.map",
   "runtime.js": "js/runtime.js",
   "runtime.js.map": "js/runtime.js.map",
+  "vendors.css": "css/vendors.css",
+  "vendors.js": "js/vendors.js",
+  "vendors.js.map": "js/vendors.js.map",
   "styles.css": "css/styles.css",
+  "commons.js": "js/commons.js",
+  "commons.js.map": "js/commons.js.map",
   "img/Webperf-icon.svg": "img/Webperf-icon.svg"
 }

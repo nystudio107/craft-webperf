@@ -10,6 +10,8 @@
     {{ parent() }}
     {% set jsModules = [
         'runtime.js',
+        'vendors.js',
+        'commons.js',
         'webperf.js',
     ] %}
     {{ registerJsModules(jsModules) }}
