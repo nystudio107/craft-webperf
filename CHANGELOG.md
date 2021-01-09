@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.20 - UNRELEASED
+### Changed
+* Updated Axios to `^0.21.1`
+
 ## 1.0.19 - 2020.12.09
 ### Changed
 * Moved the CSS/JS buildchain over to webpack 5
