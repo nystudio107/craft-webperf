@@ -26,11 +26,11 @@ class RecommendationDataSample extends FluentModel
     // =========================================================================
 
     use CraftDataSampleTrait {
-        rules as craftRules;
+        CraftDataSampleTrait::rules as craftRules;
     }
 
     use BoomerangDataSampleTrait {
-        rules as boomerangRules;
+        BoomerangDataSampleTrait::rules as boomerangRules;
     }
 
     // Public Properties
