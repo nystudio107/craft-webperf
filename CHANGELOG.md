@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 * Updated Axios to `^0.21.1`
 
+### Fixed
+* Fixed an incompatibility with PHP 8 caused by trait aliases not being fully qualified
+
 ## 1.0.19 - 2020.12.09
 ### Changed
 * Moved the CSS/JS buildchain over to webpack 5
