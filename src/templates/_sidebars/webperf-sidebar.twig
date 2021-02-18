@@ -1,17 +1,17 @@
 {% do view.registerAssetBundle("nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/webperf/assetbundles/webperf/dist', true) %}
 
-{% from 'webperf/_includes/macros.twig' import registerJsModules %}
+{{ craft.webperf.registerCssModules([
+    'vendors.css',
+    'styles.css',
+]) }}
 
-{{ craft.webperf.includeCssModule("styles.css", false) }}
-
-{% set jsModules = [
+{{ craft.webperf.registerJsModules([
     'runtime.js',
     'vendors.js',
     'commons.js',
     'sidebar.js',
-] %}
-{{ registerJsModules(jsModules) }}
+]) }}
 
 <hr />
 <div class="meta overflow-hidden">

@@ -46,8 +46,7 @@
 
 {% block foot %}
     {{ parent() }}
-    {% set jsModules = [
+    {{ craft.webperf.registerJsModules([
         'alerts.js',
-    ] %}
-    {{ registerJsModules(jsModules) }}
+    ]) }}
 {% endblock %}
