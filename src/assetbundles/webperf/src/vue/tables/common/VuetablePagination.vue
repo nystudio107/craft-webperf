@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import PaginationMixin from './VuetablePaginationMixin.vue'
+import PaginationMixin from '@vue/tables/common/VuetablePaginationMixin.vue'
 
 export default {
   mixins: [PaginationMixin],

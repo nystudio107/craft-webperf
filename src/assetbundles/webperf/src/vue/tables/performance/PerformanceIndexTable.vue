@@ -52,15 +52,15 @@
 </template>
 
 <script>
-    import FieldDefs from './PerformanceIndexFieldDefs.js';
+    import FieldDefs from '@vue/tables/performance/PerformanceIndexFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
-    import VueTablePagination from '../common/VuetablePagination.vue';
-    import VueTablePaginationInfo from '../common/VuetablePaginationInfo.vue';
-    import VueTableFilterBar from '../common/VuetableFilterBar.vue';
-    import TriBlendColor from '../../../js/tri-color-blend.js';
-    import RequestBarChart from '../../charts/common/RequestBarChart.vue';
-    import PageResultCell from '../common/PageResultCell.vue';
-    import SampleSizeWarning from '../../common/SampleSizeWarning.vue';
+    import VueTablePagination from '@vue/tables/common/VuetablePagination.vue';
+    import VueTablePaginationInfo from '@vue/tables/common/VuetablePaginationInfo.vue';
+    import VueTableFilterBar from '@vue/tables/common/VuetableFilterBar.vue';
+    import TriBlendColor from '@js/tri-color-blend.js';
+    import RequestBarChart from '@vue/charts/common/RequestBarChart.vue';
+    import PageResultCell from '@vue/tables/common/PageResultCell.vue';
+    import SampleSizeWarning from '@vue/common/SampleSizeWarning.vue';
 
     // Our component exports
     export default {

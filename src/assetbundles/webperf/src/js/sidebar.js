@@ -1,6 +1,6 @@
-import SmallRadialBarChart from '../vue/charts/common/SmallRadialBarChart.vue';
-import SmallSimpleBarChart from '../vue/charts/common/SmallSimpleBarChart.vue';
-import SmallSamplePaneFooter from '../vue/common/SmallSamplePaneFooter.vue';
+import SmallRadialBarChart from '@vue/charts/common/SmallRadialBarChart.vue';
+import SmallSimpleBarChart from '@vue/charts/common/SmallSimpleBarChart.vue';
+import SmallSamplePaneFooter from '@vue/common/SmallSamplePaneFooter.vue';
 
 // Create our vue instance
 const vm = new Vue({

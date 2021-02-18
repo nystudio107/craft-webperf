@@ -58,16 +58,16 @@
 </template>
 
 <script>
-    import FieldDefs from './ErrorsDetailFieldDefs.js';
+    import FieldDefs from '@vue/tables/errors/ErrorsDetailFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
-    import VueTablePagination from '../common/VuetablePagination.vue';
-    import VueTablePaginationInfo from '../common/VuetablePaginationInfo.vue';
-    import VueTableFilterBar from '../common/VuetableFilterBar.vue';
-    import RequestBarChart from '../../charts/common/RequestBarChart.vue';
-    import PageResultCell from '../common/PageResultCell.vue';
-    import DataSampleDate from '../common/DataSampleDate.vue';
-    import DataSampleDevice from '../common/DataSampleDevice.vue';
-    import ErrorSample from './ErrorSample.vue';
+    import VueTablePagination from '@vue/tables/common/VuetablePagination.vue';
+    import VueTablePaginationInfo from '@vue/tables/common/VuetablePaginationInfo.vue';
+    import VueTableFilterBar from '@vue/tables/common/VuetableFilterBar.vue';
+    import RequestBarChart from '@vue/charts/common/RequestBarChart.vue';
+    import PageResultCell from '@vue/tables/common/PageResultCell.vue';
+    import DataSampleDate from '@vue/tables/common/DataSampleDate.vue';
+    import DataSampleDevice from '@vue/tables/common/DataSampleDevice.vue';
+    import ErrorSample from '@vue/tables/errors/ErrorSample.vue';
 
     // Our component exports
     export default {

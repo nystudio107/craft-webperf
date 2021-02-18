@@ -62,14 +62,14 @@
 </template>
 
 <script>
-    import FieldDefs from './ErrorsIndexFieldDefs.js';
+    import FieldDefs from '@vue/tables/errors/ErrorsIndexFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
-    import VueTablePagination from '../common/VuetablePagination.vue';
-    import VueTablePaginationInfo from '../common/VuetablePaginationInfo.vue';
-    import VueTableFilterBar from '../common/VuetableFilterBar.vue';
-    import PageResultCell from '../common/PageResultCell.vue';
-    import DataSampleDate from '../common/DataSampleDate.vue';
-    import ErrorWarning from '../../common/ErrorWarning.vue';
+    import VueTablePagination from '@vue/tables/common/VuetablePagination.vue';
+    import VueTablePaginationInfo from '@vue/tables/common/VuetablePaginationInfo.vue';
+    import VueTableFilterBar from '@vue/tables/common/VuetableFilterBar.vue';
+    import PageResultCell from '@vue/tables/common/PageResultCell.vue';
+    import DataSampleDate from '@vue/tables/common/DataSampleDate.vue';
+    import ErrorWarning from '@vue/common/ErrorWarning.vue';
 
     // Our component exports
     export default {

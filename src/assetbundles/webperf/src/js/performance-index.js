@@ -1,8 +1,8 @@
 import VueEvents from 'vue-events';
-import PerformanceIndexTable from '../vue/tables/performance/PerformanceIndexTable.vue';
-import SampleRangePicker from '../vue/common/SampleRangePicker.vue';
-import PerformanceDetailAreaChart from '../vue/charts/performance/PerformanceDetailAreaChart.vue';
-import RecommendationsList from '../vue/common/RecommendationsList.vue';
+import PerformanceIndexTable from '@vue/tables/performance/PerformanceIndexTable.vue';
+import SampleRangePicker from '@vue/common/SampleRangePicker.vue';
+import PerformanceDetailAreaChart from '@vue/charts/performance/PerformanceDetailAreaChart.vue';
+import RecommendationsList from '@vue/common/RecommendationsList.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
