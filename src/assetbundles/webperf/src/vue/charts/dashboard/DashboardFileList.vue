@@ -19,8 +19,8 @@
 
 <script>
     import Axios from 'axios';
-    import TriBlendColor from '@js/tri-color-blend.js';
-    import DashboardFileListCell from '@vue/charts/dashboard/DashboardFileListCell.vue';
+    import TriBlendColor from '@/js/tri-color-blend.js';
+    import DashboardFileListCell from '@/vue/charts/dashboard/DashboardFileListCell.vue';
 
     // Configure the api endpoint
     const configureApi = (url) => {

@@ -6,7 +6,7 @@
 <script>
     import Axios from 'axios';
     import ApexCharts from 'vue-apexcharts';
-    import TriBlendColor from '@js/tri-color-blend.js';
+    import TriBlendColor from '@/js/tri-color-blend.js';
 
     // Configure the api endpoint
     const configureApi = (url) => {

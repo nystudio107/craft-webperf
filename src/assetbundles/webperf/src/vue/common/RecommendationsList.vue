@@ -33,7 +33,7 @@
 
 <script>
     import Axios from 'axios';
-    import SamplePaneFooter from '@vue/common/SamplePaneFooter.vue';
+    import SamplePaneFooter from '@/vue/common/SamplePaneFooter.vue';
 
     // Configure the api endpoint
     const configureApi = (url) => {

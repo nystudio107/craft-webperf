@@ -6,7 +6,7 @@
                                       infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="paginationTop"
-                                 @vuetable-pagination:change-page="onChangePage"
+                                 @/vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
         <div class="overflow-x-auto overflow-y-hidden">
@@ -17,9 +17,9 @@
                       :css="css"
                       :sort-order="sortOrder"
                       :append-params="moreParams"
-                      @vuetable:pagination-data="onPaginationData"
-                      @vuetable:row-clicked="onRowClicked"
-                      @vuetable:loaded="onLoaded"
+                      @/vuetable:pagination-data="onPaginationData"
+                      @/vuetable:row-clicked="onRowClicked"
+                      @/vuetable:loaded="onLoaded"
             >
                 <template slot="page-listing-display" slot-scope="props">
                     <page-result-cell :title="props.rowData.title"
@@ -55,21 +55,21 @@
                                       infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="pagination"
-                                 @vuetable-pagination:change-page="onChangePage"
+                                 @/vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
     </div>
 </template>
 
 <script>
-    import FieldDefs from '@vue/tables/errors/ErrorsIndexFieldDefs.js';
+    import FieldDefs from '@/vue/tables/errors/ErrorsIndexFieldDefs.js';
     import VueTable from 'vuetable-2/src/components/Vuetable.vue';
-    import VueTablePagination from '@vue/tables/common/VuetablePagination.vue';
-    import VueTablePaginationInfo from '@vue/tables/common/VuetablePaginationInfo.vue';
-    import VueTableFilterBar from '@vue/tables/common/VuetableFilterBar.vue';
-    import PageResultCell from '@vue/tables/common/PageResultCell.vue';
-    import DataSampleDate from '@vue/tables/common/DataSampleDate.vue';
-    import ErrorWarning from '@vue/common/ErrorWarning.vue';
+    import VueTablePagination from '@/vue/tables/common/VuetablePagination.vue';
+    import VueTablePaginationInfo from '@/vue/tables/common/VuetablePaginationInfo.vue';
+    import VueTableFilterBar from '@/vue/tables/common/VuetableFilterBar.vue';
+    import PageResultCell from '@/vue/tables/common/PageResultCell.vue';
+    import DataSampleDate from '@/vue/tables/common/DataSampleDate.vue';
+    import ErrorWarning from '@/vue/common/ErrorWarning.vue';
 
     // Our component exports
     export default {

@@ -34,7 +34,7 @@
     </div>
 </template>
 <script>
-    import RequestBarRecursive from '@vue/charts/common/RequestBarRecursive.vue';
+    import RequestBarRecursive from '@/vue/charts/common/RequestBarRecursive.vue';
 
     const requestBarGraphFields = [
         {
