@@ -1,6 +1,6 @@
 # Webperf Changelog
 
-## 1.1.21 - UNRELEASED
+## 1.1.21 - 2021.02.24
 ### Added
 * Added support for both 8.x and 9.x versions of `league/csv` for peer compatibility
 
