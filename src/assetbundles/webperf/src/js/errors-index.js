@@ -1,7 +1,7 @@
 import VueEvents from 'vue-events';
-import ErrorsIndexTable from '../vue/tables/Errors/ErrorsIndexTable.vue';
-import SampleRangePicker from '../vue/common/SampleRangePicker.vue';
-import ErrorsDetailAreaChart from '../vue/charts/Errors/ErrorsDetailAreaChart.vue';
+import ErrorsIndexTable from '@/vue/tables/Errors/ErrorsIndexTable.vue';
+import SampleRangePicker from '@/vue/common/SampleRangePicker.vue';
+import ErrorsDetailAreaChart from '@/vue/charts/Errors/ErrorsDetailAreaChart.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance

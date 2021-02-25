@@ -2,26 +2,28 @@
 
 // node modules
 require('dotenv').config();
+const path = require('path');
 
 // settings
 module.exports = {
     alias: {
+        '@': path.resolve('../src/assetbundles/webperf/src'),
     },
     copyright: '©2020 nystudio107.com',
     entry: {
-        'alerts': '../src/assetbundles/webperf/src/js/alerts.js',
-        'dashboard': '../src/assetbundles/webperf/src/js/dashboard.js',
-        'errors-detail': '../src/assetbundles/webperf/src/js/errors-detail.js',
-        'errors-index': '../src/assetbundles/webperf/src/js/errors-index.js',
-        'performance-detail': '../src/assetbundles/webperf/src/js/performance-detail.js',
-        'performance-index': '../src/assetbundles/webperf/src/js/performance-index.js',
-        'sidebar': '../src/assetbundles/webperf/src/js/sidebar.js',
-        'webperf': '../src/assetbundles/webperf/src/js/webperf.js',
+        'alerts': '@/js/alerts.js',
+        'dashboard': '@/js/dashboard.js',
+        'errors-detail': '@/js/errors-detail.js',
+        'errors-index': '@/js/errors-index.js',
+        'performance-detail': '@/js/performance-detail.js',
+        'performance-index': '@/js/performance-index.js',
+        'sidebar': '@/js/sidebar.js',
+        'webperf': '@/js/webperf.js',
     },
     extensions: ['.ts', '.js', '.vue', '.json'],
     name: 'webperf',
     paths: {
-        dist: '../../src/assetbundles/webperf/dist/',
+        dist: path.resolve('../src/assetbundles/webperf/dist/'),
     },
     urls: {
         publicPath: () => process.env.PUBLIC_PATH || '',
