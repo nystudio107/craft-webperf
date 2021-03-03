@@ -23,6 +23,8 @@ use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\Recommendations as RecommendationsService;
 use nystudio107\webperf\variables\WebperfVariable;
 
+use nystudio107\pluginmanifest\services\ManifestService;
+
 use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
@@ -47,12 +49,13 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property  RecommendationsService  $recommendations
- * @property  DataSamplesService      $dataSamples
- * @property  ErrorSamplesService     $errorSamples
- * @property  BeaconsService          $beacons
- * @property  ErrorsTarget            $errorsTarget
- * @property  ProfileTarget           $profileTarget
+ * @property RecommendationsService  $recommendations
+ * @property DataSamplesService      $dataSamples
+ * @property ErrorSamplesService     $errorSamples
+ * @property BeaconsService          $beacons
+ * @property ErrorsTarget            $errorsTarget
+ * @property ProfileTarget           $profileTarget
+ * @property ManifestService         $manifest
  */
 class Webperf extends Plugin
 {
@@ -347,6 +350,14 @@ class Webperf extends Plugin
      */
     protected function installGlobalEventListeners()
     {
+        // Register the manifest service
+        $this->set('manifest', [
+            'class' => ManifestService::class,
+            'assetClass' => WebperfAsset::class,
+            'devServerManifestPath' => 'http://webperf-buildchain:8080/',
+            'devServerPublicPath' => 'http://webperf-buildchain:8080/',
+        ]);
+
         // Handler: CraftVariable::EVENT_INIT
         Event::on(
             CraftVariable::class,
@@ -354,7 +365,10 @@ class Webperf extends Plugin
             function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
-                $variable->set('webperf', WebperfVariable::class);
+                $variable->set('webperf', [
+                    'class' => WebperfVariable::class,
+                    'manifestService' => $this->manifest,
+                ]);
             }
         );
         // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
