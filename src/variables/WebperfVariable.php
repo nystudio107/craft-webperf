@@ -12,6 +12,8 @@ namespace nystudio107\webperf\variables;
 
 use nystudio107\webperf\Webperf;
 
+use nystudio107\pluginmanifest\variables\ManifestVariable;
+
 /**
  * @author    nystudio107
  * @package   Webperf
