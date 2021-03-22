@@ -1,5 +1,9 @@
 # Webperf Changelog
 
+## 1.1.23 - UNRELEASED
+### Changed
+* More consistent `makefile` build commands
+
 ## 1.1.22 - 2021.03.03
 ### Changed
 * Dockerized the buildchain, using `craft-plugin-manifest` for the webpack HMR bridge
