@@ -354,8 +354,8 @@ class Webperf extends Plugin
         $this->set('manifest', [
             'class' => ManifestService::class,
             'assetClass' => WebperfAsset::class,
-            'devServerManifestPath' => 'http://webperf-buildchain:8080/',
-            'devServerPublicPath' => 'http://webperf-buildchain:8080/',
+            'devServerManifestPath' => 'http://craft-webperf-buildchain:8080/',
+            'devServerPublicPath' => 'http://craft-webperf-buildchain:8080/',
         ]);
 
         // Handler: CraftVariable::EVENT_INIT
