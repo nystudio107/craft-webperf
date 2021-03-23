@@ -3,6 +3,7 @@
 ## 1.1.23 - UNRELEASED
 ### Changed
 * More consistent `makefile` build commands
+* Use Tailwind 2.x & `@tailwindcss/jit`
 
 ## 1.1.22 - 2021.03.03
 ### Changed
