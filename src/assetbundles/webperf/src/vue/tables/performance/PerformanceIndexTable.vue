@@ -6,7 +6,7 @@
                                       infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="paginationTop"
-                                 @/vuetable-pagination:change-page="onChangePage"
+                                 @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
         <div class="overflow-x-auto overflow-y-hidden">
@@ -17,9 +17,9 @@
                       :css="css"
                       :sort-order="sortOrder"
                       :append-params="moreParams"
-                      @/vuetable:pagination-data="onPaginationData"
-                      @/vuetable:row-clicked="onRowClicked"
-                      @/vuetable:loaded="onLoaded"
+                      @vuetable:pagination-data="onPaginationData"
+                      @vuetable:row-clicked="onRowClicked"
+                      @vuetable:loaded="onLoaded"
             >
                 <template slot="page-listing-display" slot-scope="props" :maxValue="maxValue" :triBlend="triBlend">
                     <page-result-cell :title="props.rowData.title"
@@ -45,7 +45,7 @@
                                       infoTemplate="Displaying {from} to {to} of {total} pages"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="pagination"
-                                 @/vuetable-pagination:change-page="onChangePage"
+                                 @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
     </div>

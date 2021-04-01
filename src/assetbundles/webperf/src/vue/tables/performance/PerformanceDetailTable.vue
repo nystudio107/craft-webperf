@@ -6,7 +6,7 @@
                                       infoTemplate="Displaying {from} to {to} of {total} data samples"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="paginationTop"
-                                 @/vuetable-pagination:change-page="onChangePage"
+                                 @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
         <div class="overflow-x-auto overflow-y-hidden">
@@ -17,9 +17,9 @@
                       :css="css"
                       :sort-order="sortOrder"
                       :append-params="moreParams"
-                      @/vuetable:pagination-data="onPaginationData"
-                      @/vuetable:row-clicked="onRowClicked"
-                      @/vuetable:loaded="onLoaded"
+                      @vuetable:pagination-data="onPaginationData"
+                      @vuetable:row-clicked="onRowClicked"
+                      @vuetable:loaded="onLoaded"
             >
                 <template slot="sample-date" slot-scope="props">
                     <data-sample-date :date="props.rowData.dateCreated"
@@ -45,7 +45,7 @@
                                       infoTemplate="Displaying {from} to {to} of {total} data samples"
             ></vuetable-pagination-info>
             <vuetable-pagination ref="pagination"
-                                 @/vuetable-pagination:change-page="onChangePage"
+                                 @vuetable-pagination:change-page="onChangePage"
             ></vuetable-pagination>
         </div>
     </div>
