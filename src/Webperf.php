@@ -49,10 +49,10 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property RecommendationsService  $recommendations
+ * @property BeaconsService          $beacons
  * @property DataSamplesService      $dataSamples
  * @property ErrorSamplesService     $errorSamples
- * @property BeaconsService          $beacons
+ * @property RecommendationsService  $recommendations
  * @property ErrorsTarget            $errorsTarget
  * @property ProfileTarget           $profileTarget
  * @property ManifestService         $manifest
@@ -106,6 +106,31 @@ class Webperf extends Plugin
      */
     public static $craft31 = false;
 
+    // Static Methods
+    // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct($id, $parent = null, array $config = [])
+    {
+        $config['components'] = [
+            'beacons' => BeaconsService::class,
+            'dataSamples' => DataSamplesService::class,
+            'errorSamples' => ErrorSamplesService::class,
+            'recommendations' => RecommendationsService::class,
+            // Register the manifest service
+            'manifest' => [
+                'class' => ManifestService::class,
+                'assetClass' => WebperfAsset::class,
+                'devServerManifestPath' => 'http://craft-webperf-buildchain:8080/',
+                'devServerPublicPath' => 'http://craft-webperf-buildchain:8080/',
+            ],
+        ];
+
+        parent::__construct($id, $parent, $config);
+    }
+
     // Public Properties
     // =========================================================================
 
@@ -113,6 +138,16 @@ class Webperf extends Plugin
      * @var string
      */
     public $schemaVersion = '1.0.1';
+
+    /**
+     * @var bool
+     */
+    public $hasCpSection = true;
+
+    /**
+     * @var bool
+     */
+    public $hasCpSettings = true;
 
     // Public Methods
     // =========================================================================
@@ -350,14 +385,6 @@ class Webperf extends Plugin
      */
     protected function installGlobalEventListeners()
     {
-        // Register the manifest service
-        $this->set('manifest', [
-            'class' => ManifestService::class,
-            'assetClass' => WebperfAsset::class,
-            'devServerManifestPath' => 'http://webperf-buildchain:8080/',
-            'devServerPublicPath' => 'http://webperf-buildchain:8080/',
-        ]);
-
         // Handler: CraftVariable::EVENT_INIT
         Event::on(
             CraftVariable::class,

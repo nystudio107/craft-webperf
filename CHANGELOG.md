@@ -1,10 +1,18 @@
 # Webperf Changelog
 
-## 1.1.22 - 2021.03.03
+## 1.0.23 - 2021.04.01
+### Changed
+* More consistent `makefile` build commands
+* Use Tailwind 2.x & `@tailwindcss/jit`
+* Move settings from the `composer.json` “extra” to the plugin main class
+* Move the manifest service registration to the constructor
+* Fix the broken Vue data tables
+
+## 1.0.22 - 2021.03.03
 ### Changed
 * Dockerized the buildchain, using `craft-plugin-manifest` for the webpack HMR bridge
 
-## 1.1.21 - 2021.02.24
+## 1.0.21 - 2021.02.24
 ### Added
 * Added support for both 8.x and 9.x versions of `league/csv` for peer compatibility
 
