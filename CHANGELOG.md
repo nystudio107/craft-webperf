@@ -1,5 +1,13 @@
 # Webperf Changelog
 
+## 1.0.24 - 2021.04.06
+### Added
+* Added `make update` to update NPM packages
+* Added `make update-clean` to completely remove `node_modules/`, then update NPM packages
+
+### Changed
+* Use Tailwind CSS `^2.1.0` with JIT
+
 ## 1.0.23 - 2021.04.01
 ### Changed
 * More consistent `makefile` build commands
