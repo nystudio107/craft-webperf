@@ -31,16 +31,16 @@ docs: docker
 	mv ./docs/docs/.vuepress/dist ${DOCSDEST}
 install: docker
 	${DOCKERRUN} \
-		install
+		install --ignore-scripts
 update: docker
 	rm -f buildchain/package-lock.json
 	${DOCKERRUN} \
-		install
+		install --ignore-scripts
 update-clean: docker
 	rm -f buildchain/package-lock.json
 	rm -rf buildchain/node_modules/
 	${DOCKERRUN} \
-		install
+		install --ignore-scripts
 npm: docker
 	${DOCKERRUN} \
 		$(filter-out $@,$(MAKECMDGOALS))
