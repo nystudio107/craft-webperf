@@ -1,5 +1,9 @@
 # Webperf Changelog
 
+## 1.0.25 - UNRELEASED
+### Fixed
+* Fixed an issue where an exception could be thrown in Craft CMS 3.7.x if no `element` existed when rendering the sidebar (https://github.com/nystudio107/craft-webperf/issues/38)
+
 ## 1.0.24 - 2021.04.06
 ### Added
 * Added `make update` to update NPM packages
