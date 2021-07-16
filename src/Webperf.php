@@ -575,22 +575,34 @@ class Webperf extends Plugin
             $view->hook('cp.entries.edit.details', function (&$context) {
                 /** @var  Element $element */
                 $element = $context['entry'] ?? null;
+                $html = '';
+                if ($element !== null && $element->uri !== null) {
+                    $html = $this->renderSidebar($element);
+                }
 
-                return $this->renderSidebar($element);
+                return $html;
             });
             // Category Groups sidebar
             $view->hook('cp.categories.edit.details', function (&$context) {
                 /** @var  Element $element */
                 $element = $context['category'] ?? null;
+                $html = '';
+                if ($element !== null && $element->uri !== null) {
+                    $html = $this->renderSidebar($element);
+                }
 
-                return $this->renderSidebar($element);
+                return $html;
             });
             // Commerce Product Types sidebar
             $view->hook('cp.commerce.product.edit.details', function (&$context) {
                 /** @var  Element $element */
                 $element = $context['product'] ?? null;
+                $html = '';
+                if ($element !== null && $element->uri !== null) {
+                    $html = $this->renderSidebar($element);
+                }
 
-                return $this->renderSidebar($element);
+                return $html;
             });
         }
     }
