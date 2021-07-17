@@ -8,9 +8,8 @@ DOCKERRUN=docker container run \
 	-p 8080:8080 \
 	-v `pwd`:/app \
 	${CONTAINER}:${TAG}
-DOCSDEST?=../../sites/nystudio107/web/docs/webperf
 
-.PHONY: build dev docker docs install npm
+.PHONY: build dev docker install npm
 
 build: docker install
 	${DOCKERRUN} \
@@ -24,11 +23,6 @@ docker:
 		-t ${CONTAINER}:${TAG} \
 		--build-arg TAG=${TAG} \
 		--no-cache
-docs: docker
-	${DOCKERRUN} \
-		run docs
-	rm -rf ${DOCSDEST}
-	mv ./docs/docs/.vuepress/dist ${DOCSDEST}
 install: docker
 	${DOCKERRUN} \
 		install --ignore-scripts

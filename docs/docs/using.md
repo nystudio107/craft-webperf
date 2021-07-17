@@ -1,10 +1,10 @@
 # Using Webperf
 
-Webperf is a passive Real User Measurement system that extracts the performance that people experience when they visit your website. Since devices, connections, and Internet conditions vary, the more people visit your website, the better overall performance picture you'll have.
+Webperf is a passive Real User Measurement system that extracts the performance that people experience when they visit your site. Since devices, connections, and internet conditions vary, the more people visit your website, the better overall performance picture you’ll have.
 
 Webperf shows a warning ⚠ next to any metric that is composed of fewer than 100 samples, because there may not be enough data for it to be statistically significant.
 
-If you are using a multi-site setup, on all of Webperf's pages there will be a site switcher that lets you choose between viewing data for all sites, or for a specific site alone.
+If you are using a multi-site setup, on all of Webperf’s pages there will be a site switcher that lets you choose between viewing data for all sites, or for a specific site alone.
 
 ## Dashboard
 
@@ -12,39 +12,39 @@ If you are using a multi-site setup, on all of Webperf's pages there will be a s
 
 ![Screenshot](./resources/screenshots/webperf-dashboard.png)
 
-The Webperf Dashboard gives you an overall picture of how all of the pages on your site perform. The statistics displayed here are an aggregate of all of the performance timings from all of your site's pages.
+The Webperf Dashboard gives you an overall picture of how all of the pages on your site perform. The statistics displayed here are an aggregate of all of the performance timings from all of your site’s pages.
 
 ![Screenshot](./resources/screenshots/webperf-date-range-picker.png)
 
-You can also choose the date range on any page to control what data samples you're viewing.
+You can also choose the date range on any page to control what data samples you’re viewing.
 
 ### Browser Performance
 
-* **Page Loaded** - The time it takes for the webpage to be fully loaded in the client's browser. [Learn More](https://developers.google.com/web/fundamentals/performance/speed-tools/)
+* **Page Loaded** - The time it takes for the web page to be fully loaded in the client’s browser. [Learn More](https://developers.google.com/web/fundamentals/performance/speed-tools/)
 * **First Paint** - When the browser first begins to nominally paint content into the browser. [Learn More](https://developers.google.com/web/tools/lighthouse/audits/first-meaningful-paint)
-* **First Contentful Paint** - The first meaningful content that the client sees 'painted' in their browser. [Learn More](https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint)
+* **First Contentful Paint** - The first meaningful content that the client sees 'painted’ in their browser. [Learn More](https://developers.google.com/web/tools/lighthouse/audits/first-contentful-paint)
 * **Slowest Pages** - The slowest pages based on the **Page Loaded** statistic
 
 ### Server Performance
 
 * **First Byte** - How long it takes before the first byte of data is received from the server. [Learn More](https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing)
-* **DNS Lookup** - How long it takes to do a DNS lookup of the website's IP address. [Learn More](https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing)
+* **DNS Lookup** - How long it takes to do a DNS lookup of the website’s IP address. [Learn More](https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing)
 * **Connect** - How long it takes to negotiate a connection to the server. [Learn More](https://developers.google.com/web/tools/chrome-devtools/network-performance/understanding-resource-timing)
 * **Slowest Pages** - The slowest pages based on the **First Byte** statistic
 
 ### Craft Performance
 
-* **Craft Execution** - The total amount of time it takes Craft to process the webpages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
-* **Database Queries** - How long it takes to execute the database queries for the webpages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
-* **Twig Rendering** - How long it takes Twig to render the templates for the webpages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
-* **Other** - Other profiled code (such as from plugins) in order to process the webpages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
+* **Craft Execution** - The total amount of time it takes Craft to process the web pages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
+* **Database Queries** - How long it takes to execute the database queries for the web pages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
+* **Twig Rendering** - How long it takes Twig to render the templates for the web pages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
+* **Other** - Other profiled code (such as from plugins) to process the web pages. [Learn More](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar)
 * **Slowest Pages** - The slowest pages based on the **Craft Execution** statistic
 
 ### Recommendations
 
 ![Screenshot](./resources/screenshots/webperf-performance-recommendations.png)
 
-Webperf will provide you with a list of recommendations of things that you can do to improve the performance of your website. It also includes links to resources where you can learn more about the topic.
+Webperf will provide you with a list of recommendations of things that you can do to improve the performance of your site. It also includes links to resources where you can learn more about the topic.
 
 ## Performance
 
@@ -52,19 +52,19 @@ Webperf will provide you with a list of recommendations of things that you can d
 
 ![Screenshot](./resources/screenshots/webperf-performance-chart.png)
 
-The Performance section gives you a stacked area graph of the aggregate performance history of your website. You can mouse over the graph for data point details.
+The Performance section gives you a stacked area graph of the aggregate performance history of your site. You can mouse over the graph for data point details.
 
 ![Screenshot](./resources/screenshots/webperf-performance-table.png)
 
 The Performance section also gives you a table initially sorted by **Performance Timeline** that shows you the aggregate performance of your pages.
 
-You can limit what is displayed in the table by typing what you're looking for in the **Search for:** field, and you can sort the table by any of the columns by clicking on them.
+You can limit what is displayed in the table by typing what you’re looking for in the **Search for:** field, and you can sort the table by any of the columns by clicking on them.
 
 The **Performance Timeline** is a graphical depiction of the measured stages of the page load. You can mouse over each section of the bar graph to see the statistic in question.
 
 Webperf does both frontend browser performance timings, as well as backend Craft performance timings. A blue dot next to the **Performance Timeline** indicates a frontend timing, an orange dot means a backend Craft timing, and both means a combined frontend/backend sample.
 
-Click on any row in the Performance table to go to a Performance Detail page for that particular webpage.
+Click on any row in the Performance table to go to a Performance Detail page for that particular web page.
 
 ### Performance Detail
 
@@ -74,7 +74,7 @@ The chart on the Performance Detail page shows you the performance history of on
 
 ![Screenshot](./resources/screenshots/webperf-performance-detail-dashboard.png)
 
-The Performance Detail page also gives you the same charts as the Dashboard, but for this particular page. It also provides buttons to launch more detailed performance tests via the third party websites Google PageSpeed Insights, WebpageTest.org, and GTMetrix.com.
+The Performance Detail page also gives you the same charts as the Dashboard, but for this particular page. It also provides buttons to launch more detailed performance tests via the third party sites Google PageSpeed Insights, WebpageTest.org, and GTMetrix.com.
 
 ![Screenshot](./resources/screenshots/webperf-performance-recommendations.png)
 
@@ -94,7 +94,7 @@ Webperf will record both frontend JavaScript errors, as well as backend Craft er
 
 ![Screenshot](./resources/screenshots/webperf-errors-chart.png)
 
-The Aggregate Page Errors History chart shows you the history of errors for all of your pages on your website. Craft errors are in red, and JavaScript errors are in green.
+The Aggregate Page Errors History chart shows you the history of errors for all of your pages on your site. Craft errors are in red, and JavaScript errors are in green.
 
 ![Screenshot](./resources/screenshots/webperf-errors-table.png)
 
@@ -150,9 +150,9 @@ Trimming error samples
 Trimmed 0 from webperf_error_samples table
 ```
 
-This will trim the `webperf_data_samples` table so that it has only the number of samples in the table as you've specified via the **Webperf Data Samples to Store** Setting.
+This will trim the `webperf_data_samples` table so that it has only the number of samples in the table as you’ve specified via the **Webperf Data Samples to Store** Setting.
 
-This will also trim the `webperf_error_samples` table so that it has only the number of samples in the table as you've specified via the **Error Samples to Store** Setting.
+This will also trim the `webperf_error_samples` table so that it has only the number of samples in the table as you’ve specified via the **Error Samples to Store** Setting.
 
 When the tables are trimmed, it sorts the samples by the **Date Created** time, and only trims the oldest samples.
 
