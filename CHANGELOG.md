@@ -1,6 +1,9 @@
 # Webperf Changelog
 
 ## 1.0.25 - 2021.07.17
+### Changed
+* Switched documentation system to VitePress
+
 ### Fixed
 * Fixed an issue where an exception could be thrown in Craft CMS 3.7.x if no `element` existed when rendering the sidebar (https://github.com/nystudio107/craft-webperf/issues/38)
 
