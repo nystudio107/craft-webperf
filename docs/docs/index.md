@@ -6,7 +6,7 @@ description: Webperf helps you build & maintain high quality websites through Re
 
 # Webperf plugin for Craft CMS 3.x
 
-Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance
+Webperf helps you build & maintain high quality sites through Real User Measurement of your website’s performance
 
 ![Screenshot](./resources/img/plugin-banner.jpg)
 
