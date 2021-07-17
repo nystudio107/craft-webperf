@@ -23,8 +23,8 @@ module.exports = {
             { text: 'Webperf Plugin', link: '/' },
             { text: 'Webperf Overview', link: '/overview.html' },
             { text: 'Performance Resources', link: '/resources.html' },
-            { text: 'Configuring Webpef', link: '/configuring.html' },
-            { text: 'Using Webpef', link: '/using.html' },
+            { text: 'Configuring Webperf', link: '/configuring.html' },
+            { text: 'Using Webperf', link: '/using.html' },
         ],
     },
 };
