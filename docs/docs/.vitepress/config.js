@@ -13,7 +13,7 @@ module.exports = {
         docsDir: 'docs/docs',
         docsBranch: 'v1',
         algolia: {
-            apiKey: '',
+            apiKey: '9047780c8cf9b8baa92b472d13a30160',
             indexName: 'webperf'
         },
         editLinks: true,
