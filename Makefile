@@ -6,6 +6,7 @@ DOCKERRUN=docker container run \
 	-t \
 	--network plugindev_default \
 	-p 8080:8080 \
+	-e CPPFLAGS="-DPNG_ARM_NEON_OPT=0" \
 	-v "${CURDIR}":/app \
 	${CONTAINER}:${TAG}
 
