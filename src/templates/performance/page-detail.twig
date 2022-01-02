@@ -140,7 +140,10 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ craft.webperf.registerJsModules([
-        'performance-detail.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset'
+        ],
+    } %}
+    {{ craft.webperf.register('src/js/performance-detail.js', false, tagOptions, tagOptions) }}
 {% endblock %}

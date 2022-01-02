@@ -23,7 +23,7 @@ use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\Recommendations as RecommendationsService;
 use nystudio107\webperf\variables\WebperfVariable;
 
-use nystudio107\pluginmanifest\services\ManifestService;
+use nystudio107\pluginvite\services\VitePluginService;
 
 use Craft;
 use craft\base\Element;
@@ -55,7 +55,7 @@ use yii\base\InvalidConfigException;
  * @property RecommendationsService  $recommendations
  * @property ErrorsTarget            $errorsTarget
  * @property ProfileTarget           $profileTarget
- * @property ManifestService         $manifest
+ * @property VitePluginService       $vite
  */
 class Webperf extends Plugin
 {
@@ -119,12 +119,16 @@ class Webperf extends Plugin
             'dataSamples' => DataSamplesService::class,
             'errorSamples' => ErrorSamplesService::class,
             'recommendations' => RecommendationsService::class,
-            // Register the manifest service
-            'manifest' => [
-                'class' => ManifestService::class,
+            // Register the vite service
+            'vite' => [
+                'class' => VitePluginService::class,
                 'assetClass' => WebperfAsset::class,
-                'devServerManifestPath' => 'http://craft-webperf-buildchain:8080/',
-                'devServerPublicPath' => 'http://craft-webperf-buildchain:8080/',
+                'useDevServer' => true,
+                'devServerPublic' => 'http://localhost:3001',
+                'serverPublic' => 'http://localhost:8000',
+                'errorEntry' => 'src/js/webperf.js',
+                'devServerInternal' => 'http://craft-webperf-buildchain:3001',
+                'checkDevServer' => true,
             ],
         ];
 
@@ -394,7 +398,7 @@ class Webperf extends Plugin
                 $variable = $event->sender;
                 $variable->set('webperf', [
                     'class' => WebperfVariable::class,
-                    'manifestService' => $this->manifest,
+                    'viteService' => $this->vite,
                 ]);
             }
         );

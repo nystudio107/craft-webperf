@@ -2,18 +2,10 @@
 
 {% block head %}
     {{ parent() }}
-    {{ craft.webperf.registerCssModules([
-        'vendors.css',
-        'styles.css',
-    ]) }}
-{% endblock %}
-
-{% block foot %}
-    {{ parent() }}
-    {{ craft.webperf.registerJsModules([
-        'runtime.js',
-        'vendors.js',
-        'commons.js',
-        'webperf.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset'
+        ],
+    } %}
+    {{ craft.webperf.register('src/js/webperf.js', false, tagOptions, tagOptions) }}
 {% endblock %}

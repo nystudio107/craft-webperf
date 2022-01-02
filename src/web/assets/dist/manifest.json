@@ -1,0 +1,184 @@
+{
+  "src/js/alerts.js": {
+    "file": "assets/alerts.1871661a.js",
+    "src": "src/js/alerts.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "src/js/dashboard.js": {
+    "file": "assets/dashboard.728fdf71.js",
+    "src": "src/js/dashboard.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_SimpleBarChart.cada778d.js",
+      "_tri-color-blend.3ecffd12.js",
+      "_SampleSizeWarning.2c2275fa.js",
+      "_SampleRangePicker.0e02f7a5.js",
+      "_SamplePaneFooter.c88f08be.js",
+      "_RecommendationsList.5608b603.js"
+    ]
+  },
+  "src/js/errors-detail.js": {
+    "file": "assets/errors-detail.7ce4939d.js",
+    "src": "src/js/errors-detail.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_ErrorsDetailAreaChart.8008259f.js",
+      "_PageResultCell.a819acb2.js",
+      "_RequestBarChart.ca2f7fb8.js",
+      "_DataSampleDate.94853f61.js",
+      "_DataSampleDevice.fabeb357.js",
+      "_SimpleBarChart.cada778d.js",
+      "_SampleRangePicker.0e02f7a5.js",
+      "_SamplePaneFooter.c88f08be.js",
+      "_tri-color-blend.3ecffd12.js"
+    ]
+  },
+  "src/js/errors-index.js": {
+    "file": "assets/errors-index.39d1d1ba.js",
+    "src": "src/js/errors-index.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_PageResultCell.a819acb2.js",
+      "_DataSampleDate.94853f61.js",
+      "_SampleRangePicker.0e02f7a5.js",
+      "_ErrorsDetailAreaChart.8008259f.js"
+    ]
+  },
+  "src/js/performance-detail.js": {
+    "file": "assets/performance-detail.c1f5a444.js",
+    "src": "src/js/performance-detail.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_PerformanceDetailAreaChart.09e41373.js",
+      "_PageResultCell.a819acb2.js",
+      "_tri-color-blend.3ecffd12.js",
+      "_RequestBarChart.ca2f7fb8.js",
+      "_DataSampleDate.94853f61.js",
+      "_DataSampleDevice.fabeb357.js",
+      "_SimpleBarChart.cada778d.js",
+      "_SampleRangePicker.0e02f7a5.js",
+      "_SamplePaneFooter.c88f08be.js",
+      "_RecommendationsList.5608b603.js"
+    ]
+  },
+  "src/js/performance-index.js": {
+    "file": "assets/performance-index.7cf1ff71.js",
+    "src": "src/js/performance-index.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_PageResultCell.a819acb2.js",
+      "_tri-color-blend.3ecffd12.js",
+      "_RequestBarChart.ca2f7fb8.js",
+      "_SampleSizeWarning.2c2275fa.js",
+      "_SampleRangePicker.0e02f7a5.js",
+      "_PerformanceDetailAreaChart.09e41373.js",
+      "_RecommendationsList.5608b603.js",
+      "_SamplePaneFooter.c88f08be.js"
+    ]
+  },
+  "src/js/sidebar.js": {
+    "file": "assets/sidebar.e99e35d8.js",
+    "src": "src/js/sidebar.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_tri-color-blend.3ecffd12.js"
+    ]
+  },
+  "src/js/webperf.js": {
+    "file": "assets/webperf.2e6c8d55.js",
+    "src": "src/js/webperf.js",
+    "isEntry": true,
+    "css": [
+      "assets/webperf.8cd77e50.css"
+    ]
+  },
+  "_vendor.6a8d211c.js": {
+    "file": "assets/vendor.6a8d211c.js",
+    "css": [
+      "assets/vendor.3b5bd98c.css"
+    ]
+  },
+  "_SimpleBarChart.cada778d.js": {
+    "file": "assets/SimpleBarChart.cada778d.js",
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_tri-color-blend.3ecffd12.js"
+    ]
+  },
+  "_SampleRangePicker.0e02f7a5.js": {
+    "file": "assets/SampleRangePicker.0e02f7a5.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ],
+    "css": [
+      "assets/SampleRangePicker.a26c4ce9.css"
+    ]
+  },
+  "_SamplePaneFooter.c88f08be.js": {
+    "file": "assets/SamplePaneFooter.c88f08be.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_RecommendationsList.5608b603.js": {
+    "file": "assets/RecommendationsList.5608b603.js",
+    "imports": [
+      "_vendor.6a8d211c.js",
+      "_SamplePaneFooter.c88f08be.js"
+    ]
+  },
+  "_tri-color-blend.3ecffd12.js": {
+    "file": "assets/tri-color-blend.3ecffd12.js"
+  },
+  "_SampleSizeWarning.2c2275fa.js": {
+    "file": "assets/SampleSizeWarning.2c2275fa.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_ErrorsDetailAreaChart.8008259f.js": {
+    "file": "assets/ErrorsDetailAreaChart.8008259f.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_PageResultCell.a819acb2.js": {
+    "file": "assets/PageResultCell.a819acb2.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_RequestBarChart.ca2f7fb8.js": {
+    "file": "assets/RequestBarChart.ca2f7fb8.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_DataSampleDate.94853f61.js": {
+    "file": "assets/DataSampleDate.94853f61.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_DataSampleDevice.fabeb357.js": {
+    "file": "assets/DataSampleDevice.fabeb357.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  },
+  "_PerformanceDetailAreaChart.09e41373.js": {
+    "file": "assets/PerformanceDetailAreaChart.09e41373.js",
+    "imports": [
+      "_vendor.6a8d211c.js"
+    ]
+  }
+}

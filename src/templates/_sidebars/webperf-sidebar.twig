@@ -1,17 +1,13 @@
 {% do view.registerAssetBundle("nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/webperf/assetbundles/webperf/dist', true) %}
 
-{{ craft.webperf.registerCssModules([
-    'vendors.css',
-    'styles.css',
-]) }}
-
-{{ craft.webperf.registerJsModules([
-    'runtime.js',
-    'vendors.js',
-    'commons.js',
-    'sidebar.js',
-]) }}
+{% set tagOptions = {
+    'depends': [
+        'nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset'
+    ],
+} %}
+{{ craft.webperf.register('src/js/webperf.js', false, tagOptions, tagOptions) }}
+{{ craft.webperf.register('src/js/sidebar.js', false, tagOptions, tagOptions) }}
 
 <hr />
 <div class="meta overflow-hidden">
