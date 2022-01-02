@@ -1,5 +1,10 @@
 # Webperf Changelog
 
+## 1.0.26 - UNRELEASED
+### Changed
+* Updated the buildchain to use Node 16
+* Changed buildchain to Vite from webpack 5
+
 ## 1.0.25 - 2021.07.17
 ### Changed
 * Switched documentation system to VitePress
