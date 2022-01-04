@@ -46,7 +46,10 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ craft.webperf.registerJsModules([
-        'alerts.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset'
+        ],
+    } %}
+    {{ craft.webperf.register('src/js/alerts.js', false, tagOptions, tagOptions) }}
 {% endblock %}

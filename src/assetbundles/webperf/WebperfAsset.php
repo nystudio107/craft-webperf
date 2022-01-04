@@ -29,7 +29,7 @@ class WebperfAsset extends AssetBundle
      */
     public function init()
     {
-        $this->sourcePath = "@nystudio107/webperf/assetbundles/webperf/dist";
+        $this->sourcePath = "@nystudio107/webperf/web/assets/dist";
 
         $this->depends = [
             CpAsset::class,

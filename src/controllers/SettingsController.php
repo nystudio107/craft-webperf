@@ -69,7 +69,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/webperf/assetbundles/webperf/dist',
+            '@nystudio107/webperf/web/assets/dist',
             true
         );
         // Basic variables

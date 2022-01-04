@@ -12,15 +12,18 @@ namespace nystudio107\webperf\variables;
 
 use nystudio107\webperf\Webperf;
 
-use nystudio107\pluginmanifest\variables\ManifestVariable;
+use nystudio107\pluginvite\variables\ViteVariableInterface;
+use nystudio107\pluginvite\variables\ViteVariableTrait;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class WebperfVariable extends ManifestVariable
+class WebperfVariable implements ViteVariableInterface
 {
+    use ViteVariableTrait;
+
     // Public Methods
     // =========================================================================
 

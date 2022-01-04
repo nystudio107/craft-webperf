@@ -2,7 +2,7 @@
     "name": "nystudio107/craft-webperf",
     "description": "Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance",
     "type": "craft-plugin",
-    "version": "1.0.25",
+    "version": "1.0.26",
     "keywords": [
         "craft",
         "cms",
@@ -23,7 +23,7 @@
     ],
     "require": {
         "craftcms/cms": "^3.0.0",
-        "nystudio107/craft-plugin-manifest": "^1.0.0",
+        "nystudio107/craft-plugin-vite": "^1.0.0",
         "jaybizzle/crawler-detect": "^1.2.37",
         "league/csv": "^8.2 || ^9.0",
         "whichbrowser/parser": "^2.0.37"

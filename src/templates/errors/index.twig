@@ -83,7 +83,10 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ craft.webperf.registerJsModules([
-        'errors-index.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset'
+        ],
+    } %}
+    {{ craft.webperf.register('src/js/errors-index.js', false, tagOptions, tagOptions) }}
 {% endblock %}

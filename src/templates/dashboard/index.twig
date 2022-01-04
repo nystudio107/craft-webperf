@@ -87,7 +87,10 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ craft.webperf.registerJsModules([
-        'dashboard.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\webperf\\assetbundles\\webperf\\WebperfAsset'
+        ],
+    } %}
+    {{ craft.webperf.register('src/js/dashboard.js', false, tagOptions, tagOptions) }}
 {% endblock %}

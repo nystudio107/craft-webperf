@@ -11,9 +11,9 @@ module.exports = {
     themeConfig: {
         repo: 'nystudio107/craft-webperf',
         docsDir: 'docs/docs',
-        docsBranch: 'v1',
+        docsBranch: 'develop',
         algolia: {
-            apiKey: '',
+            apiKey: '9047780c8cf9b8baa92b472d13a30160',
             indexName: 'webperf'
         },
         editLinks: true,
