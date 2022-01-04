@@ -1,6 +1,6 @@
 # Webperf Changelog
 
-## 1.0.26 - UNRELEASED
+## 1.0.26 - 2022.01.04
 ### Changed
 * Updated the buildchain to use Node 16
 * Changed buildchain to Vite from webpack 5
