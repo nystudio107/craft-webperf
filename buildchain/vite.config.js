@@ -41,11 +41,6 @@ export default ({ command }) => ({
     createVuePlugin(),
     viteExternalsPlugin({
       vue: 'Vue',
-    }, {
-      filter(code, id, ssr) {
-        const ID_FILTER_REG = /\.(js|ts|vue|jsx|tsx)$/;
-        return ID_FILTER_REG.test(id);
-      }
     }),
   ],
   publicDir: '../src/web/assets/public',
