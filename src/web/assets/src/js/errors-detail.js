@@ -9,7 +9,7 @@ import SamplePaneFooter from '@/vue/common/SamplePaneFooter.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
-const vm = new Vue({
+new Vue({
     el: "#cp-nav-content",
     components: {
         ErrorsDetailAreaChart,
@@ -19,12 +19,12 @@ const vm = new Vue({
         SampleRangePicker,
         SamplePaneFooter,
     },
+    mounted() {
+        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
+    },
     methods: {
         onTableRefresh(vuetable) {
             Vue.nextTick(() => vuetable.refresh());
         }
-    },
-    mounted() {
-        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
 });

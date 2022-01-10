@@ -21,12 +21,12 @@ new Vue({
         SamplePaneFooter,
         RecommendationsList,
     },
+    mounted() {
+        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
+    },
     methods: {
         onTableRefresh(vuetable) {
             Vue.nextTick(() => vuetable.refresh());
         }
-    },
-    mounted() {
-        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
 });
