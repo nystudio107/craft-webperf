@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueEvents from 'vue-events';
 import ErrorsDetailAreaChart from '@/vue/charts/Errors/ErrorsDetailAreaChart.vue';
 import ErrorsDetailTable from '@/vue/tables/Errors/ErrorsDetailTable.vue';
@@ -11,14 +12,12 @@ Vue.use(VueEvents);
 const vm = new Vue({
     el: "#cp-nav-content",
     components: {
-        'errors-detail-area-chart': ErrorsDetailAreaChart,
-        'errors-detail-table': ErrorsDetailTable,
-        'radial-bar-chart': RadialBarChart,
-        'simple-bar-chart': SimpleBarChart,
-        'sample-range-picker': SampleRangePicker,
-        'sample-pane-footer': SamplePaneFooter,
-    },
-    data: {
+        ErrorsDetailAreaChart,
+        ErrorsDetailTable,
+        RadialBarChart,
+        SimpleBarChart,
+        SampleRangePicker,
+        SamplePaneFooter,
     },
     methods: {
         onTableRefresh(vuetable) {

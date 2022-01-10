@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueEvents from 'vue-events';
 import PerformanceDetailAreaChart from '@/vue/charts/performance/PerformanceDetailAreaChart.vue';
 import PerformanceDetailTable from '@/vue/tables/performance/PerformanceDetailTable.vue';
@@ -9,18 +10,16 @@ import RecommendationsList from '@/vue/common/RecommendationsList.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
-const vm = new Vue({
+new Vue({
     el: "#cp-nav-content",
     components: {
-        'performance-detail-area-chart': PerformanceDetailAreaChart,
-        'performance-detail-table': PerformanceDetailTable,
-        'radial-bar-chart': RadialBarChart,
-        'simple-bar-chart': SimpleBarChart,
-        'sample-range-picker': SampleRangePicker,
-        'sample-pane-footer': SamplePaneFooter,
-        'recommendations-list': RecommendationsList,
-    },
-    data: {
+        PerformanceDetailAreaChart,
+        PerformanceDetailTable,
+        RadialBarChart,
+        SimpleBarChart,
+        SampleRangePicker,
+        SamplePaneFooter,
+        RecommendationsList,
     },
     methods: {
         onTableRefresh(vuetable) {
