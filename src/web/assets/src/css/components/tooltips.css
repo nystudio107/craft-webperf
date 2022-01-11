@@ -33,7 +33,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent grey transparent;
+  border-color: transparent transparent grey;
 }
 
 .webperf-tooltip:hover .webperf-tooltiptext {
@@ -41,7 +41,7 @@
 }
 
 .webperf-tooltiptext.webperf-tooltip-visible {
-  visibility: visible!important;
+  visibility: visible !important;
   width: 60px;
   margin-left: -30px;
   top: 150%;
@@ -54,9 +54,9 @@
 }
 
 .webperf-tooltip-link.notice.go {
-  color: #f1f5f8!important;
+  color: #f1f5f8 !important;
 }
 
-.webperf-tooltip-link.notice.go:after {
-  color: #b9bfc6!important;
+.webperf-tooltip-link.notice.go::after {
+  color: #b9bfc6 !important;
 }
