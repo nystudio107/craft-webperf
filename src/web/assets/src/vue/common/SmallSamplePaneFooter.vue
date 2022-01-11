@@ -49,9 +49,18 @@ const queryApi = (api, uri, params, callback) => {
 export default {
   components: {},
   props: {
-    start: String,
-    end: String,
-    column: String,
+    start: {
+      type: String,
+      default: '',
+    },
+    end: {
+      type: String,
+      default: '',
+    },
+    column: {
+      type: String,
+      default: '',
+    },
     displayDevModeWarning: {
       type: Boolean,
       default: false

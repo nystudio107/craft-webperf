@@ -8,9 +8,18 @@
 export default {
   name: 'DataSampleDate',
   props: {
-    date: String,
-    url: String,
-    query: String,
+    date: {
+      type: String,
+      default: '',
+    },
+    url: {
+      type: String,
+      default: '',
+    },
+    query: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     title() {

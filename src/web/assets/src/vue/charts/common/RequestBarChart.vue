@@ -101,7 +101,10 @@ export default {
     'request-bar-recursive': RequestBarRecursive,
   },
   props: {
-    rowData: Object,
+    rowData: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data: function () {
     return {
@@ -117,7 +120,7 @@ export default {
     this.calculateNodes();
   },
   methods: {
-    onTableRefresh: function (eventData) {
+    onTableRefresh: function () {
       this.calculateNodes();
     },
     statFormatter(val) {

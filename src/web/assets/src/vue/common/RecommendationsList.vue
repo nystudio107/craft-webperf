@@ -12,14 +12,18 @@
     >
       <div class="field pb-4">
         <p class="warning text-2xl leading-normal">
+          <!-- eslint-disable vue/no-v-html -->
           <span v-html="item.summary" />
+          <!--eslint-enable-->
         </p>
         <div
           class="heading"
           style="padding-left: 26px;"
         >
           <p class="instructions text-xl leading-tight">
+            <!-- eslint-disable vue/no-v-html -->
             <span v-html="item.detail" />
+            <!--eslint-enable-->
             <span class="field inline-block m-0">
               <a
                 v-if="item.learnMoreUrl !== ''"
@@ -77,8 +81,14 @@ export default {
     'sample-pane-footer': SamplePaneFooter,
   },
   props: {
-    start: String,
-    end: String,
+    start: {
+      type: String,
+      default: '',
+    },
+    end: {
+      type: String,
+      default: '',
+    },
     devModeWarning: {
       type: Boolean,
       default: false

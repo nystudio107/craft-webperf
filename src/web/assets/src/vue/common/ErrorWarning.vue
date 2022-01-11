@@ -18,7 +18,10 @@
 export default {
   name: 'ErrorWarning',
   props: {
-    sample: Number,
+    sample: {
+      type: Number,
+      default: 0,
+    },
   },
 }
 </script>

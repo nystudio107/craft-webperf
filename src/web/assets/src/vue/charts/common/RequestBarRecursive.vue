@@ -21,12 +21,30 @@
 export default {
   name: 'RequestBarRecursive',
   props: {
-    column: String,
-    color: String,
-    label: String,
-    value: Number,
-    parentValue: Number,
-    nodes: Array,
+    column: {
+      type: String,
+      default: '',
+    },
+    color: {
+      type: String,
+      default: '',
+    },
+    label: {
+      type: String,
+      default: '',
+    },
+    value: {
+      type: Number,
+      default: 0,
+    },
+    parentValue: {
+      type: Number,
+      default: 0,
+    },
+    nodes: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   methods: {
     statFormatter(val) {

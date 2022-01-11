@@ -9,8 +9,14 @@
 export default {
   name: 'DataSampleDevice',
   props: {
-    device: String,
-    mobile: Boolean,
+    device: {
+      type: String,
+      default: '',
+    },
+    mobile: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     className() {

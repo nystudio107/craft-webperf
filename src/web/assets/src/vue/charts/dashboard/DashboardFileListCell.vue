@@ -9,7 +9,7 @@
         <a
           v-if="title"
           :href="url"
-          style="color: rgb(26, 13, 171);"
+          style="color: rgb(26 13 171);"
           target="_blank"
           @click.stop=""
         >
@@ -33,7 +33,7 @@
         <a
           :href="url"
           class="hover:no-underline"
-          style="color: rgb(0, 102, 33);"
+          style="color: rgb(0 102 33);"
           target="_blank"
           @click.stop=""
         >
@@ -61,13 +61,34 @@ export default {
   name: 'DashboardFileListCell',
   components: {SampleSizeWarning},
   props: {
-    title: String,
-    url: String,
-    detailPageUrl: String,
-    data: String,
-    cnt: Number,
-    width: Number,
-    color: String,
+    title: {
+      type: String,
+      default: '',
+    },
+    url: {
+      type: String,
+      default: '',
+    },
+    detailPageUrl: {
+      type: String,
+      default: '',
+    },
+    data: {
+      type: String,
+      default: '',
+    },
+    cnt: {
+      type: Number,
+      default: 0,
+    },
+    width: {
+      type: Number,
+      default: 0,
+    },
+    color: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     redirectTo(url) {

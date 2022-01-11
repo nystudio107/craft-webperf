@@ -15,7 +15,10 @@
 export default {
   name: 'SampleSizeWarning',
   props: {
-    sample: Number,
+    sample: {
+      type: Number,
+      default: 0,
+    },
   },
 }
 </script>

@@ -83,7 +83,10 @@ export default {
       type: Number,
       default: 3,
     },
-    maxValue: Number,
+    maxValue: {
+      type: Number,
+      default: 10000,
+    },
     siteId: {
       type: Number,
       default: 0,

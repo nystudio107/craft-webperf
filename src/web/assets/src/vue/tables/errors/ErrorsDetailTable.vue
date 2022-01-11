@@ -93,14 +93,21 @@ export default {
     'vuetable-pagination-info': VueTablePaginationInfo,
     'vuetable-filter-bar': VueTableFilterBar,
     'request-bar-chart': RequestBarChart,
+    // eslint-disable-next-line vue/no-unused-components
     'page-result-cell': PageResultCell,
     'data-sample-date': DataSampleDate,
     'data-sample-device': DataSampleDevice,
     'error-sample': ErrorSample,
   },
   props: {
-    start: String,
-    end: String,
+    start: {
+      type: String,
+      default: '',
+    },
+    end: {
+      type: String,
+      default: '',
+    },
     fastColor: {
       type: String,
       default: '#00C800',
@@ -117,7 +124,10 @@ export default {
       type: Number,
       default: 10000,
     },
-    pageUrl: String,
+    pageUrl: {
+      type: String,
+      default: '',
+    },
     siteId: {
       type: Number,
       default: 0,
@@ -153,7 +163,7 @@ export default {
   },
   mounted() {
     this.$events.$on('filter-set', eventData => this.onFilterSet(eventData));
-    this.$events.$on('filter-reset', e => this.onFilterReset());
+    this.$events.$on('filter-reset', () => this.onFilterReset());
     this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
   },
   methods: {
@@ -178,7 +188,8 @@ export default {
     onChangePage(page) {
       this.$refs.vuetable.changePage(page);
     },
-    onRowClicked(dataItem, event) {
+    onRowClicked() {
+      console.log();
     },
     onChangeRange(range) {
       this.moreParams.start = range.start;

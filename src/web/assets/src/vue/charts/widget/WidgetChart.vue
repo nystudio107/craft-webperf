@@ -42,9 +42,18 @@ export default {
     'apexcharts': ApexCharts,
   },
   props: {
-    title: String,
-    subTitle: String,
-    days: String,
+    title: {
+      type: String,
+      default: '',
+    },
+    subTitle: {
+      type: String,
+      default: '',
+    },
+    days: {
+      type: String,
+      default: '',
+    },
   },
   data: function () {
     return {

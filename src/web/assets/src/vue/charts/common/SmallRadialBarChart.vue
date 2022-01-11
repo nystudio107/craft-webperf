@@ -41,10 +41,22 @@ export default {
     'apexcharts': ApexCharts,
   },
   props: {
-    title: String,
-    start: String,
-    end: String,
-    column: String,
+    title: {
+      type: String,
+      default: '',
+    },
+    start: {
+      type: String,
+      default: '',
+    },
+    end: {
+      type: String,
+      default: '',
+    },
+    column: {
+      type: String,
+      default: '',
+    },
     pageUrl: {
       type: String,
       default: '',
@@ -61,7 +73,10 @@ export default {
       type: String,
       default: '#C80000',
     },
-    maxValue: Number,
+    maxValue: {
+      type: Number,
+      default: 10000,
+    },
     siteId: {
       type: Number,
       default: 0,

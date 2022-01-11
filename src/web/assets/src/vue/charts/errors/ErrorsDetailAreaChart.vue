@@ -47,9 +47,18 @@ export default {
     'apexcharts': ApexCharts,
   },
   props: {
-    title: String,
-    start: String,
-    end: String,
+    title: {
+      type: String,
+      default: '',
+    },
+    start: {
+      type: String,
+      default: '',
+    },
+    end: {
+      type: String,
+      default: '',
+    },
     pageUrl: {
       type: String,
       default: '',

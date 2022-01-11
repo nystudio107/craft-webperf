@@ -100,8 +100,14 @@ export default {
     'error-warning': ErrorWarning,
   },
   props: {
-    start: String,
-    end: String,
+    start: {
+      type: String,
+      default: '',
+    },
+    end: {
+      type: String,
+      default: '',
+    },
     fastColor: {
       type: String,
       default: '#00C800',
@@ -152,7 +158,7 @@ export default {
   },
   mounted() {
     this.$events.$on('filter-set', eventData => this.onFilterSet(eventData));
-    this.$events.$on('filter-reset', e => this.onFilterReset());
+    this.$events.$on('filter-reset', () => this.onFilterReset());
     this.$events.$on('change-range', eventData => this.onChangeRange(eventData));
   },
   methods: {
@@ -177,7 +183,7 @@ export default {
     onChangePage(page) {
       this.$refs.vuetable.changePage(page);
     },
-    onRowClicked(dataItem, event) {
+    onRowClicked(dataItem) {
       if (dataItem.detailPageUrl.length) {
         window.location.href = dataItem.detailPageUrl;
       }

@@ -5,7 +5,10 @@
         <h4 class="text-red-300 m-0">
           Craft Errors:
         </h4>
-        <div v-for="message in parsedErrors">
+        <div
+          v-for="(message, index) in parsedErrors"
+          :key="index"
+        >
           <div class="field text-sm font-normal inline-block pt-2">
             <p
               :class="[message.level === 'error' ? 'webperf-error-color' : '']"
@@ -23,7 +26,10 @@
         <h4 class="text-green-300 m-0">
           JavaScript Errors:
         </h4>
-        <div v-for="message in parsedErrors">
+        <div
+          v-for="(message, index) in parsedErrors"
+          :key="index"
+        >
           <div class="field text-sm font-normal inline-block pt-2">
             <p class="warning display-block webperf-error-color">
               Error &rarr; {{ message.t }} {{ message.c }} {{ message.m }} {{ message.x }}
@@ -32,7 +38,8 @@
               Stack Trace &rarr;
               <ul class="list-reset">
                 <li
-                  v-for="item in message.f"
+                  v-for="(item, lindex) in message.f"
+                  :key="lindex"
                   class="text-gray-600 pl-2"
                 >
                   {{ item.l }}:{{ item.c }} {{ item.f }} {{ item.w }} {{ item.wo }}
@@ -56,8 +63,14 @@
 export default {
   name: 'ErrorSample',
   props: {
-    pageErrors: String,
-    type: String,
+    pageErrors: {
+      type: String,
+      default: '',
+    },
+    type: {
+      type: String,
+      default: '',
+    },
   },
   data: function () {
     return {

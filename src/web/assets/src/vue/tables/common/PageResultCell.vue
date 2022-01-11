@@ -9,7 +9,7 @@
         <a
           v-if="title"
           :href="url"
-          style="color: rgb(26, 13, 171);"
+          style="color: rgb(26 13 171);"
           target="_blank"
           @click.stop=""
         >
@@ -25,12 +25,12 @@
       <cite
         :title="url"
         class="text-sm font-normal truncate-label single-line-truncate"
-        style="width: 100%; "
+        style="width: 100%;"
       >
         <a
           :href="url"
           class="hover:no-underline"
-          style="color: rgb(0, 102, 33);"
+          style="color: rgb(0 102 33);"
           target="_blank"
           @click.stop=""
         >
@@ -55,10 +55,22 @@
 export default {
   name: 'PageResultCell',
   props: {
-    title: String,
-    url: String,
-    width: Number,
-    color: String,
+    title: {
+      type: String,
+      default: '',
+    },
+    url: {
+      type: String,
+      default: '',
+    },
+    width: {
+      type: Number,
+      default: 0,
+    },
+    color: {
+      type: String,
+      default: '',
+    },
   },
 }
 </script>
