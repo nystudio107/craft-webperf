@@ -1,6 +1,6 @@
 {
   "src/js/alerts.js": {
-    "file": "assets/alerts.1871661a.js",
+    "file": "assets/alerts.256bc0f3.js",
     "src": "src/js/alerts.js",
     "isEntry": true,
     "imports": [
@@ -8,84 +8,84 @@
     ]
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard.728fdf71.js",
+    "file": "assets/dashboard.26422799.js",
     "src": "src/js/dashboard.js",
     "isEntry": true,
     "imports": [
       "_vendor.6a8d211c.js",
-      "_SimpleBarChart.cada778d.js",
+      "_SimpleBarChart.237d66a4.js",
       "_tri-color-blend.3ecffd12.js",
-      "_SampleSizeWarning.2c2275fa.js",
-      "_SampleRangePicker.0e02f7a5.js",
-      "_SamplePaneFooter.c88f08be.js",
-      "_RecommendationsList.5608b603.js"
+      "_SampleSizeWarning.458ccd25.js",
+      "_SampleRangePicker.50e8bc5d.js",
+      "_SamplePaneFooter.8a4aac23.js",
+      "_RecommendationsList.3878d655.js"
     ]
   },
   "src/js/errors-detail.js": {
-    "file": "assets/errors-detail.7ce4939d.js",
+    "file": "assets/errors-detail.f6ca6ee9.js",
     "src": "src/js/errors-detail.js",
     "isEntry": true,
     "imports": [
       "_vendor.6a8d211c.js",
-      "_ErrorsDetailAreaChart.8008259f.js",
-      "_PageResultCell.a819acb2.js",
-      "_RequestBarChart.ca2f7fb8.js",
-      "_DataSampleDate.94853f61.js",
-      "_DataSampleDevice.fabeb357.js",
-      "_SimpleBarChart.cada778d.js",
-      "_SampleRangePicker.0e02f7a5.js",
-      "_SamplePaneFooter.c88f08be.js",
+      "_ErrorsDetailAreaChart.910e2779.js",
+      "_PageResultCell.2fbd23df.js",
+      "_RequestBarChart.64ff66ea.js",
+      "_DataSampleDate.20b1d588.js",
+      "_DataSampleDevice.450bd5e9.js",
+      "_SimpleBarChart.237d66a4.js",
+      "_SampleRangePicker.50e8bc5d.js",
+      "_SamplePaneFooter.8a4aac23.js",
       "_tri-color-blend.3ecffd12.js"
     ]
   },
   "src/js/errors-index.js": {
-    "file": "assets/errors-index.39d1d1ba.js",
+    "file": "assets/errors-index.bd3fe27a.js",
     "src": "src/js/errors-index.js",
     "isEntry": true,
     "imports": [
       "_vendor.6a8d211c.js",
-      "_PageResultCell.a819acb2.js",
-      "_DataSampleDate.94853f61.js",
-      "_SampleRangePicker.0e02f7a5.js",
-      "_ErrorsDetailAreaChart.8008259f.js"
+      "_PageResultCell.2fbd23df.js",
+      "_DataSampleDate.20b1d588.js",
+      "_SampleRangePicker.50e8bc5d.js",
+      "_ErrorsDetailAreaChart.910e2779.js"
     ]
   },
   "src/js/performance-detail.js": {
-    "file": "assets/performance-detail.c1f5a444.js",
+    "file": "assets/performance-detail.3dcb9421.js",
     "src": "src/js/performance-detail.js",
     "isEntry": true,
     "imports": [
       "_vendor.6a8d211c.js",
-      "_PerformanceDetailAreaChart.09e41373.js",
-      "_PageResultCell.a819acb2.js",
+      "_PerformanceDetailAreaChart.81872007.js",
+      "_PageResultCell.2fbd23df.js",
       "_tri-color-blend.3ecffd12.js",
-      "_RequestBarChart.ca2f7fb8.js",
-      "_DataSampleDate.94853f61.js",
-      "_DataSampleDevice.fabeb357.js",
-      "_SimpleBarChart.cada778d.js",
-      "_SampleRangePicker.0e02f7a5.js",
-      "_SamplePaneFooter.c88f08be.js",
-      "_RecommendationsList.5608b603.js"
+      "_RequestBarChart.64ff66ea.js",
+      "_DataSampleDate.20b1d588.js",
+      "_DataSampleDevice.450bd5e9.js",
+      "_SimpleBarChart.237d66a4.js",
+      "_SampleRangePicker.50e8bc5d.js",
+      "_SamplePaneFooter.8a4aac23.js",
+      "_RecommendationsList.3878d655.js"
     ]
   },
   "src/js/performance-index.js": {
-    "file": "assets/performance-index.7cf1ff71.js",
+    "file": "assets/performance-index.d7fa815e.js",
     "src": "src/js/performance-index.js",
     "isEntry": true,
     "imports": [
       "_vendor.6a8d211c.js",
-      "_PageResultCell.a819acb2.js",
+      "_PageResultCell.2fbd23df.js",
       "_tri-color-blend.3ecffd12.js",
-      "_RequestBarChart.ca2f7fb8.js",
-      "_SampleSizeWarning.2c2275fa.js",
-      "_SampleRangePicker.0e02f7a5.js",
-      "_PerformanceDetailAreaChart.09e41373.js",
-      "_RecommendationsList.5608b603.js",
-      "_SamplePaneFooter.c88f08be.js"
+      "_RequestBarChart.64ff66ea.js",
+      "_SampleSizeWarning.458ccd25.js",
+      "_SampleRangePicker.50e8bc5d.js",
+      "_PerformanceDetailAreaChart.81872007.js",
+      "_RecommendationsList.3878d655.js",
+      "_SamplePaneFooter.8a4aac23.js"
     ]
   },
   "src/js/sidebar.js": {
-    "file": "assets/sidebar.e99e35d8.js",
+    "file": "assets/sidebar.d5ff225d.js",
     "src": "src/js/sidebar.js",
     "isEntry": true,
     "imports": [
@@ -98,7 +98,7 @@
     "src": "src/js/webperf.js",
     "isEntry": true,
     "css": [
-      "assets/webperf.8cd77e50.css"
+      "assets/webperf.883616c3.css"
     ]
   },
   "_vendor.6a8d211c.js": {
@@ -107,15 +107,15 @@
       "assets/vendor.3b5bd98c.css"
     ]
   },
-  "_SimpleBarChart.cada778d.js": {
-    "file": "assets/SimpleBarChart.cada778d.js",
+  "_SimpleBarChart.237d66a4.js": {
+    "file": "assets/SimpleBarChart.237d66a4.js",
     "imports": [
       "_vendor.6a8d211c.js",
       "_tri-color-blend.3ecffd12.js"
     ]
   },
-  "_SampleRangePicker.0e02f7a5.js": {
-    "file": "assets/SampleRangePicker.0e02f7a5.js",
+  "_SampleRangePicker.50e8bc5d.js": {
+    "file": "assets/SampleRangePicker.50e8bc5d.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ],
@@ -123,60 +123,60 @@
       "assets/SampleRangePicker.7c556130.css"
     ]
   },
-  "_SamplePaneFooter.c88f08be.js": {
-    "file": "assets/SamplePaneFooter.c88f08be.js",
+  "_SamplePaneFooter.8a4aac23.js": {
+    "file": "assets/SamplePaneFooter.8a4aac23.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_RecommendationsList.5608b603.js": {
-    "file": "assets/RecommendationsList.5608b603.js",
+  "_RecommendationsList.3878d655.js": {
+    "file": "assets/RecommendationsList.3878d655.js",
     "imports": [
       "_vendor.6a8d211c.js",
-      "_SamplePaneFooter.c88f08be.js"
+      "_SamplePaneFooter.8a4aac23.js"
     ]
   },
   "_tri-color-blend.3ecffd12.js": {
     "file": "assets/tri-color-blend.3ecffd12.js"
   },
-  "_SampleSizeWarning.2c2275fa.js": {
-    "file": "assets/SampleSizeWarning.2c2275fa.js",
+  "_SampleSizeWarning.458ccd25.js": {
+    "file": "assets/SampleSizeWarning.458ccd25.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_ErrorsDetailAreaChart.8008259f.js": {
-    "file": "assets/ErrorsDetailAreaChart.8008259f.js",
+  "_ErrorsDetailAreaChart.910e2779.js": {
+    "file": "assets/ErrorsDetailAreaChart.910e2779.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_PageResultCell.a819acb2.js": {
-    "file": "assets/PageResultCell.a819acb2.js",
+  "_PageResultCell.2fbd23df.js": {
+    "file": "assets/PageResultCell.2fbd23df.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_RequestBarChart.ca2f7fb8.js": {
-    "file": "assets/RequestBarChart.ca2f7fb8.js",
+  "_RequestBarChart.64ff66ea.js": {
+    "file": "assets/RequestBarChart.64ff66ea.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_DataSampleDate.94853f61.js": {
-    "file": "assets/DataSampleDate.94853f61.js",
+  "_DataSampleDate.20b1d588.js": {
+    "file": "assets/DataSampleDate.20b1d588.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_DataSampleDevice.fabeb357.js": {
-    "file": "assets/DataSampleDevice.fabeb357.js",
+  "_DataSampleDevice.450bd5e9.js": {
+    "file": "assets/DataSampleDevice.450bd5e9.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
   },
-  "_PerformanceDetailAreaChart.09e41373.js": {
-    "file": "assets/PerformanceDetailAreaChart.09e41373.js",
+  "_PerformanceDetailAreaChart.81872007.js": {
+    "file": "assets/PerformanceDetailAreaChart.81872007.js",
     "imports": [
       "_vendor.6a8d211c.js"
     ]
