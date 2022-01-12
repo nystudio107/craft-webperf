@@ -1,32 +1,42 @@
 <template>
-    <span class="cursor-default" :class="className" :title="title"> {{ device }}</span>
+  <span
+    :class="className"
+    :title="title"
+    class="cursor-default"
+  > {{ device }}</span>
 </template>
 <script>
-    export default {
-        name: 'data-sample-device',
-        props: {
-            device: String,
-            mobile: Boolean,
-        },
-        computed: {
-            className() {
-                let className = '';
+export default {
+  name: 'DataSampleDevice',
+  props: {
+    device: {
+      type: String,
+      default: '',
+    },
+    mobile: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    className() {
+      let className = '';
 
-                if (this.device && this.mobile !== undefined) {
-                    className = this.mobile === true ? 'webperf-mobile-icon' : 'webperf-desktop-icon';
-                }
+      if (this.device && this.mobile !== undefined) {
+        className = this.mobile === true ? 'webperf-mobile-icon' : 'webperf-desktop-icon';
+      }
 
-                return className;
-            },
-            title() {
-                let title = '';
+      return className;
+    },
+    title() {
+      let title = '';
 
-                if (this.device && this.mobile !== undefined) {
-                    title = this.mobile === true ? 'Mobile device' : 'Desktop device';
-                }
+      if (this.device && this.mobile !== undefined) {
+        title = this.mobile === true ? 'Mobile device' : 'Desktop device';
+      }
 
-                return title;
-            }
-        }
+      return title;
     }
+  }
+}
 </script>

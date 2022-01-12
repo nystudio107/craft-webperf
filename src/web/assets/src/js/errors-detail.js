@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueEvents from 'vue-events';
 import ErrorsDetailAreaChart from '@/vue/charts/Errors/ErrorsDetailAreaChart.vue';
 import ErrorsDetailTable from '@/vue/tables/Errors/ErrorsDetailTable.vue';
@@ -8,24 +9,22 @@ import SamplePaneFooter from '@/vue/common/SamplePaneFooter.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
-const vm = new Vue({
+new Vue({
     el: "#cp-nav-content",
     components: {
-        'errors-detail-area-chart': ErrorsDetailAreaChart,
-        'errors-detail-table': ErrorsDetailTable,
-        'radial-bar-chart': RadialBarChart,
-        'simple-bar-chart': SimpleBarChart,
-        'sample-range-picker': SampleRangePicker,
-        'sample-pane-footer': SamplePaneFooter,
+        ErrorsDetailAreaChart,
+        ErrorsDetailTable,
+        RadialBarChart,
+        SimpleBarChart,
+        SampleRangePicker,
+        SamplePaneFooter,
     },
-    data: {
+    mounted() {
+        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
     methods: {
         onTableRefresh(vuetable) {
             Vue.nextTick(() => vuetable.refresh());
         }
-    },
-    mounted() {
-        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
 });

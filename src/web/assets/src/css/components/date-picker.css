@@ -18,11 +18,11 @@ div.datepicker.flex.flex-direction-column {
 }
 
 body.ltr .date-time-picker .flex > *:not(:last-child) {
-  margin-right: auto!important;
+  margin-right: auto !important;
 }
 
 body.ltr .date-time-picker .flex > .header-picker:not(:last-child) {
-  margin-right: 0!important;
+  margin-right: 0 !important;
 }
 
 .shortcuts-container {

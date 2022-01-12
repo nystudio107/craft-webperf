@@ -7,7 +7,7 @@
 
 .apexcharts-title-text {
   font-weight: bold;
-  font-family: system-ui, system-ui, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .apexcharts-datalabel-value {
@@ -43,11 +43,11 @@
 }
 
 .file-list-wrapper:hover {
-  background-color: #EEE;
+  background-color: #eee;
 }
 
 .good-bad-ugly {
-  background: linear-gradient(to right, rgb(0, 200, 0), rgb(255, 255, 0), rgb(200, 0, 0));
+  background: linear-gradient(to right, rgb(0 200 0), rgb(255 255 0), rgb(200 0 0));
   height: 20px;
 }
 

@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueEvents from 'vue-events';
 import ErrorsIndexTable from '@/vue/tables/Errors/ErrorsIndexTable.vue';
 import SampleRangePicker from '@/vue/common/SampleRangePicker.vue';
@@ -5,21 +6,19 @@ import ErrorsDetailAreaChart from '@/vue/charts/Errors/ErrorsDetailAreaChart.vue
 
 Vue.use(VueEvents);
 // Create our vue instance
-const vm = new Vue({
+new Vue({
     el: "#cp-nav-content",
     components: {
-        'errors-index-table': ErrorsIndexTable,
-        'sample-range-picker': SampleRangePicker,
-        'errors-detail-area-chart': ErrorsDetailAreaChart,
+        ErrorsIndexTable,
+        SampleRangePicker,
+        ErrorsDetailAreaChart,
     },
-    data: {
+    mounted() {
+        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
     methods: {
         onTableRefresh(vuetable) {
             Vue.nextTick(() => vuetable.refresh());
         }
-    },
-    mounted() {
-        this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
     },
 });

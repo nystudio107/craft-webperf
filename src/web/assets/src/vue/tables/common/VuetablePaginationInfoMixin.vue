@@ -22,13 +22,13 @@ export default {
       }
     },
   },
-  data: function() {
+  data: function () {
     return {
       tablePagination: null
     }
   },
   computed: {
-    paginationInfo () {
+    paginationInfo() {
       if (this.tablePagination == null || this.tablePagination.total == 0) {
         return this.noDataTemplate
       }
@@ -40,10 +40,10 @@ export default {
     },
   },
   methods: {
-    setPaginationData (tablePagination) {
+    setPaginationData(tablePagination) {
       this.tablePagination = tablePagination
     },
-    resetData () {
+    resetData() {
       this.tablePagination = null
     }
   },

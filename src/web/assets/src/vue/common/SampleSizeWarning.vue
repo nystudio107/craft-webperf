@@ -1,16 +1,24 @@
 <template>
-    <div class="field webperf-tooltip text-sm font-normal inline-block">
-        <p class="warning display-block" v-if="sample < 100">&nbsp;</p>
-        <span class="webperf-tooltiptext webperf-sample-tooltip">
-            Only {{ sample }} data sample<span v-if="sample !== 1">s</span>.
-        </span>
-    </div>
+  <div class="field webperf-tooltip text-sm font-normal inline-block">
+    <p
+      v-if="sample < 100"
+      class="warning display-block"
+    >
+&nbsp;
+    </p>
+    <span class="webperf-tooltiptext webperf-sample-tooltip">
+      Only {{ sample }} data sample<span v-if="sample !== 1">s</span>.
+    </span>
+  </div>
 </template>
 <script>
-    export default {
-        name: 'sample-size-warning',
-        props: {
-            sample: Number,
-        },
-    }
+export default {
+  name: 'SampleSizeWarning',
+  props: {
+    sample: {
+      type: Number,
+      default: 0,
+    },
+  },
+}
 </script>

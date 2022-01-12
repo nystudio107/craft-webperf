@@ -5,17 +5,19 @@
  *
  */
 
+/* stylelint-disable */
+
 table.vuetable {
-  width: 100%;
-  padding: 0;
+    width: 100%;
+    padding: 0;
 }
 
 .webperf-menubtn-asc::after {
-  content: 'downangle';
+    content: "downangle";
 }
 
 .webperf-menubtn-desc::after {
-  content: 'upangle';
+    content: "upangle";
 }
 
 /**
@@ -29,83 +31,83 @@ th.loadTimeBar {
 }
 
 th.vuetable-th-craftDbCnt {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 th.vuetable-th-craftTwigCnt {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 th.vuetable-th-craftOtherCnt {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 th.vuetable-th-craftTotalMemory {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 th.vuetable-th-slot-data-samples {
-  text-align: center!important;
+    text-align: center !important;
 }
 
 th.vuetable-th-device {
-  text-align: left!important;
+    text-align: left !important;
 }
 
 th.vuetable-th-os {
-  text-align: left!important;
+    text-align: left !important;
 }
 
 th.vuetable-th-browser {
-  text-align: left!important;
+    text-align: left !important;
 }
 
 th.vuetable-th-countryCode {
-  text-align: left!important;
+    text-align: left !important;
 }
 
 th.vuetable-th-slot-total-errors {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 th.vuetable-th-slot-craft-errors {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 th.vuetable-th-slot-boomerang-errors {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 table.webperf-pages-index tbody.vuetable-body tr:hover {
-  background-color: #DCEEFE;
-  cursor: pointer;
+    background-color: #dceefe;
+    cursor: pointer;
 }
 
 table.webperf-pages-index td:first-child {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 table.webperf-pages-index td:last-child {
-  padding-right: 10px;
+    padding-right: 10px;
 }
 
 table.webperf-pages-index th:first-child {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 table.webperf-pages-index th:last-child {
-  padding-right: 10px;
+    padding-right: 10px;
 }
 
 /**
  * Column alignment
  */
 td.text-center {
-  text-align: center!important;
+    text-align: center !important;
 }
 
 td.text-right {
-  text-align: right!important;
+    text-align: right !important;
 }
 
 /**
@@ -113,14 +115,16 @@ td.text-right {
  */
 
 .single-line-truncate-wrapper {
-  height: 20px;
+    height: 20px;
 }
 
 .single-line-truncate {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
+
+/* stylelint-enable */
