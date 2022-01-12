@@ -1,6 +1,6 @@
 # Webperf Changelog
 
-## 1.0.27 - UNRELEASED
+## 1.0.27 - 2022.01.12
 
 ### Added
 
