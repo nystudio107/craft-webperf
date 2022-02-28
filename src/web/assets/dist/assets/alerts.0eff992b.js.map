@@ -1,0 +1,1 @@
+{"version":3,"file":"alerts.0eff992b.js","sources":["../../src/js/alerts.js"],"sourcesContent":["import Vue from 'vue';\nimport VeeValidate from 'vee-validate';\n\nVue.use(VeeValidate);\n// Create our vue instance\nnew Vue({\n    el: \"#cp-nav-content\",\n});\n"],"names":["VeeValidate"],"mappings":"yCAAA,mBAGA,EAAI,IAAIA,GAER,GAAI,GAAI,CACJ,GAAI"}
