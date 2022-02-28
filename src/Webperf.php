@@ -88,9 +88,9 @@ class Webperf extends Plugin
     public static ?int $requestUuid = null;
 
     /**
-     * @var int|null
+     * @var string|null
      */
-    public static ?int $requestUrl = null;
+    public static ?string $requestUrl = null;
 
     /**
      * @var bool
