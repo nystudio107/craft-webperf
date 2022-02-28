@@ -2,7 +2,6 @@
 
 namespace nystudio107\webperf\migrations;
 
-use Craft;
 use craft\db\Migration;
 
 /**
@@ -17,42 +16,26 @@ class m190625_151715_add_indexes extends Migration
     {
         // Add webperf_data_samples indexes
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'dateCreated',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'dateCreated',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'requestId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'requestId',
             false
         );
         // Add webperf_error_samples indexes
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'dateCreated',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'dateCreated',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'requestId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'requestId',
             false

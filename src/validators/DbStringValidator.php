@@ -10,10 +10,8 @@
 
 namespace nystudio107\webperf\validators;
 
-use nystudio107\webperf\helpers\Text as TextHelper;
-
 use craft\helpers\StringHelper;
-
+use nystudio107\webperf\helpers\Text as TextHelper;
 use yii\base\InvalidConfigException;
 use yii\validators\Validator;
 
@@ -34,7 +32,7 @@ class DbStringValidator extends Validator
      * @inheritdoc
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         if ($this->max === null) {
@@ -45,7 +43,7 @@ class DbStringValidator extends Validator
     /**
      * @inheritdoc
      */
-    public function validateAttribute($model, $attribute)
+    public function validateAttribute($model, $attribute): void
     {
         $value = $model->$attribute;
         $value = TextHelper::cleanupText($value);

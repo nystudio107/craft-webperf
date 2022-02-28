@@ -10,10 +10,7 @@
 
 namespace nystudio107\webperf\migrations;
 
-use nystudio107\webperf\Webperf;
-
 use Craft;
-use craft\config\DbConfig;
 use craft\db\Migration;
 
 /**
@@ -139,72 +136,41 @@ class Install extends Migration
     protected function createIndexes()
     {
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'url',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'url',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'dateCreated',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'dateCreated',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'requestId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'requestId',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'url',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'url',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'dateCreated',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'dateCreated',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'requestId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'requestId',
             false
         );
-        // Additional commands depending on the db driver
-        switch ($this->driver) {
-            case DbConfig::DRIVER_MYSQL:
-                break;
-            case DbConfig::DRIVER_PGSQL:
-                break;
-        }
     }
 
     /**

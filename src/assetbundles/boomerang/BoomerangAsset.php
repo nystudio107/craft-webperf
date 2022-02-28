@@ -10,7 +10,6 @@
 
 namespace nystudio107\webperf\assetbundles\boomerang;
 
-use Craft;
 use craft\web\AssetBundle;
 
 /**
@@ -26,7 +25,7 @@ class BoomerangAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = "@nystudio107/webperf/assetbundles/boomerang/dist";
 

@@ -10,12 +10,14 @@
 
 namespace nystudio107\webperf\events;
 
+use yii\base\ModelEvent;
+
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class AlertEvent extends \yii\base\ModelEvent
+class AlertEvent extends ModelEvent
 {
     // Properties
     // =========================================================================

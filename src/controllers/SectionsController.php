@@ -10,16 +10,16 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\assetbundles\webperf\WebperfDashboardAsset;
-use nystudio107\webperf\helpers\MultiSite as MultiSiteHelper;
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
-
+use DateTime;
+use nystudio107\webperf\assetbundles\webperf\WebperfDashboardAsset;
+use nystudio107\webperf\helpers\MultiSite as MultiSiteHelper;
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
+use nystudio107\webperf\Webperf;
 use yii\base\InvalidConfigException;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -47,11 +47,11 @@ class SectionsController extends Controller
 
     /**
      * @param string|null $siteHandle
-     * @param bool        $showWelcome
+     * @param bool $showWelcome
      *
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionDashboard(string $siteHandle = null, bool $showWelcome = false): Response
     {
@@ -83,7 +83,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -91,7 +91,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/dashboard'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/dashboard' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -99,7 +99,7 @@ class SectionsController extends Controller
         $variables['showWelcome'] = $showWelcome;
         $variables['settings'] = Webperf::$settings;
         // Set the default date range
-        $now = new \DateTime();
+        $now = new DateTime();
         $variables['end'] = $now->format('Y-m-d');
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
@@ -112,7 +112,7 @@ class SectionsController extends Controller
      *
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionPagesIndex(string $siteHandle = null): Response
     {
@@ -145,7 +145,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -153,14 +153,14 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/performance' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'performance';
         $variables['settings'] = Webperf::$settings;
         // Set the default date range
-        $now = new \DateTime();
+        $now = new DateTime();
         $variables['end'] = $now->format('Y-m-d');
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
@@ -169,12 +169,12 @@ class SectionsController extends Controller
     }
 
     /**
-     * @param string      $pageUrl
+     * @param string $pageUrl
      * @param string|null $siteHandle
      *
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionPageDetail(string $pageUrl, string $siteHandle = null): Response
     {
@@ -207,7 +207,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -215,11 +215,11 @@ class SectionsController extends Controller
             ],
             [
                 'label' => Craft::t('webperf', 'Performance'),
-                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/performance' . $siteHandleUri),
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/performance/page-detail'.$siteHandleUri, [
+                'url' => UrlHelper::cpUrl('webperf/performance/page-detail' . $siteHandleUri, [
                     'pageUrl' => $pageUrl
                 ]),
             ],
@@ -230,11 +230,11 @@ class SectionsController extends Controller
         $variables['pageTitle'] = Webperf::$plugin->dataSamples->pageTitle($pageUrl, $siteId);
         $variables['settings'] = Webperf::$settings;
         $variables['webpageTestApiKey'] = Webperf::$settings->webpageTestApiKey;
-        if (Webperf::$craft31 && $variables['webpageTestApiKey']) {
+        if ($variables['webpageTestApiKey']) {
             $variables['webpageTestApiKey'] = Craft::parseEnv($variables['webpageTestApiKey']);
         }
         // Set the default date range
-        $now = new \DateTime();
+        $now = new DateTime();
         $variables['end'] = $now->format('Y-m-d');
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
@@ -248,7 +248,7 @@ class SectionsController extends Controller
      *
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionErrorsIndex(string $siteHandle = null): Response
     {
@@ -280,7 +280,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -288,14 +288,14 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/errors' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
         $variables['selectedSubnavItem'] = 'errors';
         $variables['settings'] = Webperf::$settings;
         // Set the default date range
-        $now = new \DateTime();
+        $now = new DateTime();
         $variables['end'] = $now->format('Y-m-d');
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
@@ -304,12 +304,12 @@ class SectionsController extends Controller
     }
 
     /**
-     * @param string      $pageUrl
+     * @param string $pageUrl
      * @param string|null $siteHandle
      *
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionErrorsDetail(string $pageUrl, string $siteHandle = null): Response
     {
@@ -341,7 +341,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -349,11 +349,11 @@ class SectionsController extends Controller
             ],
             [
                 'label' => Craft::t('webperf', 'Errors'),
-                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/errors' . $siteHandleUri),
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/errors/page-detail'.$siteHandleUri, [
+                'url' => UrlHelper::cpUrl('webperf/errors/page-detail' . $siteHandleUri, [
                     'pageUrl' => $pageUrl
                 ]),
             ],
@@ -364,7 +364,7 @@ class SectionsController extends Controller
         $variables['pageTitle'] = Webperf::$plugin->errorSamples->pageTitle($pageUrl, $siteId);
         $variables['settings'] = Webperf::$settings;
         // Set the default date range
-        $now = new \DateTime();
+        $now = new DateTime();
         $variables['end'] = $now->format('Y-m-d');
         $variables['start'] = $now->modify('-1 year')->format('Y-m-d');
 
@@ -377,7 +377,7 @@ class SectionsController extends Controller
      *
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionAlerts(string $siteHandle = null): Response
     {
@@ -406,7 +406,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -414,7 +414,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/alerts'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/alerts' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";

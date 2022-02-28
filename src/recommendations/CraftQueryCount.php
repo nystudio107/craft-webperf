@@ -10,9 +10,8 @@
 
 namespace nystudio107\webperf\recommendations;
 
-use nystudio107\webperf\base\Recommendation;
-
 use Craft;
+use nystudio107\webperf\base\Recommendation;
 
 /**
  * @author    nystudio107
@@ -24,7 +23,7 @@ class CraftQueryCount extends Recommendation
     // Constants
     // =========================================================================
 
-    const MAX_QUERIES = 150;
+    protected const MAX_QUERIES = 150;
 
     // Public Methods
     // =========================================================================
@@ -32,7 +31,7 @@ class CraftQueryCount extends Recommendation
     /**
      * @inheritdoc
      */
-    public function evaluate()
+    public function evaluate(): void
     {
         // See if there are too many database queries
         if ($this->sample->craftDbCnt >= self::MAX_QUERIES) {

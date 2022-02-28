@@ -25,7 +25,7 @@ class CraftDbErrorSample extends DbErrorSample
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         $this->type = 'craft';

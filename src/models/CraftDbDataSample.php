@@ -13,7 +13,6 @@ namespace nystudio107\webperf\models;
 use nystudio107\webperf\base\CraftDataSample;
 use nystudio107\webperf\base\DbDataSampleInterface;
 use nystudio107\webperf\base\DbDataSampleTrait;
-
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -36,7 +35,7 @@ class CraftDbDataSample extends CraftDataSample implements DbDataSampleInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),
@@ -49,7 +48,7 @@ class CraftDbDataSample extends CraftDataSample implements DbDataSampleInterface
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),

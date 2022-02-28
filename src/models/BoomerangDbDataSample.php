@@ -14,7 +14,6 @@ use nystudio107\webperf\base\BoomerangDataSample;
 use nystudio107\webperf\base\DbDataSampleInterface;
 use nystudio107\webperf\base\DbDataSampleTrait;
 use nystudio107\webperf\validators\DbStringValidator;
-
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -37,7 +36,7 @@ class BoomerangDbDataSample extends BoomerangDataSample implements DbDataSampleI
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),
@@ -54,7 +53,7 @@ class BoomerangDbDataSample extends BoomerangDataSample implements DbDataSampleI
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),

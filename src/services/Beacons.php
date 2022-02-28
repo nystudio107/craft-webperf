@@ -10,21 +10,18 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\base\CraftDataSample;
-use nystudio107\webperf\helpers\MultiSite;
-use nystudio107\webperf\helpers\PluginTemplate;
-use nystudio107\webperf\models\CraftDbErrorSample;
-use nystudio107\webperf\models\CraftDbDataSample;
-
-use nystudio107\seomatic\Seomatic;
-
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
-
 use Craft;
 use craft\base\Component;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\webperf\base\CraftDataSample;
+use nystudio107\webperf\helpers\MultiSite;
+use nystudio107\webperf\helpers\PluginTemplate;
+use nystudio107\webperf\models\CraftDbDataSample;
+use nystudio107\webperf\models\CraftDbErrorSample;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107
@@ -36,8 +33,8 @@ class Beacons extends Component
     // Constants
     // =========================================================================
 
-    const AMP_IFRAME_SCRIPT_URL = "https://cdn.ampproject.org/v0/amp-iframe-0.1.js";
-    const SEOMATIC_PLUGIN_HANDLE = 'seomatic';
+    protected const AMP_IFRAME_SCRIPT_URL = "https://cdn.ampproject.org/v0/amp-iframe-0.1.js";
+    protected const SEOMATIC_PLUGIN_HANDLE = 'seomatic';
 
     // Public Methods
     // =========================================================================
@@ -45,7 +42,7 @@ class Beacons extends Component
     /**
      * @return void
      */
-    public function includeHtmlBeacon()
+    public function includeHtmlBeacon(): void
     {
         $view = Craft::$app->getView();
         $script = $this->htmlBeaconScript(false);
@@ -57,7 +54,7 @@ class Beacons extends Component
     }
 
     /**
-     * @param bool        $headless
+     * @param bool $headless
      * @param string|null $title
      *
      * @return string
@@ -87,7 +84,7 @@ class Beacons extends Component
     /*
      * @return void
      */
-    public function includeAmpHtmlScript()
+    public function includeAmpHtmlScript(): void
     {
         $view = Craft::$app->getView();
         $view->registerJsFile(
@@ -104,7 +101,7 @@ class Beacons extends Component
     /*
      * @return void
      */
-    public function includeAmpHtmlBeacon()
+    public function includeAmpHtmlBeacon(): void
     {
         $html = PluginTemplate::renderPluginTemplate(
             '_frontend/scripts/load-boomerang-amp-iframe.twig',
@@ -119,7 +116,7 @@ class Beacons extends Component
     /*
      * @return void
      */
-    public function ampHtmlIframe()
+    public function ampHtmlIframe(): string
     {
         $boomerangUrl = Craft::$app->assetManager->getPublishedUrl(
             '@nystudio107/webperf/assetbundles/boomerang/dist/js/boomerang-1.0.0.min.js',
@@ -143,7 +140,7 @@ class Beacons extends Component
     /**
      * @return void
      */
-    public function includeCraftBeacon()
+    public function includeCraftBeacon(): void
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
@@ -191,14 +188,14 @@ class Beacons extends Component
                 + $stats['other']['memory']),
         ]);
         // Save the data sample
-        Craft::debug('Saving Craft DataSample: '.print_r($sample->getAttributes(), true), __METHOD__);
+        Craft::debug('Saving Craft DataSample: ' . print_r($sample->getAttributes(), true), __METHOD__);
         Webperf::$plugin->dataSamples->addDataSample($sample);
     }
 
     /**
      * @return void
      */
-    public function includeCraftErrorsBeacon()
+    public function includeCraftErrorsBeacon(): void
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
@@ -235,7 +232,7 @@ class Beacons extends Component
             'pageErrors' => $messages,
         ]);
         // Save the error sample
-        Craft::debug('Saving Craft ErrorSample: '.print_r($sample->getAttributes(), true), __METHOD__);
+        Craft::debug('Saving Craft ErrorSample: ' . print_r($sample->getAttributes(), true), __METHOD__);
         Webperf::$plugin->errorSamples->addErrorSample($sample);
     }
 

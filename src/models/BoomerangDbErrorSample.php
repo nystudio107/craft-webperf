@@ -25,7 +25,7 @@ class BoomerangDbErrorSample extends DbErrorSample
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         $this->type = 'boomerang';

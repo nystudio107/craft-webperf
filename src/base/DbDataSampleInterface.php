@@ -23,12 +23,12 @@ interface DbDataSampleInterface
     /**
      * @return array
      */
-    public function rules();
+    public function rules(): array;
 
     /**
      * @return array
      */
-    public function behaviors();
+    public function behaviors(): array;
 
     /**
      * @return array
@@ -36,7 +36,7 @@ interface DbDataSampleInterface
     public function getErrors($attribute = null);
 
     /**
-     * @param null  $names
+     * @param null $names
      * @param array $except
      *
      * @return mixed

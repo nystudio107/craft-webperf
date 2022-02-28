@@ -2,47 +2,46 @@
 {% from "webperf/_includes/macros.twig" import configWarning %}
 <div id="general">
     {% namespace "settings" %}
-    {{ forms.textField({
-        label: "Plugin name"|t("webperf"),
-        instructions: "The public-facing name of the plugin"|t("webperf"),
-        id: "pluginName",
-        name: "pluginName",
-        value: settings.pluginName,
-        warning: configWarning("pluginName", "webperf"),
-        errors: settings.getErrors("pluginName"),
-    }) }}
+        {{ forms.textField({
+            label: "Plugin name"|t("webperf"),
+            instructions: "The public-facing name of the plugin"|t("webperf"),
+            id: "pluginName",
+            name: "pluginName",
+            value: settings.pluginName,
+            warning: configWarning("pluginName", "webperf"),
+            errors: settings.getErrors("pluginName"),
+        }) }}
 
-    {{ forms.lightswitchField({
-        label: "Include Browser Beacon"|t("webperf"),
-        instructions: "Whether or not the asynchronous User Timing Beacon should be rendered on frontend pages."|t("webperf"),
-        id: "includeBeacon",
-        name: "includeBeacon",
-        on: settings.includeBeacon,
-        warning: configWarning("includeBeacon", "webperf"),
-        errors: settings.getErrors("includeBeacon"),
-    }) }}
+        {{ forms.lightswitchField({
+            label: "Include Browser Beacon"|t("webperf"),
+            instructions: "Whether or not the asynchronous User Timing Beacon should be rendered on frontend pages."|t("webperf"),
+            id: "includeBeacon",
+            name: "includeBeacon",
+            on: settings.includeBeacon,
+            warning: configWarning("includeBeacon", "webperf"),
+            errors: settings.getErrors("includeBeacon"),
+        }) }}
 
-    {{ forms.lightswitchField({
-        label: "Include Craft Beacon"|t("webperf"),
-        instructions: "Whether or not the Craft profiling data should be recorded for site requests."|t("webperf"),
-        id: "includeCraftProfiling",
-        name: "includeCraftProfiling",
-        on: settings.includeCraftProfiling,
-        warning: configWarning("includeCraftProfiling", "webperf"),
-        errors: settings.getErrors("includeCraftProfiling"),
-    }) }}
+        {{ forms.lightswitchField({
+            label: "Include Craft Beacon"|t("webperf"),
+            instructions: "Whether or not the Craft profiling data should be recorded for site requests."|t("webperf"),
+            id: "includeCraftProfiling",
+            name: "includeCraftProfiling",
+            on: settings.includeCraftProfiling,
+            warning: configWarning("includeCraftProfiling", "webperf"),
+            errors: settings.getErrors("includeCraftProfiling"),
+        }) }}
 
-    {{ forms.lightswitchField({
-        label: "Static Cached Site"|t("webperf"),
-        instructions: "If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token."|t("webperf"),
-        id: "staticCachedSite",
-        name: "staticCachedSite",
-        on: settings.staticCachedSite,
-        warning: configWarning("staticCachedSite", "webperf"),
-        errors: settings.getErrors("staticCachedSite"),
-    }) }}
+        {{ forms.lightswitchField({
+            label: "Static Cached Site"|t("webperf"),
+            instructions: "If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token."|t("webperf"),
+            id: "staticCachedSite",
+            name: "staticCachedSite",
+            on: settings.staticCachedSite,
+            warning: configWarning("staticCachedSite", "webperf"),
+            errors: settings.getErrors("staticCachedSite"),
+        }) }}
 
-    {% if craft.webperf.craft31 %}
         {{ forms.autosuggestField({
             label: "WebPageTest.org API Key"|t("webperf"),
             instructions: "To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
@@ -53,36 +52,26 @@
             warning: configWarning("webpageTestApiKey", "webperf"),
             errors: settings.getErrors("webpageTestApiKey"),
         }) }}
-    {% else %}
-        {{ forms.textField({
-            label: "WebPageTest.org API Key"|t("webperf"),
-            instructions: "To run pages through [WebPageTest.org](https://www.webpagetest.org/) via an API, you need an API key. Enter your WebpageTest.org API key here. If you don't have one, they are free and easy to obtain. [Learn More](https://www.webpagetest.org/getkey.php)"|t("webperf"),
-            id: "webpageTestApiKey",
-            name: "webpageTestApiKey",
-            value: settings.webpageTestApiKey,
-            warning: configWarning("webpageTestApiKey", "webperf"),
-            errors: settings.getErrors("webpageTestApiKey"),
-        }) }}
-    {% endif %}
-    {{ forms.editableTableField({
-        label: "Exclude Patterns"|t("webperf"),
-        instructions: "[Regular expressions](https://regexr.com/) to match URIs that should be excluded from tracking."|t("webperf"),
-        id: 'excludePatterns',
-        name: 'excludePatterns',
-        required: false,
-        defaultValues: {
-            pattern: "",
-        },
-        cols: {
-            pattern: {
-                heading: "RegEx pattern to exclude"|t("webperf"),
-                type: "singleline",
-                width: "100%",
-                code: true,
+
+        {{ forms.editableTableField({
+            label: "Exclude Patterns"|t("webperf"),
+            instructions: "[Regular expressions](https://regexr.com/) to match URIs that should be excluded from tracking."|t("webperf"),
+            id: 'excludePatterns',
+            name: 'excludePatterns',
+            required: false,
+            defaultValues: {
+                pattern: "",
             },
-        },
-        rows: settings.excludePatterns,
-        errors: settings.getErrors("excludePatterns"),
-    }) }}
+            cols: {
+                pattern: {
+                    heading: "RegEx pattern to exclude"|t("webperf"),
+                    type: "singleline",
+                    width: "100%",
+                    code: true,
+                },
+            },
+            rows: settings.excludePatterns,
+            errors: settings.getErrors("excludePatterns"),
+        }) }}
     {% endnamespace %}
 </div>

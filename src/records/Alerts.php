@@ -10,11 +10,7 @@
 
 namespace nystudio107\webperf\records;
 
-use nystudio107\webperf\Webperf;
-
-use Craft;
 use craft\db\ActiveRecord;
-
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -28,40 +24,36 @@ class Alerts extends ActiveRecord
     // =========================================================================
 
     /**
-     * @inheritdoc
+     * @var int
      */
-    public static function tableName()
-    {
-        return '{{%webperf_alerts}}';
-    }
+    public int $siteId;
 
     // Public Properties
     // =========================================================================
-
-    /**
-     * @var int
-     */
-    public $siteId;
-
     /**
      * @var string
      */
-    public $type;
-
+    public string $type;
     /**
      * @var string
      */
-    public $column;
-
+    public string $column;
     /**
      * @var int
      */
-    public $condition;
-
+    public int $condition;
     /**
      * @var int
      */
-    public $interval;
+    public int $interval;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName(): string
+    {
+        return '{{%webperf_alerts}}';
+    }
 
     // Public Methods
     // =========================================================================
@@ -69,7 +61,7 @@ class Alerts extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),
@@ -86,7 +78,7 @@ class Alerts extends ActiveRecord
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),

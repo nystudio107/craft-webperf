@@ -11,13 +11,14 @@
 namespace nystudio107\webperf\events;
 
 use nystudio107\webperf\base\DbDataSampleInterface;
+use yii\base\ModelEvent;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class DataSampleEvent extends \yii\base\ModelEvent
+class DataSampleEvent extends ModelEvent
 {
     // Properties
     // =========================================================================

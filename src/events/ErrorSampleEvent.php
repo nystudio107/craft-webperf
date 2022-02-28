@@ -11,13 +11,14 @@
 namespace nystudio107\webperf\events;
 
 use nystudio107\webperf\base\DbErrorSampleInterface;
+use yii\base\ModelEvent;
 
 /**
  * @author    nystudio107
  * @package   Webperf
  * @since     1.0.0
  */
-class ErrorSampleEvent extends \yii\base\ModelEvent
+class ErrorSampleEvent extends ModelEvent
 {
     // Properties
     // =========================================================================

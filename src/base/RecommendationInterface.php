@@ -25,5 +25,5 @@ interface RecommendationInterface
      *
      * @return void
      */
-    public function evaluate();
+    public function evaluate(): void;
 }

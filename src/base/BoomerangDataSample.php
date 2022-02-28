@@ -30,7 +30,7 @@ abstract class BoomerangDataSample extends FluentModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),

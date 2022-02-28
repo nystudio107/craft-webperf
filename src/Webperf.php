@@ -10,6 +10,24 @@
 
 namespace nystudio107\webperf;
 
+use Craft;
+use craft\base\Element;
+use craft\base\Model;
+use craft\base\Plugin;
+use craft\events\DefineHtmlEvent;
+use craft\events\PluginEvent;
+use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterUserPermissionsEvent;
+use craft\helpers\UrlHelper;
+use craft\services\Plugins;
+use craft\services\UserPermissions;
+use craft\web\Application;
+use craft\web\twig\variables\CraftVariable;
+use craft\web\UrlManager;
+use craft\web\View;
+use DateTime;
+use Exception;
+use nystudio107\pluginvite\services\VitePluginService;
 use nystudio107\webperf\assetbundles\webperf\WebperfAsset;
 use nystudio107\webperf\base\CraftDataSample;
 use nystudio107\webperf\helpers\PluginTemplate;
@@ -17,28 +35,11 @@ use nystudio107\webperf\log\ErrorsTarget;
 use nystudio107\webperf\log\ProfileTarget;
 use nystudio107\webperf\models\RecommendationDataSample;
 use nystudio107\webperf\models\Settings;
+use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\ErrorSamples as ErrorSamplesService;
-use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\Recommendations as RecommendationsService;
 use nystudio107\webperf\variables\WebperfVariable;
-
-use nystudio107\pluginvite\services\VitePluginService;
-
-use Craft;
-use craft\base\Element;
-use craft\base\Plugin;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
-use craft\events\RegisterUserPermissionsEvent;
-use craft\events\RegisterUrlRulesEvent;
-use craft\helpers\UrlHelper;
-use craft\services\UserPermissions;
-use craft\web\Application;
-use craft\web\twig\variables\CraftVariable;
-use craft\web\UrlManager;
-use craft\web\View;
-
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 
@@ -49,65 +50,75 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property BeaconsService          $beacons
- * @property DataSamplesService      $dataSamples
- * @property ErrorSamplesService     $errorSamples
- * @property RecommendationsService  $recommendations
- * @property ErrorsTarget            $errorsTarget
- * @property ProfileTarget           $profileTarget
- * @property VitePluginService       $vite
+ * @property BeaconsService $beacons
+ * @property DataSamplesService $dataSamples
+ * @property ErrorSamplesService $errorSamples
+ * @property RecommendationsService $recommendations
+ * @property ErrorsTarget $errorsTarget
+ * @property ProfileTarget $profileTarget
+ * @property VitePluginService $vite
  */
 class Webperf extends Plugin
 {
     // Constants
     // =========================================================================
 
-    const RECOMMENDATIONS_CACHE_KEY = 'webperf-recommendations';
-    const RECOMMENDATIONS_CACHE_DURATION = 60;
+    public const RECOMMENDATIONS_CACHE_KEY = 'webperf-recommendations';
+    public const RECOMMENDATIONS_CACHE_DURATION = 60;
 
-    const ERRORS_CACHE_KEY = 'webperf-errors';
-    const ERRORS_CACHE_DURATION = 60;
+    public const ERRORS_CACHE_KEY = 'webperf-errors';
+    public const ERRORS_CACHE_DURATION = 60;
 
     // Static Properties
     // =========================================================================
 
     /**
-     * @var Webperf
+     * @var null|Webperf
      */
-    public static $plugin;
+    public static ?Webperf $plugin = null;
 
     /**
-     * @var Settings
+     * @var null|Settings
      */
-    public static $settings;
-
-    /**
-     * @var int|null
-     */
-    public static $requestUuid;
+    public static ?Settings $settings = null;
 
     /**
      * @var int|null
      */
-    public static $requestUrl;
+    public static ?int $requestUuid = null;
+
+    /**
+     * @var int|null
+     */
+    public static ?int $requestUrl = null;
 
     /**
      * @var bool
      */
-    public static $beaconIncluded = false;
+    public static bool $beaconIncluded = false;
 
     /**
      * @var string
      */
-    public static $renderType = 'html';
-
-    /**
-     * @var bool
-     */
-    public static $craft31 = false;
+    public static string $renderType = 'html';
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public string $schemaVersion = '1.0.1';
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var bool
+     */
+    public bool $hasCpSection = true;
+    /**
+     * @var bool
+     */
+    public bool $hasCpSettings = true;
 
     /**
      * @inheritdoc
@@ -135,31 +146,13 @@ class Webperf extends Plugin
         parent::__construct($id, $parent, $config);
     }
 
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $schemaVersion = '1.0.1';
-
-    /**
-     * @var bool
-     */
-    public $hasCpSection = true;
-
-    /**
-     * @var bool
-     */
-    public $hasCpSettings = true;
-
     // Public Methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         // Initialize properties
@@ -167,10 +160,9 @@ class Webperf extends Plugin
         self::$settings = $this->getSettings();
         try {
             self::$requestUuid = random_int(0, PHP_INT_MAX);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             self::$requestUuid = null;
         }
-        self::$craft31 = version_compare(Craft::$app->getVersion(), '3.1', '>=');
         $this->name = self::$settings->pluginName;
         // Handle any console commands
         $request = Craft::$app->getRequest();
@@ -204,14 +196,14 @@ class Webperf extends Plugin
     /**
      * @inheritdoc
      */
-    public function getCpNavItem()
+    public function getCpNavItem(): array
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
         $recommendations = $this->getRecommendationsCount();
         $errors = $this->getErrorsCount();
         if (!empty($errors)) {
-            $navItem['label'] .= ' '.$errors;
+            $navItem['label'] .= ' ' . $errors;
         }
         $navItem['badgeCount'] = $recommendations;
         $currentUser = Craft::$app->getUser()->getIdentity();
@@ -231,42 +223,40 @@ class Webperf extends Plugin
             }
             if ($currentUser->can('webperf:errors')) {
                 $subNavs['errors'] = [
-                    'label' => Craft::t('webperf', 'Errors').' '.$errors,
+                    'label' => Craft::t('webperf', 'Errors') . ' ' . $errors,
                     'url' => 'webperf/errors',
                     'badge' => $errors,
                 ];
             }
             /* @TODO Alerts implementation
-            if ($currentUser->can('webperf:alerts')) {
-                $subNavs['alerts'] = [
-                    'label' => 'Alerts',
-                    'url' => 'webperf/alerts',
-                ];
-            }
+             * if ($currentUser->can('webperf:alerts')) {
+             * $subNavs['alerts'] = [
+             * 'label' => 'Alerts',
+             * 'url' => 'webperf/alerts',
+             * ];
+             * }
              */
             $editableSettings = true;
             $general = Craft::$app->getConfig()->getGeneral();
-            if (self::$craft31 && !$general->allowAdminChanges) {
+            if (!$general->allowAdminChanges) {
                 $editableSettings = false;
             }
-            if ($currentUser->can('webperf:settings') && $editableSettings) {
+            if ($editableSettings && $currentUser->can('webperf:settings')) {
                 $subNavs['settings'] = [
                     'label' => Craft::t('webperf', 'Settings'),
                     'url' => 'webperf/settings',
                 ];
             }
         }
-        $navItem = array_merge($navItem, [
+        return array_merge($navItem, [
             'subnav' => $subNavs,
         ]);
-
-        return $navItem;
     }
 
     /**
      * Clear all the caches!
      */
-    public function clearAllCaches()
+    public function clearAllCaches(): void
     {
     }
 
@@ -276,7 +266,7 @@ class Webperf extends Plugin
     /**
      * Add in our components
      */
-    protected function addComponents()
+    protected function addComponents(): void
     {
         $request = Craft::$app->getRequest();
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest() && !$request->getIsLivePreview()) {
@@ -334,7 +324,7 @@ class Webperf extends Plugin
      *
      * @param bool $force
      */
-    protected function setRequestUrl(bool $force = false)
+    protected function setRequestUrl(bool $force = false): void
     {
         self::$requestUrl = CraftDataSample::PLACEHOLDER_URL;
         if (!self::$settings->includeBeacon || $force || self::$settings->staticCachedSite) {
@@ -348,7 +338,7 @@ class Webperf extends Plugin
     /**
      * Install our event listeners.
      */
-    protected function installEventListeners()
+    protected function installEventListeners(): void
     {
         $request = Craft::$app->getRequest();
         // Add in our event listeners that are needed for every request
@@ -387,7 +377,7 @@ class Webperf extends Plugin
     /**
      * Install global event listeners for all request types
      */
-    protected function installGlobalEventListeners()
+    protected function installGlobalEventListeners(): void
     {
         // Handler: CraftVariable::EVENT_INIT
         Event::on(
@@ -410,7 +400,7 @@ class Webperf extends Plugin
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
                 // Only respond to non-console site requests
-                if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()  && !$request->getIsLivePreview()) {
+                if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest() && !$request->getIsLivePreview()) {
                     $this->handleSiteRequest();
                 }
                 // Respond to Control Panel requests
@@ -424,7 +414,7 @@ class Webperf extends Plugin
     /**
      * Install site event listeners for site requests only
      */
-    protected function installSiteEventListeners()
+    protected function installSiteEventListeners(): void
     {
         // Handler: UrlManager::EVENT_REGISTER_SITE_URL_RULES
         Event::on(
@@ -447,7 +437,7 @@ class Webperf extends Plugin
     /**
      * Install site event listeners for Control Panel requests only
      */
-    protected function installCpEventListeners()
+    protected function installCpEventListeners(): void
     {
         // Handler: UrlManager::EVENT_REGISTER_CP_URL_RULES
         Event::on(
@@ -485,7 +475,7 @@ class Webperf extends Plugin
      * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
      * before our event listeners kick in
      */
-    protected function handleSiteRequest()
+    protected function handleSiteRequest(): void
     {
         $request = Craft::$app->getRequest();
         try {
@@ -499,7 +489,7 @@ class Webperf extends Plugin
             Event::on(
                 View::class,
                 View::EVENT_END_PAGE,
-                function () {
+                static function () {
                     Craft::debug(
                         'View::EVENT_END_PAGE',
                         __METHOD__
@@ -527,7 +517,7 @@ class Webperf extends Plugin
             Event::on(
                 View::class,
                 View::EVENT_END_BODY,
-                function () {
+                static function () {
                     Craft::debug(
                         'View::EVENT_END_BODY',
                         __METHOD__
@@ -569,46 +559,30 @@ class Webperf extends Plugin
      * EVENT_AFTER_LOAD_PLUGINS so that any pending db migrations can be run
      * before our event listeners kick in
      */
-    protected function handleAdminCpRequest()
+    protected function handleAdminCpRequest(): void
     {
-        $currentUser = Craft::$app->getUser()->getIdentity();
-        // Only show sub-navs the user has permission to view
-        if (self::$settings->displaySidebar && $currentUser && $currentUser->can('webperf:sidebar')) {
-            $view = Craft::$app->getView();
-            // Entries sidebar
-            $view->hook('cp.entries.edit.details', function (&$context) {
-                /** @var  Element $element */
-                $element = $context['entry'] ?? null;
-                $html = '';
-                if ($element !== null && $element->uri !== null) {
-                    $html = $this->renderSidebar($element);
+        // Handler: Element::EVENT_DEFINE_SIDEBAR_HTML
+        Event::on(
+            Element::class,
+            Element::EVENT_DEFINE_SIDEBAR_HTML,
+            function (DefineHtmlEvent $event) {
+                Craft::debug(
+                    'Element::EVENT_DEFINE_SIDEBAR_HTML',
+                    __METHOD__
+                );
+                // Only show sub-navs the user has permission to view
+                $user = Craft::$app->getUser();
+                if (self::$settings->displaySidebar && $user->checkPermission('webperf:sidebar')) {
+                    /* @var Element $element */
+                    $element = $event->sender;
+                    $html = '';
+                    if ($element->uri !== null) {
+                        $html = $this->renderSidebar($element);
+                    }
+                    $event->html .= $html;
                 }
-
-                return $html;
-            });
-            // Category Groups sidebar
-            $view->hook('cp.categories.edit.details', function (&$context) {
-                /** @var  Element $element */
-                $element = $context['category'] ?? null;
-                $html = '';
-                if ($element !== null && $element->uri !== null) {
-                    $html = $this->renderSidebar($element);
-                }
-
-                return $html;
-            });
-            // Commerce Product Types sidebar
-            $view->hook('cp.commerce.product.edit.details', function (&$context) {
-                /** @var  Element $element */
-                $element = $context['product'] ?? null;
-                $html = '';
-                if ($element !== null && $element->uri !== null) {
-                    $html = $this->renderSidebar($element);
-                }
-
-                return $html;
-            });
-        }
+            }
+        );
     }
 
     /**
@@ -619,15 +593,15 @@ class Webperf extends Plugin
     protected function renderSidebar(Element $element): string
     {
         $html = '';
-        if ($element !== null && $element->url !== null) {
+        if ($element->url !== null) {
             $view = Craft::$app->getView();
             try {
                 $view->registerAssetBundle(WebperfAsset::class);
             } catch (InvalidConfigException $e) {
             }
             try {
-                $now = new \DateTime();
-            } catch (\Exception $e) {
+                $now = new DateTime();
+            } catch (Exception $e) {
                 return $html;
             }
             $end = $now->format('Y-m-d');
@@ -654,10 +628,10 @@ class Webperf extends Plugin
      */
     protected function excludeUri($uri): bool
     {
-        $uri = '/'.ltrim($uri, '/');
+        $uri = '/' . ltrim($uri, '/');
         if (!empty(self::$settings->excludePatterns)) {
             foreach (self::$settings->excludePatterns as $excludePattern) {
-                $pattern = '`'.$excludePattern['pattern'].'`i';
+                $pattern = '`' . $excludePattern['pattern'] . '`i';
                 if (preg_match($pattern, $uri) === 1) {
                     return true;
                 }
@@ -670,7 +644,7 @@ class Webperf extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }
@@ -702,6 +676,7 @@ class Webperf extends Plugin
             '/webperf/render/amp-iframe' => 'webperf/render/amp-iframe',
         ];
     }
+
     /**
      * Return the custom Control Panel routes
      *
@@ -767,10 +742,10 @@ class Webperf extends Plugin
                 ],
             ],
             /* @TODO Alerts implementation
-            'webperf:alerts' => [
-                'label' => Craft::t('webperf', 'Alerts'),
-            ],
-            */
+             * 'webperf:alerts' => [
+             * 'label' => Craft::t('webperf', 'Alerts'),
+             * ],
+             */
             'webperf:recommendations' => [
                 'label' => Craft::t('webperf', 'Recommendations'),
             ],
@@ -794,7 +769,7 @@ class Webperf extends Plugin
         // See if there are any recommendations to add as a badge
         $recommendations = $cache->getOrSet(self::RECOMMENDATIONS_CACHE_KEY, function () {
             $data = [];
-            $now = new \DateTime();
+            $now = new DateTime();
             $end = $now->format('Y-m-d');
             $start = $now->modify('-30 days')->format('Y-m-d');
             $stats = Webperf::$plugin->recommendations->data('', $start, $end);
@@ -823,7 +798,7 @@ class Webperf extends Plugin
         $cache = Craft::$app->getCache();
         // See if there are any recommendations to add as a badge
         $errors = $cache->getOrSet(self::ERRORS_CACHE_KEY, function () {
-            $now = new \DateTime();
+            $now = new DateTime();
             $end = $now->format('Y-m-d');
             $start = $now->modify('-30 days')->format('Y-m-d');
 

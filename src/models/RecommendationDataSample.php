@@ -10,9 +10,8 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\base\CraftDataSampleTrait;
 use nystudio107\webperf\base\BoomerangDataSampleTrait;
-
+use nystudio107\webperf\base\CraftDataSampleTrait;
 use nystudio107\webperf\base\FluentModel;
 
 /**
@@ -47,7 +46,7 @@ class RecommendationDataSample extends FluentModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),

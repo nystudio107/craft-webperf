@@ -10,9 +10,8 @@
 
 namespace nystudio107\webperf\console\controllers;
 
-use nystudio107\webperf\Webperf;
-
 use Craft;
+use nystudio107\webperf\Webperf;
 use yii\console\Controller;
 
 /**
@@ -28,7 +27,7 @@ class SamplesController extends Controller
     /**
      * @var null|int
      */
-    public $limit;
+    public ?int $limit = null;
 
     // Protected Properties
     // =========================================================================
@@ -36,7 +35,7 @@ class SamplesController extends Controller
     /**
      * @var    bool|array
      */
-    protected $allowAnonymous = [
+    protected bool|array $allowAnonymous = [
     ];
 
     // Public Methods
@@ -45,7 +44,7 @@ class SamplesController extends Controller
     /**
      * @param string $actionID
      *
-     * @return array|string[]
+     * @return array
      */
     public function options($actionID): array
     {
@@ -61,20 +60,20 @@ class SamplesController extends Controller
      */
     public function actionTrim(): int
     {
-        echo Craft::t('webperf', 'Trimming data samples').PHP_EOL;
+        echo Craft::t('webperf', 'Trimming data samples') . PHP_EOL;
         $affectedRows = Webperf::$plugin->dataSamples->trimDataSamples($this->limit);
         echo Craft::t(
-            'webperf',
-            'Trimmed {rows} from webperf_data_samples table',
-            ['rows' => $affectedRows]
-        ).PHP_EOL;
-        echo Craft::t('webperf', 'Trimming error samples').PHP_EOL;
+                'webperf',
+                'Trimmed {rows} from webperf_data_samples table',
+                ['rows' => $affectedRows]
+            ) . PHP_EOL;
+        echo Craft::t('webperf', 'Trimming error samples') . PHP_EOL;
         $affectedRows = Webperf::$plugin->errorSamples->trimErrorSamples($this->limit);
         echo Craft::t(
-            'webperf',
-            'Trimmed {rows} from webperf_error_samples table',
-            ['rows' => $affectedRows]
-        ).PHP_EOL;
+                'webperf',
+                'Trimmed {rows} from webperf_error_samples table',
+                ['rows' => $affectedRows]
+            ) . PHP_EOL;
 
         return 0;
     }

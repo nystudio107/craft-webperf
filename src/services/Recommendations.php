@@ -10,6 +10,9 @@
 
 namespace nystudio107\webperf\services;
 
+use Craft;
+use craft\base\Component;
+use craft\db\Query;
 use nystudio107\webperf\base\Recommendation;
 use nystudio107\webperf\models\RecommendationDataSample;
 use nystudio107\webperf\recommendations\CraftQueryCount;
@@ -20,11 +23,6 @@ use nystudio107\webperf\recommendations\DomInteractive;
 use nystudio107\webperf\recommendations\FirstByte;
 use nystudio107\webperf\recommendations\FirstContentfulPaint;
 use nystudio107\webperf\recommendations\MemoryLimit;
-
-use Craft;
-use craft\base\Component;
-use craft\db\Query;
-
 use yii\helpers\Markdown;
 
 /**
@@ -37,7 +35,7 @@ class Recommendations extends Component
     // Constants
     // =========================================================================
 
-    const RECOMMENDATIONS_LIST = [
+    protected const RECOMMENDATIONS_LIST = [
         CraftQueryCount::class,
         CraftQueryTime::class,
         CraftTwigTime::class,
@@ -81,7 +79,7 @@ class Recommendations extends Component
      * @param string $pageUrl
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return array
      */
@@ -90,11 +88,12 @@ class Recommendations extends Component
         string $start = '',
         string $end = '',
         $siteId = 0
-    ): array {
+    ): array
+    {
         $data = [];
         $db = Craft::$app->getDb();
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Query the db table
         $query = (new Query())

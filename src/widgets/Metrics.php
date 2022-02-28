@@ -10,11 +10,9 @@
 
 namespace nystudio107\webperf\widgets;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\assetbundles\metricswidget\MetricsWidgetAsset;
-
 use Craft;
 use craft\base\Widget;
+use nystudio107\webperf\assetbundles\metricswidget\MetricsWidgetAsset;
 
 /**
  * Webperf Widget
@@ -48,7 +46,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public static function iconPath()
+    public static function iconPath(): false|string
     {
         return Craft::getAlias("@nystudio107/webperf/assetbundles/metricswidget/dist/img/DataSamples-icon.svg");
     }
@@ -56,7 +54,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public static function maxColspan()
+    public static function maxColspan(): ?int
     {
         return null;
     }
@@ -67,7 +65,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge(
@@ -83,7 +81,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): string
     {
         return Craft::$app->getView()->renderTemplate(
             'webperf/_components/widgets/Metrics_settings',
@@ -96,7 +94,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public function getBodyHtml()
+    public function getBodyHtml(): string
     {
         Craft::$app->getView()->registerAssetBundle(MetricsWidgetAsset::class);
 

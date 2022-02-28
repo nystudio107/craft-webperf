@@ -10,10 +10,9 @@
 
 namespace nystudio107\webperf\variables;
 
-use nystudio107\webperf\Webperf;
-
 use nystudio107\pluginvite\variables\ViteVariableInterface;
 use nystudio107\pluginvite\variables\ViteVariableTrait;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107
@@ -32,7 +31,7 @@ class WebperfVariable implements ViteVariableInterface
      *
      * @param bool $include
      */
-    public function includeBeacon(bool $include)
+    public function includeBeacon(bool $include): void
     {
         Webperf::$settings->includeBeacon = $include;
     }
@@ -42,7 +41,7 @@ class WebperfVariable implements ViteVariableInterface
      *
      * @param bool $include
      */
-    public function includeCraftBeacon(bool $include)
+    public function includeCraftBeacon(bool $include): void
     {
         Webperf::$settings->includeCraftProfiling = $include;
     }
@@ -52,18 +51,18 @@ class WebperfVariable implements ViteVariableInterface
      *
      * @param string $renderType
      */
-    public function renderType(string $renderType)
+    public function renderType(string $renderType): void
     {
         Webperf::$renderType = $renderType;
     }
 
     /**
-     * @param int    $siteId
+     * @param int $siteId
      * @param string $column
      *
      * @return int|string
      */
-    public function totalSamples(int $siteId, string $column)
+    public function totalSamples(int $siteId, string $column): int|string
     {
         return Webperf::$plugin->dataSamples->totalSamples($siteId, $column);
     }
@@ -72,9 +71,9 @@ class WebperfVariable implements ViteVariableInterface
      * Get the total number of errors optionally limited by siteId, between
      * $start and $end
      *
-     * @param int         $siteId
-     * @param string      $start
-     * @param string      $end
+     * @param int $siteId
+     * @param string $start
+     * @param string $end
      * @param string|null $pageUrl
      * @param string|null $type
      *
@@ -83,15 +82,5 @@ class WebperfVariable implements ViteVariableInterface
     public function totalErrorSamplesRange(int $siteId, string $start, string $end, $pageUrl = null, $type = null): int
     {
         return Webperf::$plugin->errorSamples->totalErrorSamplesRange($siteId, $start, $end, $pageUrl, $type);
-    }
-
-    /**
-     * Return whether we are running Craft 3.1 or later
-     *
-     * @return bool
-     */
-    public function craft31(): bool
-    {
-        return Webperf::$craft31;
     }
 }

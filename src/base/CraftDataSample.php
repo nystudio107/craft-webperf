@@ -27,7 +27,7 @@ abstract class CraftDataSample extends FluentModel
     // Constants
     // =========================================================================
 
-    const PLACEHOLDER_URL = 'webperf-craft-placeholder';
+    public const PLACEHOLDER_URL = 'webperf-craft-placeholder';
 
     // Public Methods
     // =========================================================================
@@ -35,7 +35,7 @@ abstract class CraftDataSample extends FluentModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),

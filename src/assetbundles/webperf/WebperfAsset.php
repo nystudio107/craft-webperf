@@ -27,7 +27,7 @@ class WebperfAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = "@nystudio107/webperf/web/assets/dist";
 

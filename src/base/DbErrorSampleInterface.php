@@ -23,25 +23,25 @@ interface DbErrorSampleInterface
     /**
      * @return array
      */
-    public function rules();
+    public function rules(): array;
 
     /**
      * @return array
      */
-    public function behaviors();
+    public function behaviors(): array;
 
     /**
      * @return array
      */
-    public function getErrors($attribute = null);
+    public function getErrors($attribute = null): array;
 
     /**
-     * @param null  $names
+     * @param null $names
      * @param array $except
      *
      * @return mixed
      */
-    public function getAttributes($names = null, $except = []);
+    public function getAttributes($names = null, array $except = []): mixed;
 
     /**
      * @param null $attributeNames
@@ -49,5 +49,5 @@ interface DbErrorSampleInterface
      *
      * @return bool
      */
-    public function validate($attributeNames = null, $clearErrors = true);
+    public function validate($attributeNames = null, bool $clearErrors = true): bool;
 }

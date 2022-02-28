@@ -10,14 +10,15 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\base\DbErrorSampleInterface;
-use nystudio107\webperf\events\ErrorSampleEvent;
-
 use Craft;
 use craft\base\Component;
 use craft\db\Query;
 use craft\helpers\Json;
+use Exception;
+use nystudio107\webperf\base\DbErrorSampleInterface;
+use nystudio107\webperf\events\ErrorSampleEvent;
+use nystudio107\webperf\Webperf;
+use function is_array;
 
 /**
  * @author    nystudio107
@@ -29,7 +30,7 @@ class ErrorSamples extends Component
     // Constants
     // =========================================================================
 
-    const LAST_ERRORSAMPLES_TRIM_CACHE_KEY = 'webperf-last-errorsamples-trim';
+    protected const LAST_ERRORSAMPLES_TRIM_CACHE_KEY = 'webperf-last-errorsamples-trim';
 
     /**
      * @event ErrorSampleEvent The event that is triggered before the error sample is saved
@@ -72,18 +73,17 @@ class ErrorSamples extends Component
     /**
      * Get the total number of errors optionally limited by siteId
      *
-     * @param int    $siteId
+     * @param int $siteId
      * @param string $column
      *
      * @return int|string
      */
-    public function totalErrorSamples(int $siteId, string $column)
+    public function totalErrorSamples(int $siteId, string $column): int|string
     {
         // Get the total number of errors
         $query = (new Query())
             ->from(['{{%webperf_error_samples}}'])
-            ->where(['not', [$column => null]])
-            ;
+            ->where(['not', [$column => null]]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -95,9 +95,9 @@ class ErrorSamples extends Component
      * Get the total number of errors optionally limited by siteId, between
      * $start and $end
      *
-     * @param int         $siteId
-     * @param string      $start
-     * @param string      $end
+     * @param int $siteId
+     * @param string $start
+     * @param string $end
      * @param string|null $pageUrl
      * @param string|null $type
      *
@@ -106,21 +106,18 @@ class ErrorSamples extends Component
     public function totalErrorSamplesRange(int $siteId, string $start, string $end, $pageUrl = null, $type = null): int
     {
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Get the total number of errors
         $query = (new Query())
             ->from(['{{%webperf_error_samples}}'])
-            ->where(['between', 'dateCreated', $start, $end])
-        ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ($type !== null) {
             $query
-                ->andWhere(['type' => $type])
-            ;
+                ->andWhere(['type' => $type]);
         }
         if ($pageUrl !== null) {
             $query
-                ->andWhere(['url' => $pageUrl])
-            ;
+                ->andWhere(['url' => $pageUrl]);
         }
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
@@ -132,7 +129,7 @@ class ErrorSamples extends Component
     /**
      * Get the page title from errors by URL and optionally siteId
      *
-     * @param string   $url
+     * @param string $url
      * @param int $siteId
      *
      * @return string
@@ -146,8 +143,7 @@ class ErrorSamples extends Component
             ->where([
                 'and', ['url' => $url],
                 ['not', ['title' => '']],
-            ])
-        ;
+            ]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -191,7 +187,7 @@ class ErrorSamples extends Component
         // Get the validated model attributes and save them to the db
         $errorSampleConfig = $errorSample->getAttributes();
         if (!empty($errorSampleConfig['pageErrors'])) {
-            if (\is_array($errorSampleConfig['pageErrors'])) {
+            if (is_array($errorSampleConfig['pageErrors'])) {
                 $errorSampleConfig['pageErrors'] = Json::encode($errorSampleConfig['pageErrors']);
             }
             $db = Craft::$app->getDb();
@@ -203,7 +199,7 @@ class ErrorSamples extends Component
                     $errorSampleConfig
                 )->execute();
                 Craft::debug($result, __METHOD__);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
             // Trigger a 'afterSaveErrorSample' event
@@ -233,7 +229,7 @@ class ErrorSamples extends Component
                     'id' => $id,
                 ]
             )->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             $result = 0;
         }
@@ -244,7 +240,7 @@ class ErrorSamples extends Component
     /**
      * Delete error samples by URL and optionally siteId
      *
-     * @param string   $url
+     * @param string $url
      * @param int|null $siteId
      *
      * @return int
@@ -262,7 +258,7 @@ class ErrorSamples extends Component
                 '{{%webperf_error_samples}}',
                 $conditions
             )->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             $result = 0;
         }
@@ -290,7 +286,7 @@ class ErrorSamples extends Component
                 '{{%webperf_error_samples}}',
                 $conditions
             )->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             $result = 0;
         }
@@ -350,7 +346,7 @@ class ErrorSamples extends Component
                         "
                     )->execute();
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
             Craft::info(

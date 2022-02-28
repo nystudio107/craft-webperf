@@ -35,7 +35,7 @@ abstract class DbErrorSample extends FluentModel implements DbErrorSampleInterfa
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             parent::rules(),
@@ -48,7 +48,7 @@ abstract class DbErrorSample extends FluentModel implements DbErrorSampleInterfa
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),

@@ -10,9 +10,8 @@
 
 namespace nystudio107\webperf\recommendations;
 
-use nystudio107\webperf\base\Recommendation;
-
 use Craft;
+use nystudio107\webperf\base\Recommendation;
 
 /**
  * @author    nystudio107
@@ -24,8 +23,8 @@ class MemoryLimit extends Recommendation
     // Constants
     // =========================================================================
 
-    const MIN_CRAFT_MEMORY = 64 * 1024 * 1024;
-    const MAX_CRAFT_MEMORY = 1024 * 1024 * 1024;
+    protected const MIN_CRAFT_MEMORY = 64 * 1024 * 1024;
+    protected const MAX_CRAFT_MEMORY = 1024 * 1024 * 1024;
 
     // Public Methods
     // =========================================================================
@@ -33,7 +32,7 @@ class MemoryLimit extends Recommendation
     /**
      * @inheritdoc
      */
-    public function evaluate()
+    public function evaluate(): void
     {
         $phpMemoryLimit = (int)$this->memoryLimit();
         $this->sample->craftTotalMemory = (int)$this->sample->craftTotalMemory;

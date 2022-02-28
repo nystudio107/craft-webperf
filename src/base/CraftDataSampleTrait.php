@@ -71,7 +71,7 @@ trait CraftDataSampleTrait
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [

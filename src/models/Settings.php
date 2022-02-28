@@ -10,17 +10,13 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\Webperf;
-
 use Craft;
 use craft\base\Model;
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\validators\ArrayValidator;
 use craft\validators\ColorValidator;
-
-use yii\behaviors\AttributeTypecastBehavior;
-
 use putyourlightson\blitz\Blitz;
+use yii\behaviors\AttributeTypecastBehavior;
 
 /**
  * @author    nystudio107
@@ -32,7 +28,7 @@ class Settings extends Model
     // Constants
     // =========================================================================
 
-    const BLITZ_PLUGIN_HANDLE = 'blitz';
+    protected const BLITZ_PLUGIN_HANDLE = 'blitz';
 
     // Public Properties
     // =========================================================================
@@ -40,57 +36,57 @@ class Settings extends Model
     /**
      * @var string The public-facing name of the plugin
      */
-    public $pluginName = 'Webperf';
+    public string $pluginName = 'Webperf';
 
     /**
      * @var bool Whether or not to include the beacon on the page
      */
-    public $includeBeacon = true;
+    public bool $includeBeacon = true;
 
     /**
      * @var bool Whether or not to include the Craft profiling of pages
      */
-    public $includeCraftProfiling = true;
+    public bool $includeCraftProfiling = true;
 
     /**
      * @var bool If the site is static cached, turn this option on to prevent Webperf from generating a unique beacon token
      */
-    public $staticCachedSite = false;
+    public bool $staticCachedSite = false;
 
     /**
      * @var int The number of data samples to store
      */
-    public $dataSamplesStoredLimit = 100000;
+    public int $dataSamplesStoredLimit = 100000;
 
     /**
      * @var bool Whether the DataSamples should be trimmed after each new DataSample is added
      */
-    public $automaticallyTrimDataSamples = true;
+    public bool $automaticallyTrimDataSamples = true;
 
     /**
      * @var bool Whether outlier data samples that are 10x the mean should be deleted
      */
-    public $trimOutlierDataSamples = true;
+    public bool $trimOutlierDataSamples = true;
 
     /**
      * @var int The number of milliseconds required between trimming of data samples
      */
-    public $samplesRateLimitMs = 3600000;
+    public int $samplesRateLimitMs = 3600000;
 
     /**
      * @var int The number of milliseconds required between recording of frontend beacon data samples
      */
-    public $rateLimitMs = 500;
+    public int $rateLimitMs = 500;
 
     /**
      * @var string API Key for WebPageTest.org
      */
-    public $webpageTestApiKey = '';
+    public string $webpageTestApiKey = '';
 
     /**
      * @var array [Regular expressions](https://regexr.com/) to match URLs to exclude from tracking
      */
-    public $excludePatterns = [
+    public array $excludePatterns = [
         0 => [
             'pattern' => '/webperf/.*',
         ],
@@ -108,101 +104,101 @@ class Settings extends Model
     /**
      * @var bool Whether Craft `warning` messages should be recorded in addition to `error` messages
      */
-    public $includeCraftWarnings = false;
+    public bool $includeCraftWarnings = false;
 
     /**
      * @var int The number of error samples to store
      */
-    public $errorSamplesStoredLimit = 1000;
+    public int $errorSamplesStoredLimit = 1000;
 
     /**
      * @var bool Whether the ErrorSamples should be trimmed after each new ErrorSample is added
      */
-    public $automaticallyTrimErrorSamples = true;
+    public bool $automaticallyTrimErrorSamples = true;
 
     /**
      * @var bool Whether to filter bot user agents from generating profile hits or not
      *           NOT visible in the GUI currently
      */
-    public $filterBotUserAgents = true;
+    public bool $filterBotUserAgents = true;
 
     /**
      * @var bool Whether the performance summary sidebar should be shown on entry, category, and product pages
      */
-    public $displaySidebar = true;
+    public bool $displaySidebar = true;
 
     /**
      * @var string The dashboard 'fast' color for charts
      */
-    public $dashboardFastColor = '#00C800';
+    public string $dashboardFastColor = '#00C800';
 
     /**
      * @var string The dashboard 'average' color for charts
      */
-    public $dashboardAverageColor = '#FFFF00';
+    public string $dashboardAverageColor = '#FFFF00';
 
     /**
      * @var string The dashboard 'slow' color for charts
      */
-    public $dashboardSlowColor = '#C80000';
+    public string $dashboardSlowColor = '#C80000';
 
     // Threshold levels
     // =========================================================================
 
     /**
-     * @var int Threshold in seconds for the dns metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the dns metric, beyond which it will be considered slow
      */
-    public $dnsThreshold = 0.5;
+    public int|float $dnsThreshold = 0.5;
 
     /**
-     * @var int Threshold in seconds for the connect metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the connect metric, beyond which it will be considered slow
      */
-    public $connectThreshold = 0.5;
+    public int|float $connectThreshold = 0.5;
 
     /**
-     * @var int Threshold in seconds for the first byte metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the first byte metric, beyond which it will be considered slow
      */
-    public $firstByteThreshold = 2.0;
+    public int|float $firstByteThreshold = 2.0;
 
     /**
-     * @var int Threshold in seconds for the first paint metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the first paint metric, beyond which it will be considered slow
      */
-    public $firstPaintThreshold = 5.0;
+    public int|float $firstPaintThreshold = 5.0;
 
     /**
-     * @var int Threshold in seconds for the first contentful paint metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the first contentful paint metric, beyond which it will be considered slow
      */
-    public $firstContentfulPaintThreshold = 5.0;
+    public int|float $firstContentfulPaintThreshold = 5.0;
 
     /**
-     * @var int Threshold in seconds for the DOM interactive metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the DOM interactive metric, beyond which it will be considered slow
      */
-    public $domInteractiveThreshold = 5.0;
+    public int|float $domInteractiveThreshold = 5.0;
 
     /**
-     * @var int Threshold in seconds for the page load metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the page load metric, beyond which it will be considered slow
      */
-    public $pageLoadThreshold = 10.0;
+    public int|float $pageLoadThreshold = 10.0;
 
     /**
-     * @var int Threshold in seconds for the Craft execution metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the Craft execution metric, beyond which it will be considered slow
      */
-    public $craftTotalMsThreshold = 2.0;
+    public int|float $craftTotalMsThreshold = 2.0;
 
     /**
-     * @var int Threshold in seconds for the database queries metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the database queries metric, beyond which it will be considered slow
      */
-    public $craftDbMsThreshold = 2.0;
+    public int|float $craftDbMsThreshold = 2.0;
 
     /**
-     * @var int Threshold in seconds for the Twig rendering metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the Twig rendering metric, beyond which it will be considered slow
      */
-    public $craftTwigMsThreshold = 2.0;
+    public int|float $craftTwigMsThreshold = 2.0;
 
     /**
-     * @var int Threshold in seconds for the Craft other metric, beyond which it will be considered slow
+     * @var int|float Threshold in seconds for the Craft other metric, beyond which it will be considered slow
      */
-    public $craftOtherMsThreshold = 2.0;
+    public int|float $craftOtherMsThreshold = 2.0;
 
     // Public Methods
     // =========================================================================
@@ -210,7 +206,7 @@ class Settings extends Model
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         // If Blitz is installed & enabled, flip the $staticCachedSite on
@@ -223,7 +219,7 @@ class Settings extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['pluginName', 'string'],
@@ -280,25 +276,19 @@ class Settings extends Model
     /**
      * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
-        $craft31Behaviors = [];
-        if (Webperf::$craft31) {
-            $craft31Behaviors = [
-                'parser' => [
-                    'class' => EnvAttributeParserBehavior::class,
-                    'attributes' => [
-                        'webpageTestApiKey',
-                    ],
-                ]
-            ];
-        }
-
-        return array_merge($craft31Behaviors, [
+        return [
             'typecast' => [
                 'class' => AttributeTypecastBehavior::class,
                 // 'attributeTypes' will be composed automatically according to `rules()`
             ],
-        ]);
+            'parser' => [
+                'class' => EnvAttributeParserBehavior::class,
+                'attributes' => [
+                    'webpageTestApiKey',
+                ],
+            ]
+        ];
     }
 }

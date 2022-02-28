@@ -19,24 +19,6 @@ use craft\base\Model;
  */
 abstract class CleanModel extends Model
 {
-    // Static Protected Methods
-    // =========================================================================
-
-    /**
-     * Remove any properties that don't exist in the model
-     *
-     * @param string $class
-     * @param array  $config
-     */
-    protected static function cleanProperties(string $class, array &$config)
-    {
-        foreach ($config as $propName => $propValue) {
-            if (!property_exists($class, $propName)) {
-                unset($config[$propName]);
-            }
-        }
-    }
-
     // Public Methods
     // =========================================================================
 
@@ -48,5 +30,23 @@ abstract class CleanModel extends Model
         // Unset any deprecated properties
         self::cleanProperties(static::class, $config);
         parent::__construct($config);
+    }
+
+    // Static Protected Methods
+    // =========================================================================
+
+    /**
+     * Remove any properties that don't exist in the model
+     *
+     * @param string $class
+     * @param array $config
+     */
+    protected static function cleanProperties(string $class, array &$config): void
+    {
+        foreach ($config as $propName => $propValue) {
+            if (!property_exists($class, $propName)) {
+                unset($config[$propName]);
+            }
+        }
     }
 }

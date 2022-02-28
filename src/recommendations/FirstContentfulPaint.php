@@ -10,9 +10,8 @@
 
 namespace nystudio107\webperf\recommendations;
 
-use nystudio107\webperf\base\Recommendation;
-
 use Craft;
+use nystudio107\webperf\base\Recommendation;
 
 /**
  * @author    nystudio107
@@ -24,7 +23,7 @@ class FirstContentfulPaint extends Recommendation
     // Constants
     // =========================================================================
 
-    const MAX_FIRST_CONTENTFUL_PAINT_TIME = 3 * 1000;
+    protected const MAX_FIRST_CONTENTFUL_PAINT_TIME = 3 * 1000;
 
     // Public Methods
     // =========================================================================
@@ -32,7 +31,7 @@ class FirstContentfulPaint extends Recommendation
     /**
      * @inheritdoc
      */
-    public function evaluate()
+    public function evaluate(): void
     {
         // See if there are too many database queries
         if ($this->sample->firstContentfulPaint >= self::MAX_FIRST_CONTENTFUL_PAINT_TIME) {
