@@ -187,16 +187,16 @@ class Webperf extends Plugin
     /**
      * @inheritdoc
      */
-    public function getSettingsResponse()
+    public function getSettingsResponse(): mixed
     {
         // Just redirect to the plugin settings page
-        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('webperf/settings'));
+        return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('webperf/settings'));
     }
 
     /**
      * @inheritdoc
      */
-    public function getCpNavItem(): array
+    public function getCpNavItem(): ?array
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
@@ -652,7 +652,7 @@ class Webperf extends Plugin
     /**
      * @inheritdoc
      */
-    protected function settingsHtml(): string
+    protected function settingsHtml(): ?string
     {
         return Craft::$app->view->renderTemplate(
             'webperf/settings',

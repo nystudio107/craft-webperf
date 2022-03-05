@@ -57,7 +57,7 @@ namespace nystudio107\webperf\controllers {
          *         actions. The actions must be in 'kebab-case'
          * @access protected
          */
-        protected $allowAnonymous = ['beacon'];
+        protected array|bool|int $allowAnonymous = ['beacon'];
 
 
         // Public Methods
