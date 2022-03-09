@@ -33,7 +33,7 @@ interface DbErrorSampleInterface
     /**
      * @return array
      */
-    public function getErrors($attribute = null): array;
+    public function getErrors($attribute = null);
 
     /**
      * @param null $names
@@ -41,7 +41,7 @@ interface DbErrorSampleInterface
      *
      * @return mixed
      */
-    public function getAttributes($names = null, array $except = []): mixed;
+    public function getAttributes($names = null, array $except = []);
 
     /**
      * @param null $attributeNames
@@ -49,5 +49,5 @@ interface DbErrorSampleInterface
      *
      * @return bool
      */
-    public function validate($attributeNames = null, bool $clearErrors = true): bool;
+    public function validate($attributeNames = null, bool $clearErrors = true);
 }

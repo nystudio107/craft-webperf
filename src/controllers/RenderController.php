@@ -26,7 +26,7 @@ class RenderController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected $allowAnonymous = ['amp-iframe', 'beacon-script'];
+    protected array|bool|int $allowAnonymous = ['amp-iframe', 'beacon-script'];
 
     // Public Methods
     // =========================================================================

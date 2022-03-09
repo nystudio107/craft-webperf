@@ -36,7 +36,7 @@ class RecommendationsController extends Controller
     /**
      * @var    bool|array
      */
-    protected $allowAnonymous = [];
+    protected array|bool|int $allowAnonymous = [];
 
     // Public Methods
     // =========================================================================

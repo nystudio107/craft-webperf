@@ -81,7 +81,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml(): string
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'webperf/_components/widgets/Metrics_settings',
@@ -94,7 +94,7 @@ class Metrics extends Widget
     /**
      * @inheritdoc
      */
-    public function getBodyHtml(): string
+    public function getBodyHtml(): ?string
     {
         Craft::$app->getView()->registerAssetBundle(MetricsWidgetAsset::class);
 
