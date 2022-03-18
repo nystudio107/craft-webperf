@@ -1,5 +1,11 @@
 # Webperf Changelog
 
+## 4.0.0-beta.3 - 2022.03.18
+
+### Fixed
+
+* Fix registering permissions ([#352](https://github.com/craftcms/docs/issues/352))
+
 ## 4.0.0-beta.2 - 2022.03.04
 
 ### Fixed
