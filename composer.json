@@ -2,7 +2,7 @@
   "name": "nystudio107/craft-webperf",
   "description": "Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance",
   "type": "craft-plugin",
-  "version": "4.0.0-beta.2",
+  "version": "4.0.0-beta.3",
   "keywords": [
     "craft",
     "cms",
