@@ -465,7 +465,10 @@ class Webperf extends Plugin
                     __METHOD__
                 );
                 // Register our custom permissions
-                $event->permissions[Craft::t('webperf', 'Webperf')] = $this->customAdminCpPermissions();
+                $event->permissions[] = [
+                    'heading' => Craft::t('webperf', 'Webperf'),
+                    'permissions' => $this->customAdminCpPermissions(),
+                ];
             }
         );
     }
