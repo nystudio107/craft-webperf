@@ -1,5 +1,12 @@
 # Webperf Changelog
 
+## 4.0.0 - 2022.06.23
+### Added
+* Initial Craft CMS 4 release
+
+### Changed
+* Removed the sub resource integrity on the built JavaScript, which could fail if systems were set up that manipulated the incoming JavaScript resources dynamically
+
 ## 4.0.0-beta.3 - 2022.03.18
 
 ### Fixed
