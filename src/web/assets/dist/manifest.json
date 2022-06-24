@@ -1,205 +1,181 @@
 {
   "../src/web/assets/src/js/alerts.js": {
-    "file": "assets/alerts.0eff992b.js",
+    "file": "assets/alerts.78744207.js",
     "src": "../src/web/assets/src/js/alerts.js",
-    "isEntry": true,
-    "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-zLTRJ5pmi0gSWagvoUmCclKST7TAHwwADIGuK24mtT4VcswzKX2j0JH/QEdq/H3o"
+    "isEntry": true
   },
   "../src/web/assets/src/js/dashboard.js": {
-    "file": "assets/dashboard.f439b4a6.js",
+    "file": "assets/dashboard.c5f98da7.js",
     "src": "../src/web/assets/src/js/dashboard.js",
     "isEntry": true,
     "imports": [
-      "_vendor.cae9834c.js",
-      "_SimpleBarChart.9900cd81.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_vue-apexcharts.159e071b.js",
+      "_SimpleBarChart.5ce065d9.js",
       "_tri-color-blend.3ecffd12.js",
-      "_SampleSizeWarning.0b034383.js",
-      "_SampleRangePicker.49ea8317.js",
-      "_SamplePaneFooter.90ac6a0d.js",
-      "_RecommendationsList.d7c9e75e.js"
-    ],
-    "integrity": "sha384-EJyGIrGmgHNmcnEuF+xUV4eSZ0HWPj97RnmHxNl4zgrUAsWN0Kof1DEu8vtoWON8"
+      "_SampleSizeWarning.8f20eec9.js",
+      "_SamplePaneFooter.eadc9035.js",
+      "_RecommendationsList.281cf6fa.js"
+    ]
   },
   "../src/web/assets/src/js/errors-detail.js": {
-    "file": "assets/errors-detail.8bd9cf58.js",
+    "file": "assets/errors-detail.4f190327.js",
     "src": "../src/web/assets/src/js/errors-detail.js",
     "isEntry": true,
     "imports": [
-      "_vendor.cae9834c.js",
-      "_ErrorsDetailAreaChart.65b250a7.js",
-      "_PageResultCell.10a827bc.js",
-      "_RequestBarChart.c4e11a7a.js",
-      "_DataSampleDate.fdc9bc95.js",
-      "_DataSampleDevice.fd107ba6.js",
-      "_SimpleBarChart.9900cd81.js",
-      "_SampleRangePicker.49ea8317.js",
-      "_SamplePaneFooter.90ac6a0d.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_ErrorsDetailAreaChart.4c651bef.js",
+      "_PageResultCell.457d2b6b.js",
+      "_RequestBarChart.15bfe72e.js",
+      "_DataSampleDate.eaf2d70c.js",
+      "_DataSampleDevice.912c20f4.js",
+      "_vue-apexcharts.159e071b.js",
+      "_SimpleBarChart.5ce065d9.js",
+      "_SamplePaneFooter.eadc9035.js",
       "_tri-color-blend.3ecffd12.js"
-    ],
-    "integrity": "sha384-HoxfeZ1xFowSvY4WyhHEvTZw6ulrnNer2HNDXMAE8tLRHeMHgLQCytiYTdMdz361"
+    ]
   },
   "../src/web/assets/src/js/errors-index.js": {
-    "file": "assets/errors-index.49da1c0f.js",
+    "file": "assets/errors-index.d0eb90a8.js",
     "src": "../src/web/assets/src/js/errors-index.js",
     "isEntry": true,
     "imports": [
-      "_vendor.cae9834c.js",
-      "_PageResultCell.10a827bc.js",
-      "_DataSampleDate.fdc9bc95.js",
-      "_SampleRangePicker.49ea8317.js",
-      "_ErrorsDetailAreaChart.65b250a7.js"
-    ],
-    "integrity": "sha384-uh4nkcw/kjtYkUn/bQ8SasGdZiLluYjNhyiM7g5OVNdDetJ5jeSrjIdMBrr9Qck+"
+      "_SampleRangePicker.f22425b8.js",
+      "_PageResultCell.457d2b6b.js",
+      "_DataSampleDate.eaf2d70c.js",
+      "_vue-apexcharts.159e071b.js",
+      "_ErrorsDetailAreaChart.4c651bef.js"
+    ]
   },
   "../src/web/assets/src/js/performance-detail.js": {
-    "file": "assets/performance-detail.c390f532.js",
+    "file": "assets/performance-detail.76d6eac0.js",
     "src": "../src/web/assets/src/js/performance-detail.js",
     "isEntry": true,
     "imports": [
-      "_vendor.cae9834c.js",
-      "_PerformanceDetailAreaChart.9eae3b00.js",
-      "_PageResultCell.10a827bc.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_PerformanceDetailAreaChart.1ff5b0b1.js",
+      "_PageResultCell.457d2b6b.js",
       "_tri-color-blend.3ecffd12.js",
-      "_RequestBarChart.c4e11a7a.js",
-      "_DataSampleDate.fdc9bc95.js",
-      "_DataSampleDevice.fd107ba6.js",
-      "_SimpleBarChart.9900cd81.js",
-      "_SampleRangePicker.49ea8317.js",
-      "_SamplePaneFooter.90ac6a0d.js",
-      "_RecommendationsList.d7c9e75e.js"
-    ],
-    "integrity": "sha384-dVYBxdvD1u82KB6VDOntIz5OZ0yuaNnxfWyLPLOm4vLRNNJNAYtYbpz9DpzDmdHa"
+      "_RequestBarChart.15bfe72e.js",
+      "_DataSampleDate.eaf2d70c.js",
+      "_DataSampleDevice.912c20f4.js",
+      "_vue-apexcharts.159e071b.js",
+      "_SimpleBarChart.5ce065d9.js",
+      "_SamplePaneFooter.eadc9035.js",
+      "_RecommendationsList.281cf6fa.js"
+    ]
   },
   "../src/web/assets/src/js/performance-index.js": {
-    "file": "assets/performance-index.5b0edb70.js",
+    "file": "assets/performance-index.8c3b42ce.js",
     "src": "../src/web/assets/src/js/performance-index.js",
     "isEntry": true,
     "imports": [
-      "_vendor.cae9834c.js",
-      "_PageResultCell.10a827bc.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_PageResultCell.457d2b6b.js",
       "_tri-color-blend.3ecffd12.js",
-      "_RequestBarChart.c4e11a7a.js",
-      "_SampleSizeWarning.0b034383.js",
-      "_SampleRangePicker.49ea8317.js",
-      "_PerformanceDetailAreaChart.9eae3b00.js",
-      "_RecommendationsList.d7c9e75e.js",
-      "_SamplePaneFooter.90ac6a0d.js"
-    ],
-    "integrity": "sha384-ZfT3OcsHbzN9h4H7KSH4ukaD/dxtDah7e/FUwDR3xgalncUPj9pRJ5iaCjV7zcJ4"
+      "_RequestBarChart.15bfe72e.js",
+      "_SampleSizeWarning.8f20eec9.js",
+      "_vue-apexcharts.159e071b.js",
+      "_PerformanceDetailAreaChart.1ff5b0b1.js",
+      "_RecommendationsList.281cf6fa.js",
+      "_SamplePaneFooter.eadc9035.js"
+    ]
   },
   "../src/web/assets/src/js/sidebar.js": {
-    "file": "assets/sidebar.20f1383b.js",
+    "file": "assets/sidebar.0c904941.js",
     "src": "../src/web/assets/src/js/sidebar.js",
     "isEntry": true,
     "imports": [
-      "_vendor.cae9834c.js",
+      "_vue-apexcharts.159e071b.js",
       "_tri-color-blend.3ecffd12.js"
-    ],
-    "integrity": "sha384-Bx/96KWQNbFnSBIveyiDxRYsAAvrOrKSo76ohiieYNLoAWWWDlnbr1FkyFjdOo/N"
+    ]
   },
   "../src/web/assets/src/js/webperf.js": {
-    "file": "assets/webperf.2e6c8d55.js",
+    "file": "assets/webperf.fbc928c6.js",
     "src": "../src/web/assets/src/js/webperf.js",
     "isEntry": true,
     "css": [
       "assets/webperf.51e99dad.css"
-    ],
-    "integrity": "sha384-m5MwM9Rk8YweVqiFKxxdq6SdSln4Vt5Hhw9DdKODOpcp52IM6cbe5SdEm1xOaDp/"
+    ]
   },
-  "_vendor.cae9834c.js": {
-    "file": "assets/vendor.cae9834c.js",
-    "css": [
-      "assets/vendor.3b5bd98c.css"
-    ],
-    "integrity": "sha384-PGQH6rtblH+zHFAOvkO7A5E3Z1wjpSjVTRfmzB9HC0g0EFQ5qys7pRifyrBPCqxZ"
-  },
-  "_SimpleBarChart.9900cd81.js": {
-    "file": "assets/SimpleBarChart.9900cd81.js",
+  "_SampleRangePicker.f22425b8.js": {
+    "file": "assets/SampleRangePicker.f22425b8.js",
     "imports": [
-      "_vendor.cae9834c.js",
-      "_tri-color-blend.3ecffd12.js"
-    ],
-    "integrity": "sha384-dDK5pUev4tG4kDzykk1cVo9rtrS/CdP6fQnIMEr83Ah0LtfpXLpqEBYR5iuGatDW"
-  },
-  "_SampleRangePicker.49ea8317.js": {
-    "file": "assets/SampleRangePicker.49ea8317.js",
-    "imports": [
-      "_vendor.cae9834c.js"
+      "_vue-apexcharts.159e071b.js"
     ],
     "css": [
       "assets/SampleRangePicker.7c556130.css"
-    ],
-    "integrity": "sha384-Nv3Hed0KlopqXcliGDoIKvZ6YMuv2YRvrP3voi9htU4iCIb7HkiOq2DPcPvIAzyL"
+    ]
   },
-  "_SamplePaneFooter.90ac6a0d.js": {
-    "file": "assets/SamplePaneFooter.90ac6a0d.js",
+  "_SimpleBarChart.5ce065d9.js": {
+    "file": "assets/SimpleBarChart.5ce065d9.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-oNKDy7xu+1JOA/d01Xto5J62JhSc0wt2lSkGJj0EaaH7BJMp2utmDgQf9hq8Y8QL"
+      "_vue-apexcharts.159e071b.js",
+      "_tri-color-blend.3ecffd12.js"
+    ]
   },
-  "_RecommendationsList.d7c9e75e.js": {
-    "file": "assets/RecommendationsList.d7c9e75e.js",
+  "_SamplePaneFooter.eadc9035.js": {
+    "file": "assets/SamplePaneFooter.eadc9035.js",
     "imports": [
-      "_vendor.cae9834c.js",
-      "_SamplePaneFooter.90ac6a0d.js"
-    ],
-    "integrity": "sha384-O+JVLavFk4cXy4BJBHp0MuW9JazTpWAT7BnAGqM8A043gQbeUNtxd1rl8ssoLHG6"
+      "_vue-apexcharts.159e071b.js"
+    ]
+  },
+  "_RecommendationsList.281cf6fa.js": {
+    "file": "assets/RecommendationsList.281cf6fa.js",
+    "imports": [
+      "_vue-apexcharts.159e071b.js",
+      "_SamplePaneFooter.eadc9035.js"
+    ]
+  },
+  "_vue-apexcharts.159e071b.js": {
+    "file": "assets/vue-apexcharts.159e071b.js"
   },
   "_tri-color-blend.3ecffd12.js": {
-    "file": "assets/tri-color-blend.3ecffd12.js",
-    "integrity": "sha384-PZ8tOd+Kg3XINwQogRv1EtyM7A0rmK4lT0mRBqwdhqxeRelgvdCDP+GRQm5S9atf"
+    "file": "assets/tri-color-blend.3ecffd12.js"
   },
-  "_SampleSizeWarning.0b034383.js": {
-    "file": "assets/SampleSizeWarning.0b034383.js",
+  "_SampleSizeWarning.8f20eec9.js": {
+    "file": "assets/SampleSizeWarning.8f20eec9.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-or7O3y6E1u1n681bI5tBujR2lXN7U3UfNGLcyqQy0Yg9JljpkOchxf5aBCbNnXW2"
+      "_vue-apexcharts.159e071b.js"
+    ]
   },
-  "_ErrorsDetailAreaChart.65b250a7.js": {
-    "file": "assets/ErrorsDetailAreaChart.65b250a7.js",
+  "_ErrorsDetailAreaChart.4c651bef.js": {
+    "file": "assets/ErrorsDetailAreaChart.4c651bef.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-OC2N5p6idDqSW9f8AeO9SL7qb7xymZ6M29TzZNGeYQN2i0V2qhz1JtQvKZIYRGng"
+      "_vue-apexcharts.159e071b.js"
+    ]
   },
-  "_PageResultCell.10a827bc.js": {
-    "file": "assets/PageResultCell.10a827bc.js",
+  "_PageResultCell.457d2b6b.js": {
+    "file": "assets/PageResultCell.457d2b6b.js",
     "imports": [
-      "_vendor.cae9834c.js"
+      "_vue-apexcharts.159e071b.js"
     ],
-    "integrity": "sha384-el67VTB4EWneTexzy185KwymMxRKEA4qMqvuuemcWlZOcH5bPdsZCgrIYHLDz9Qq"
+    "css": [
+      "assets/PageResultCell.e5b1d28e.css"
+    ]
   },
-  "_RequestBarChart.c4e11a7a.js": {
-    "file": "assets/RequestBarChart.c4e11a7a.js",
+  "_RequestBarChart.15bfe72e.js": {
+    "file": "assets/RequestBarChart.15bfe72e.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-rvTy77SlEmmq6mucYszbVpF7kmQGs5XpLfRTHYNJZ8EHzFHiz525ocl2sJxyUoDN"
+      "_vue-apexcharts.159e071b.js"
+    ]
   },
-  "_DataSampleDate.fdc9bc95.js": {
-    "file": "assets/DataSampleDate.fdc9bc95.js",
+  "_DataSampleDate.eaf2d70c.js": {
+    "file": "assets/DataSampleDate.eaf2d70c.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-6dPZelcuhPIKHXD1FgzieIbG8e3BeZNrlM3/ZZWQb4gCghB7xwAPJQJ/LDYzgtV/"
+      "_vue-apexcharts.159e071b.js"
+    ]
   },
-  "_DataSampleDevice.fd107ba6.js": {
-    "file": "assets/DataSampleDevice.fd107ba6.js",
+  "_DataSampleDevice.912c20f4.js": {
+    "file": "assets/DataSampleDevice.912c20f4.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-krxT4KpLUk+3gwKWIeSEEE51qCnJg3m9/f14v0Nlrbrr+l1vVy7TAQxIQx6uToRJ"
+      "_vue-apexcharts.159e071b.js"
+    ]
   },
-  "_PerformanceDetailAreaChart.9eae3b00.js": {
-    "file": "assets/PerformanceDetailAreaChart.9eae3b00.js",
+  "_PerformanceDetailAreaChart.1ff5b0b1.js": {
+    "file": "assets/PerformanceDetailAreaChart.1ff5b0b1.js",
     "imports": [
-      "_vendor.cae9834c.js"
-    ],
-    "integrity": "sha384-p2LhJH6Cid6gGtNRGknFY1jf7eaaym1qbPWL5/Q6/ZQePI3GrWpEP3NaKB9NlX3V"
+      "_vue-apexcharts.159e071b.js"
+    ]
   }
 }
