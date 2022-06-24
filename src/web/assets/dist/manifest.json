@@ -1,184 +1,181 @@
 {
-  "src/js/alerts.js": {
-    "file": "assets/alerts.285ef65d.js",
-    "src": "src/js/alerts.js",
-    "isEntry": true,
-    "imports": [
-      "_vendor.d298d7b0.js"
-    ]
+  "../src/web/assets/src/js/alerts.js": {
+    "file": "assets/alerts.78744207.js",
+    "src": "../src/web/assets/src/js/alerts.js",
+    "isEntry": true
   },
-  "src/js/dashboard.js": {
-    "file": "assets/dashboard.e85a8716.js",
-    "src": "src/js/dashboard.js",
+  "../src/web/assets/src/js/dashboard.js": {
+    "file": "assets/dashboard.c5f98da7.js",
+    "src": "../src/web/assets/src/js/dashboard.js",
     "isEntry": true,
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_SimpleBarChart.24f64a98.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_vue-apexcharts.159e071b.js",
+      "_SimpleBarChart.5ce065d9.js",
       "_tri-color-blend.3ecffd12.js",
-      "_SampleSizeWarning.2f3be6f7.js",
-      "_SampleRangePicker.21b89632.js",
-      "_SamplePaneFooter.d8765632.js",
-      "_RecommendationsList.73cf9209.js"
+      "_SampleSizeWarning.8f20eec9.js",
+      "_SamplePaneFooter.eadc9035.js",
+      "_RecommendationsList.281cf6fa.js"
     ]
   },
-  "src/js/errors-detail.js": {
-    "file": "assets/errors-detail.6f6977bd.js",
-    "src": "src/js/errors-detail.js",
+  "../src/web/assets/src/js/errors-detail.js": {
+    "file": "assets/errors-detail.4f190327.js",
+    "src": "../src/web/assets/src/js/errors-detail.js",
     "isEntry": true,
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_ErrorsDetailAreaChart.27ff2418.js",
-      "_PageResultCell.9bead252.js",
-      "_RequestBarChart.cc701873.js",
-      "_DataSampleDate.822e2357.js",
-      "_DataSampleDevice.9c89c782.js",
-      "_SimpleBarChart.24f64a98.js",
-      "_SampleRangePicker.21b89632.js",
-      "_SamplePaneFooter.d8765632.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_ErrorsDetailAreaChart.4c651bef.js",
+      "_PageResultCell.457d2b6b.js",
+      "_RequestBarChart.15bfe72e.js",
+      "_DataSampleDate.eaf2d70c.js",
+      "_DataSampleDevice.912c20f4.js",
+      "_vue-apexcharts.159e071b.js",
+      "_SimpleBarChart.5ce065d9.js",
+      "_SamplePaneFooter.eadc9035.js",
       "_tri-color-blend.3ecffd12.js"
     ]
   },
-  "src/js/errors-index.js": {
-    "file": "assets/errors-index.45db71e4.js",
-    "src": "src/js/errors-index.js",
+  "../src/web/assets/src/js/errors-index.js": {
+    "file": "assets/errors-index.d0eb90a8.js",
+    "src": "../src/web/assets/src/js/errors-index.js",
     "isEntry": true,
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_PageResultCell.9bead252.js",
-      "_DataSampleDate.822e2357.js",
-      "_SampleRangePicker.21b89632.js",
-      "_ErrorsDetailAreaChart.27ff2418.js"
+      "_SampleRangePicker.f22425b8.js",
+      "_PageResultCell.457d2b6b.js",
+      "_DataSampleDate.eaf2d70c.js",
+      "_vue-apexcharts.159e071b.js",
+      "_ErrorsDetailAreaChart.4c651bef.js"
     ]
   },
-  "src/js/performance-detail.js": {
-    "file": "assets/performance-detail.ef3bc321.js",
-    "src": "src/js/performance-detail.js",
+  "../src/web/assets/src/js/performance-detail.js": {
+    "file": "assets/performance-detail.76d6eac0.js",
+    "src": "../src/web/assets/src/js/performance-detail.js",
     "isEntry": true,
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_PerformanceDetailAreaChart.b6d8a225.js",
-      "_PageResultCell.9bead252.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_PerformanceDetailAreaChart.1ff5b0b1.js",
+      "_PageResultCell.457d2b6b.js",
       "_tri-color-blend.3ecffd12.js",
-      "_RequestBarChart.cc701873.js",
-      "_DataSampleDate.822e2357.js",
-      "_DataSampleDevice.9c89c782.js",
-      "_SimpleBarChart.24f64a98.js",
-      "_SampleRangePicker.21b89632.js",
-      "_SamplePaneFooter.d8765632.js",
-      "_RecommendationsList.73cf9209.js"
+      "_RequestBarChart.15bfe72e.js",
+      "_DataSampleDate.eaf2d70c.js",
+      "_DataSampleDevice.912c20f4.js",
+      "_vue-apexcharts.159e071b.js",
+      "_SimpleBarChart.5ce065d9.js",
+      "_SamplePaneFooter.eadc9035.js",
+      "_RecommendationsList.281cf6fa.js"
     ]
   },
-  "src/js/performance-index.js": {
-    "file": "assets/performance-index.bf9bd5ec.js",
-    "src": "src/js/performance-index.js",
+  "../src/web/assets/src/js/performance-index.js": {
+    "file": "assets/performance-index.8c3b42ce.js",
+    "src": "../src/web/assets/src/js/performance-index.js",
     "isEntry": true,
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_PageResultCell.9bead252.js",
+      "_SampleRangePicker.f22425b8.js",
+      "_PageResultCell.457d2b6b.js",
       "_tri-color-blend.3ecffd12.js",
-      "_RequestBarChart.cc701873.js",
-      "_SampleSizeWarning.2f3be6f7.js",
-      "_SampleRangePicker.21b89632.js",
-      "_PerformanceDetailAreaChart.b6d8a225.js",
-      "_RecommendationsList.73cf9209.js",
-      "_SamplePaneFooter.d8765632.js"
+      "_RequestBarChart.15bfe72e.js",
+      "_SampleSizeWarning.8f20eec9.js",
+      "_vue-apexcharts.159e071b.js",
+      "_PerformanceDetailAreaChart.1ff5b0b1.js",
+      "_RecommendationsList.281cf6fa.js",
+      "_SamplePaneFooter.eadc9035.js"
     ]
   },
-  "src/js/sidebar.js": {
-    "file": "assets/sidebar.afe1b4dc.js",
-    "src": "src/js/sidebar.js",
+  "../src/web/assets/src/js/sidebar.js": {
+    "file": "assets/sidebar.0c904941.js",
+    "src": "../src/web/assets/src/js/sidebar.js",
     "isEntry": true,
     "imports": [
-      "_vendor.d298d7b0.js",
+      "_vue-apexcharts.159e071b.js",
       "_tri-color-blend.3ecffd12.js"
     ]
   },
-  "src/js/webperf.js": {
-    "file": "assets/webperf.2e6c8d55.js",
-    "src": "src/js/webperf.js",
+  "../src/web/assets/src/js/webperf.js": {
+    "file": "assets/webperf.fbc928c6.js",
+    "src": "../src/web/assets/src/js/webperf.js",
     "isEntry": true,
     "css": [
       "assets/webperf.51e99dad.css"
     ]
   },
-  "_vendor.d298d7b0.js": {
-    "file": "assets/vendor.d298d7b0.js",
-    "css": [
-      "assets/vendor.3b5bd98c.css"
-    ]
-  },
-  "_SimpleBarChart.24f64a98.js": {
-    "file": "assets/SimpleBarChart.24f64a98.js",
+  "_SampleRangePicker.f22425b8.js": {
+    "file": "assets/SampleRangePicker.f22425b8.js",
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_tri-color-blend.3ecffd12.js"
-    ]
-  },
-  "_SampleRangePicker.21b89632.js": {
-    "file": "assets/SampleRangePicker.21b89632.js",
-    "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ],
     "css": [
       "assets/SampleRangePicker.7c556130.css"
     ]
   },
-  "_SamplePaneFooter.d8765632.js": {
-    "file": "assets/SamplePaneFooter.d8765632.js",
+  "_SimpleBarChart.5ce065d9.js": {
+    "file": "assets/SimpleBarChart.5ce065d9.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js",
+      "_tri-color-blend.3ecffd12.js"
     ]
   },
-  "_RecommendationsList.73cf9209.js": {
-    "file": "assets/RecommendationsList.73cf9209.js",
+  "_SamplePaneFooter.eadc9035.js": {
+    "file": "assets/SamplePaneFooter.eadc9035.js",
     "imports": [
-      "_vendor.d298d7b0.js",
-      "_SamplePaneFooter.d8765632.js"
+      "_vue-apexcharts.159e071b.js"
     ]
+  },
+  "_RecommendationsList.281cf6fa.js": {
+    "file": "assets/RecommendationsList.281cf6fa.js",
+    "imports": [
+      "_vue-apexcharts.159e071b.js",
+      "_SamplePaneFooter.eadc9035.js"
+    ]
+  },
+  "_vue-apexcharts.159e071b.js": {
+    "file": "assets/vue-apexcharts.159e071b.js"
   },
   "_tri-color-blend.3ecffd12.js": {
     "file": "assets/tri-color-blend.3ecffd12.js"
   },
-  "_SampleSizeWarning.2f3be6f7.js": {
-    "file": "assets/SampleSizeWarning.2f3be6f7.js",
+  "_SampleSizeWarning.8f20eec9.js": {
+    "file": "assets/SampleSizeWarning.8f20eec9.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ]
   },
-  "_ErrorsDetailAreaChart.27ff2418.js": {
-    "file": "assets/ErrorsDetailAreaChart.27ff2418.js",
+  "_ErrorsDetailAreaChart.4c651bef.js": {
+    "file": "assets/ErrorsDetailAreaChart.4c651bef.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ]
   },
-  "_PageResultCell.9bead252.js": {
-    "file": "assets/PageResultCell.9bead252.js",
+  "_PageResultCell.457d2b6b.js": {
+    "file": "assets/PageResultCell.457d2b6b.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
+    ],
+    "css": [
+      "assets/PageResultCell.e5b1d28e.css"
     ]
   },
-  "_RequestBarChart.cc701873.js": {
-    "file": "assets/RequestBarChart.cc701873.js",
+  "_RequestBarChart.15bfe72e.js": {
+    "file": "assets/RequestBarChart.15bfe72e.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ]
   },
-  "_DataSampleDate.822e2357.js": {
-    "file": "assets/DataSampleDate.822e2357.js",
+  "_DataSampleDate.eaf2d70c.js": {
+    "file": "assets/DataSampleDate.eaf2d70c.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ]
   },
-  "_DataSampleDevice.9c89c782.js": {
-    "file": "assets/DataSampleDevice.9c89c782.js",
+  "_DataSampleDevice.912c20f4.js": {
+    "file": "assets/DataSampleDevice.912c20f4.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ]
   },
-  "_PerformanceDetailAreaChart.b6d8a225.js": {
-    "file": "assets/PerformanceDetailAreaChart.b6d8a225.js",
+  "_PerformanceDetailAreaChart.1ff5b0b1.js": {
+    "file": "assets/PerformanceDetailAreaChart.1ff5b0b1.js",
     "imports": [
-      "_vendor.d298d7b0.js"
+      "_vue-apexcharts.159e071b.js"
     ]
   }
 }
