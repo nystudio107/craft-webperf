@@ -1,5 +1,8 @@
 # Webperf Changelog
 
+## 1.0.29 - UNRELEASED
+### Changed
+
 ## 1.0.28 - 2022.06.23
 ### Changed
 * Removed the sub resource integrity on the built JavaScript, which could fail if systems were set up that manipulated the incoming JavaScript resources dynamically
