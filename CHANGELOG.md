@@ -1,5 +1,9 @@
 # Webperf Changelog
 
+## 4.0.1 - UNRELEASED
+### Fixed
+* Ensure that `$driver` is nullable in the install migration
+
 ## 4.0.0 - 2022.06.23
 ### Added
 * Initial Craft CMS 4 release
