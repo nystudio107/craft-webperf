@@ -33,6 +33,14 @@
       "nystudio107\\webperf\\": "src/"
     }
   },
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
   "extra": {
     "name": "Webperf",
     "handle": "webperf",
