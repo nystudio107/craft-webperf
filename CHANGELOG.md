@@ -1,6 +1,10 @@
 # Webperf Changelog
 
 ## 4.0.1 - UNRELEASED
+### Changed
+* Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* Updated docs to use node 20 & a new sitemap plugin
+
 ### Fixed
 * Ensure that `$driver` is nullable in the install migration
 
