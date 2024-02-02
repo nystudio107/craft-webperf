@@ -1,10 +1,10 @@
-# `retour` buildchain
+# `webperf` buildchain
 
-This buildchain is a self-contained build system for the `retour` JavaScript bundle.
+This buildchain is a self-contained build system for the `webperf` JavaScript bundle.
 
 ## Overview
 
-The buildchain builds & bundles all of the `retour` TypeScript/JavaScript code, Vue components, CSS, and any other static resources via Vite via a Docker container.
+The buildchain builds & bundles all of the `webperf` TypeScript/JavaScript code, Vue components, CSS, and any other static resources via Vite via a Docker container.
 
 Source files:
 
