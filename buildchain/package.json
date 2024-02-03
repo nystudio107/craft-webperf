@@ -16,7 +16,6 @@
     "cms",
     "plugin"
   ],
-  "version": "1.0.0",
   "dependencies": {
     "apexcharts": "^3.8.0",
     "axios": "^1.6.2",
