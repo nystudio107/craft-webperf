@@ -6,6 +6,7 @@
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
 * Move to using `ServicesTrait` and add getter methods for services
 * Update the Test on Google PageSpeed Insights URL to `pagespeed.web.dev`
+* Clean up search bar CSS
 * Updated docs to use node 20 & a new sitemap plugin
 
 ### Fixed
