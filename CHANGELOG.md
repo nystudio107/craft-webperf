@@ -2,6 +2,11 @@
 
 ## 1.0.29 - UNRELEASED
 ### Changed
+* Add `allow-plugins` for CI
+* Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+
+### Fixed
+* Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
 
 ## 1.0.28 - 2022.06.23
 ### Changed
