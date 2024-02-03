@@ -4,6 +4,7 @@
 ### Changed
 * Add `allow-plugins` for CI
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* Move to using `ServicesTrait` and add getter methods for services
 
 ### Fixed
 * Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
