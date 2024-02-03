@@ -21,6 +21,7 @@ use nystudio107\webperf\services\DataSamples as DataSamplesService;
 use nystudio107\webperf\services\ErrorSamples as ErrorSamplesService;
 use nystudio107\webperf\services\Beacons as BeaconsService;
 use nystudio107\webperf\services\Recommendations as RecommendationsService;
+use nystudio107\webperf\services\ServicesTrait;
 use nystudio107\webperf\variables\WebperfVariable;
 
 use nystudio107\pluginvite\services\VitePluginService;
@@ -49,16 +50,15 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property BeaconsService          $beacons
- * @property DataSamplesService      $dataSamples
- * @property ErrorSamplesService     $errorSamples
- * @property RecommendationsService  $recommendations
- * @property ErrorsTarget            $errorsTarget
- * @property ProfileTarget           $profileTarget
- * @property VitePluginService       $vite
+ * @property ProfileTarget $profileTarget
  */
 class Webperf extends Plugin
 {
+    // Traits
+    // =========================================================================
+
+    use ServicesTrait;
+
     // Constants
     // =========================================================================
 
@@ -105,35 +105,6 @@ class Webperf extends Plugin
      * @var bool
      */
     public static $craft31 = false;
-
-    // Static Methods
-    // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public function __construct($id, $parent = null, array $config = [])
-    {
-        $config['components'] = [
-            'beacons' => BeaconsService::class,
-            'dataSamples' => DataSamplesService::class,
-            'errorSamples' => ErrorSamplesService::class,
-            'recommendations' => RecommendationsService::class,
-            // Register the vite service
-            'vite' => [
-                'class' => VitePluginService::class,
-                'assetClass' => WebperfAsset::class,
-                'useDevServer' => true,
-                'devServerPublic' => 'http://localhost:3001',
-                'serverPublic' => 'http://localhost:8000',
-                'errorEntry' => 'src/js/webperf.js',
-                'devServerInternal' => 'http://craft-webperf-buildchain:3001',
-                'checkDevServer' => true,
-            ],
-        ];
-
-        parent::__construct($id, $parent, $config);
-    }
 
     // Public Properties
     // =========================================================================
