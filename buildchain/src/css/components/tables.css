@@ -127,4 +127,8 @@ td.text-right {
     right: 0;
 }
 
+.webperf-reset::before {
+    padding-bottom: 4px;
+}
+
 /* stylelint-enable */

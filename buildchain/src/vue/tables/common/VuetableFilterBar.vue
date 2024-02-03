@@ -5,13 +5,13 @@
         <label class="text-gray-600">Search for:</label>
         <input
           v-model="filterText"
-          class="text nicetext"
+          class="text nicetext mx-2"
           placeholder=""
           type="text"
           @keyup="doFilter"
         >
         <button
-          class="btn delete icon"
+          class="btn delete icon webperf-reset"
           @click="resetFilter"
         >
           Reset
