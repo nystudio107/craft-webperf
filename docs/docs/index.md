@@ -1,10 +1,10 @@
 ---
-title: Webperf plugin for Craft CMS 3.x
+title: Webperf plugin for Craft CMS
 description: Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance
 ---
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/quality-score.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/?branch=v1) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/coverage.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/?branch=v1) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/build.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/build-status/v1) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/code-intelligence.svg?b=v1)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/quality-score.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/?branch=v4) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/coverage.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/?branch=v4) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/build.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/build-status/v4) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-webperf/badges/code-intelligence.svg?b=v4)](https://scrutinizer-ci.com/code-intelligence)
 
-# Webperf plugin for Craft CMS 3.x
+# Webperf plugin for Craft CMS 4.x
 
 Webperf helps you build & maintain high quality sites through Real User Measurement of your website’s performance
 
@@ -14,7 +14,7 @@ Webperf helps you build & maintain high quality sites through Real User Measurem
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
