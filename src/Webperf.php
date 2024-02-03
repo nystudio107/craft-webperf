@@ -51,13 +51,7 @@ use yii\base\InvalidConfigException;
  * @package   Webperf
  * @since     1.0.0
  *
- * @property BeaconsService $beacons
- * @property DataSamplesService $dataSamples
- * @property ErrorSamplesService $errorSamples
- * @property RecommendationsService $recommendations
- * @property ErrorsTarget $errorsTarget
  * @property ProfileTarget $profileTarget
- * @property VitePluginService $vite
  */
 class Webperf extends Plugin
 {
