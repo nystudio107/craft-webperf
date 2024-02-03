@@ -118,7 +118,7 @@
         </div>
     </div>
     <div class="buttons pt-4 pb-2">
-        {% set testUrl = url('https://developers.google.com/speed/pagespeed/insights', {
+        {% set testUrl = url('https://pagespeed.web.dev', {
             'url': pageUrl,
         }) %}
         {% set testName = 'Test on Google PageSpeed Insights'|t %}
