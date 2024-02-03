@@ -12,6 +12,7 @@
 ### Fixed
 * Ensure that `$driver` is nullable in the install migration
 * Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
+* Fix the sidebar CSS so the radial bar chart is not cropped, and there is padding around the text labels ([#51](https://github.com/nystudio107/craft-webperf/issues/51))
 
 ## 4.0.0 - 2022.06.23
 ### Added
