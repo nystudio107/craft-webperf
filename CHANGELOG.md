@@ -6,6 +6,7 @@
 * Move to using `ServicesTrait` and add getter methods for services
 * Add `allow-plugins` for CI
 * Update the Test on Google PageSpeed Insights URL to `pagespeed.web.dev`
+* Clean up search bar CSS
 * Updated docs to use node 20 & a new sitemap plugin
 
 ### Fixed
