@@ -3,10 +3,13 @@
 ## 4.0.1 - UNRELEASED
 ### Changed
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* Move to using `ServicesTrait` and add getter methods for services
+* Add `allow-plugins` for CI
 * Updated docs to use node 20 & a new sitemap plugin
 
 ### Fixed
 * Ensure that `$driver` is nullable in the install migration
+* Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
 
 ## 4.0.0 - 2022.06.23
 ### Added
