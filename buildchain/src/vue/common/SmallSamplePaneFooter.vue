@@ -1,5 +1,5 @@
 <template>
-  <div class="field">
+  <div class="">
     <div
       v-if="samples >= 100"
       class="heading"

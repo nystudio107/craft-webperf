@@ -2,7 +2,7 @@
   <apexcharts
     :options="chartOptions"
     :series="series"
-    height="180px"
+    height="155"
     type="radialBar"
     width="100%"
   />
@@ -110,7 +110,7 @@ export default {
             startAngle: -135,
             endAngle: 135,
             hollow: {
-              size: '65%',
+              size: '50%',
             },
             track: {
               background: "#dae1e7",
@@ -150,7 +150,7 @@ export default {
         labels: [this.title],
         title: {
           text: this.title,
-          offsetY: 20,
+          offsetY: 10,
           align: 'center',
           style: {
             color: '#606f7b',
