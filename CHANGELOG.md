@@ -1,6 +1,10 @@
 # Webperf Changelog
 
 ## 4.0.1 - UNRELEASED
+### Added
+* Add `phpstan` and `ecs` code linting
+* Add `code-analysis.yaml` GitHub action
+
 ### Changed
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
 * Move to using `ServicesTrait` and add getter methods for services
