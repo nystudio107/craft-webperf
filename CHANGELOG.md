@@ -12,6 +12,7 @@
 * Update the Test on Google PageSpeed Insights URL to `pagespeed.web.dev`
 * Clean up search bar CSS
 * Updated docs to use node 20 & a new sitemap plugin
+* ECS code cleanup
 
 ### Fixed
 * Ensure that `$driver` is nullable in the install migration
