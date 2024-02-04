@@ -12,6 +12,7 @@
 * Update the Test on Google PageSpeed Insights URL to `pagespeed.web.dev`
 * Clean up search bar CSS
 * Updated docs to use node 20 & a new sitemap plugin
+* ECS code cleanup
 
 ### Fixed
 * Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
