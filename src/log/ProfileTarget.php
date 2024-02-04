@@ -12,8 +12,8 @@ namespace nystudio107\webperf\log;
 
 use nystudio107\webperf\Webperf;
 
-use yii\log\Target;
 use yii\log\Logger;
+use yii\log\Target;
 
 /**
  * @author    nystudio107
@@ -22,8 +22,7 @@ use yii\log\Logger;
  */
 class ProfileTarget extends Target
 {
-
-    const PROFILE_CATEGORIES = [
+    public const PROFILE_CATEGORIES = [
         'database' => [
             'prefix' => 'yii\db',
         ],

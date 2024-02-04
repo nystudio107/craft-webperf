@@ -10,25 +10,24 @@
 
 namespace {
 
-    require_once __DIR__.'/../lib/geoiploc.php';
+    require_once __DIR__ . '/../lib/geoiploc.php';
 }
 
 namespace nystudio107\webperf\controllers {
-
-    use nystudio107\webperf\Webperf;
-    use nystudio107\webperf\helpers\MultiSite;
-    use nystudio107\webperf\helpers\Permission as PermissionHelper;
-    use nystudio107\webperf\models\BoomerangDbDataSample;
-    use nystudio107\webperf\models\BoomerangDbErrorSample;
-
-    use Jaybizzle\CrawlerDetect\CrawlerDetect;
-    use WhichBrowser\Parser;
 
     use Craft;
     use craft\errors\SiteNotFoundException;
     use craft\helpers\Json;
     use craft\helpers\UrlHelper;
+
     use craft\web\Controller;
+    use Jaybizzle\CrawlerDetect\CrawlerDetect;
+
+    use nystudio107\webperf\helpers\MultiSite;
+    use nystudio107\webperf\models\BoomerangDbDataSample;
+    use nystudio107\webperf\models\BoomerangDbErrorSample;
+    use nystudio107\webperf\Webperf;
+    use WhichBrowser\Parser;
 
     use yii\base\InvalidConfigException;
 
@@ -42,7 +41,7 @@ namespace nystudio107\webperf\controllers {
         // Constants
         // =========================================================================
 
-        const LAST_BEACON_CACHE_KEY = 'webperf-last-beacon';
+        public const LAST_BEACON_CACHE_KEY = 'webperf-last-beacon';
 
         // Public Properties
         // =========================================================================
@@ -90,7 +89,7 @@ namespace nystudio107\webperf\controllers {
             }
             // Filter out bot/spam requests via UserAgent
             if (Webperf::$settings->filterBotUserAgents) {
-                $crawlerDetect = new CrawlerDetect;
+                $crawlerDetect = new CrawlerDetect();
                 // Check the user agent of the current 'visitor'
                 if ($crawlerDetect->isCrawler()) {
                     Craft::$app->end();
@@ -168,7 +167,7 @@ namespace nystudio107\webperf\controllers {
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample
-            Craft::debug('Saving BoomerangDbDataSample: '.print_r($sample->getAttributes(), true), __METHOD__);
+            Craft::debug('Saving BoomerangDbDataSample: ' . print_r($sample->getAttributes(), true), __METHOD__);
             Webperf::$plugin->dataSamples->addDataSample($sample);
             if (!empty($params['err'])) {
                 // Allocate a new ErrorSample, and fill it in
@@ -180,7 +179,7 @@ namespace nystudio107\webperf\controllers {
                     'pageErrors' => Json::decodeIfJson($params['err']),
                 ]);
                 // Save the error sample
-                Craft::debug('Saving Boomerang ErrorSample: '.print_r($errorSample->getAttributes(), true), __METHOD__);
+                Craft::debug('Saving Boomerang ErrorSample: ' . print_r($errorSample->getAttributes(), true), __METHOD__);
                 Webperf::$plugin->errorSamples->addErrorSample($errorSample);
             }
             Craft::$app->end();

@@ -144,7 +144,7 @@ class Beacons extends Component
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
-            $crawlerDetect = new CrawlerDetect;
+            $crawlerDetect = new CrawlerDetect();
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
                 return;
@@ -199,7 +199,7 @@ class Beacons extends Component
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
-            $crawlerDetect = new CrawlerDetect;
+            $crawlerDetect = new CrawlerDetect();
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
                 return;

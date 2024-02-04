@@ -49,7 +49,7 @@ class DataSamples extends Component
      * );
      * ```
      */
-    const EVENT_BEFORE_SAVE_DATA_SAMPLE = 'beforeSaveDataSample';
+    public const EVENT_BEFORE_SAVE_DATA_SAMPLE = 'beforeSaveDataSample';
 
     /**
      * @event DataSampleEvent The event that is triggered after the redirect is saved
@@ -66,7 +66,7 @@ class DataSamples extends Component
      * );
      * ```
      */
-    const EVENT_AFTER_SAVE_DATA_SAMPLE = 'afterSaveDataSample';
+    public const EVENT_AFTER_SAVE_DATA_SAMPLE = 'afterSaveDataSample';
 
     // Public Methods
     // =========================================================================

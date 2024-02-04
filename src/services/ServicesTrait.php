@@ -58,7 +58,7 @@ trait ServicesTrait
                     'errorEntry' => 'src/js/webperf.js',
                     'useDevServer' => true,
                 ],
-            ]
+            ],
         ];
     }
 

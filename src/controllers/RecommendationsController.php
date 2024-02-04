@@ -10,11 +10,11 @@
 
 namespace nystudio107\webperf\controllers;
 
+use craft\web\Controller;
+
 use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
 use nystudio107\webperf\models\RecommendationDataSample;
-
-use craft\web\Controller;
 
 use nystudio107\webperf\Webperf;
 use yii\web\ForbiddenHttpException;
@@ -56,7 +56,7 @@ class RecommendationsController extends Controller
         $pageUrl = '',
         string $start = '',
         string $end = '',
-        $siteId = 0
+        $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:recommendations');
         $data = [];

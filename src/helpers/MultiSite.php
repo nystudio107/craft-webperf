@@ -87,7 +87,7 @@ class MultiSite
                         $siteId = reset($variables['enabledSiteIds']);
                     }
                 } else {
-                    self::requirePermission('editSite:'.$siteId);
+                    self::requirePermission('editSite:' . $siteId);
                 }
             }
         }
@@ -135,7 +135,7 @@ class MultiSite
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
             if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+                throw new NotFoundHttpException('Invalid site handle: ' . $siteHandle);
             }
             $siteId = $site->id;
         } else {

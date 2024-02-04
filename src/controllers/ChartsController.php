@@ -10,13 +10,13 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
+
 use craft\db\Query;
 use craft\helpers\ArrayHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
@@ -59,7 +59,7 @@ class ChartsController extends Controller
         string $end = '',
         string $column = 'pageLoad',
         $pageUrl = '',
-        int $siteId = 0
+        int $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
@@ -67,7 +67,7 @@ class ChartsController extends Controller
             return $this->asJson($data);
         }
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Different dbs do it different ways
         $stats = null;
@@ -77,7 +77,7 @@ class ChartsController extends Controller
             ->from('{{%webperf_data_samples}}')
             ->select([
                 'COUNT([[url]]) AS cnt',
-                'AVG([['.$column.']]) AS avg',
+                'AVG([[' . $column . ']]) AS avg',
             ])
             ->where(['between', 'dateCreated', $start, $end])
             ->andWhere(['not', [$column => null]]);
@@ -116,12 +116,12 @@ class ChartsController extends Controller
         string $end,
         string $column = 'pageLoad',
         int $limit = 3,
-        int $siteId = 0
+        int $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
@@ -132,7 +132,7 @@ class ChartsController extends Controller
                 '[[url]]',
                 'MIN([[title]]) AS title',
                 'COUNT([[url]]) AS cnt',
-                'AVG([['.$column.']]) AS avg',
+                'AVG([[' . $column . ']]) AS avg',
             ])
             ->where(['between', 'dateCreated', $start, $end])
             ->andWhere(['not', [$column => null]]);
@@ -178,12 +178,12 @@ class ChartsController extends Controller
         string $start,
         string $end,
         $pageUrl = '',
-        int $siteId = 0
+        int $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         $dateStart = new \DateTime($start);
         $dateEnd = new \DateTime($end);
@@ -192,7 +192,7 @@ class ChartsController extends Controller
         if ($interval->days > 30) {
             $dateFormat = "'%Y-%m-%d'";
         }
-            // Different dbs do it different ways
+        // Different dbs do it different ways
         $stats = null;
         $db = Craft::$app->getDb();
         if ($db->getIsPgsql()) {
@@ -227,7 +227,7 @@ class ChartsController extends Controller
         if ($db->getIsMysql()) {
             $query
                 ->addSelect([
-                    'DATE_FORMAT([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                    'DATE_FORMAT([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
                 ->groupBy('sampleDate')
             ;
@@ -235,9 +235,9 @@ class ChartsController extends Controller
         if ($db->getIsPgsql()) {
             $query
                 ->addSelect([
-                    'to_char([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                    'to_char([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
-                ->groupBy(['to_char([[dateCreated]], '.$dateFormat.')'])
+                ->groupBy(['to_char([[dateCreated]], ' . $dateFormat . ')'])
             ;
         }
         $stats = $query
@@ -315,12 +315,12 @@ class ChartsController extends Controller
         string $start,
         string $end,
         $pageUrl = '',
-        int $siteId = 0
+        int $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         $dateStart = new \DateTime($start);
         $dateEnd = new \DateTime($end);
@@ -356,7 +356,7 @@ class ChartsController extends Controller
         if ($db->getIsMysql()) {
             $query
                 ->addSelect([
-                    'DATE_FORMAT([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                    'DATE_FORMAT([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
                 ->groupBy('[[sampleDate]], [[type]]')
             ;
@@ -364,9 +364,9 @@ class ChartsController extends Controller
         if ($db->getIsPgsql()) {
             $query
                 ->addSelect([
-                    'to_char([[dateCreated]], '.$dateFormat.') AS [[sampleDate]]',
+                    'to_char([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
-                ->groupBy(['to_char([[dateCreated]], '.$dateFormat.'), [[type]]'])
+                ->groupBy(['to_char([[dateCreated]], ' . $dateFormat . '), [[type]]'])
             ;
         }
         $stats = $query

@@ -250,7 +250,7 @@ class Settings extends Model
                     'dashboardAverageColor',
                     'dashboardSlowColor',
                 ],
-                ColorValidator::class
+                ColorValidator::class,
             ],
             [
                 [
@@ -269,7 +269,7 @@ class Settings extends Model
                 'number',
                 'min' => 0.1,
                 'max' => 100,
-            ]
+            ],
         ];
     }
 
@@ -288,7 +288,7 @@ class Settings extends Model
                 'attributes' => [
                     'webpageTestApiKey',
                 ],
-            ]
+            ],
         ];
     }
 }

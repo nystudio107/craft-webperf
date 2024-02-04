@@ -10,11 +10,11 @@
 
 namespace nystudio107\webperf\helpers;
 
-use nystudio107\minify\Minify;
-
 use Craft;
+
 use craft\helpers\Template;
 use craft\web\View;
+use nystudio107\minify\Minify;
 
 use yii\base\Exception;
 
@@ -28,7 +28,7 @@ class PluginTemplate
     // Constants
     // =========================================================================
 
-    const MINIFY_PLUGIN_HANDLE = 'minify';
+    public const MINIFY_PLUGIN_HANDLE = 'minify';
 
     // Static Methods
     // =========================================================================
@@ -61,7 +61,7 @@ class PluginTemplate
     public static function renderPluginTemplate(
         string $templatePath,
         array $params = [],
-        string $minifier = null
+        string $minifier = null,
     ): string {
         // Stash the old template mode, and set it Control Panel template mode
         $oldMode = Craft::$app->view->getTemplateMode();
@@ -80,7 +80,6 @@ class PluginTemplate
                 if ($minify) {
                     $htmlText = Minify::$plugin->minify->$minifier($htmlText);
                 }
-
             }
         } catch (\Exception $e) {
             $htmlText = Craft::t(

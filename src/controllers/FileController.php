@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
+
 use craft\db\Query;
 use craft\web\Controller;
-
 use League\Csv\CannotInsertRecord;
+
 use League\Csv\Writer;
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
 /**
  * @author    nystudio107
@@ -29,7 +29,7 @@ class FileController extends Controller
     // Constants
     // =========================================================================
 
-    const EXPORT_DATA_SAMPLES_COLUMNS = [
+    public const EXPORT_DATA_SAMPLES_COLUMNS = [
         'siteId',
         'title',
         'url',
@@ -56,7 +56,7 @@ class FileController extends Controller
         'craftTotalMemory',
     ];
 
-    const EXPORT_ERROR_SAMPLES_COLUMNS = [
+    public const EXPORT_ERROR_SAMPLES_COLUMNS = [
         'siteId',
         'title',
         'url',
@@ -138,7 +138,7 @@ class FileController extends Controller
         string $table,
         array $columns,
         string $pageUrl = '',
-        int $siteId = null
+        int $siteId = null,
     ) {
         // If your CSV document was created or is read on a Macintosh computer,
         // add the following lines before using the library to help PHP detect line ending in Mac OS X
@@ -166,7 +166,7 @@ class FileController extends Controller
         $csv = Writer::createFromFileObject(new \SplTempFileObject());
         $csv->insertOne($columns);
         $csv->insertAll($data);
-        $csv->output($filename.'.csv');
+        $csv->output($filename . '.csv');
         exit(0);
     }
 }
