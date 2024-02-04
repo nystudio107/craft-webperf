@@ -204,7 +204,7 @@ Event::on(DataSamples::class,
 
 ```php
 use nystudio107\webperf\services\ErrorSamples;
-use nystudio107\retour\events\ErrorSampleEvent;
+use nystudio107\webperf\events\ErrorSampleEvent;
 
 Event::on(ErrorSamples::class,
     ErrorSamples::EVENT_BEFORE_SAVE_ERROR_SAMPLE,
