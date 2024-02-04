@@ -28,6 +28,16 @@
     "league/csv": "^8.2 || ^9.0",
     "whichbrowser/parser": "^2.0.37"
   },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/rector": "dev-main"
+  },
+  "scripts": {
+    "phpstan": "phpstan --ansi --memory-limit=1G",
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --fix --ansi"
+  },
   "autoload": {
     "psr-4": {
       "nystudio107\\webperf\\": "src/"
