@@ -1,6 +1,10 @@
 # Webperf Changelog
 
 ## 1.0.29 - UNRELEASED
+### Added
+* Add `phpstan` and `ecs` code linting
+* Add `code-analysis.yaml` GitHub action
+
 ### Changed
 * Add `allow-plugins` for CI
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
