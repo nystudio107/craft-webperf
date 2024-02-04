@@ -2,7 +2,6 @@
 
 namespace nystudio107\webperf\migrations;
 
-use Craft;
 use craft\db\Migration;
 
 /**

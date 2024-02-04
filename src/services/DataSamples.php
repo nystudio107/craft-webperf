@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\base\CraftDataSample;
-use nystudio107\webperf\base\DbDataSampleInterface;
-use nystudio107\webperf\events\DataSampleEvent;
-
 use Craft;
 use craft\base\Component;
 use craft\db\Query;
+use nystudio107\webperf\base\CraftDataSample;
+
+use nystudio107\webperf\base\DbDataSampleInterface;
+use nystudio107\webperf\events\DataSampleEvent;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107

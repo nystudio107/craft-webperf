@@ -10,8 +10,8 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\base\CraftDataSampleTrait;
 use nystudio107\webperf\base\BoomerangDataSampleTrait;
+use nystudio107\webperf\base\CraftDataSampleTrait;
 
 use nystudio107\webperf\base\FluentModel;
 

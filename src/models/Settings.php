@@ -10,17 +10,17 @@
 
 namespace nystudio107\webperf\models;
 
-use nystudio107\webperf\Webperf;
-
 use Craft;
+
 use craft\base\Model;
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\validators\ArrayValidator;
 use craft\validators\ColorValidator;
-
-use yii\behaviors\AttributeTypecastBehavior;
+use nystudio107\webperf\Webperf;
 
 use putyourlightson\blitz\Blitz;
+
+use yii\behaviors\AttributeTypecastBehavior;
 
 /**
  * @author    nystudio107
@@ -254,7 +254,7 @@ class Settings extends Model
                     'dashboardAverageColor',
                     'dashboardSlowColor',
                 ],
-                ColorValidator::class
+                ColorValidator::class,
             ],
             [
                 [
@@ -273,7 +273,7 @@ class Settings extends Model
                 'number',
                 'min' => 0.1,
                 'max' => 100,
-            ]
+            ],
         ];
     }
 
@@ -290,7 +290,7 @@ class Settings extends Model
                     'attributes' => [
                         'webpageTestApiKey',
                     ],
-                ]
+                ],
             ];
         }
 

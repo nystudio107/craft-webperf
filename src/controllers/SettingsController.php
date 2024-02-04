@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\assetbundles\webperf\WebperfAsset;
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-use nystudio107\webperf\models\Settings;
-
 use Craft;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use nystudio107\webperf\assetbundles\webperf\WebperfAsset;
+
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
+use nystudio107\webperf\models\Settings;
+use nystudio107\webperf\Webperf;
 
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;

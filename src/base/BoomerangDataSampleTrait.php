@@ -96,7 +96,7 @@ trait BoomerangDataSampleTrait
                     'browser',
                     'os',
                 ],
-                'string'
+                'string',
             ],
             [
                 [
@@ -108,7 +108,7 @@ trait BoomerangDataSampleTrait
                     'domInteractive',
                     'pageLoad',
                 ],
-                'integer'
+                'integer',
             ],
             ['mobile', 'boolean'],
         ];

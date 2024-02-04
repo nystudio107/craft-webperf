@@ -10,11 +10,11 @@
 
 namespace nystudio107\webperf\migrations;
 
-use nystudio107\webperf\Webperf;
-
 use Craft;
+
 use craft\config\DbConfig;
 use craft\db\Migration;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107

@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\assetbundles\webperf\WebperfDashboardAsset;
-use nystudio107\webperf\helpers\MultiSite as MultiSiteHelper;
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use nystudio107\webperf\assetbundles\webperf\WebperfDashboardAsset;
+
+use nystudio107\webperf\helpers\MultiSite as MultiSiteHelper;
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
+use nystudio107\webperf\Webperf;
 
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
@@ -83,7 +83,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -91,7 +91,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/dashboard'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/dashboard' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -145,7 +145,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -153,7 +153,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/performance' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -207,7 +207,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -215,12 +215,12 @@ class SectionsController extends Controller
             ],
             [
                 'label' => Craft::t('webperf', 'Performance'),
-                'url' => UrlHelper::cpUrl('webperf/performance'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/performance' . $siteHandleUri),
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/performance/page-detail'.$siteHandleUri, [
-                    'pageUrl' => $pageUrl
+                'url' => UrlHelper::cpUrl('webperf/performance/page-detail' . $siteHandleUri, [
+                    'pageUrl' => $pageUrl,
                 ]),
             ],
         ];
@@ -280,7 +280,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -288,7 +288,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/errors' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";
@@ -341,7 +341,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -349,12 +349,12 @@ class SectionsController extends Controller
             ],
             [
                 'label' => Craft::t('webperf', 'Errors'),
-                'url' => UrlHelper::cpUrl('webperf/errors'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/errors' . $siteHandleUri),
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/errors/page-detail'.$siteHandleUri, [
-                    'pageUrl' => $pageUrl
+                'url' => UrlHelper::cpUrl('webperf/errors/page-detail' . $siteHandleUri, [
+                    'pageUrl' => $pageUrl,
                 ]),
             ],
         ];
@@ -406,7 +406,7 @@ class SectionsController extends Controller
         $variables['docsUrl'] = self::DOCUMENTATION_URL;
         $variables['pluginName'] = $pluginName;
         $variables['title'] = $templateTitle;
-        $siteHandleUri = Craft::$app->isMultiSite ? '/'.$siteHandle : '';
+        $siteHandleUri = Craft::$app->isMultiSite ? '/' . $siteHandle : '';
         $variables['crumbs'] = [
             [
                 'label' => $pluginName,
@@ -414,7 +414,7 @@ class SectionsController extends Controller
             ],
             [
                 'label' => $templateTitle,
-                'url' => UrlHelper::cpUrl('webperf/alerts'.$siteHandleUri),
+                'url' => UrlHelper::cpUrl('webperf/alerts' . $siteHandleUri),
             ],
         ];
         $variables['docTitle'] = "{$pluginName} - {$templateTitle}";

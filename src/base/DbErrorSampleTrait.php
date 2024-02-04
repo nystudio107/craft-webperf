@@ -10,9 +10,9 @@
 
 namespace nystudio107\webperf\base;
 
-use nystudio107\webperf\validators\DbStringValidator;
-
 use craft\validators\ArrayValidator;
+
+use nystudio107\webperf\validators\DbStringValidator;
 
 /**
  * @author    nystudio107
@@ -82,7 +82,7 @@ trait DbErrorSampleTrait
                     'url',
                     'queryString',
                 ],
-                'string'
+                'string',
             ],
         ];
     }

@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\base\DbErrorSampleInterface;
-use nystudio107\webperf\events\ErrorSampleEvent;
-
 use Craft;
 use craft\base\Component;
 use craft\db\Query;
+
 use craft\helpers\Json;
+use nystudio107\webperf\base\DbErrorSampleInterface;
+use nystudio107\webperf\events\ErrorSampleEvent;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107
@@ -106,7 +106,7 @@ class ErrorSamples extends Component
     public function totalErrorSamplesRange(int $siteId, string $start, string $end, $pageUrl = null, $type = null): int
     {
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Get the total number of errors
         $query = (new Query())
             ->from(['{{%webperf_error_samples}}'])

@@ -10,13 +10,13 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
+
 use craft\db\Query;
 use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
@@ -117,7 +117,7 @@ class TablesController extends Controller
         $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -178,7 +178,7 @@ class TablesController extends Controller
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
-             // Determine the stat type
+                // Determine the stat type
                 if (!empty($stat['pageLoad']) && !empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'both';
                 }
@@ -205,7 +205,7 @@ class TablesController extends Controller
                 // Set up the appropriate helper links
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/data-samples/delete-samples-by-url', [
                     'pageUrl' => $stat['url'],
-                    'siteId' => $siteId
+                    'siteId' => $siteId,
                 ]);
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/performance/page-detail', [
                     'pageUrl' => $stat['url'],
@@ -278,7 +278,7 @@ class TablesController extends Controller
         $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Figure out the sorting type
         if ($sort !== '') {
@@ -350,7 +350,7 @@ class TablesController extends Controller
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/data-samples/delete-sample-by-id', [
-                    'id' => $stat['id']
+                    'id' => $stat['id'],
                 ]);
                 // Override based on permissions
                 if (!$user->can('webperf:delete-data-samples')) {
@@ -418,7 +418,7 @@ class TablesController extends Controller
         $sortField = 'url';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -492,7 +492,7 @@ class TablesController extends Controller
                 // Set up the appropriate helper links
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/error-samples/delete-samples-by-url', [
                     'pageUrl' => $stat['url'],
-                    'siteId' => $siteId
+                    'siteId' => $siteId,
                 ]);
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/errors/page-detail', [
                     'pageUrl' => $stat['url'],
@@ -569,7 +569,7 @@ class TablesController extends Controller
         $sortField = 'dateCreated';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Figure out the sorting type
         if ($sort !== '') {
@@ -643,7 +643,7 @@ class TablesController extends Controller
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/error-samples/delete-sample-by-id', [
-                    'id' => $stat['id']
+                    'id' => $stat['id'],
                 ]);
                 // Override based on permissions
                 if (!$user->can('webperf:delete-error-samples')) {

@@ -86,7 +86,7 @@ trait CraftDataSampleTrait
                     'craftOtherCnt',
                     'craftTotalMemory',
                 ],
-                'integer'
+                'integer',
             ],
         ];
     }

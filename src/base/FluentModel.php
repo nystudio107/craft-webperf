@@ -11,7 +11,6 @@
 namespace nystudio107\webperf\base;
 
 use Craft;
-use craft\base\Model;
 
 use yii\base\InvalidArgumentException;
 

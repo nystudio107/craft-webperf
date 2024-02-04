@@ -26,7 +26,7 @@ class ErrorsTarget extends Target
 
     const ERROR_LEVELS = [
         1 => 'error',
-        2 => 'warning'
+        2 => 'warning',
     ];
 
     // Public Properties

@@ -61,7 +61,7 @@ trait ServicesTrait
                     'errorEntry' => 'src/js/webperf.js',
                     'useDevServer' => true,
                 ],
-            ]
+            ],
         ], $config);
 
         parent::__construct($id, $parent, $config);

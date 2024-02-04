@@ -10,14 +10,14 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
+
 use craft\db\Query;
 use craft\web\Controller;
-
 use League\Csv\CannotInsertRecord;
+
 use League\Csv\Writer;
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
 
 /**
  * @author    nystudio107
@@ -166,7 +166,7 @@ class FileController extends Controller
         $csv = Writer::createFromFileObject(new \SplTempFileObject());
         $csv->insertOne($columns);
         $csv->insertAll($data);
-        $csv->output($filename.'.csv');
+        $csv->output($filename . '.csv');
         exit(0);
     }
 }

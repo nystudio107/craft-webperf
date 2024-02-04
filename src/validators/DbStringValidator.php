@@ -10,9 +10,9 @@
 
 namespace nystudio107\webperf\validators;
 
-use nystudio107\webperf\helpers\Text as TextHelper;
-
 use craft\helpers\StringHelper;
+
+use nystudio107\webperf\helpers\Text as TextHelper;
 
 use yii\base\InvalidConfigException;
 use yii\validators\Validator;
