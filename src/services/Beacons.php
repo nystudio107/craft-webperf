@@ -253,9 +253,10 @@ class Beacons extends Component
             $docTitle = '';
         }
         // If SEOmatic is installed, get the title from it
+        /** @var Seomatic|null $seomatic */
         $seomatic = Craft::$app->getPlugins()->getPlugin(self::SEOMATIC_PLUGIN_HANDLE);
-        if ($seomatic && Seomatic::$settings->renderEnabled) {
-            $titleTag = Seomatic::$plugin->title->get('title');
+        if ($seomatic && $seomatic::$settings->renderEnabled) {
+            $titleTag = $seomatic->title->get('title');
             if ($titleTag) {
                 $titleArray = $titleTag->renderAttributes();
                 if (!empty($titleArray['title'])) {
