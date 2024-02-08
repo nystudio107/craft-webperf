@@ -473,7 +473,9 @@ class TablesController extends Controller
 
         $stats = $query->all();
         if ($stats) {
-            $user = Craft::$app->getUser()->getIdentity();
+            /** @var User $user */
+            $user = Craft::$app->getUser();
+            $identity = $user->getIdentity();
             // Massage the stats
             foreach ($stats as &$stat) {
                 $stat['cnt'] = (int)$stat['cnt'];
@@ -493,10 +495,10 @@ class TablesController extends Controller
                     'siteId' => $siteId,
                 ]);
                 // Override based on permissions
-                if (!$user->can('webperf:delete-error-samples')) {
+                if (!$identity->can('webperf:delete-error-samples')) {
                     $stat['deleteLink'] = '';
                 }
-                if (!$user->can('webperf:errors-detail')) {
+                if (!$identity->can('webperf:errors-detail')) {
                     $stat['detailPageUrl'] = '';
                 }
             }
@@ -618,7 +620,9 @@ class TablesController extends Controller
             ->limit($per_page);
         $stats = $query->all();
         if ($stats) {
-            $user = Craft::$app->getUser()->getIdentity();
+            /** @var User $user */
+            $user = Craft::$app->getUser();
+            $identity = $user->getIdentity();
             // Massage the stats
             foreach ($stats as &$stat) {
                 if (!empty($stats['dateCreated'])) {
@@ -636,7 +640,7 @@ class TablesController extends Controller
                     'id' => $stat['id'],
                 ]);
                 // Override based on permissions
-                if (!$user->can('webperf:delete-error-samples')) {
+                if (!$identity->can('webperf:delete-error-samples')) {
                     $stat['deleteLink'] = '';
                 }
             }

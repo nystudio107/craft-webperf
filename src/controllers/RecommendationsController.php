@@ -54,8 +54,7 @@ class RecommendationsController extends Controller
         string $start = '',
         string $end = '',
         $siteId = 0
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:recommendations');
         $data = [];
         $stats = Webperf::$plugin->recommendations->data($pageUrl, $start, $end, $siteId);

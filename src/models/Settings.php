@@ -211,7 +211,7 @@ class Settings extends Model
     {
         parent::init();
         // If Blitz is installed & enabled, flip the $staticCachedSite on
-        /** @var Blitz $blitz */
+        /** @var Blitz|null $blitz */
         $blitz = Craft::$app->getPlugins()->getPlugin(self::BLITZ_PLUGIN_HANDLE);
         if ($blitz && $blitz->settings->cachingEnabled) {
             $this->staticCachedSite = true;

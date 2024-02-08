@@ -47,7 +47,6 @@ class MultiSite
         // Enabled sites
         $sites = Craft::$app->getSites();
         if (Craft::$app->getIsMultiSite()) {
-
             foreach ($sites->getAllGroups() as $group) {
                 $groupSites = $sites->getSitesByGroupId($group->id);
                 $variables['sitesMenu'][$group->name]
