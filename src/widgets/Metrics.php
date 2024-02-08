@@ -12,7 +12,6 @@ namespace nystudio107\webperf\widgets;
 
 use Craft;
 use craft\base\Widget;
-use nystudio107\webperf\assetbundles\metricswidget\MetricsWidgetAsset;
 
 /**
  * Webperf Widget
