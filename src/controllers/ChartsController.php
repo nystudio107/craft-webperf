@@ -59,8 +59,7 @@ class ChartsController extends Controller
         string $column = 'pageLoad',
                $pageUrl = '',
         int    $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         if (empty($end) || empty($start)) {
@@ -117,8 +116,7 @@ class ChartsController extends Controller
         string $column = 'pageLoad',
         int    $limit = 3,
         int    $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
@@ -180,8 +178,7 @@ class ChartsController extends Controller
         string $end,
                $pageUrl = '',
         int    $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
@@ -315,8 +312,7 @@ class ChartsController extends Controller
         string $end,
                $pageUrl = '',
         int    $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00

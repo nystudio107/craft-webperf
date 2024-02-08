@@ -327,7 +327,7 @@ class Webperf extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
+            function(PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // Invalidate our caches after we've been installed
                     $this->clearAllCaches();
@@ -355,7 +355,7 @@ class Webperf extends Plugin
         Event::on(
             CraftVariable::class,
             CraftVariable::EVENT_INIT,
-            function (Event $event) {
+            function(Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('webperf', [
@@ -368,7 +368,7 @@ class Webperf extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
-            function () {
+            function() {
                 // Install these only after all other plugins have loaded
                 $request = Craft::$app->getRequest();
                 // Only respond to non-console site requests
@@ -392,7 +392,7 @@ class Webperf extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 Craft::debug(
                     'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
                     __METHOD__
@@ -415,7 +415,7 @@ class Webperf extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 Craft::debug(
                     'UrlManager::EVENT_REGISTER_CP_URL_RULES',
                     __METHOD__
@@ -431,7 +431,7 @@ class Webperf extends Plugin
         Event::on(
             UserPermissions::class,
             UserPermissions::EVENT_REGISTER_PERMISSIONS,
-            function (RegisterUserPermissionsEvent $event) {
+            function(RegisterUserPermissionsEvent $event) {
                 Craft::debug(
                     'UserPermissions::EVENT_REGISTER_PERMISSIONS',
                     __METHOD__
@@ -464,7 +464,7 @@ class Webperf extends Plugin
             Event::on(
                 View::class,
                 View::EVENT_END_PAGE,
-                static function () {
+                static function() {
                     Craft::debug(
                         'View::EVENT_END_PAGE',
                         __METHOD__
@@ -492,7 +492,7 @@ class Webperf extends Plugin
             Event::on(
                 View::class,
                 View::EVENT_END_BODY,
-                static function () {
+                static function() {
                     Craft::debug(
                         'View::EVENT_END_BODY',
                         __METHOD__
@@ -515,7 +515,7 @@ class Webperf extends Plugin
             Event::on(
                 Application::class,
                 Application::EVENT_AFTER_REQUEST,
-                function () {
+                function() {
                     Craft::debug(
                         'Application::EVENT_AFTER_REQUEST',
                         __METHOD__
@@ -540,7 +540,7 @@ class Webperf extends Plugin
         Event::on(
             Element::class,
             Element::EVENT_DEFINE_SIDEBAR_HTML,
-            function (DefineHtmlEvent $event) {
+            function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'Element::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -738,7 +738,7 @@ class Webperf extends Plugin
     {
         $cache = Craft::$app->getCache();
         // See if there are any recommendations to add as a badge
-        $recommendations = $cache->getOrSet(self::RECOMMENDATIONS_CACHE_KEY, function () {
+        $recommendations = $cache->getOrSet(self::RECOMMENDATIONS_CACHE_KEY, function() {
             $data = [];
             $now = new DateTime();
             $end = $now->format('Y-m-d');
@@ -768,7 +768,7 @@ class Webperf extends Plugin
     {
         $cache = Craft::$app->getCache();
         // See if there are any recommendations to add as a badge
-        $errors = $cache->getOrSet(self::ERRORS_CACHE_KEY, function () {
+        $errors = $cache->getOrSet(self::ERRORS_CACHE_KEY, function() {
             $now = new DateTime();
             $end = $now->format('Y-m-d');
             $start = $now->modify('-30 days')->format('Y-m-d');

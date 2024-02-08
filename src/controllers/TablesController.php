@@ -109,8 +109,7 @@ class TablesController extends Controller
         int    $per_page = 20,
                $filter = '',
                $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
@@ -267,8 +266,7 @@ class TablesController extends Controller
                $filter = '',
                $pageUrl = '',
                $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
@@ -403,8 +401,7 @@ class TablesController extends Controller
         int    $per_page = 20,
                $filter = '',
                $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         $sortField = 'url';
@@ -550,8 +547,7 @@ class TablesController extends Controller
                $filter = '',
                $pageUrl = '',
                $siteId = 0,
-    ): Response
-    {
+    ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         $sortField = 'dateCreated';

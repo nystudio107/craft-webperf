@@ -15,8 +15,9 @@ use craft\base\Component;
 use craft\db\Query;
 use Exception;
 use nystudio107\webperf\base\CraftDataSample;
-use nystudio107\webperf\base\DbDataSampleInterface;
 use nystudio107\webperf\events\DataSampleEvent;
+use nystudio107\webperf\models\BoomerangDbDataSample;
+use nystudio107\webperf\models\CraftDbDataSample;
 use nystudio107\webperf\Webperf;
 
 /**
@@ -125,9 +126,9 @@ class DataSamples extends Component
     /**
      * Add a data sample to the webperf_data_samples table
      *
-     * @param DbDataSampleInterface $dataSample
+     * @param BoomerangDbDataSample|CraftDbDataSample $dataSample
      */
-    public function addDataSample(DbDataSampleInterface $dataSample)
+    public function addDataSample(BoomerangDbDataSample|CraftDbDataSample $dataSample)
     {
         // Validate the model before saving it to the db
         if ($dataSample->validate() === false) {
