@@ -8,6 +8,9 @@ return static function(ECSConfig $ecsConfig): void {
         __DIR__ . '/src',
         __FILE__,
     ]);
+    $ecsConfig->skip([
+        __DIR__ . '/src/lib',
+    ]);
     $ecsConfig->parallel();
     $ecsConfig->sets([SetList::CRAFT_CMS_4]);
 };
