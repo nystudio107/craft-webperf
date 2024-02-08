@@ -33,6 +33,7 @@
     "craftcms/phpstan": "dev-main",
     "craftcms/rector": "dev-main",
     "nystudio107/craft-minify": "^1.0.0",
+    "nystudio107/craft-seomatic": "^3.0.0",
     "putyourlightson/craft-blitz": "^3.0.0"
   },
   "scripts": {
