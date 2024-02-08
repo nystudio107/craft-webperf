@@ -23,8 +23,8 @@ use yii\base\InvalidConfigException;
  * @property Beacons $beacons
  * @property DataSamples $dataSamples
  * @property ErrorSamples $errorSamples
- * @property ErrorSamples $recommendations
- * @property Recommendations $vite
+ * @property Recommendations $recommendations
+ * @property VitePluginService $vite
  */
 trait ServicesTrait
 {

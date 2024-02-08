@@ -11,11 +11,9 @@
 namespace nystudio107\webperf\helpers;
 
 use Craft;
-
 use craft\helpers\Template;
 use craft\web\View;
 use nystudio107\minify\Minify;
-
 use yii\base\Exception;
 
 /**
@@ -52,17 +50,18 @@ class PluginTemplate
     /**
      * Render a plugin template
      *
-     * @param string      $templatePath
-     * @param array       $params
+     * @param string $templatePath
+     * @param array $params
      * @param string|null $minifier
      *
      * @return string
      */
     public static function renderPluginTemplate(
         string $templatePath,
-        array $params = [],
+        array  $params = [],
         string $minifier = null,
-    ): string {
+    ): string
+    {
         // Stash the old template mode, and set it Control Panel template mode
         $oldMode = Craft::$app->view->getTemplateMode();
         try {
@@ -75,7 +74,8 @@ class PluginTemplate
         try {
             $htmlText = Craft::$app->view->renderTemplate('webperf/' . $templatePath, $params);
             if ($minifier) {
-                // If SEOmatic is installed, get the title from it
+                // If Minify is installed, minify the html
+                /** @var ?Minify $minify */
                 $minify = Craft::$app->getPlugins()->getPlugin(self::MINIFY_PLUGIN_HANDLE);
                 if ($minify) {
                     $htmlText = Minify::$plugin->minify->$minifier($htmlText);

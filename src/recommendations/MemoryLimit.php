@@ -105,11 +105,11 @@ class MemoryLimit extends Recommendation
         $memoryLimit = ini_get('memory_limit');
         if (preg_match('/^(\d+)(.)$/', $memoryLimit, $matches)) {
             if (strtoupper($matches[2]) === 'G') {
-                $memoryLimit = $matches[1] * 1024 * 1024 * 1024; // nnnG -> nnn GB
+                $memoryLimit = (int)$matches[1] * 1024 * 1024 * 1024; // nnnG -> nnn GB
             } elseif (strtoupper($matches[2]) === 'M') {
-                $memoryLimit = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
+                $memoryLimit = (int)$matches[1] * 1024 * 1024; // nnnM -> nnn MB
             } elseif (strtoupper($matches[2]) === 'K') {
-                $memoryLimit = $matches[1] * 1024; // nnnK -> nnn KB
+                $memoryLimit = (int)$matches[1] * 1024; // nnnK -> nnn KB
             }
         }
 

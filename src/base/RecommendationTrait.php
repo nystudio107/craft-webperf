@@ -25,9 +25,9 @@ trait RecommendationTrait
     /**
      * The data sample to be evaluated
      *
-     * @var RecommendationDataSample
+     * @var ?RecommendationDataSample
      */
-    public $sample;
+    public ?RecommendationDataSample $sample = null;
 
     /**
      * Whether or not there is a recommendation for this rule

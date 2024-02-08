@@ -11,13 +11,12 @@
 namespace nystudio107\webperf\controllers;
 
 use Craft;
-
 use craft\db\Query;
 use craft\helpers\ArrayHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use DateTime;
 use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 
@@ -35,7 +34,7 @@ class ChartsController extends Controller
     // =========================================================================
 
     /**
-     * @var    bool|array
+     * @inheritdoc
      */
     protected array|bool|int $allowAnonymous = [];
 
@@ -49,7 +48,7 @@ class ChartsController extends Controller
      * @param string $end
      * @param string $column
      * @param string $pageUrl
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -58,9 +57,10 @@ class ChartsController extends Controller
         string $start = '',
         string $end = '',
         string $column = 'pageLoad',
-        $pageUrl = '',
-        int $siteId = 0,
-    ): Response {
+               $pageUrl = '',
+        int    $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         if (empty($end) || empty($start)) {
@@ -105,8 +105,8 @@ class ChartsController extends Controller
      * @param string $start
      * @param string $end
      * @param string $column
-     * @param int    $limit
-     * @param int    $siteId
+     * @param int $limit
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -115,9 +115,10 @@ class ChartsController extends Controller
         string $start,
         string $end,
         string $column = 'pageLoad',
-        int $limit = 3,
-        int $siteId = 0,
-    ): Response {
+        int    $limit = 3,
+        int    $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
@@ -169,7 +170,7 @@ class ChartsController extends Controller
      * @param string $start
      * @param string $end
      * @param string $pageUrl
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -177,16 +178,17 @@ class ChartsController extends Controller
     public function actionPagesAreaChart(
         string $start,
         string $end,
-        $pageUrl = '',
-        int $siteId = 0,
-    ): Response {
+               $pageUrl = '',
+        int    $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:dashboard');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
-        $dateStart = new \DateTime($start);
-        $dateEnd = new \DateTime($end);
+        $dateStart = new DateTime($start);
+        $dateEnd = new DateTime($end);
         $interval = date_diff($dateStart, $dateEnd);
         $dateFormat = "'%Y-%m-%d %H'";
         if ($interval->days > 30) {
@@ -216,8 +218,7 @@ class ChartsController extends Controller
                 'AVG([[craftTwigMs]]) AS [[craftTwigMs]]',
                 'AVG([[craftDbMs]]) AS [[craftDbMs]]',
             ])
-            ->where(['between', 'dateCreated', $start, $end])
-            ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -229,16 +230,14 @@ class ChartsController extends Controller
                 ->addSelect([
                     'DATE_FORMAT([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
-                ->groupBy('sampleDate')
-            ;
+                ->groupBy('sampleDate');
         }
         if ($db->getIsPgsql()) {
             $query
                 ->addSelect([
                     'to_char([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
-                ->groupBy(['to_char([[dateCreated]], ' . $dateFormat . ')'])
-            ;
+                ->groupBy(['to_char([[dateCreated]], ' . $dateFormat . ')']);
         }
         $stats = $query
             ->all();
@@ -306,7 +305,7 @@ class ChartsController extends Controller
      * @param string $start
      * @param string $end
      * @param string $pageUrl
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -314,16 +313,17 @@ class ChartsController extends Controller
     public function actionErrorsAreaChart(
         string $start,
         string $end,
-        $pageUrl = '',
-        int $siteId = 0,
-    ): Response {
+               $pageUrl = '',
+        int    $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
         $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
-        $dateStart = new \DateTime($start);
-        $dateEnd = new \DateTime($end);
+        $dateStart = new DateTime($start);
+        $dateEnd = new DateTime($end);
         $interval = date_diff($dateStart, $dateEnd);
         $dateFormat = "'%Y-%m-%d %H'";
         if ($interval->days > 30) {
@@ -345,8 +345,7 @@ class ChartsController extends Controller
                 '[[type]]',
                 'COUNT([[type]]) AS [[cnt]]',
             ])
-            ->where(['between', 'dateCreated', $start, $end])
-        ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -358,16 +357,14 @@ class ChartsController extends Controller
                 ->addSelect([
                     'DATE_FORMAT([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
-                ->groupBy('[[sampleDate]], [[type]]')
-            ;
+                ->groupBy('[[sampleDate]], [[type]]');
         }
         if ($db->getIsPgsql()) {
             $query
                 ->addSelect([
                     'to_char([[dateCreated]], ' . $dateFormat . ') AS [[sampleDate]]',
                 ])
-                ->groupBy(['to_char([[dateCreated]], ' . $dateFormat . '), [[type]]'])
-            ;
+                ->groupBy(['to_char([[dateCreated]], ' . $dateFormat . '), [[type]]']);
         }
         $stats = $query
             ->all();

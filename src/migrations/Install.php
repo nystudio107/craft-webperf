@@ -179,7 +179,7 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_data_samples}}', 'siteId'),
+            $this->db->getForeignKeyName(),
             '{{%webperf_data_samples}}',
             'siteId',
             '{{%sites}}',
@@ -188,7 +188,7 @@ class Install extends Migration
             'CASCADE'
         );
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_error_samples}}', 'siteId'),
+            $this->db->getForeignKeyName(),
             '{{%webperf_error_samples}}',
             'siteId',
             '{{%sites}}',

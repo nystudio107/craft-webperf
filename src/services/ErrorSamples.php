@@ -198,7 +198,7 @@ class ErrorSamples extends Component
                     '{{%webperf_error_samples}}',
                     $errorSampleConfig
                 )->execute();
-                Craft::debug($result, __METHOD__);
+                Craft::debug((string)$result, __METHOD__);
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }

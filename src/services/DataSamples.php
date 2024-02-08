@@ -174,7 +174,7 @@ class DataSamples extends Component
                     '{{%webperf_data_samples}}',
                     $dataSampleConfig
                 )->execute();
-                Craft::debug($result, __METHOD__);
+                Craft::debug((string)$result, __METHOD__);
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
@@ -189,7 +189,7 @@ class DataSamples extends Component
                         'requestId' => $dataSample->requestId,
                     ]
                 )->execute();
-                Craft::debug($result, __METHOD__);
+                Craft::debug((string)$result, __METHOD__);
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
@@ -307,7 +307,7 @@ class DataSamples extends Component
                         '{{%webperf_data_samples}}',
                         ['>', '[[pageLoad]]', $threshold]
                     )->execute();
-                    Craft::debug($result, __METHOD__);
+                    Craft::debug((string)$result, __METHOD__);
                 } catch (Exception $e) {
                     Craft::error($e->getMessage(), __METHOD__);
                 }
@@ -334,7 +334,7 @@ class DataSamples extends Component
                     ['not', ['requestId' => $requestId]],
                 ]
             )->execute();
-            Craft::debug($result, __METHOD__);
+            Craft::debug((string)$result, __METHOD__);
         } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }

@@ -11,13 +11,11 @@
 namespace nystudio107\webperf\controllers;
 
 use Craft;
-
 use craft\db\Query;
 use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
@@ -81,7 +79,7 @@ class TablesController extends Controller
     // =========================================================================
 
     /**
-     * @var    bool|array
+     * @inheritdoc
      */
     protected array|bool|int $allowAnonymous = [];
 
@@ -92,12 +90,12 @@ class TablesController extends Controller
      * Handle requests for the performance index table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -107,11 +105,12 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'pageLoad|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $siteId = 0,
-    ): Response {
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
@@ -155,22 +154,19 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
-            ->where(['between', 'dateCreated', $start, $end])
-        ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
         if ($filter !== '') {
             $query
                 ->andWhere(['like', 'url', $filter])
-                ->orWhere(['like', 'title', $filter])
-            ;
+                ->orWhere(['like', 'title', $filter]);
         }
         $query
             ->orderBy([$sortField => $sortType])
             ->groupBy('url')
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
 
         $stats = $query->all();
         if ($stats) {
@@ -225,8 +221,7 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_data_samples}}'])
                 ->groupBy('[[url]]')
-                ->where(['between', 'dateCreated', $start, $end])
-                ;
+                ->where(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query->andWhere(['like', 'url', $filter]);
                 $query->orWhere(['like', 'title', $filter]);
@@ -251,13 +246,13 @@ class TablesController extends Controller
      * Handle requests for the performance detail table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $pageUrl
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -267,12 +262,13 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'pageLoad|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $pageUrl = '',
-        $siteId = 0,
-    ): Response {
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $pageUrl = '',
+               $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
@@ -300,8 +296,7 @@ class TablesController extends Controller
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
-            ->andWhere(['between', 'dateCreated', $start, $end])
-        ;
+            ->andWhere(['between', 'dateCreated', $start, $end]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -310,13 +305,11 @@ class TablesController extends Controller
                 ->andWhere(['like', 'device', $filter])
                 ->orWhere(['like', 'os', $filter])
                 ->orWhere(['like', 'browser', $filter])
-                ->orWhere(['like', 'countryCode', $filter])
-            ;
+                ->orWhere(['like', 'countryCode', $filter]);
         }
         $query
             ->orderBy([$sortField => $sortType])
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
         $stats = $query->all();
         if ($stats) {
             $user = Craft::$app->getUser()->getIdentity();
@@ -363,15 +356,13 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
-                ->andWhere(['between', 'dateCreated', $start, $end])
-            ;
+                ->andWhere(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query
                     ->andWhere(['like', 'device', $filter])
                     ->orWhere(['like', 'os', $filter])
                     ->orWhere(['like', 'browser', $filter])
-                    ->orWhere(['like', 'countryCode', $filter])
-                ;
+                    ->orWhere(['like', 'countryCode', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [
@@ -393,12 +384,12 @@ class TablesController extends Controller
      * Handle requests for the pages index table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -408,11 +399,12 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'url|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $siteId = 0,
-    ): Response {
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         $sortField = 'url';
@@ -445,8 +437,7 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_error_samples}}'])
             ->offset($offset)
-            ->where(['between', 'dateCreated', $start, $end])
-        ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ($db->getIsMysql()) {
             $query
                 ->addSelect([
@@ -468,14 +459,12 @@ class TablesController extends Controller
             $query
                 ->andWhere(['like', 'url', $filter])
                 ->orWhere(['like', 'title', $filter])
-                ->orWhere(['like', 'pageErrors', $filter])
-            ;
+                ->orWhere(['like', 'pageErrors', $filter]);
         }
         $query
             ->orderBy([$sortField => $sortType])
             ->groupBy('url')
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
 
         $stats = $query->all();
         if ($stats) {
@@ -512,14 +501,12 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_error_samples}}'])
                 ->groupBy('[[url]]')
-                ->where(['between', 'dateCreated', $start, $end])
-            ;
+                ->where(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query
                     ->andWhere(['like', 'url', $filter])
                     ->orWhere(['like', 'title', $filter])
-                    ->orWhere(['like', 'pageErrors', $filter])
-                ;
+                    ->orWhere(['like', 'pageErrors', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [
@@ -542,13 +529,13 @@ class TablesController extends Controller
      * Handle requests for the performance detail table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $pageUrl
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -558,12 +545,13 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'dateCreated|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $pageUrl = '',
-        $siteId = 0,
-    ): Response {
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $pageUrl = '',
+               $siteId = 0,
+    ): Response
+    {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         $sortField = 'dateCreated';
@@ -606,15 +594,13 @@ class TablesController extends Controller
             ->offset($offset)
             ->where(['[[webperf_error_samples.url]]' => $pageUrl])
             ->andWhere(['between', '[[webperf_error_samples.dateCreated]]', $start, $end])
-            ->leftJoin('{{%webperf_data_samples}} webperf_data_samples', '[[webperf_data_samples.requestId]] = [[webperf_error_samples.requestId]]')
-        ;
+            ->leftJoin('{{%webperf_data_samples}} webperf_data_samples', '[[webperf_data_samples.requestId]] = [[webperf_error_samples.requestId]]');
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
         if ($filter !== '') {
             $query
-                ->andWhere(['like', 'pageErrors', $filter])
-                /*
+                ->andWhere(['like', 'pageErrors', $filter])/*
                 ->orWhere(['like', 'device', $filter])
                 ->orWhere(['like', 'os', $filter])
                 ->orWhere(['like', 'browser', $filter])
@@ -624,8 +610,7 @@ class TablesController extends Controller
         }
         $query
             ->orderBy([$sortField => $sortType])
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
         $stats = $query->all();
         if ($stats) {
             $user = Craft::$app->getUser()->getIdentity();
@@ -656,12 +641,10 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_error_samples}}'])
                 ->where(['url' => $pageUrl])
-                ->andWhere(['between', 'dateCreated', $start, $end])
-            ;
+                ->andWhere(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query
-                    ->andWhere(['like', 'pageErrors', $filter])
-                    /*
+                    ->andWhere(['like', 'pageErrors', $filter])/*
                     ->orWhere(['like', 'device', $filter])
                     ->orWhere(['like', 'os', $filter])
                     ->orWhere(['like', 'browser', $filter])

@@ -95,8 +95,6 @@ class Metrics extends Widget
      */
     public function getBodyHtml(): ?string
     {
-        Craft::$app->getView()->registerAssetBundle(MetricsWidgetAsset::class);
-
         return Craft::$app->getView()->renderTemplate(
             'webperf/_components/widgets/Metrics_body',
             [
