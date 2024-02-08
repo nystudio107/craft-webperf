@@ -17,7 +17,7 @@ jobs:
           - name: 'PHPStan'
             run: composer phpstan
           - name: 'Coding Standards'
-            run: vendor/bin/ecs vendor/nystudio107/craft-webperf/src --fix
+            run: vendor/bin/ecs check vendor/nystudio107/craft-webperf/src --fix
     name: ${{ matrix.actions.name }}
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +33,7 @@ jobs:
         with:
           php-version: 8.2
           extensions: 'ctype,curl,dom,iconv,imagick,intl,json,mbstring,openssl,pcre,pdo,reflection,spl,zip'
-          ini-values: post_max_size=256M, max_execution_time=180, memory_limit=1024M
+          ini-values: post_max_size=256M, max_execution_time=180, memory_limit=512M
           tools: composer:v2
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-ansi --no-progress
