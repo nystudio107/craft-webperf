@@ -17,7 +17,7 @@ jobs:
           - name: 'PHPStan'
             run: composer phpstan
           - name: 'Coding Standards'
-            run: composer fix-cs
+            run: vendor/bin/ecs vendor/nystudio107/craft-webperf/src --fix
     name: ${{ matrix.actions.name }}
     runs-on: ubuntu-latest
     steps:
