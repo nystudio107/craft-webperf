@@ -7,6 +7,5 @@ return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->paths([
         __DIR__ . '/src',
     ]);
-    $ecsConfig->parallel();
     $ecsConfig->sets([SetList::CRAFT_CMS_4]);
 };
