@@ -13,8 +13,8 @@ namespace nystudio107\webperf\services;
 use Craft;
 use craft\base\Component;
 use craft\db\Query;
+use Exception;
 use nystudio107\webperf\base\CraftDataSample;
-
 use nystudio107\webperf\base\DbDataSampleInterface;
 use nystudio107\webperf\events\DataSampleEvent;
 use nystudio107\webperf\Webperf;
@@ -74,7 +74,7 @@ class DataSamples extends Component
     /**
      * Get the total number of data samples optionally limited by siteId
      *
-     * @param int    $siteId
+     * @param int $siteId
      * @param string $column
      *
      * @return int|string
@@ -84,8 +84,7 @@ class DataSamples extends Component
         // Get the total number of data samples
         $query = (new Query())
             ->from(['{{%webperf_data_samples}}'])
-            ->where(['not', [$column => null]])
-            ;
+            ->where(['not', [$column => null]]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -96,7 +95,7 @@ class DataSamples extends Component
     /**
      * Get the page title from data samples by URL and optionally siteId
      *
-     * @param string   $url
+     * @param string $url
      * @param int $siteId
      *
      * @return string
@@ -110,8 +109,7 @@ class DataSamples extends Component
             ->where([
                 'and', ['url' => $url],
                 ['not', ['title' => '']],
-            ])
-        ;
+            ]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -176,8 +174,8 @@ class DataSamples extends Component
                     '{{%webperf_data_samples}}',
                     $dataSampleConfig
                 )->execute();
-                Craft::debug($result, __METHOD__);
-            } catch (\Exception $e) {
+                Craft::debug((string)$result, __METHOD__);
+            } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
         } else {
@@ -191,8 +189,8 @@ class DataSamples extends Component
                         'requestId' => $dataSample->requestId,
                     ]
                 )->execute();
-                Craft::debug($result, __METHOD__);
-            } catch (\Exception $e) {
+                Craft::debug((string)$result, __METHOD__);
+            } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
         }
@@ -224,7 +222,7 @@ class DataSamples extends Component
                     'id' => $id,
                 ]
             )->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             $result = 0;
         }
@@ -235,7 +233,7 @@ class DataSamples extends Component
     /**
      * Delete data samples by URL and optionally siteId
      *
-     * @param string   $url
+     * @param string $url
      * @param int|null $siteId
      *
      * @return int
@@ -253,7 +251,7 @@ class DataSamples extends Component
                 '{{%webperf_data_samples}}',
                 $conditions
             )->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             $result = 0;
         }
@@ -281,7 +279,7 @@ class DataSamples extends Component
                 '{{%webperf_data_samples}}',
                 $conditions
             )->execute();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             $result = 0;
         }
@@ -309,8 +307,8 @@ class DataSamples extends Component
                         '{{%webperf_data_samples}}',
                         ['>', '[[pageLoad]]', $threshold]
                     )->execute();
-                    Craft::debug($result, __METHOD__);
-                } catch (\Exception $e) {
+                    Craft::debug((string)$result, __METHOD__);
+                } catch (Exception $e) {
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
@@ -336,8 +334,8 @@ class DataSamples extends Component
                     ['not', ['requestId' => $requestId]],
                 ]
             )->execute();
-            Craft::debug($result, __METHOD__);
-        } catch (\Exception $e) {
+            Craft::debug((string)$result, __METHOD__);
+        } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
     }
@@ -395,7 +393,7 @@ class DataSamples extends Component
                         "
                     )->execute();
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
             Craft::info(

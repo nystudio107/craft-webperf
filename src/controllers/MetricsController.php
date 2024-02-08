@@ -19,16 +19,14 @@ namespace nystudio107\webperf\controllers {
     use craft\errors\SiteNotFoundException;
     use craft\helpers\Json;
     use craft\helpers\UrlHelper;
-
     use craft\web\Controller;
     use Jaybizzle\CrawlerDetect\CrawlerDetect;
-
     use nystudio107\webperf\helpers\MultiSite;
     use nystudio107\webperf\models\BoomerangDbDataSample;
     use nystudio107\webperf\models\BoomerangDbErrorSample;
     use nystudio107\webperf\Webperf;
     use WhichBrowser\Parser;
-
+    use yii\base\ExitException;
     use yii\base\InvalidConfigException;
 
     /**
@@ -52,9 +50,7 @@ namespace nystudio107\webperf\controllers {
         // =========================================================================
 
         /**
-         * @var    bool|array Allows anonymous access to this controller's
-         *         actions. The actions must be in 'kebab-case'
-         * @access protected
+         * @inheritdoc
          */
         protected $allowAnonymous = ['beacon'];
 
@@ -64,7 +60,7 @@ namespace nystudio107\webperf\controllers {
 
         /**
          * @return void
-         * @throws \yii\base\ExitException
+         * @throws ExitException
          */
         public function actionBeacon()
         {
@@ -105,23 +101,15 @@ namespace nystudio107\webperf\controllers {
                 $site = MultiSite::getSiteFromUrl($sample->url);
                 $sample->siteId = $site->id;
             } catch (SiteNotFoundException $e) {
-                $sample->siteId = null;
+                $sample->siteId = 0;
             }
             // Fill in all of the timing information that's available
             $sample->pageLoad = $params['t_done'] ?? null;
             if (!empty($params['nt_dns_end']) && !empty($params['nt_dns_st'])) {
                 $sample->dns = $params['nt_dns_end'] - $params['nt_dns_st'];
-                // If there was no delay, set it to null
-                if ($sample->dns === 0) {
-                    $sample->dns = null;
-                }
             }
             if (!empty($params['nt_con_end']) && !empty($params['nt_con_st'])) {
                 $sample->connect = $params['nt_con_end'] - $params['nt_con_st'];
-                // If there was no delay, set it to null
-                if ($sample->connect === 0) {
-                    $sample->connect = null;
-                }
             }
             if (!empty($params['t_resp'])) {
                 $sample->firstByte = $params['t_resp'];
@@ -161,9 +149,9 @@ namespace nystudio107\webperf\controllers {
             $userAgent = $request->userAgent;
             if ($userAgent) {
                 $parser = new Parser($userAgent);
-                $sample->device = ($parser->device->model ?? '');
-                $sample->browser = ($parser->browser->name ?? '') . ' ' . $parser->browser->getVersion();
-                $sample->os = ($parser->os->name ?? '') . ' ' . $parser->os->getVersion();
+                $sample->device = ($parser->device->model);
+                $sample->browser = ($parser->browser->name) . ' ' . $parser->browser->getVersion();
+                $sample->os = ($parser->os->name) . ' ' . $parser->os->getVersion();
                 $sample->mobile = $parser->isMobile();
             }
             // Save the data sample

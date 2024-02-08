@@ -12,9 +12,7 @@ namespace nystudio107\webperf\widgets;
 
 use Craft;
 use craft\base\Widget;
-
 use nystudio107\webperf\assetbundles\metricswidget\MetricsWidgetAsset;
-use nystudio107\webperf\Webperf;
 
 /**
  * Webperf Widget
@@ -97,8 +95,6 @@ class Metrics extends Widget
      */
     public function getBodyHtml()
     {
-        Craft::$app->getView()->registerAssetBundle(MetricsWidgetAsset::class);
-
         return Craft::$app->getView()->renderTemplate(
             'webperf/_components/widgets/Metrics_body',
             [

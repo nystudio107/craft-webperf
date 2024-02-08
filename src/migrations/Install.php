@@ -11,10 +11,8 @@
 namespace nystudio107\webperf\migrations;
 
 use Craft;
-
 use craft\config\DbConfig;
 use craft\db\Migration;
-use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107
@@ -139,61 +137,37 @@ class Install extends Migration
     protected function createIndexes()
     {
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'url',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'url',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'dateCreated',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'dateCreated',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_data_samples}}',
-                'requestId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_data_samples}}',
             'requestId',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'url',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'url',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'dateCreated',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'dateCreated',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%webperf_error_samples}}',
-                'requestId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%webperf_error_samples}}',
             'requestId',
             false
@@ -213,7 +187,7 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_data_samples}}', 'siteId'),
+            $this->db->getForeignKeyName(),
             '{{%webperf_data_samples}}',
             'siteId',
             '{{%sites}}',
@@ -222,7 +196,7 @@ class Install extends Migration
             'CASCADE'
         );
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_error_samples}}', 'siteId'),
+            $this->db->getForeignKeyName(),
             '{{%webperf_error_samples}}',
             'siteId',
             '{{%sites}}',

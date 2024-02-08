@@ -11,7 +11,6 @@
 namespace nystudio107\webperf\base;
 
 use craft\validators\ArrayValidator;
-
 use nystudio107\webperf\validators\DbStringValidator;
 
 /**
