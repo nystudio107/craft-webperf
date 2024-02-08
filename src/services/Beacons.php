@@ -16,11 +16,8 @@ use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use nystudio107\seomatic\Seomatic;
-
 use nystudio107\webperf\base\CraftDataSample;
-
 use nystudio107\webperf\helpers\MultiSite;
-
 use nystudio107\webperf\helpers\PluginTemplate;
 use nystudio107\webperf\models\CraftDbDataSample;
 use nystudio107\webperf\models\CraftDbErrorSample;
@@ -57,7 +54,7 @@ class Beacons extends Component
     }
 
     /**
-     * @param bool        $headless
+     * @param bool $headless
      * @param string|null $title
      *
      * @return string
@@ -256,9 +253,10 @@ class Beacons extends Component
             $docTitle = '';
         }
         // If SEOmatic is installed, get the title from it
+        /** @var Seomatic|null $seomatic */
         $seomatic = Craft::$app->getPlugins()->getPlugin(self::SEOMATIC_PLUGIN_HANDLE);
-        if ($seomatic && Seomatic::$settings->renderEnabled) {
-            $titleTag = Seomatic::$plugin->title->get('title');
+        if ($seomatic && $seomatic::$settings->renderEnabled) {
+            $titleTag = $seomatic->title->get('title');
             if ($titleTag) {
                 $titleArray = $titleTag->renderAttributes();
                 if (!empty($titleArray['title'])) {
