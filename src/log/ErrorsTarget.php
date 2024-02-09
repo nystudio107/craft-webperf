@@ -11,8 +11,8 @@
 namespace nystudio107\webperf\log;
 
 use nystudio107\webperf\Webperf;
-
 use yii\log\Target;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -24,9 +24,9 @@ class ErrorsTarget extends Target
     // Constants
     // =========================================================================
 
-    const ERROR_LEVELS = [
+    public const ERROR_LEVELS = [
         1 => 'error',
-        2 => 'warning'
+        2 => 'warning',
     ];
 
     // Public Properties
@@ -49,15 +49,11 @@ class ErrorsTarget extends Target
      * @param array $messages log messages to be processed. See
      *                        [[Logger::messages]] for the structure of each
      *                        message.
-     * @param bool  $final    whether this method is called at the end of the
+     * @param bool $final whether this method is called at the end of the
      *                        current application
      */
     public function collect($messages, $final)
     {
-        // Bail if either values are null
-        if (($messages === null) || ($this->messages === null)) {
-            return;
-        }
         // Merge in any messages intended for us
         $this->messages = array_merge(
             $this->messages,
@@ -65,7 +61,7 @@ class ErrorsTarget extends Target
         );
         foreach ($this->messages as $message) {
             // Ignore objects/arrays
-            if (!\is_string($message[0])) {
+            if (!is_string($message[0])) {
                 continue;
             }
             $this->pageErrors[] = [

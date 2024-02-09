@@ -48,7 +48,7 @@ class ErrorSamples extends Component
      * );
      * ```
      */
-    const EVENT_BEFORE_SAVE_ERROR_SAMPLE = 'beforeSaveErrorSample';
+    public const EVENT_BEFORE_SAVE_ERROR_SAMPLE = 'beforeSaveErrorSample';
 
     /**
      * @event ErrorSampleEvent The event that is triggered after the redirect is saved
@@ -65,7 +65,7 @@ class ErrorSamples extends Component
      * );
      * ```
      */
-    const EVENT_AFTER_SAVE_ERROR_SAMPLE = 'afterSaveErrorSample';
+    public const EVENT_AFTER_SAVE_ERROR_SAMPLE = 'afterSaveErrorSample';
 
     // Public Methods
     // =========================================================================
@@ -198,7 +198,7 @@ class ErrorSamples extends Component
                     '{{%webperf_error_samples}}',
                     $errorSampleConfig
                 )->execute();
-                Craft::debug($result, __METHOD__);
+                Craft::debug((string)$result, __METHOD__);
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }

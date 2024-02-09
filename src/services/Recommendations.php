@@ -87,9 +87,8 @@ class Recommendations extends Component
         $pageUrl = '',
         string $start = '',
         string $end = '',
-        $siteId = 0
-    ): array
-    {
+        $siteId = 0,
+    ): array {
         $data = [];
         $db = Craft::$app->getDb();
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00

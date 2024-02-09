@@ -10,14 +10,12 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
 use Craft;
 use craft\db\Query;
 use craft\helpers\DateTimeHelper;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
-
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
@@ -32,12 +30,12 @@ class TablesController extends Controller
     // Constants
     // =========================================================================
 
-    const SORT_MAP = [
+    public const SORT_MAP = [
         'DESC' => SORT_DESC,
         'ASC' => SORT_ASC,
     ];
 
-    const ALLOWED_PAGE_INDEX_SORT_FIELDS = [
+    public const ALLOWED_PAGE_INDEX_SORT_FIELDS = [
         'url',
         'pageLoad',
         'craftDbCnt',
@@ -47,7 +45,7 @@ class TablesController extends Controller
         'cnt',
     ];
 
-    const ALLOWED_PAGE_DETAIL_SORT_FIELDS = [
+    public const ALLOWED_PAGE_DETAIL_SORT_FIELDS = [
         'dateCreated',
         'pageLoad',
         'craftDbCnt',
@@ -60,7 +58,7 @@ class TablesController extends Controller
         'countryCode',
     ];
 
-    const ALLOWED_ERRORS_INDEX_SORT_FIELDS = [
+    public const ALLOWED_ERRORS_INDEX_SORT_FIELDS = [
         'url',
         'latestErrorDate',
         'craftCount',
@@ -68,7 +66,7 @@ class TablesController extends Controller
         'cnt',
     ];
 
-    const ALLOWED_ERRORS_DETAIL_SORT_FIELDS = [
+    public const ALLOWED_ERRORS_DETAIL_SORT_FIELDS = [
         'dateCreated',
         'pageErrors',
         'device',
@@ -81,7 +79,7 @@ class TablesController extends Controller
     // =========================================================================
 
     /**
-     * @var    bool|array
+     * @inheritdoc
      */
     protected array|bool|int $allowAnonymous = [];
 
@@ -92,12 +90,12 @@ class TablesController extends Controller
      * Handle requests for the performance index table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -107,17 +105,17 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'pageLoad|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $siteId = 0
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -155,22 +153,19 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
-            ->where(['between', 'dateCreated', $start, $end])
-        ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
         if ($filter !== '') {
             $query
                 ->andWhere(['like', 'url', $filter])
-                ->orWhere(['like', 'title', $filter])
-            ;
+                ->orWhere(['like', 'title', $filter]);
         }
         $query
             ->orderBy([$sortField => $sortType])
             ->groupBy('url')
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
 
         $stats = $query->all();
         if ($stats) {
@@ -178,7 +173,7 @@ class TablesController extends Controller
             // Compute the largest page load time
             $maxTotalPageLoad = 0;
             foreach ($stats as &$stat) {
-             // Determine the stat type
+                // Determine the stat type
                 if (!empty($stat['pageLoad']) && !empty($stat['craftTotalMs'])) {
                     $stat['type'] = 'both';
                 }
@@ -205,7 +200,7 @@ class TablesController extends Controller
                 // Set up the appropriate helper links
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/data-samples/delete-samples-by-url', [
                     'pageUrl' => $stat['url'],
-                    'siteId' => $siteId
+                    'siteId' => $siteId,
                 ]);
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/performance/page-detail', [
                     'pageUrl' => $stat['url'],
@@ -225,8 +220,7 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_data_samples}}'])
                 ->groupBy('[[url]]')
-                ->where(['between', 'dateCreated', $start, $end])
-                ;
+                ->where(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query->andWhere(['like', 'url', $filter]);
                 $query->orWhere(['like', 'title', $filter]);
@@ -251,13 +245,13 @@ class TablesController extends Controller
      * Handle requests for the performance detail table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $pageUrl
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -267,18 +261,18 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'pageLoad|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $pageUrl = '',
-        $siteId = 0
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $pageUrl = '',
+               $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:performance');
         $data = [];
         $sortField = 'pageLoad';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Figure out the sorting type
         if ($sort !== '') {
@@ -300,8 +294,7 @@ class TablesController extends Controller
             ->from(['{{%webperf_data_samples}}'])
             ->offset($offset)
             ->where(['url' => $pageUrl])
-            ->andWhere(['between', 'dateCreated', $start, $end])
-        ;
+            ->andWhere(['between', 'dateCreated', $start, $end]);
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
@@ -310,13 +303,11 @@ class TablesController extends Controller
                 ->andWhere(['like', 'device', $filter])
                 ->orWhere(['like', 'os', $filter])
                 ->orWhere(['like', 'browser', $filter])
-                ->orWhere(['like', 'countryCode', $filter])
-            ;
+                ->orWhere(['like', 'countryCode', $filter]);
         }
         $query
             ->orderBy([$sortField => $sortType])
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
         $stats = $query->all();
         if ($stats) {
             $user = Craft::$app->getUser()->getIdentity();
@@ -350,7 +341,7 @@ class TablesController extends Controller
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/data-samples/delete-sample-by-id', [
-                    'id' => $stat['id']
+                    'id' => $stat['id'],
                 ]);
                 // Override based on permissions
                 if (!$user->can('webperf:delete-data-samples')) {
@@ -363,15 +354,13 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_data_samples}}'])
                 ->where(['url' => $pageUrl])
-                ->andWhere(['between', 'dateCreated', $start, $end])
-            ;
+                ->andWhere(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query
                     ->andWhere(['like', 'device', $filter])
                     ->orWhere(['like', 'os', $filter])
                     ->orWhere(['like', 'browser', $filter])
-                    ->orWhere(['like', 'countryCode', $filter])
-                ;
+                    ->orWhere(['like', 'countryCode', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [
@@ -393,12 +382,12 @@ class TablesController extends Controller
      * Handle requests for the pages index table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -408,17 +397,17 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'url|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $siteId = 0
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         $sortField = 'url';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         // Figure out the sorting type
         if ($sort !== '') {
             if (strpos($sort, '|') === false) {
@@ -445,8 +434,7 @@ class TablesController extends Controller
             ])
             ->from(['{{%webperf_error_samples}}'])
             ->offset($offset)
-            ->where(['between', 'dateCreated', $start, $end])
-        ;
+            ->where(['between', 'dateCreated', $start, $end]);
         if ($db->getIsMysql()) {
             $query
                 ->addSelect([
@@ -468,14 +456,12 @@ class TablesController extends Controller
             $query
                 ->andWhere(['like', 'url', $filter])
                 ->orWhere(['like', 'title', $filter])
-                ->orWhere(['like', 'pageErrors', $filter])
-            ;
+                ->orWhere(['like', 'pageErrors', $filter]);
         }
         $query
             ->orderBy([$sortField => $sortType])
             ->groupBy('url')
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
 
         $stats = $query->all();
         if ($stats) {
@@ -492,7 +478,7 @@ class TablesController extends Controller
                 // Set up the appropriate helper links
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/error-samples/delete-samples-by-url', [
                     'pageUrl' => $stat['url'],
-                    'siteId' => $siteId
+                    'siteId' => $siteId,
                 ]);
                 $stat['detailPageUrl'] = UrlHelper::cpUrl('webperf/errors/page-detail', [
                     'pageUrl' => $stat['url'],
@@ -512,14 +498,12 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_error_samples}}'])
                 ->groupBy('[[url]]')
-                ->where(['between', 'dateCreated', $start, $end])
-            ;
+                ->where(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query
                     ->andWhere(['like', 'url', $filter])
                     ->orWhere(['like', 'title', $filter])
-                    ->orWhere(['like', 'pageErrors', $filter])
-                ;
+                    ->orWhere(['like', 'pageErrors', $filter]);
             }
             $count = $query->count();
             $data['links']['pagination'] = [
@@ -542,13 +526,13 @@ class TablesController extends Controller
      * Handle requests for the performance detail table
      *
      * @param string $sort
-     * @param int    $page
-     * @param int    $per_page
+     * @param int $page
+     * @param int $per_page
      * @param string $filter
      * @param string $pageUrl
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException
@@ -558,18 +542,18 @@ class TablesController extends Controller
         string $start = '',
         string $end = '',
         string $sort = 'dateCreated|DESC',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $pageUrl = '',
-        $siteId = 0
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $pageUrl = '',
+               $siteId = 0,
     ): Response {
         PermissionHelper::controllerPermissionCheck('webperf:errors');
         $data = [];
         $sortField = 'dateCreated';
         $sortType = 'DESC';
         // Add a day since YYYY-MM-DD is really YYYY-MM-DD 00:00:00
-        $end = date('Y-m-d', strtotime($end.'+1 day'));
+        $end = date('Y-m-d', strtotime($end . '+1 day'));
         $pageUrl = urldecode($pageUrl);
         // Figure out the sorting type
         if ($sort !== '') {
@@ -606,15 +590,13 @@ class TablesController extends Controller
             ->offset($offset)
             ->where(['[[webperf_error_samples.url]]' => $pageUrl])
             ->andWhere(['between', '[[webperf_error_samples.dateCreated]]', $start, $end])
-            ->leftJoin('{{%webperf_data_samples}} webperf_data_samples', '[[webperf_data_samples.requestId]] = [[webperf_error_samples.requestId]]')
-        ;
+            ->leftJoin('{{%webperf_data_samples}} webperf_data_samples', '[[webperf_data_samples.requestId]] = [[webperf_error_samples.requestId]]');
         if ((int)$siteId !== 0) {
             $query->andWhere(['siteId' => $siteId]);
         }
         if ($filter !== '') {
             $query
-                ->andWhere(['like', 'pageErrors', $filter])
-                /*
+                ->andWhere(['like', 'pageErrors', $filter])/*
                 ->orWhere(['like', 'device', $filter])
                 ->orWhere(['like', 'os', $filter])
                 ->orWhere(['like', 'browser', $filter])
@@ -624,8 +606,7 @@ class TablesController extends Controller
         }
         $query
             ->orderBy([$sortField => $sortType])
-            ->limit($per_page)
-        ;
+            ->limit($per_page);
         $stats = $query->all();
         if ($stats) {
             $user = Craft::$app->getUser()->getIdentity();
@@ -643,7 +624,7 @@ class TablesController extends Controller
                     $stat['title'] = html_entity_decode($stat['title'], ENT_NOQUOTES, 'UTF-8');
                 }
                 $stat['deleteLink'] = UrlHelper::actionUrl('webperf/error-samples/delete-sample-by-id', [
-                    'id' => $stat['id']
+                    'id' => $stat['id'],
                 ]);
                 // Override based on permissions
                 if (!$user->can('webperf:delete-error-samples')) {
@@ -656,12 +637,10 @@ class TablesController extends Controller
                 ->select(['[[url]]'])
                 ->from(['{{%webperf_error_samples}}'])
                 ->where(['url' => $pageUrl])
-                ->andWhere(['between', 'dateCreated', $start, $end])
-            ;
+                ->andWhere(['between', 'dateCreated', $start, $end]);
             if ($filter !== '') {
                 $query
-                    ->andWhere(['like', 'pageErrors', $filter])
-                    /*
+                    ->andWhere(['like', 'pageErrors', $filter])/*
                     ->orWhere(['like', 'device', $filter])
                     ->orWhere(['like', 'os', $filter])
                     ->orWhere(['like', 'browser', $filter])

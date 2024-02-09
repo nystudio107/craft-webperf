@@ -33,9 +33,9 @@ class SectionsController extends Controller
     // Constants
     // =========================================================================
 
-    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-webperf/';
+    public const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-webperf/';
 
-    const WEBHOOKS_PLUGIN_HANDLE = 'webhooks';
+    public const WEBHOOKS_PLUGIN_HANDLE = 'webhooks';
 
     // Protected Properties
     // =========================================================================
@@ -220,7 +220,7 @@ class SectionsController extends Controller
             [
                 'label' => $templateTitle,
                 'url' => UrlHelper::cpUrl('webperf/performance/page-detail' . $siteHandleUri, [
-                    'pageUrl' => $pageUrl
+                    'pageUrl' => $pageUrl,
                 ]),
             ],
         ];
@@ -354,7 +354,7 @@ class SectionsController extends Controller
             [
                 'label' => $templateTitle,
                 'url' => UrlHelper::cpUrl('webperf/errors/page-detail' . $siteHandleUri, [
-                    'pageUrl' => $pageUrl
+                    'pageUrl' => $pageUrl,
                 ]),
             ],
         ];

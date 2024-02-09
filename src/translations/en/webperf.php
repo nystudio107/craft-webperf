@@ -167,5 +167,5 @@ return [
     'The amount of time required between trimming of data samples.' => 'The amount of time required between trimming of data samples.',
     'Sample Trimming Rate Limit' => 'Sample Trimming Rate Limit',
     'Tags' => 'Tags',
-    'Once per week' => 'Once per week'
+    'Once per week' => 'Once per week',
 ];

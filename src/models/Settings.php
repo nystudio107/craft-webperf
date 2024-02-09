@@ -210,8 +210,9 @@ class Settings extends Model
     {
         parent::init();
         // If Blitz is installed & enabled, flip the $staticCachedSite on
+        /** @var Blitz|null $blitz */
         $blitz = Craft::$app->getPlugins()->getPlugin(self::BLITZ_PLUGIN_HANDLE);
-        if ($blitz && Blitz::$plugin->getSettings()->cachingEnabled) {
+        if ($blitz && $blitz->settings->cachingEnabled) {
             $this->staticCachedSite = true;
         }
     }
@@ -250,7 +251,7 @@ class Settings extends Model
                     'dashboardAverageColor',
                     'dashboardSlowColor',
                 ],
-                ColorValidator::class
+                ColorValidator::class,
             ],
             [
                 [
@@ -269,7 +270,7 @@ class Settings extends Model
                 'number',
                 'min' => 0.1,
                 'max' => 100,
-            ]
+            ],
         ];
     }
 
@@ -288,7 +289,7 @@ class Settings extends Model
                 'attributes' => [
                     'webpageTestApiKey',
                 ],
-            ]
+            ],
         ];
     }
 }

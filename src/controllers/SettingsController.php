@@ -10,16 +10,18 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\Webperf;
+use Craft;
+use craft\errors\MissingComponentException;
+use craft\helpers\UrlHelper;
+use craft\web\Controller;
+use craft\web\UrlManager;
 use nystudio107\webperf\assetbundles\webperf\WebperfAsset;
 use nystudio107\webperf\helpers\Permission as PermissionHelper;
 use nystudio107\webperf\models\Settings;
-
-use Craft;
-use craft\helpers\UrlHelper;
-use craft\web\Controller;
-
+use nystudio107\webperf\Webperf;
 use yii\base\InvalidConfigException;
+use yii\web\BadRequestHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -33,7 +35,7 @@ class SettingsController extends Controller
     // Constants
     // =========================================================================
 
-    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-webperf/';
+    public const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-webperf/';
 
     // Protected Properties
     // =========================================================================
@@ -49,7 +51,7 @@ class SettingsController extends Controller
      * @param null|bool|Settings $settings
      *
      * @return Response The rendered result
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionPluginSettings($settings = null): Response
     {
@@ -100,9 +102,9 @@ class SettingsController extends Controller
      *
      * @return Response|null
      * @throws NotFoundHttpException if the requested plugin cannot be found
-     * @throws \yii\web\BadRequestHttpException
-     * @throws \craft\errors\MissingComponentException
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws BadRequestHttpException
+     * @throws MissingComponentException
+     * @throws ForbiddenHttpException
      */
     public function actionSavePluginSettings()
     {
@@ -120,7 +122,9 @@ class SettingsController extends Controller
             Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save plugin settings."));
 
             // Send the plugin back to the template
-            Craft::$app->getUrlManager()->setRouteParams([
+            /** @var UrlManager $urlManager */
+            $urlManager = Craft::$app->getUrlManager();
+            $urlManager->setRouteParams([
                 'plugin' => $plugin,
             ]);
 

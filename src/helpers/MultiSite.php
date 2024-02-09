@@ -11,11 +11,13 @@
 namespace nystudio107\webperf\helpers;
 
 use Craft;
+use craft\errors\SiteNotFoundException;
 use craft\helpers\ArrayHelper;
 use craft\models\Site;
-
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use function count;
+use function in_array;
 
 /**
  * @author    nystudio107
@@ -45,8 +47,6 @@ class MultiSite
         // Enabled sites
         $sites = Craft::$app->getSites();
         if (Craft::$app->getIsMultiSite()) {
-
-            /** @var Site $site */
             foreach ($sites->getAllGroups() as $group) {
                 $groupSites = $sites->getSitesByGroupId($group->id);
                 $variables['sitesMenu'][$group->name]
@@ -63,7 +63,7 @@ class MultiSite
      * @param        $siteId
      * @param        $variables
      *
-     * @throws \yii\web\ForbiddenHttpException
+     * @throws ForbiddenHttpException
      */
     public static function setMultiSiteVariables($siteHandle, &$siteId, array &$variables)
     {
@@ -74,20 +74,19 @@ class MultiSite
             $variables['enabledSiteIds'] = [];
             $variables['siteIds'] = [];
 
-            /** @var Site $site */
             foreach ($sites->getEditableSiteIds() as $editableSiteId) {
                 $variables['enabledSiteIds'][] = $editableSiteId;
                 $variables['siteIds'][] = $editableSiteId;
             }
 
             // Make sure the $siteId they are trying to edit is in our array of editable sites
-            if (!\in_array($siteId, $variables['enabledSiteIds'], false)) {
+            if (!in_array($siteId, $variables['enabledSiteIds'], false)) {
                 if (!empty($variables['enabledSiteIds'])) {
                     if ($siteId !== 0) {
                         $siteId = reset($variables['enabledSiteIds']);
                     }
                 } else {
-                    self::requirePermission('editSite:'.$siteId);
+                    self::requirePermission('editSite:' . $siteId);
                 }
             }
         }
@@ -100,7 +99,7 @@ class MultiSite
         // Page title
         $variables['showSites'] = (
             Craft::$app->getIsMultiSite() &&
-            \count($variables['enabledSiteIds'])
+            count($variables['enabledSiteIds'])
         );
 
         if ($variables['showSites']) {
@@ -124,7 +123,7 @@ class MultiSite
     /**
      * Return a siteId from a siteHandle
      *
-     * @param string $siteHandle
+     * @param ?string $siteHandle
      *
      * @return int|null
      * @throws NotFoundHttpException
@@ -135,7 +134,7 @@ class MultiSite
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
             if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: '.$siteHandle);
+                throw new NotFoundHttpException('Invalid site handle: ' . $siteHandle);
             }
             $siteId = $site->id;
         } else {
@@ -152,7 +151,7 @@ class MultiSite
      * @param string $url
      *
      * @return Site
-     * @throws \craft\errors\SiteNotFoundException
+     * @throws SiteNotFoundException
      */
     public static function getSiteFromUrl(string $url): Site
     {

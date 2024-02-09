@@ -81,7 +81,7 @@ trait DbErrorSampleTrait
                     'url',
                     'queryString',
                 ],
-                'string'
+                'string',
             ],
         ];
     }

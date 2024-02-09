@@ -12,7 +12,6 @@ namespace nystudio107\webperf\widgets;
 
 use Craft;
 use craft\base\Widget;
-use nystudio107\webperf\assetbundles\metricswidget\MetricsWidgetAsset;
 
 /**
  * Webperf Widget
@@ -23,7 +22,6 @@ use nystudio107\webperf\assetbundles\metricswidget\MetricsWidgetAsset;
  */
 class Metrics extends Widget
 {
-
     // Public Properties
     // =========================================================================
 
@@ -86,7 +84,7 @@ class Metrics extends Widget
         return Craft::$app->getView()->renderTemplate(
             'webperf/_components/widgets/Metrics_settings',
             [
-                'widget' => $this
+                'widget' => $this,
             ]
         );
     }
@@ -96,12 +94,10 @@ class Metrics extends Widget
      */
     public function getBodyHtml(): ?string
     {
-        Craft::$app->getView()->registerAssetBundle(MetricsWidgetAsset::class);
-
         return Craft::$app->getView()->renderTemplate(
             'webperf/_components/widgets/Metrics_body',
             [
-                'message' => $this->message
+                'message' => $this->message,
             ]
         );
     }

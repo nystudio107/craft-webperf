@@ -144,7 +144,7 @@ class Beacons extends Component
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
-            $crawlerDetect = new CrawlerDetect;
+            $crawlerDetect = new CrawlerDetect();
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
                 return;
@@ -199,7 +199,7 @@ class Beacons extends Component
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
-            $crawlerDetect = new CrawlerDetect;
+            $crawlerDetect = new CrawlerDetect();
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
                 return;
@@ -253,9 +253,10 @@ class Beacons extends Component
             $docTitle = '';
         }
         // If SEOmatic is installed, get the title from it
+        /** @var Seomatic|null $seomatic */
         $seomatic = Craft::$app->getPlugins()->getPlugin(self::SEOMATIC_PLUGIN_HANDLE);
-        if ($seomatic && Seomatic::$settings->renderEnabled) {
-            $titleTag = Seomatic::$plugin->title->get('title');
+        if ($seomatic && $seomatic::$settings->renderEnabled) {
+            $titleTag = $seomatic->title->get('title');
             if ($titleTag) {
                 $titleArray = $titleTag->renderAttributes();
                 if (!empty($titleArray['title'])) {

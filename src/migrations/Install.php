@@ -24,9 +24,9 @@ class Install extends Migration
     // =========================================================================
 
     /**
-     * @var string The database driver to use
+     * @var ?string The database driver to use
      */
-    public $driver;
+    public ?string $driver = null;
 
     // Public Methods
     // =========================================================================
@@ -179,7 +179,7 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_data_samples}}', 'siteId'),
+            $this->db->getForeignKeyName(),
             '{{%webperf_data_samples}}',
             'siteId',
             '{{%sites}}',
@@ -188,7 +188,7 @@ class Install extends Migration
             'CASCADE'
         );
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%webperf_error_samples}}', 'siteId'),
+            $this->db->getForeignKeyName(),
             '{{%webperf_error_samples}}',
             'siteId',
             '{{%sites}}',
