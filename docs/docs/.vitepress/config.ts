@@ -31,11 +31,11 @@ export default defineConfig({
       {
         text: 'Topics',
         items: [
-          { text: 'Webperf Plugin', link: '/' },
-          { text: 'Webperf Overview', link: '/overview.html' },
-          { text: 'Performance Resources', link: '/resources.html' },
-          { text: 'Configuring Webperf', link: '/configuring.html' },
-          { text: 'Using Webperf', link: '/using.html' },
+          {text: 'Webperf Plugin', link: '/'},
+          {text: 'Webperf Overview', link: '/overview.html'},
+          {text: 'Performance Resources', link: '/resources.html'},
+          {text: 'Configuring Webperf', link: '/configuring.html'},
+          {text: 'Using Webperf', link: '/using.html'},
         ],
       }
     ],
@@ -45,8 +45,9 @@ export default defineConfig({
       {text: 'Changelog', link: 'https://nystudio107.com/plugins/webperf/changelog'},
       {text: 'Issues', link: 'https://github.com/nystudio107/craft-webperf/issues'},
       {
-        text: 'v4', items: [
-          {text: 'v4', link: '/'},
+        text: 'v5', items: [
+          {text: 'v5', link: '/'},
+          {text: 'v4', link: 'https://nystudio107.com/docs/webperf/v4/'},
           {text: 'v3', link: 'https://nystudio107.com/docs/webperf/v3/'},
         ],
       },
