@@ -1,6 +1,6 @@
 # Webperf Changelog
 
-## 1.0.29 - UNRELEASED
+## 1.0.29 - 2024.02.09
 ### Added
 * Add `phpstan` and `ecs` code linting
 * Add `code-analysis.yaml` GitHub action
@@ -16,6 +16,7 @@
 
 ### Fixed
 * Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
+* Added  the unused `static` to the Tailwind CSS `blocklist` to avoid a name collision with a Craft CSS class ([#1412](https://github.com/nystudio107/craft-seomatic/issues/1412))
 
 ## 1.0.28 - 2022.06.23
 ### Changed
