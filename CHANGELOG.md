@@ -1,6 +1,6 @@
 # Webperf Changelog
 
-## 4.0.1 - UNRELEASED
+## 4.0.1 - 2024.02.09
 ### Added
 * Add `phpstan` and `ecs` code linting
 * Add `code-analysis.yaml` GitHub action
@@ -18,6 +18,7 @@
 * Ensure that `$driver` is nullable in the install migration
 * Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
 * Fix the sidebar CSS so the radial bar chart is not cropped, and there is padding around the text labels ([#51](https://github.com/nystudio107/craft-webperf/issues/51))
+* Added  the unused `static` to the Tailwind CSS `blocklist` to avoid a name collision with a Craft CSS class ([#1412](https://github.com/nystudio107/craft-seomatic/issues/1412))
 
 ## 4.0.0 - 2022.06.23
 ### Added
