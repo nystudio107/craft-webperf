@@ -14,3 +14,4 @@ return static function(ECSConfig $ecsConfig): void {
     $ecsConfig->parallel();
     $ecsConfig->sets([SetList::CRAFT_CMS_4]);
 };
+
