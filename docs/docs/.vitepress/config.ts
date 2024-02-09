@@ -3,7 +3,7 @@ import {defineConfig} from 'vitepress'
 export default defineConfig({
   title: 'Webperf Plugin',
   description: 'Documentation for the Webperf plugin',
-  base: '/docs/webperf/v3/',
+  base: '/docs/webperf/v1/',
   lang: 'en-US',
   head: [
     ['meta', {content: 'https://github.com/nystudio107', property: 'og:see_also',}],
@@ -45,10 +45,10 @@ export default defineConfig({
       {text: 'Changelog', link: 'https://nystudio107.com/plugins/webperf/changelog'},
       {text: 'Issues', link: 'https://github.com/nystudio107/craft-webperf/issues'},
       {
-        text: 'v3', items: [
+        text: 'v1', items: [
           {text: 'v5', link: 'https://nystudio107.com/docs/webperf/'},
           {text: 'v4', link: 'https://nystudio107.com/docs/webperf/v4/'},
-          {text: 'v3', link: '/'},
+          {text: 'v1', link: '/'},
         ],
       },
     ],
