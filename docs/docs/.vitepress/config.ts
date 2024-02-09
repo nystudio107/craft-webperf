@@ -48,7 +48,7 @@ export default defineConfig({
         text: 'v4', items: [
           {text: 'v5', link: 'https://nystudio107.com/docs/webperf/'},
           {text: 'v4', link: '/'},
-          {text: 'v3', link: 'https://nystudio107.com/docs/webperf/v3/'},
+          {text: 'v1', link: 'https://nystudio107.com/docs/webperf/v1/'},
         ],
       },
     ],
