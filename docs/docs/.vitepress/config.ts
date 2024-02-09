@@ -3,7 +3,7 @@ import {defineConfig} from 'vitepress'
 export default defineConfig({
   title: 'Webperf Plugin',
   description: 'Documentation for the Webperf plugin',
-  base: '/docs/webperf/',
+  base: '/docs/webperf/v4/',
   lang: 'en-US',
   head: [
     ['meta', {content: 'https://github.com/nystudio107', property: 'og:see_also',}],
@@ -31,11 +31,11 @@ export default defineConfig({
       {
         text: 'Topics',
         items: [
-          { text: 'Webperf Plugin', link: '/' },
-          { text: 'Webperf Overview', link: '/overview.html' },
-          { text: 'Performance Resources', link: '/resources.html' },
-          { text: 'Configuring Webperf', link: '/configuring.html' },
-          { text: 'Using Webperf', link: '/using.html' },
+          {text: 'Webperf Plugin', link: '/'},
+          {text: 'Webperf Overview', link: '/overview.html'},
+          {text: 'Performance Resources', link: '/resources.html'},
+          {text: 'Configuring Webperf', link: '/configuring.html'},
+          {text: 'Using Webperf', link: '/using.html'},
         ],
       }
     ],
@@ -46,6 +46,7 @@ export default defineConfig({
       {text: 'Issues', link: 'https://github.com/nystudio107/craft-webperf/issues'},
       {
         text: 'v4', items: [
+          {text: 'v5', link: 'https://nystudio107.com/docs/webperf/'},
           {text: 'v4', link: '/'},
           {text: 'v3', link: 'https://nystudio107.com/docs/webperf/v3/'},
         ],
