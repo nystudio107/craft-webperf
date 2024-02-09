@@ -45,6 +45,6 @@ abstract class Recommendation extends FluentModel implements RecommendationInter
      */
     public function displayMs(int $number): string
     {
-        return number_format((float)$number / 1000, 2).'s';
+        return number_format((float)$number / 1000, 2) . 's';
     }
 }

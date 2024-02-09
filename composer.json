@@ -2,7 +2,7 @@
   "name": "nystudio107/craft-webperf",
   "description": "Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance",
   "type": "craft-plugin",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "keywords": [
     "craft",
     "cms",
@@ -28,10 +28,31 @@
     "league/csv": "^8.2 || ^9.0",
     "whichbrowser/parser": "^2.0.37"
   },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/rector": "dev-main",
+    "nystudio107/craft-minify": "^1.0.0",
+    "nystudio107/craft-seomatic": "^3.0.0",
+    "putyourlightson/craft-blitz": "^3.0.0"
+  },
+  "scripts": {
+    "phpstan": "phpstan --ansi --memory-limit=2G",
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --fix --ansi"
+  },
   "autoload": {
     "psr-4": {
       "nystudio107\\webperf\\": "src/"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "craftcms/plugin-installer": true,
+      "yiisoft/yii2-composer": true
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
   },
   "extra": {
     "name": "Webperf",

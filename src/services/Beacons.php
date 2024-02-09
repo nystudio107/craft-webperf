@@ -10,21 +10,18 @@
 
 namespace nystudio107\webperf\services;
 
-use nystudio107\webperf\Webperf;
-use nystudio107\webperf\base\CraftDataSample;
-use nystudio107\webperf\helpers\MultiSite;
-use nystudio107\webperf\helpers\PluginTemplate;
-use nystudio107\webperf\models\CraftDbErrorSample;
-use nystudio107\webperf\models\CraftDbDataSample;
-
-use nystudio107\seomatic\Seomatic;
-
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
-
 use Craft;
 use craft\base\Component;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\webperf\base\CraftDataSample;
+use nystudio107\webperf\helpers\MultiSite;
+use nystudio107\webperf\helpers\PluginTemplate;
+use nystudio107\webperf\models\CraftDbDataSample;
+use nystudio107\webperf\models\CraftDbErrorSample;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107
@@ -57,7 +54,7 @@ class Beacons extends Component
     }
 
     /**
-     * @param bool        $headless
+     * @param bool $headless
      * @param string|null $title
      *
      * @return string
@@ -147,7 +144,7 @@ class Beacons extends Component
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
-            $crawlerDetect = new CrawlerDetect;
+            $crawlerDetect = new CrawlerDetect();
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
                 return;
@@ -191,7 +188,7 @@ class Beacons extends Component
                 + $stats['other']['memory']),
         ]);
         // Save the data sample
-        Craft::debug('Saving Craft DataSample: '.print_r($sample->getAttributes(), true), __METHOD__);
+        Craft::debug('Saving Craft DataSample: ' . print_r($sample->getAttributes(), true), __METHOD__);
         Webperf::$plugin->dataSamples->addDataSample($sample);
     }
 
@@ -202,7 +199,7 @@ class Beacons extends Component
     {
         // Filter out bot/spam requests via UserAgent
         if (Webperf::$settings->filterBotUserAgents) {
-            $crawlerDetect = new CrawlerDetect;
+            $crawlerDetect = new CrawlerDetect();
             // Check the user agent of the current 'visitor'
             if ($crawlerDetect->isCrawler()) {
                 return;
@@ -235,7 +232,7 @@ class Beacons extends Component
             'pageErrors' => $messages,
         ]);
         // Save the error sample
-        Craft::debug('Saving Craft ErrorSample: '.print_r($sample->getAttributes(), true), __METHOD__);
+        Craft::debug('Saving Craft ErrorSample: ' . print_r($sample->getAttributes(), true), __METHOD__);
         Webperf::$plugin->errorSamples->addErrorSample($sample);
     }
 
@@ -256,9 +253,10 @@ class Beacons extends Component
             $docTitle = '';
         }
         // If SEOmatic is installed, get the title from it
+        /** @var Seomatic|null $seomatic */
         $seomatic = Craft::$app->getPlugins()->getPlugin(self::SEOMATIC_PLUGIN_HANDLE);
-        if ($seomatic && Seomatic::$settings->renderEnabled) {
-            $titleTag = Seomatic::$plugin->title->get('title');
+        if ($seomatic && $seomatic::$settings->renderEnabled) {
+            $titleTag = $seomatic->title->get('title');
             if ($titleTag) {
                 $titleArray = $titleTag->renderAttributes();
                 if (!empty($titleArray['title'])) {

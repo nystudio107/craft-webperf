@@ -10,9 +10,9 @@
 
 namespace nystudio107\webperf\recommendations;
 
-use nystudio107\webperf\base\Recommendation;
-
 use Craft;
+
+use nystudio107\webperf\base\Recommendation;
 
 /**
  * @author    nystudio107

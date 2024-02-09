@@ -10,9 +10,7 @@
 
 namespace nystudio107\webperf\base;
 
-use Craft;
-use craft\base\Model;
-
+use ReflectionClass;
 use yii\base\InvalidArgumentException;
 
 /**
@@ -29,22 +27,13 @@ abstract class FluentModel extends CleanModel
      * Add fluent getters/setters for this class
      *
      * @param string $method The method name (property name)
-     * @param array  $args   The arguments list
+     * @param array $args The arguments list
      *
      * @return mixed            The value of the property
      */
     public function __call($method, $args)
     {
-        try {
-            $reflector = new \ReflectionClass(static::class);
-        } catch (\ReflectionException $e) {
-            Craft::error(
-                $e->getMessage(),
-                __METHOD__
-            );
-
-            return null;
-        }
+        $reflector = new ReflectionClass(static::class);
         if (!$reflector->hasProperty($method)) {
             throw new InvalidArgumentException("Property {$method} doesn't exist");
         }

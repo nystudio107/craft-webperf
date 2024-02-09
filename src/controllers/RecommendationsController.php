@@ -10,12 +10,9 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\helpers\Permission as PermissionHelper;
-
-use nystudio107\webperf\models\RecommendationDataSample;
-
 use craft\web\Controller;
-
+use nystudio107\webperf\helpers\Permission as PermissionHelper;
+use nystudio107\webperf\models\RecommendationDataSample;
 use nystudio107\webperf\Webperf;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
@@ -34,7 +31,7 @@ class RecommendationsController extends Controller
     // =========================================================================
 
     /**
-     * @var    bool|array
+     * @inheritdoc
      */
     protected $allowAnonymous = [];
 
@@ -47,7 +44,7 @@ class RecommendationsController extends Controller
      * @param string $pageUrl
      * @param string $start
      * @param string $end
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      * @throws ForbiddenHttpException

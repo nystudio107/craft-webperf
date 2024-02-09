@@ -10,7 +10,6 @@
 
 namespace nystudio107\webperf\assetbundles\boomerang;
 
-use Craft;
 use craft\web\AssetBundle;
 
 /**

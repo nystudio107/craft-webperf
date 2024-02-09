@@ -10,9 +10,9 @@
 
 namespace nystudio107\webperf\controllers;
 
-use nystudio107\webperf\Webperf;
-
 use craft\web\Controller;
+
+use nystudio107\webperf\Webperf;
 
 use yii\web\Response;
 

@@ -11,9 +11,9 @@
 namespace nystudio107\webperf\log;
 
 use nystudio107\webperf\Webperf;
-
-use yii\log\Target;
+use yii\base\ExitException;
 use yii\log\Logger;
+use yii\log\Target;
 
 /**
  * @author    nystudio107
@@ -22,7 +22,6 @@ use yii\log\Logger;
  */
 class ProfileTarget extends Target
 {
-
     const PROFILE_CATEGORIES = [
         'database' => [
             'prefix' => 'yii\db',
@@ -70,17 +69,13 @@ class ProfileTarget extends Target
      * @param array $messages log messages to be processed. See
      *                        [[Logger::messages]] for the structure of each
      *                        message.
-     * @param bool  $final    whether this method is called at the end of the
+     * @param bool $final whether this method is called at the end of the
      *                        current application
      *
-     * @throws \yii\base\ExitException
+     * @throws ExitException
      */
     public function collect($messages, $final)
     {
-        // Bail if either values are null
-        if (($messages === null) || ($this->messages === null)) {
-            return;
-        }
         // Merge in any messages intended for us
         $this->messages = array_merge(
             $this->messages,

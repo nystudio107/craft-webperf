@@ -1,5 +1,23 @@
 # Webperf Changelog
 
+## 1.0.29 - 2024.02.09
+### Added
+* Add `phpstan` and `ecs` code linting
+* Add `code-analysis.yaml` GitHub action
+
+### Changed
+* Add `allow-plugins` for CI
+* Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* Move to using `ServicesTrait` and add getter methods for services
+* Update the Test on Google PageSpeed Insights URL to `pagespeed.web.dev`
+* Clean up search bar CSS
+* Updated docs to use node 20 & a new sitemap plugin
+* ECS code cleanup
+
+### Fixed
+* Update to Boomerang Loader Snippet version 15 to modernize the loader, and eliminage `document.write` warnings
+* Added  the unused `static` to the Tailwind CSS `blocklist` to avoid a name collision with a Craft CSS class ([#1412](https://github.com/nystudio107/craft-seomatic/issues/1412))
+
 ## 1.0.28 - 2022.06.23
 ### Changed
 * Removed the sub resource integrity on the built JavaScript, which could fail if systems were set up that manipulated the incoming JavaScript resources dynamically

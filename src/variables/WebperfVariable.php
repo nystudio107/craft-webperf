@@ -10,10 +10,10 @@
 
 namespace nystudio107\webperf\variables;
 
-use nystudio107\webperf\Webperf;
-
 use nystudio107\pluginvite\variables\ViteVariableInterface;
+
 use nystudio107\pluginvite\variables\ViteVariableTrait;
+use nystudio107\webperf\Webperf;
 
 /**
  * @author    nystudio107

@@ -10,10 +10,9 @@
 
 namespace nystudio107\webperf\records;
 
-use nystudio107\webperf\Webperf;
-
-use Craft;
 use craft\db\ActiveRecord;
+
+use nystudio107\webperf\Webperf;
 
 use yii\behaviors\AttributeTypecastBehavior;
 
