@@ -60,8 +60,7 @@ class PluginTemplate
         string $templatePath,
         array  $params = [],
         string $minifier = null,
-    ): string
-    {
+    ): string {
         // Stash the old template mode, and set it Control Panel template mode
         $oldMode = Craft::$app->view->getTemplateMode();
         try {
