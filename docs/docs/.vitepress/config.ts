@@ -24,7 +24,10 @@ export default defineConfig({
     algolia: {
       appId: 'T6JC4YE35L',
       apiKey: '071b68301938ade2178101974f60c3ac',
-      indexName: 'webperf'
+      indexName: 'webperf',
+      searchParameters: {
+        facetFilters: ["version:v4"],
+      },
     },
     lastUpdatedText: 'Last Updated',
     sidebar: [
