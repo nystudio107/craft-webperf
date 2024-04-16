@@ -6,6 +6,5 @@ parameters:
     paths:
         - src
     excludePaths:
-        - src/lib/*
-    ignoreErrors:
-        - '#Function getCountryFromIP not found\.#'
+        analyse:
+            - src/lib/*

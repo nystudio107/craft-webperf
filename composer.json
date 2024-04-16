@@ -2,7 +2,9 @@
   "name": "nystudio107/craft-webperf",
   "description": "Webperf helps you build & maintain high quality websites through Real User Measurement of your website's performance",
   "type": "craft-plugin",
-  "version": "5.0.0-beta.3",
+  "version": "5.0.0",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "keywords": [
     "craft",
     "cms",
@@ -23,8 +25,9 @@
     }
   ],
   "require": {
-    "craftcms/cms": "^5.0.0-beta.1",
-    "nystudio107/craft-plugin-vite": "^5.0.0-beta.1",
+    "php": "^8.2",
+    "craftcms/cms": "^5.0.0",
+    "nystudio107/craft-plugin-vite": "^5.0.0",
     "jaybizzle/crawler-detect": "^1.2.37",
     "league/csv": "^8.2 || ^9.0",
     "whichbrowser/parser": "^2.0.37"
@@ -33,9 +36,9 @@
     "craftcms/ecs": "dev-main",
     "craftcms/phpstan": "dev-main",
     "craftcms/rector": "dev-main",
-    "nystudio107/craft-minify": "^5.0.0-beta.1",
-    "nystudio107/craft-seomatic": "^5.0.0-beta.1",
-    "putyourlightson/craft-blitz": "^5.0.0-beta.1"
+    "nystudio107/craft-minify": "^5.0.0",
+    "nystudio107/craft-seomatic": "^5.0.0",
+    "putyourlightson/craft-blitz": "^5.0.0"
   },
   "scripts": {
     "phpstan": "phpstan --ansi --memory-limit=2G",

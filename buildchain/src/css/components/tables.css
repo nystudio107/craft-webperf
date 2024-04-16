@@ -13,11 +13,13 @@ table.vuetable {
 }
 
 .webperf-menubtn-asc::after {
-    content: "downangle";
+    font-weight: bold;
+    content: "upangle";
 }
 
 .webperf-menubtn-desc::after {
-    content: "upangle";
+    font-weight: bold;
+    content: "downangle";
 }
 
 /**
