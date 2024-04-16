@@ -1,5 +1,9 @@
 # Webperf Changelog
 
+## 4.0.2 - 2024.04.16
+### Fixed
+* Fixed an issue where the down and up arrows were reversed for sorting purposes
+
 ## 4.0.1 - 2024.02.09
 ### Added
 * Add `phpstan` and `ecs` code linting
