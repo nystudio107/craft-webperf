@@ -78,7 +78,6 @@ class PluginTemplate
                 /** @var Minify|null $minify */
                 $minify = Craft::$app->getPlugins()->getPlugin(self::MINIFY_PLUGIN_HANDLE);
                 if ($minify) {
-                    /** @phpstan-ignore-next-line */
                     $htmlText = $minify->minify->$minifier($htmlText);
                 }
             }
