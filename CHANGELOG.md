@@ -1,5 +1,12 @@
 # Webperf Changelog
 
+## 5.0.0 - 2024.04.16
+### Added
+* Stable release for Craft CMS 5
+
+### Fixed
+* Fixed an issue where the down and up arrows were reversed for sorting purposes
+
 ## 5.0.0-beta.3 - 2024.02.09
 ### Fixed
 * Fixed an issue with the Sites menu styling
