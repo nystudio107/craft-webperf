@@ -6,9 +6,12 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "noImplicitAny": true,
     "outDir": "../src/web/assets/dist/",
@@ -25,7 +28,9 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "target": "esnext",
-    "types": ["vite/client"]
+    "types": [
+      "vite/client"
+    ]
   },
   "include": [
     "./src/**/*.js",
