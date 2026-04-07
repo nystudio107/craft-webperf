@@ -1,5 +1,9 @@
 # Webperf Changelog
 
+## 5.0.1 - UNRELEASED
+### Fixed
+* Fixed an issue with Craft `^5.9` where it throws an error because `craftcms/cms` no longer uses the `Stringy` package ([#59](https://github.com/nystudio107/craft-webperf/issues/59))
+
 ## 5.0.0 - 2024.04.16
 ### Added
 * Stable release for Craft CMS 5
