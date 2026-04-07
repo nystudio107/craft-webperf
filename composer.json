@@ -54,6 +54,9 @@
     "optimize-autoloader": true,
     "sort-packages": true
   },
+  "audit": {
+    "block-insecure": false
+  },
   "extra": {
     "name": "Webperf",
     "handle": "webperf",
