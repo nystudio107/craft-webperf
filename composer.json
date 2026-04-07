@@ -51,11 +51,11 @@
       "craftcms/plugin-installer": true,
       "yiisoft/yii2-composer": true
     },
+    "audit": {
+      "block-insecure": false
+    },
     "optimize-autoloader": true,
     "sort-packages": true
-  },
-  "audit": {
-    "block-insecure": false
   },
   "extra": {
     "name": "Webperf",
