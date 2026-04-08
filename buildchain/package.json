@@ -17,7 +17,7 @@
     "plugin"
   ],
   "dependencies": {
-    "apexcharts": "^3.8.0",
+    "apexcharts": "^4.0.0",
     "axios": "^1.6.2",
     "boomerangjs": "^1.621.0",
     "vee-validate": "^2.1.7",
