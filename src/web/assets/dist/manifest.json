@@ -1,210 +1,210 @@
 {
-  "_DataSampleDate-Dgx4fk93.js": {
-    "file": "assets/DataSampleDate-Dgx4fk93.js",
+  "_DataSampleDate-YOyW8Nlv.js": {
+    "file": "assets/DataSampleDate-YOyW8Nlv.js",
     "name": "DataSampleDate",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_DataSampleDevice-BYVJkV9d.js": {
-    "file": "assets/DataSampleDevice-BYVJkV9d.js",
+  "_DataSampleDevice-tSzszoll.js": {
+    "file": "assets/DataSampleDevice-tSzszoll.js",
     "name": "DataSampleDevice",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_ErrorsDetailAreaChart-6y8sttWU.js": {
-    "file": "assets/ErrorsDetailAreaChart-6y8sttWU.js",
+  "_ErrorsDetailAreaChart-CRKygpir.js": {
+    "file": "assets/ErrorsDetailAreaChart-CRKygpir.js",
     "name": "ErrorsDetailAreaChart",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_PageResultCell-!~{00h}~.js": {
+  "_PageResultCell-DvoaRXnC.css": {
     "file": "assets/PageResultCell-DvoaRXnC.css",
-    "src": "_PageResultCell-!~{00h}~.js"
+    "src": "_PageResultCell-DvoaRXnC.css"
   },
-  "_PageResultCell-HfoBw8gs.js": {
-    "file": "assets/PageResultCell-HfoBw8gs.js",
+  "_PageResultCell-nra8Su7h.js": {
+    "file": "assets/PageResultCell-nra8Su7h.js",
     "name": "PageResultCell",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ],
     "css": [
       "assets/PageResultCell-DvoaRXnC.css"
     ]
   },
-  "_PerformanceDetailAreaChart-CZQLb_Yj.js": {
-    "file": "assets/PerformanceDetailAreaChart-CZQLb_Yj.js",
+  "_PerformanceDetailAreaChart-CMBeHuB6.js": {
+    "file": "assets/PerformanceDetailAreaChart-CMBeHuB6.js",
     "name": "PerformanceDetailAreaChart",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_RecommendationsList-D2hPPeOV.js": {
-    "file": "assets/RecommendationsList-D2hPPeOV.js",
+  "_RecommendationsList-CGbWRT2B.js": {
+    "file": "assets/RecommendationsList-CGbWRT2B.js",
     "name": "RecommendationsList",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js",
-      "_SamplePaneFooter-Bdc0pmNI.js"
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SamplePaneFooter-B8srIjLI.js"
     ]
   },
-  "_RequestBarChart-Yh9rOPtU.js": {
-    "file": "assets/RequestBarChart-Yh9rOPtU.js",
+  "_RequestBarChart-a3YOSKfg.js": {
+    "file": "assets/RequestBarChart-a3YOSKfg.js",
     "name": "RequestBarChart",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_SamplePaneFooter-Bdc0pmNI.js": {
-    "file": "assets/SamplePaneFooter-Bdc0pmNI.js",
+  "_SamplePaneFooter-B8srIjLI.js": {
+    "file": "assets/SamplePaneFooter-B8srIjLI.js",
     "name": "SamplePaneFooter",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_SampleRangePicker-!~{009}~.js": {
-    "file": "assets/SampleRangePicker-C5_mML9z.css",
-    "src": "_SampleRangePicker-!~{009}~.js"
-  },
-  "_SampleRangePicker-BgLdtu6q.js": {
-    "file": "assets/SampleRangePicker-BgLdtu6q.js",
+  "_SampleRangePicker--fEU-jFt.js": {
+    "file": "assets/SampleRangePicker--fEU-jFt.js",
     "name": "SampleRangePicker",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ],
     "css": [
-      "assets/SampleRangePicker-C5_mML9z.css"
+      "assets/SampleRangePicker-CL4KHARP.css"
     ]
   },
-  "_SampleSizeWarning-B2a7Rdgq.js": {
-    "file": "assets/SampleSizeWarning-B2a7Rdgq.js",
+  "_SampleRangePicker-CL4KHARP.css": {
+    "file": "assets/SampleRangePicker-CL4KHARP.css",
+    "src": "_SampleRangePicker-CL4KHARP.css"
+  },
+  "_SampleSizeWarning-XJ_R-Fhy.js": {
+    "file": "assets/SampleSizeWarning-XJ_R-Fhy.js",
     "name": "SampleSizeWarning",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_SimpleBarChart-2LuX8RW5.js": {
-    "file": "assets/SimpleBarChart-2LuX8RW5.js",
+  "_SimpleBarChart-C3Y3Sax4.js": {
+    "file": "assets/SimpleBarChart-C3Y3Sax4.js",
     "name": "SimpleBarChart",
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js",
-      "_tri-color-blend-CUFlaG2k.js"
+      "_vue-apexcharts-CG4irvdz.js",
+      "_tri-color-blend-m46SNmpI.js"
     ]
   },
-  "_tri-color-blend-CUFlaG2k.js": {
-    "file": "assets/tri-color-blend-CUFlaG2k.js",
+  "_tri-color-blend-m46SNmpI.js": {
+    "file": "assets/tri-color-blend-m46SNmpI.js",
     "name": "tri-color-blend"
   },
-  "_vue-apexcharts-bmfWccRO.js": {
-    "file": "assets/vue-apexcharts-bmfWccRO.js",
+  "_vue-apexcharts-CG4irvdz.js": {
+    "file": "assets/vue-apexcharts-CG4irvdz.js",
     "name": "vue-apexcharts"
   },
   "src/js/alerts.js": {
-    "file": "assets/alerts-CJ3zabAY.js",
+    "file": "assets/alerts-Du6n8qO6.js",
     "name": "alerts",
     "src": "src/js/alerts.js",
     "isEntry": true
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-CKz2AtaU.js",
+    "file": "assets/dashboard-BkxRV20M.js",
     "name": "dashboard",
     "src": "src/js/dashboard.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-BgLdtu6q.js",
-      "_vue-apexcharts-bmfWccRO.js",
-      "_SimpleBarChart-2LuX8RW5.js",
-      "_tri-color-blend-CUFlaG2k.js",
-      "_SampleSizeWarning-B2a7Rdgq.js",
-      "_SamplePaneFooter-Bdc0pmNI.js",
-      "_RecommendationsList-D2hPPeOV.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SimpleBarChart-C3Y3Sax4.js",
+      "_tri-color-blend-m46SNmpI.js",
+      "_SampleSizeWarning-XJ_R-Fhy.js",
+      "_SamplePaneFooter-B8srIjLI.js",
+      "_RecommendationsList-CGbWRT2B.js"
     ]
   },
   "src/js/errors-detail.js": {
-    "file": "assets/errors-detail-DALIjvei.js",
+    "file": "assets/errors-detail-C_x3V2Ip.js",
     "name": "errors-detail",
     "src": "src/js/errors-detail.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-BgLdtu6q.js",
-      "_ErrorsDetailAreaChart-6y8sttWU.js",
-      "_PageResultCell-HfoBw8gs.js",
-      "_RequestBarChart-Yh9rOPtU.js",
-      "_DataSampleDate-Dgx4fk93.js",
-      "_DataSampleDevice-BYVJkV9d.js",
-      "_vue-apexcharts-bmfWccRO.js",
-      "_SimpleBarChart-2LuX8RW5.js",
-      "_SamplePaneFooter-Bdc0pmNI.js",
-      "_tri-color-blend-CUFlaG2k.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_ErrorsDetailAreaChart-CRKygpir.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_RequestBarChart-a3YOSKfg.js",
+      "_DataSampleDate-YOyW8Nlv.js",
+      "_DataSampleDevice-tSzszoll.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SimpleBarChart-C3Y3Sax4.js",
+      "_SamplePaneFooter-B8srIjLI.js",
+      "_tri-color-blend-m46SNmpI.js"
     ]
   },
   "src/js/errors-index.js": {
-    "file": "assets/errors-index-D2qy5Ll4.js",
+    "file": "assets/errors-index-_lOXim5j.js",
     "name": "errors-index",
     "src": "src/js/errors-index.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-BgLdtu6q.js",
-      "_PageResultCell-HfoBw8gs.js",
-      "_DataSampleDate-Dgx4fk93.js",
-      "_vue-apexcharts-bmfWccRO.js",
-      "_ErrorsDetailAreaChart-6y8sttWU.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_DataSampleDate-YOyW8Nlv.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_ErrorsDetailAreaChart-CRKygpir.js"
     ]
   },
   "src/js/performance-detail.js": {
-    "file": "assets/performance-detail-odpBFdrM.js",
+    "file": "assets/performance-detail-NfsPCBvT.js",
     "name": "performance-detail",
     "src": "src/js/performance-detail.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-BgLdtu6q.js",
-      "_PerformanceDetailAreaChart-CZQLb_Yj.js",
-      "_PageResultCell-HfoBw8gs.js",
-      "_tri-color-blend-CUFlaG2k.js",
-      "_RequestBarChart-Yh9rOPtU.js",
-      "_DataSampleDate-Dgx4fk93.js",
-      "_DataSampleDevice-BYVJkV9d.js",
-      "_vue-apexcharts-bmfWccRO.js",
-      "_SimpleBarChart-2LuX8RW5.js",
-      "_SamplePaneFooter-Bdc0pmNI.js",
-      "_RecommendationsList-D2hPPeOV.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_PerformanceDetailAreaChart-CMBeHuB6.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_tri-color-blend-m46SNmpI.js",
+      "_RequestBarChart-a3YOSKfg.js",
+      "_DataSampleDate-YOyW8Nlv.js",
+      "_DataSampleDevice-tSzszoll.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SimpleBarChart-C3Y3Sax4.js",
+      "_SamplePaneFooter-B8srIjLI.js",
+      "_RecommendationsList-CGbWRT2B.js"
     ]
   },
   "src/js/performance-index.js": {
-    "file": "assets/performance-index-DRoMF8CX.js",
+    "file": "assets/performance-index-DuSFy23A.js",
     "name": "performance-index",
     "src": "src/js/performance-index.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-BgLdtu6q.js",
-      "_PageResultCell-HfoBw8gs.js",
-      "_tri-color-blend-CUFlaG2k.js",
-      "_RequestBarChart-Yh9rOPtU.js",
-      "_SampleSizeWarning-B2a7Rdgq.js",
-      "_vue-apexcharts-bmfWccRO.js",
-      "_PerformanceDetailAreaChart-CZQLb_Yj.js",
-      "_RecommendationsList-D2hPPeOV.js",
-      "_SamplePaneFooter-Bdc0pmNI.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_tri-color-blend-m46SNmpI.js",
+      "_RequestBarChart-a3YOSKfg.js",
+      "_SampleSizeWarning-XJ_R-Fhy.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_PerformanceDetailAreaChart-CMBeHuB6.js",
+      "_RecommendationsList-CGbWRT2B.js",
+      "_SamplePaneFooter-B8srIjLI.js"
     ]
   },
   "src/js/sidebar.js": {
-    "file": "assets/sidebar-DS_g0W9s.js",
+    "file": "assets/sidebar-CCtYSNH0.js",
     "name": "sidebar",
     "src": "src/js/sidebar.js",
     "isEntry": true,
     "imports": [
-      "_vue-apexcharts-bmfWccRO.js",
-      "_tri-color-blend-CUFlaG2k.js"
+      "_vue-apexcharts-CG4irvdz.js",
+      "_tri-color-blend-m46SNmpI.js"
     ]
   },
   "src/js/webperf.js": {
-    "file": "assets/webperf-BMZ58HcU.js",
+    "file": "assets/webperf-D7vpMQiv.js",
     "name": "webperf",
     "src": "src/js/webperf.js",
     "isEntry": true,
     "css": [
-      "assets/webperf-DYwJPaQZ.css"
+      "assets/webperf-DbZkbkfZ.css"
     ]
   }
 }
