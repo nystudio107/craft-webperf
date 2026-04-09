@@ -25,8 +25,8 @@
         @vuetable:loaded="onLoaded"
       >
         <template
-          slot="error-date"
-          slot-scope="props"
+          v-slot:error-date="props"
+          
         >
           <data-sample-date
             :date="props.rowData.dateCreated"
@@ -35,8 +35,8 @@
           />
         </template>
         <template
-          slot="error-sample"
-          slot-scope="props"
+          v-slot:error-sample="props"
+          
         >
           <error-sample
             :page-errors="props.rowData.pageErrors"
@@ -44,8 +44,8 @@
           />
         </template>
         <template
-          slot="sample-device"
-          slot-scope="props"
+          v-slot:sample-device="props"
+          
         >
           <data-sample-device
             :device="props.rowData.device"
@@ -53,8 +53,8 @@
           />
         </template>
         <template
-          slot="load-time-bar"
-          slot-scope="props"
+          v-slot:load-time-bar="props"
+          
         >
           <request-bar-chart :row-data="props.rowData" />
         </template>

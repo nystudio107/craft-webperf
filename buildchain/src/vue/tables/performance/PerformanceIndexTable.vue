@@ -26,8 +26,8 @@
       >
         <!-- eslint-disable vue/no-useless-template-attributes -->
         <template
-          slot="page-listing-display"
-          slot-scope="props"
+          v-slot:page-listing-display="props"
+          
           :maxValue="maxValue"
           :triBlend="triBlend"
         >
@@ -40,14 +40,14 @@
           />
         </template>
         <template
-          slot="load-time-bar"
-          slot-scope="props"
+          v-slot:load-time-bar="props"
+          
         >
           <request-bar-chart :row-data="props.rowData" />
         </template>
         <template
-          slot="data-samples"
-          slot-scope="props"
+          v-slot:data-samples="props"
+          
         >
           <sample-size-warning :sample="props.rowData.cnt" />
           {{ props.rowData.cnt }}

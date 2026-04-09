@@ -13,7 +13,7 @@
       <div class="field pb-4">
         <p class="warning text-2xl leading-normal">
           <!-- eslint-disable vue/no-v-html -->
-          <span v-html="item.summary" />
+          <span v-html="item.summary"/>
           <!--eslint-enable-->
         </p>
         <div
@@ -22,7 +22,7 @@
         >
           <p class="instructions text-xl leading-tight">
             <!-- eslint-disable vue/no-v-html -->
-            <span v-html="item.detail" />
+            <span v-html="item.detail"/>
             <!--eslint-enable-->
             <span class="field inline-block m-0">
               <a
@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     // Load in our chart data asynchronously
-    getSeriesData: async function () {
+    async getSeriesData() {
       const chartsAPI = Axios.create(configureApi(this.apiUrl));
       let params = {
         'start': this.displayStart,
