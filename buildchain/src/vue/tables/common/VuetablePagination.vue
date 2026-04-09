@@ -24,7 +24,7 @@
       <span v-else>&nbsp;&lsaquo;</span>
     </a>
     <template v-if="notEnoughPages">
-      <template v-for="n in totalPage">
+      <template v-for="n in totalPage" :key="n">
         <!-- eslint-disable vue/no-v-html -->
         <a
           :key="n"
@@ -36,7 +36,7 @@
       </template>
     </template>
     <template v-else>
-      <template v-for="n in windowSize">
+      <template v-for="n in windowSize" :key="n">
         <!-- eslint-disable vue/no-v-html -->
         <a
           :key="n"

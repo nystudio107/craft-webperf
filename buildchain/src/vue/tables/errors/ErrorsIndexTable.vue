@@ -25,8 +25,8 @@
         @vuetable:loaded="onLoaded"
       >
         <template
-          slot="page-listing-display"
-          slot-scope="props"
+          v-slot:page-listing-display="props"
+          
         >
           <page-result-cell
             :title="props.rowData.title"
@@ -36,8 +36,8 @@
           />
         </template>
         <template
-          slot="sample-date"
-          slot-scope="props"
+          v-slot:sample-date="props"
+          
         >
           <data-sample-date
             :date="props.rowData.latestErrorDate"
@@ -46,20 +46,20 @@
           />
         </template>
         <template
-          slot="craft-errors"
-          slot-scope="props"
+          v-slot:craft-errors="props"
+          
         >
           <error-warning :sample="props.rowData.craftCount" />
         </template>
         <template
-          slot="boomerang-errors"
-          slot-scope="props"
+          v-slot:boomerang-errors="props"
+          
         >
           <error-warning :sample="props.rowData.boomerangCount" />
         </template>
         <template
-          slot="total-errors"
-          slot-scope="props"
+          v-slot:total-errors="props"
+          
         >
           <error-warning :sample="props.rowData.cnt" />
         </template>
