@@ -20,12 +20,12 @@
     >
       Craft performance will be slower than normal with
       <code>devMode</code> enabled due to extensive logging and disabling of some caches. <span
-        class="field inline-block m-0"
-      ><a
-        class="notice go"
-        href="https://craftcms.com/guides/what-dev-mode-does"
-        target="_blank"
-      >Learn More</a></span>
+      class="field inline-block m-0"
+    ><a
+      class="notice go"
+      href="https://craftcms.com/guides/what-dev-mode-does"
+      target="_blank"
+    >Learn More</a></span>
     </p>
   </div>
 </template>
@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     // Load in our chart data asynchronously
-    getSeriesData: async function () {
+    async getSeriesData() {
       const chartsAPI = Axios.create(configureApi(this.apiUrl));
       let params = {
         'column': this.column,

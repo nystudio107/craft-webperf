@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     // Load in our chart data asynchronously
-    getSeriesData: async function () {
+    async getSeriesData() {
       const chartsAPI = Axios.create(configureApi(chartDataBaseUrl));
       await queryApi(chartsAPI, this.days, (data) => {
         this.series = data;

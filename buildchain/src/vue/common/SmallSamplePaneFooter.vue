@@ -1,13 +1,13 @@
 <template>
-  <div class="field">
+  <div class="">
     <div
       v-if="samples >= 100"
       class="heading"
     >
       <p class="instructions">
         Average of <strong>{{ formatNumber(samples) }}</strong> data sample<span
-          v-if="samples !== 1"
-        >s</span>.
+        v-if="samples !== 1"
+      >s</span>.
       </p>
     </div>
     <p
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     // Load in our chart data asynchronously
-    getSeriesData: async function () {
+    async getSeriesData() {
       const chartsAPI = Axios.create(configureApi(this.apiUrl));
       let params = {
         'column': this.column,

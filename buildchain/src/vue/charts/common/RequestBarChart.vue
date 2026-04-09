@@ -5,24 +5,24 @@
       class="flex-shrink"
       title="Combined Frontend & Craft Beacon"
     >
-      <div class="w-2 h-2 bg-blue-700 rounded-full mb-1" />
-      <div class="w-2 h-2 bg-orange-700 rounded-full" />
+      <div class="w-2 h-2 bg-blue-700 rounded-full mb-1"/>
+      <div class="w-2 h-2 bg-orange-700 rounded-full"/>
     </div>
     <div
       v-if="rowData.type === 'frontend'"
       class="flex-shrink"
       title="Frontend Beacon only"
     >
-      <div class="w-2 h-2 bg-blue-700 rounded-full mb-1" />
-      <div class="w-2 h-2 bg-transparent rounded-full" />
+      <div class="w-2 h-2 bg-blue-700 rounded-full mb-1"/>
+      <div class="w-2 h-2 bg-transparent rounded-full"/>
     </div>
     <div
       v-if="rowData.type === 'craft'"
       class="flex-shrink"
       title="Craft Beacon only"
     >
-      <div class="w-2 h-2 bg-transparent rounded-full mb-1" />
-      <div class="w-2 h-2 bg-orange-700 rounded-full" />
+      <div class="w-2 h-2 bg-transparent rounded-full mb-1"/>
+      <div class="w-2 h-2 bg-orange-700 rounded-full"/>
     </div>
     <div class="flex-grow">
       <request-bar-recursive
@@ -126,7 +126,7 @@ export default {
     statFormatter(val) {
       return Number(val / 1000).toFixed(2) + "s";
     },
-    calculateNodes: function () {
+    calculateNodes() {
       this.root = undefined;
       requestBarGraphFields.forEach((element) => {
         let node = {
