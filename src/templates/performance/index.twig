@@ -27,7 +27,7 @@
         </div>
         {% if currentUser.can("webperf:delete-data-samples") %}
             <a href="{{ actionUrl('webperf/data-samples/delete-all-samples', {'siteId': currentSiteId}) }}"
-               class="btn delete icon"
+               class="btn delete icon webperf-btn-reset"
                title="{{ "Delete all Data Samples"|t("webperf") }}"
                onclick="return confirm('Are you sure you want to delete all data samples?')"
             >

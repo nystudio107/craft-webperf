@@ -1,0 +1,52 @@
+/**
+ * app.css
+ *
+ * The entry point for the css.
+ *
+ */
+
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ */
+@import "./tailwind-config.css";
+
+/**
+ * Here we add custom component classes; stuff we want loaded
+ * *before* the utilities so that the utilities can still
+ * override them.
+ *
+ */
+@import "./components/global.css";
+@import "./components/charts.css";
+@import "./components/date-picker.css";
+@import "./components/tables.css";
+@import "./components/tooltips.css";
+@import "./components/typography.css";
+@import "./components/webfonts.css";
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ */
+@import "tailwindcss/utilities";
+
+/**
+ * Include styles for individual pages
+ *
+ */
+@import "./pages/alerts.css";
+@import "./pages/dashboard.css";
+@import "./pages/errors-detail.css";
+@import "./pages/errors-index.css";
+@import "./pages/performance-detail.css";
+@import "./pages/performance-index.css";
+@import "./pages/settings.css";
+@import "./pages/sidebar.css";
+
+/**
+ * Include vendor css.
+ *
+ */
+@import "./vendor.css";

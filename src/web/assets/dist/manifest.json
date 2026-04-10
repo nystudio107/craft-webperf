@@ -1,210 +1,210 @@
 {
-  "_DataSampleDate-UiLkVbOT.js": {
-    "file": "assets/DataSampleDate-UiLkVbOT.js",
+  "_DataSampleDate-YOyW8Nlv.js": {
+    "file": "assets/DataSampleDate-YOyW8Nlv.js",
     "name": "DataSampleDate",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_DataSampleDevice-D3lfOt8n.js": {
-    "file": "assets/DataSampleDevice-D3lfOt8n.js",
+  "_DataSampleDevice-tSzszoll.js": {
+    "file": "assets/DataSampleDevice-tSzszoll.js",
     "name": "DataSampleDevice",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_ErrorsDetailAreaChart-CoSEsohF.js": {
-    "file": "assets/ErrorsDetailAreaChart-CoSEsohF.js",
+  "_ErrorsDetailAreaChart-CRKygpir.js": {
+    "file": "assets/ErrorsDetailAreaChart-CRKygpir.js",
     "name": "ErrorsDetailAreaChart",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_PageResultCell-!~{00h}~.js": {
-    "file": "assets/PageResultCell-aK_k3t68.css",
-    "src": "_PageResultCell-!~{00h}~.js"
+  "_PageResultCell-DvoaRXnC.css": {
+    "file": "assets/PageResultCell-DvoaRXnC.css",
+    "src": "_PageResultCell-DvoaRXnC.css"
   },
-  "_PageResultCell-b43rcj4h.js": {
-    "file": "assets/PageResultCell-b43rcj4h.js",
+  "_PageResultCell-nra8Su7h.js": {
+    "file": "assets/PageResultCell-nra8Su7h.js",
     "name": "PageResultCell",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ],
     "css": [
-      "assets/PageResultCell-aK_k3t68.css"
+      "assets/PageResultCell-DvoaRXnC.css"
     ]
   },
-  "_PerformanceDetailAreaChart-BW1ni5m3.js": {
-    "file": "assets/PerformanceDetailAreaChart-BW1ni5m3.js",
+  "_PerformanceDetailAreaChart-CMBeHuB6.js": {
+    "file": "assets/PerformanceDetailAreaChart-CMBeHuB6.js",
     "name": "PerformanceDetailAreaChart",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_RecommendationsList-T8Et27n2.js": {
-    "file": "assets/RecommendationsList-T8Et27n2.js",
+  "_RecommendationsList-CGbWRT2B.js": {
+    "file": "assets/RecommendationsList-CGbWRT2B.js",
     "name": "RecommendationsList",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js",
-      "_SamplePaneFooter-DUo1brgB.js"
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SamplePaneFooter-B8srIjLI.js"
     ]
   },
-  "_RequestBarChart-Ee0Vh_Iz.js": {
-    "file": "assets/RequestBarChart-Ee0Vh_Iz.js",
+  "_RequestBarChart-a3YOSKfg.js": {
+    "file": "assets/RequestBarChart-a3YOSKfg.js",
     "name": "RequestBarChart",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_SamplePaneFooter-DUo1brgB.js": {
-    "file": "assets/SamplePaneFooter-DUo1brgB.js",
+  "_SamplePaneFooter-B8srIjLI.js": {
+    "file": "assets/SamplePaneFooter-B8srIjLI.js",
     "name": "SamplePaneFooter",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_SampleRangePicker-!~{009}~.js": {
-    "file": "assets/SampleRangePicker-l4T-d3Wl.css",
-    "src": "_SampleRangePicker-!~{009}~.js"
-  },
-  "_SampleRangePicker-B5MMA2lb.js": {
-    "file": "assets/SampleRangePicker-B5MMA2lb.js",
+  "_SampleRangePicker--fEU-jFt.js": {
+    "file": "assets/SampleRangePicker--fEU-jFt.js",
     "name": "SampleRangePicker",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ],
     "css": [
-      "assets/SampleRangePicker-l4T-d3Wl.css"
+      "assets/SampleRangePicker-CL4KHARP.css"
     ]
   },
-  "_SampleSizeWarning-l8RSl_wj.js": {
-    "file": "assets/SampleSizeWarning-l8RSl_wj.js",
+  "_SampleRangePicker-CL4KHARP.css": {
+    "file": "assets/SampleRangePicker-CL4KHARP.css",
+    "src": "_SampleRangePicker-CL4KHARP.css"
+  },
+  "_SampleSizeWarning-XJ_R-Fhy.js": {
+    "file": "assets/SampleSizeWarning-XJ_R-Fhy.js",
     "name": "SampleSizeWarning",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js"
+      "_vue-apexcharts-CG4irvdz.js"
     ]
   },
-  "_SimpleBarChart-DDG34REw.js": {
-    "file": "assets/SimpleBarChart-DDG34REw.js",
+  "_SimpleBarChart-C3Y3Sax4.js": {
+    "file": "assets/SimpleBarChart-C3Y3Sax4.js",
     "name": "SimpleBarChart",
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js",
-      "_tri-color-blend-CUFlaG2k.js"
+      "_vue-apexcharts-CG4irvdz.js",
+      "_tri-color-blend-m46SNmpI.js"
     ]
   },
-  "_tri-color-blend-CUFlaG2k.js": {
-    "file": "assets/tri-color-blend-CUFlaG2k.js",
+  "_tri-color-blend-m46SNmpI.js": {
+    "file": "assets/tri-color-blend-m46SNmpI.js",
     "name": "tri-color-blend"
   },
-  "_vue-apexcharts-C2g27_eS.js": {
-    "file": "assets/vue-apexcharts-C2g27_eS.js",
+  "_vue-apexcharts-CG4irvdz.js": {
+    "file": "assets/vue-apexcharts-CG4irvdz.js",
     "name": "vue-apexcharts"
   },
   "src/js/alerts.js": {
-    "file": "assets/alerts-D3VsK7uo.js",
+    "file": "assets/alerts-Du6n8qO6.js",
     "name": "alerts",
     "src": "src/js/alerts.js",
     "isEntry": true
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-B8Tl2RKD.js",
+    "file": "assets/dashboard-BkxRV20M.js",
     "name": "dashboard",
     "src": "src/js/dashboard.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-B5MMA2lb.js",
-      "_vue-apexcharts-C2g27_eS.js",
-      "_SimpleBarChart-DDG34REw.js",
-      "_tri-color-blend-CUFlaG2k.js",
-      "_SampleSizeWarning-l8RSl_wj.js",
-      "_SamplePaneFooter-DUo1brgB.js",
-      "_RecommendationsList-T8Et27n2.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SimpleBarChart-C3Y3Sax4.js",
+      "_tri-color-blend-m46SNmpI.js",
+      "_SampleSizeWarning-XJ_R-Fhy.js",
+      "_SamplePaneFooter-B8srIjLI.js",
+      "_RecommendationsList-CGbWRT2B.js"
     ]
   },
   "src/js/errors-detail.js": {
-    "file": "assets/errors-detail-CbuM4Hh8.js",
+    "file": "assets/errors-detail-C_x3V2Ip.js",
     "name": "errors-detail",
     "src": "src/js/errors-detail.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-B5MMA2lb.js",
-      "_ErrorsDetailAreaChart-CoSEsohF.js",
-      "_PageResultCell-b43rcj4h.js",
-      "_RequestBarChart-Ee0Vh_Iz.js",
-      "_DataSampleDate-UiLkVbOT.js",
-      "_DataSampleDevice-D3lfOt8n.js",
-      "_vue-apexcharts-C2g27_eS.js",
-      "_SimpleBarChart-DDG34REw.js",
-      "_SamplePaneFooter-DUo1brgB.js",
-      "_tri-color-blend-CUFlaG2k.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_ErrorsDetailAreaChart-CRKygpir.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_RequestBarChart-a3YOSKfg.js",
+      "_DataSampleDate-YOyW8Nlv.js",
+      "_DataSampleDevice-tSzszoll.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SimpleBarChart-C3Y3Sax4.js",
+      "_SamplePaneFooter-B8srIjLI.js",
+      "_tri-color-blend-m46SNmpI.js"
     ]
   },
   "src/js/errors-index.js": {
-    "file": "assets/errors-index-zYZol8PP.js",
+    "file": "assets/errors-index-_lOXim5j.js",
     "name": "errors-index",
     "src": "src/js/errors-index.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-B5MMA2lb.js",
-      "_PageResultCell-b43rcj4h.js",
-      "_DataSampleDate-UiLkVbOT.js",
-      "_vue-apexcharts-C2g27_eS.js",
-      "_ErrorsDetailAreaChart-CoSEsohF.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_DataSampleDate-YOyW8Nlv.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_ErrorsDetailAreaChart-CRKygpir.js"
     ]
   },
   "src/js/performance-detail.js": {
-    "file": "assets/performance-detail-erdgCHrY.js",
+    "file": "assets/performance-detail-NfsPCBvT.js",
     "name": "performance-detail",
     "src": "src/js/performance-detail.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-B5MMA2lb.js",
-      "_PerformanceDetailAreaChart-BW1ni5m3.js",
-      "_PageResultCell-b43rcj4h.js",
-      "_tri-color-blend-CUFlaG2k.js",
-      "_RequestBarChart-Ee0Vh_Iz.js",
-      "_DataSampleDate-UiLkVbOT.js",
-      "_DataSampleDevice-D3lfOt8n.js",
-      "_vue-apexcharts-C2g27_eS.js",
-      "_SimpleBarChart-DDG34REw.js",
-      "_SamplePaneFooter-DUo1brgB.js",
-      "_RecommendationsList-T8Et27n2.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_PerformanceDetailAreaChart-CMBeHuB6.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_tri-color-blend-m46SNmpI.js",
+      "_RequestBarChart-a3YOSKfg.js",
+      "_DataSampleDate-YOyW8Nlv.js",
+      "_DataSampleDevice-tSzszoll.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_SimpleBarChart-C3Y3Sax4.js",
+      "_SamplePaneFooter-B8srIjLI.js",
+      "_RecommendationsList-CGbWRT2B.js"
     ]
   },
   "src/js/performance-index.js": {
-    "file": "assets/performance-index-Bj4b5YCn.js",
+    "file": "assets/performance-index-DuSFy23A.js",
     "name": "performance-index",
     "src": "src/js/performance-index.js",
     "isEntry": true,
     "imports": [
-      "_SampleRangePicker-B5MMA2lb.js",
-      "_PageResultCell-b43rcj4h.js",
-      "_tri-color-blend-CUFlaG2k.js",
-      "_RequestBarChart-Ee0Vh_Iz.js",
-      "_SampleSizeWarning-l8RSl_wj.js",
-      "_vue-apexcharts-C2g27_eS.js",
-      "_PerformanceDetailAreaChart-BW1ni5m3.js",
-      "_RecommendationsList-T8Et27n2.js",
-      "_SamplePaneFooter-DUo1brgB.js"
+      "_SampleRangePicker--fEU-jFt.js",
+      "_PageResultCell-nra8Su7h.js",
+      "_tri-color-blend-m46SNmpI.js",
+      "_RequestBarChart-a3YOSKfg.js",
+      "_SampleSizeWarning-XJ_R-Fhy.js",
+      "_vue-apexcharts-CG4irvdz.js",
+      "_PerformanceDetailAreaChart-CMBeHuB6.js",
+      "_RecommendationsList-CGbWRT2B.js",
+      "_SamplePaneFooter-B8srIjLI.js"
     ]
   },
   "src/js/sidebar.js": {
-    "file": "assets/sidebar-DyQeHXoP.js",
+    "file": "assets/sidebar-CCtYSNH0.js",
     "name": "sidebar",
     "src": "src/js/sidebar.js",
     "isEntry": true,
     "imports": [
-      "_vue-apexcharts-C2g27_eS.js",
-      "_tri-color-blend-CUFlaG2k.js"
+      "_vue-apexcharts-CG4irvdz.js",
+      "_tri-color-blend-m46SNmpI.js"
     ]
   },
   "src/js/webperf.js": {
-    "file": "assets/webperf-8z1FbwJh.js",
+    "file": "assets/webperf-D7vpMQiv.js",
     "name": "webperf",
     "src": "src/js/webperf.js",
     "isEntry": true,
     "css": [
-      "assets/webperf-zfG7r2xS.css"
+      "assets/webperf-DbZkbkfZ.css"
     ]
   }
 }

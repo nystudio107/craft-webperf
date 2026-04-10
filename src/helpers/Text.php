@@ -10,7 +10,8 @@
 
 namespace nystudio107\webperf\helpers;
 
-use Stringy\Stringy;
+use craft\helpers\StringHelper;
+use function function_exists;
 
 /**
  * @author    nystudio107
@@ -30,9 +31,9 @@ class Text
      * truncating occurs, the string is further truncated so that the substring
      * may be appended without exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -42,7 +43,8 @@ class Text
 
         if (!empty($string)) {
             $string = strip_tags($string);
-            $result = (string)Stringy::create($string)->truncate($length, $substring);
+            $adjustedLength = $length - strlen($substring);
+            $result = StringHelper::truncate($string, $adjustedLength, $substring);
         }
 
         return $result;
@@ -54,9 +56,9 @@ class Text
      * string is further truncated so that the substring may be appended without
      * exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -66,7 +68,7 @@ class Text
 
         if (!empty($string)) {
             $string = strip_tags($string);
-            $result = (string)Stringy::create($string)->safeTruncate($length, $substring);
+            $result = StringHelper::safeTruncate($string, $length, $substring);
         }
 
         return $result;
@@ -86,7 +88,7 @@ class Text
             return '';
         }
         // Convert to UTF-8
-        if (\function_exists('iconv')) {
+        if (function_exists('iconv')) {
             $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), 'UTF-8//IGNORE', $text);
         } else {
             ini_set('mbstring.substitute_character', 'none');

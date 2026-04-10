@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     // Load in our chart data asynchronously
-    getSeriesData: async function () {
+    async getSeriesData() {
       const chartsAPI = Axios.create(configureApi(this.apiUrl));
       let params = {
         'column': this.column,
