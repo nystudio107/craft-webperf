@@ -1,6 +1,6 @@
 # Webperf Changelog
 
-## 5.0.1 - UNRELEASED
+## 5.0.1 - 2026.04.10
 ### Fixed
 * Fixed an issue with Craft `^5.9` where it throws an error because `craftcms/cms` no longer uses the `Stringy` package ([#59](https://github.com/nystudio107/craft-webperf/issues/59))
 
